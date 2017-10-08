@@ -1,0 +1,2 @@
+# EdgyBot
+My Discord Bot.
