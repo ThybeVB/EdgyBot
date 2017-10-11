@@ -2,10 +2,11 @@
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
+using Discord.Commands;
 
 namespace EdgyBot
 {
-    public class Program
+    public class Program : ModuleBase<SocketCommandContext>
     {
         public static void Main(string[] args)
         => new Program().StartAsync().GetAwaiter().GetResult();
@@ -15,16 +16,17 @@ namespace EdgyBot
 
         public async Task StartAsync ()
         {
-            _client = new DiscordSocketClient();
-            Console.WriteLine("Starting Client...");
+            _client = new DiscordSocketClient(new DiscordSocketConfig
+            {
+                LogLevel = LogSeverity.Verbose
+            });            
             new CommandHandler();
-            _client = new DiscordSocketClient();
-            Console.WriteLine("Connecting to EdgyBot...");
+
+            _client.Log += Log;
             _client.Ready += Ready;
             string _token = "";
             await _client.LoginAsync(TokenType.Bot, _token);
             await _client.StartAsync();
-            Console.WriteLine("Connected!");
             _handler = new CommandHandler();
             await _handler.InitializeAsync(_client);
 
@@ -32,7 +34,12 @@ namespace EdgyBot
         }
         public async Task Ready()
         {
-            await _client.SetGameAsync("indev");
+            await _client.SetGameAsync("$help | EdgyBot (inDEV)");
+        }
+        private Task Log(LogMessage message)
+        {
+            Console.WriteLine(message.ToString());
+            return Task.CompletedTask;
         }
     }
 }

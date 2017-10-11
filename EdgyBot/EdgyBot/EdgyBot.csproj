@@ -130,13 +130,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandler.cs" />
+    <Compile Include="Modules\AudioService.cs" />
     <Compile Include="Modules\TextCommands.cs" />
+    <Compile Include="Modules\VoiceCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="token.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
