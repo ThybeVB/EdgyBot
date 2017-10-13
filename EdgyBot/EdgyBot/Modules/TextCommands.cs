@@ -40,7 +40,11 @@ namespace EdgyBot.Modules
             e.AddField("invite", "Get a link to invite the bot to other servers.");
             e.AddField("kys", "Tell EdgyBot to go kill himself.");
             e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
+            e.AddField("say", "[STRING], repeats your message.");
+            e.AddField("sayd", "[STRING], repeats your message and deletes it.");
             e.AddField("sha512", "[STRING], Hashes a string to SHA512");
+            e.AddField("b64e", "[STRING], encrypts a string to Base64");
+            e.AddField("b64d", "[STRING], decrypts a string from Base64");
             e.AddField("ping", "Checks the speed of the bot.");
 
             Embed a = e.Build();
@@ -71,6 +75,7 @@ namespace EdgyBot.Modules
                 await ReplyAsync("You can't jeff urself :joy:");
                 return;
             }
+
             await Context.Channel.SendFileAsync("jeff.jpg");
             await ReplyAsync(user.Mention + ", You just got jeff'd by " + Context.User.Mention);
             
@@ -94,6 +99,33 @@ namespace EdgyBot.Modules
             e.Color = new Color(0x0cc6d3);
             e.AddField("Encrypted SHA512 String", GetHashString(input));
             Embed a = e.Build();
+
+            await ReplyAsync("", embed: a);
+        }
+        [Command("b64e")]
+        public async Task B64Encrypt(string input)
+        {
+            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+            string result = System.Convert.ToBase64String(inputBytes);
+
+            EmbedBuilder e = new EmbedBuilder();
+            e.Color = new Color(0x0cc6d3);
+            e.AddField("Encoded Base64 String", result);
+            Embed a = e.Build();
+
+            await ReplyAsync("", embed: a);
+        }
+        [Command("b64d")]
+        public async Task B64Decode(string input)
+        {
+            byte[] inputBytes = System.Convert.FromBase64String(input);
+            string result = System.Text.Encoding.UTF8.GetString(inputBytes);
+
+            EmbedBuilder e = new EmbedBuilder();
+            e.Color = new Color(0x0cc6d3);
+            e.AddField("Decoded Base64 String", result);
+            Embed a = e.Build();
+
             await ReplyAsync("", embed: a);
         }
         [Command("flip")]
@@ -113,9 +145,20 @@ namespace EdgyBot.Modules
             e.Color = new Color(0x0cc6d3);
             e.AddField("Reversed Text", input);
             Embed a = e.Build();
+
             await ReplyAsync("", embed: a);
         }
-
+        [Command("say")]
+        public async Task SayCMD (string input)
+        {
+            await ReplyAsync(input);
+        }
+        [Command("sayd")]
+        public async Task SaydCMD (string input)
+        {
+            await ReplyAsync(input);
+            await Context.Message.DeleteAsync();
+        }
         
     }
 }
