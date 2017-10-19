@@ -40,6 +40,7 @@ namespace EdgyBot.Modules
             e.AddField("invite", "Get a link to invite the bot to other servers.");
             e.AddField("kys", "Tell EdgyBot to go kill himself.");
             e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
+            e.AddField("chance", "[STRING], Calculates your chances.");
             e.AddField("say", "[STRING], repeats your message.");
             e.AddField("sayd", "[STRING], repeats your message and deletes it.");
             e.AddField("sha512", "[STRING], Hashes a string to SHA512");
@@ -158,6 +159,43 @@ namespace EdgyBot.Modules
         {
             await ReplyAsync(input);
             await Context.Message.DeleteAsync();
+        }
+        [Command("amigay")]
+        public async Task AmIGayCMD()
+        {
+            Random rand = new Random();
+            int num = rand.Next(0, 3);
+            switch (num)
+            {
+                default:
+                    await ReplyAsync("idk");
+                    break;
+
+                case 1:
+                    await ReplyAsync("yes boi");
+                    break;
+                case 2:
+                    await ReplyAsync("no boi");
+                    break;
+            }
+        }
+        [Command("e")]
+        public async Task Secret01()
+        {
+            await ReplyAsync("monstah is not gay german");
+        }
+        [Command("chance")]
+        public async Task ChaceCMD(string input)
+        {
+            Random rand = new Random();
+            int num = rand.Next(-1, 100);
+            string numStr = num.ToString();
+
+            EmbedBuilder e = new EmbedBuilder();
+            e.Color = new Color(0x0cc6d3);
+            e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
         }
         
     }
