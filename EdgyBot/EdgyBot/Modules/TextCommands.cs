@@ -40,6 +40,7 @@ namespace EdgyBot.Modules
             e.AddField("invite", "Get a link to invite the bot to other servers.");
             e.AddField("kys", "Tell EdgyBot to go kill himself.");
             e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
+            e.AddField("lol", "[MENTION] **LOL'S SOMEBODY** not what lol means but ok");
             e.AddField("chance", "[STRING], Calculates your chances.");
             e.AddField("say", "[STRING], repeats your message.");
             e.AddField("sayd", "[STRING], repeats your message and deletes it.");
@@ -61,7 +62,7 @@ namespace EdgyBot.Modules
         public async Task InviteCMD ()
         {
             await ReplyAsync("wait, u wanna invite me? wOOOOOA " + "(currently disabled cuz in dev)");
-            //await ReplyAsync("https://discordapp.com/oauth2/authorize?client_id=366543690660970496&scope=bot&permissions=2146958591");
+            //await ReplyAsync("https://discordapp.com/oauth2/authorize?client_id=373163613390897163&scope=bot&permissions=2146958591");
         }
         [Command("kys")]
         public async Task KysCMD ()
@@ -196,6 +197,18 @@ namespace EdgyBot.Modules
             e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
+        }
+        [Command("lol")]
+        public async Task LolCMD(IGuildUser user)
+        {
+            if (user.Id == Context.Message.Author.Id)
+            {
+                await ReplyAsync("Nah m8 why would u lol urself");
+            } else
+            {
+                await Context.Message.DeleteAsync();
+                await ReplyAsync(user.Mention + " lol");
+            }
         }
         
     }
