@@ -1,2 +1,2 @@
 # EdgyBot
-My second public Discord Bot, feel free to use this if you want
+My second public Discord Bot, the bot is not done, so is not rolled out to the public yet.
