@@ -20,7 +20,7 @@ namespace EdgyBot
             {
                 LogLevel = LogSeverity.Verbose
             });            
-            new CommandHandler();
+
             Console.ForegroundColor = ConsoleColor.Green;
             _client.Log += Log;
             _client.Ready += Ready;

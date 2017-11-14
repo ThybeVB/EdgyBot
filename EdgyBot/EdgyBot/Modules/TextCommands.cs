@@ -44,6 +44,8 @@ namespace EdgyBot.Modules
             e.AddField("chance", "[STRING], Calculates your chances.");
             e.AddField("say", "[STRING], repeats your message.");
             e.AddField("sayd", "[STRING], repeats your message and deletes it.");
+            e.AddField("channelinfo", "Gives info about the channel you are in.");
+            e.AddField("randomnum", "[number] minimum, [number] maximum, [number] your number");
             e.AddField("sha512", "[STRING], Hashes a string to SHA512");
             e.AddField("b64e", "[STRING], encrypts a string to Base64");
             e.AddField("b64d", "[STRING], decrypts a string from Base64");
@@ -130,6 +132,21 @@ namespace EdgyBot.Modules
 
             await ReplyAsync("", embed: a);
         }
+        [Command("randomnum")]
+        public async Task RandomNum (int min, int max)
+        {
+            int result;
+
+            Random rand = new Random();
+            result = rand.Next(min, max);
+            EmbedBuilder e = new EmbedBuilder();
+            e.Color = new Color(0x0cc6d3);
+
+            e.AddField("Random Number Generator", "You got " + result.ToString() + "!");
+
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
+        }
         [Command("flip")]
         public async Task ReverseCMD(string input)
         {
@@ -210,6 +227,32 @@ namespace EdgyBot.Modules
                 await ReplyAsync(user.Mention + " lol");
             }
         }
-        
+        [Command("channelinfo")]
+        public async Task ChannelInfoCmd()
+        {
+            string cChannelname = Context.Channel.Name;
+            string cCreated = Context.Channel.CreatedAt.ToString();
+            string cId = Context.Channel.Id.ToString();
+
+            string isNsfw = "";
+            bool x = Context.Channel.IsNsfw;
+            if (x)
+            {
+                isNsfw = "NSFW";
+            } else
+            {
+                isNsfw = "Not NSFW.";
+            }
+            EmbedBuilder e = new EmbedBuilder();
+            e.Color = new Color(0x0cc6d3);
+
+            e.AddField("Channel Name", cChannelname);
+            e.AddField("Channel ID", cId);
+            e.AddField("Is NSFW?", isNsfw);
+            e.AddField("Created", cCreated);
+
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
+        }
     }
 }
