@@ -20,14 +20,16 @@ namespace EdgyBot
             {
                 LogLevel = LogSeverity.Verbose
             });            
-
             Console.ForegroundColor = ConsoleColor.Green;
+
             _client.Log += Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
+
             string _token = "";
             await _client.LoginAsync(TokenType.Bot, _token);
             await _client.StartAsync();
+
             _handler = new CommandHandler();
             await _handler.InitializeAsync(_client);
 
