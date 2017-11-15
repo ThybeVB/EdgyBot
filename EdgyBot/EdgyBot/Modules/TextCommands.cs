@@ -74,9 +74,9 @@ namespace EdgyBot.Modules
         [Command("jeff")]
         public async Task JeffCMD (IGuildUser user)
         {
-            if (user.Username == Context.User.Username)
+            if (user.Id == Context.User.Id)
             {
-                await ReplyAsync("You can't jeff urself :joy:");
+                await ReplyAsync("You can't jeff yopurself :joy:");
                 return;
             }
 
@@ -135,10 +135,8 @@ namespace EdgyBot.Modules
         [Command("randomnum")]
         public async Task RandomNum (int min, int max)
         {
-            int result;
-
             Random rand = new Random();
-            result = rand.Next(min, max);
+            int result = rand.Next(min, max);
             EmbedBuilder e = new EmbedBuilder();
             e.Color = new Color(0x0cc6d3);
 
@@ -234,7 +232,7 @@ namespace EdgyBot.Modules
             string cCreated = Context.Channel.CreatedAt.ToString();
             string cId = Context.Channel.Id.ToString();
 
-            string isNsfw = "";
+            string isNsfw;
             bool x = Context.Channel.IsNsfw;
             if (x)
             {
