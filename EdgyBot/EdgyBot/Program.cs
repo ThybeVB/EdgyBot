@@ -3,6 +3,8 @@ using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 using Discord.Commands;
+using EdgyBot.Modules;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EdgyBot
 {
@@ -13,6 +15,8 @@ namespace EdgyBot
 
         public DiscordSocketClient _client;
         public CommandHandler _handler;
+        public AudioService audioService;
+        private IServiceCollection _services;
 
         public async Task StartAsync ()
         {
@@ -21,15 +25,13 @@ namespace EdgyBot
                 LogLevel = LogSeverity.Verbose
             });            
             Console.ForegroundColor = ConsoleColor.Green;
-
             _client.Log += Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
-
-            string _token = "";
+            _services = new ServiceCollection().AddSingleton(new AudioService());
+            string _token = "MzczMTYzNjEzMzkwODk3MTYz.DNOvNQ.Y_dp_0AEHCLOkDyIOxkUPAswBUc";
             await _client.LoginAsync(TokenType.Bot, _token);
             await _client.StartAsync();
-
             _handler = new CommandHandler();
             await _handler.InitializeAsync(_client);
 

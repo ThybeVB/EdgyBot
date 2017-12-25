@@ -10,6 +10,7 @@ namespace EdgyBot.Modules
 {
     public class VoiceCommands : ModuleBase<ICommandContext>
     {
+
         private readonly AudioService _service;
 
         // Remember to add an instance of the AudioService
@@ -21,7 +22,6 @@ namespace EdgyBot.Modules
         [Command("join", RunMode = RunMode.Async)]
         public async Task JoinCmd()
         {
-            Console.WriteLine("Joining");
             await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
         }
         [Command("leave", RunMode = RunMode.Async)]

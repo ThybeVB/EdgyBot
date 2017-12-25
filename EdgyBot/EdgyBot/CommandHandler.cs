@@ -1,10 +1,6 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EdgyBot
@@ -17,7 +13,6 @@ namespace EdgyBot
         {
             _client = client;
             _service = new CommandService();
-
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
 
             _client.MessageReceived += HandleCommandAsync;
