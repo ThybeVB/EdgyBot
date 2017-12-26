@@ -9,6 +9,8 @@ namespace EdgyBot.Modules
 {
     public class TextCommands : ModuleBase<SocketCommandContext>
     {
+        private libEdgyBot lib = new libEdgyBot();
+
         #region Hashes
         public static byte[] GetHash(string inputString)
         {
@@ -58,7 +60,8 @@ namespace EdgyBot.Modules
         [Command("ping")]
         public async Task PingCMD ()
         {
-            await ReplyAsync("Speed: " + Context.Client.Latency.ToString() + "ms");
+            Embed e = lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
+            await ReplyAsync("", embed: e);
         }
         [Command("invite")]
         public async Task InviteCMD ()
@@ -146,8 +149,13 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("flip")]
-        public async Task ReverseCMD(string input)
+        public async Task ReverseCMD(string input = null)
         {
+            if (input == null)
+            {
+                await ReplyAsync("Please enter a message!\nDon't Forget to use **Quotation Marks**!");
+                return;
+            }
             #region Flip
             char[] chararray = input.ToCharArray();
             Array.Reverse(chararray);
@@ -166,8 +174,13 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("say")]
-        public async Task SayCMD (string input)
+        public async Task SayCMD (string input = null)
         {
+            if (input == null)
+            {
+                await ReplyAsync("Please enter a message.\nDon't forget to use **Quotation Marks**!");
+                return;
+            }
             await ReplyAsync(input);
         }
         [Command("sayd")]

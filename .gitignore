@@ -264,4 +264,4 @@ __pycache__/
 *.pyc
 
 #Custom
-Settings.cs
+LoginInfo.cs
