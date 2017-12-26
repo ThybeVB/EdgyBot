@@ -15,23 +15,25 @@ namespace EdgyBot
 
         public DiscordSocketClient _client;
         public CommandHandler _handler;
-        private Settings settings;
+        private Settings _settings;
 
         public async Task StartAsync ()
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Verbose
-            });            
+            });
+            _settings = new Settings();
+            _handler = new CommandHandler();
+
             Console.ForegroundColor = ConsoleColor.Green;
+
             _client.Log += Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
-            settings = new Settings();
-            string _token = settings.getToken();
-            await _client.LoginAsync(TokenType.Bot, _token);
-            await _client.StartAsync();
-            _handler = new CommandHandler();
+            
+            await _client.LoginAsync(TokenType.Bot, _settings.getToken());
+            await _client.StartAsync();           
             await _handler.InitializeAsync(_client);
 
             await Task.Delay(-1);
