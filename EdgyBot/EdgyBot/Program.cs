@@ -15,8 +15,7 @@ namespace EdgyBot
 
         public DiscordSocketClient _client;
         public CommandHandler _handler;
-        public AudioService audioService;
-        private IServiceCollection _services;
+        private Settings settings;
 
         public async Task StartAsync ()
         {
@@ -28,8 +27,8 @@ namespace EdgyBot
             _client.Log += Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
-            _services = new ServiceCollection().AddSingleton(new AudioService());
-            string _token = "MzczMTYzNjEzMzkwODk3MTYz.DNOvNQ.Y_dp_0AEHCLOkDyIOxkUPAswBUc";
+            settings = new Settings();
+            string _token = settings.getToken();
             await _client.LoginAsync(TokenType.Bot, _token);
             await _client.StartAsync();
             _handler = new CommandHandler();
@@ -39,7 +38,8 @@ namespace EdgyBot
         }
         public async Task Ready()
         {
-            await _client.SetGameAsync("$");
+            int guildNum = _client.Guilds.Count;
+            await _client.SetGameAsync("$help | EdgyBot [" + guildNum + "]");
         }
         private Task Log(LogMessage message)
         {

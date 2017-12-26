@@ -1,39 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using System.Diagnostics;
+using Discord.Audio;
 
 namespace EdgyBot.Modules
 {
-    public class VoiceCommands : ModuleBase<ICommandContext>
+    public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-
-        private readonly AudioService _service;
-
-        // Remember to add an instance of the AudioService
-        // to your IServiceCollection when you initialize your bot
-        public VoiceCommands(AudioService service)
+        [Command("teststuff", RunMode = RunMode.Async)]
+        public async Task TestStuff(IVoiceChannel channel = null)
         {
-            _service = service;
+            await ReplyAsync("Starting...");
+            channel = channel ?? (Context.Message.Author as IGuildUser)?.VoiceChannel;
+            if (channel == null)
+            {
+                await ReplyAsync("You are not in a voice channel!");
+                return;
+            }
+            var audioClient = await channel.ConnectAsync();
+            //await SendASync(audioClient, "menuLoop.mp3");
+            
         }
-        [Command("join", RunMode = RunMode.Async)]
-        public async Task JoinCmd()
+        [Command("leavetest")]
+        public async Task LeaveCMD(IVoiceChannel channel)
         {
-            await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
+            await ReplyAsync("Leaving...");
         }
-        [Command("leave", RunMode = RunMode.Async)]
-        public async Task LeaveCmd()
+        private Process CreateStream (string path)
         {
-            await _service.LeaveAudio(Context.Guild);
+            var ffmpeg = new ProcessStartInfo
+            {
+                FileName = "ffmpeg",
+                Arguments = $"-i {path} -ac 2 -f s16le -ar 48000 pipe:1",
+                UseShellExecute = false,
+                RedirectStandardInput = true,
+            };
+            return Process.Start(ffmpeg);
         }
-
-        [Command("play", RunMode = RunMode.Async)]
-        public async Task PlayCmd([Remainder] string song)
+        private async Task SendASync (IAudioClient client, string path)
         {
-            await _service.SendAudioAsync(Context.Guild, Context.Channel, song);
+            var ffmpeg = CreateStream(path);
+            var output = ffmpeg.StandardOutput.BaseStream;
+            AudioOutStream discord = client.CreatePCMStream(AudioApplication.Mixed);
+            await output.CopyToAsync(discord);
+            await discord.FlushAsync();
         }
     }
 }

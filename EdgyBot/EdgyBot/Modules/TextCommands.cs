@@ -232,21 +232,12 @@ namespace EdgyBot.Modules
             string cCreated = Context.Channel.CreatedAt.ToString();
             string cId = Context.Channel.Id.ToString();
 
-            string isNsfw;
-            bool x = Context.Channel.IsNsfw;
-            if (x)
-            {
-                isNsfw = "NSFW";
-            } else
-            {
-                isNsfw = "Not NSFW.";
-            }
             EmbedBuilder e = new EmbedBuilder();
             e.Color = new Color(0x0cc6d3);
 
             e.AddField("Channel Name", cChannelname);
             e.AddField("Channel ID", cId);
-            e.AddField("Is NSFW?", isNsfw);
+            e.AddField("Is NSFW?", Context.Channel.IsNsfw.ToString());
             e.AddField("Created", cCreated);
 
             Embed a = e.Build();
