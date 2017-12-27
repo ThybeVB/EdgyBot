@@ -35,8 +35,8 @@ namespace EdgyBot.Modules
             e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
             e.Color = new Color(0x0cc6d3);
 
-            e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT, AND WILL BE A PRIVATE BOT UNTIL 1.0**");
-            e.AddField("Bot Prefix", "$");
+            e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
+            e.AddField("Bot Prefix", "e!");
             e.AddField("[TEXT]", "A place where you need to place some text.");
             e.AddField("help", "Shows this message!");
             e.AddField("invite", "Get a link to invite the bot to other servers.");
@@ -66,8 +66,8 @@ namespace EdgyBot.Modules
         [Command("invite")]
         public async Task InviteCMD ()
         {
-            await ReplyAsync("wait, u wanna invite me? wOOOOOA " + "(currently disabled cuz in dev)");
-            //await ReplyAsync("https://discordapp.com/oauth2/authorize?client_id=373163613390897163&scope=bot&permissions=2146958591");
+            Embed e = lib.createEmbedWithText("Invite Link", lib.getInviteLink("live") + "\nThanks for inviting EdgyBot, you're awesome :)");
+            await ReplyAsync("", embed: e);
         }
         [Command("kys")]
         public async Task KysCMD ()
@@ -138,6 +138,12 @@ namespace EdgyBot.Modules
         [Command("randomnum")]
         public async Task RandomNum (int min, int max)
         {
+            if (min >= max)
+            {
+                Embed err = lib.createEmbedWithText("EdgyBot", "Invalid number input.");
+                await ReplyAsync("", embed: err);
+                return;
+            }
             Random rand = new Random();
             int result = rand.Next(min, max);
             EmbedBuilder e = new EmbedBuilder();

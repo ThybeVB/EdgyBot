@@ -23,7 +23,7 @@ namespace EdgyBot
             if (msg == null) return;
             var context = new SocketCommandContext(_client, msg);
             int argPos = 0;
-            if (msg.HasCharPrefix('$', ref argPos))
+            if (msg.HasStringPrefix("e!", ref argPos))
             {
                 var result = await _service.ExecuteAsync(context, argPos);
                 if (!result.IsSuccess)

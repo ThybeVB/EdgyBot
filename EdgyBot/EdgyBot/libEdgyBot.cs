@@ -25,6 +25,20 @@ namespace EdgyBot
 
             return e;
         }
+        public String getInviteLink (string botInput)
+        {
+            switch (botInput)
+            {
+                default:
+                    return null;
+                case "live":
+                    return loginInfo.invLink;
+            }
+        }
+        public string getToken ()
+        {
+            return loginInfo.token;
+        }
         public Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
