@@ -4,6 +4,7 @@ using Discord;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using Discord.WebSocket;
 
 namespace EdgyBot.Modules
 {
@@ -79,12 +80,12 @@ namespace EdgyBot.Modules
         {
             if (user.Id == Context.User.Id)
             {
-                await ReplyAsync("You can't jeff yopurself :joy:");
+                await ReplyAsync("You can't jeff yourself :joy:");
                 return;
             }
 
             await Context.Channel.SendFileAsync("jeff.jpg");
-            await ReplyAsync(user.Mention + ", You just got jeff'd by " + Context.User.Mention);
+            await ReplyAsync(user.Mention + ", You just got jeffed by " + Context.User.Mention);
             
         }
         [Command("setstatus")]
@@ -179,6 +180,26 @@ namespace EdgyBot.Modules
 
             await ReplyAsync("", embed: a);
         }
+        [Command("flipcoin")]
+        public async Task FlipCoinCMD ()
+        {
+            Random random = new Random();
+            Embed e = lib.createEmbedWithText();
+            switch (random.Next(1, 3))
+            {
+                default:
+                    await ReplyAsync("Error.");
+                    break;
+                case 1:
+                    e = lib.createEmbedWithText("Coinflip", "You Got Heads!");
+                    break;
+                case 2:
+                    e = lib.createEmbedWithText("Coinflip", "You Got Tails!");
+                    break;
+            }
+            await ReplyAsync("", embed: e);
+            await ReplyAsync("(Image of Heads & Tails soon)");
+        }
         [Command("say")]
         public async Task SayCMD (string input = null)
         {
@@ -261,6 +282,64 @@ namespace EdgyBot.Modules
 
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
+        }
+        [Command("userinfo")]
+        public async Task UserInfoCMD (IGuildUser usr = null)
+        {
+            #region VarRegistration
+            string username = null;
+            string nickname = null;
+            string discriminator = null;
+            string userID = null;
+            bool isBot = false;
+            string status = null;
+            string pfpUrl = null;
+            string playing = null;
+            #endregion
+
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Color = new Color(0x0cc6d3);
+            if (usr == null)
+            {
+                username = Context.User.Username;
+                SocketGuildUser guildUser = (SocketGuildUser)Context.User;
+                nickname = guildUser.Nickname;
+                discriminator = Context.User.Discriminator;
+                userID = Context.User.Id.ToString();
+                isBot = Context.User.IsBot;
+                status = Context.User.Status.ToString();
+                pfpUrl = Context.User.GetAvatarUrl();
+                playing = Context.User.Game.ToString();
+            } else
+            {
+                username = usr.Username;
+                SocketGuildUser guildUserMnt = (SocketGuildUser)usr;
+                nickname = guildUserMnt.Nickname;
+                discriminator = usr.Discriminator;
+                userID = usr.Id.ToString();
+                isBot = usr.IsBot;
+                status = usr.Status.ToString();
+                pfpUrl = usr.GetAvatarUrl();
+                playing = usr.Game.ToString();
+            }
+            eb.ThumbnailUrl = pfpUrl;
+            eb.AddField("Username", username);
+            if (nickname == null)
+            {
+                eb.AddField("Nickname", "None");
+            } else
+            {
+                eb.AddField("Nickname", nickname);
+            }
+            eb.AddField("Discriminator (tag)", discriminator);
+            eb.AddField("Status", status);
+            if (playing != null) eb.AddField("Playing", playing); else eb.AddField("Playing", "None");
+            eb.AddField("User ID", userID);
+            eb.AddField("Is Bot", isBot.ToString());
+
+            Embed e = eb.Build();
+            await ReplyAsync("", embed: e);
+
         }
     }
 }
