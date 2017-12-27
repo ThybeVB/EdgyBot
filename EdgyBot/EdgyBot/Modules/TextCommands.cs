@@ -295,9 +295,11 @@ namespace EdgyBot.Modules
             string status = null;
             string pfpUrl = null;
             string playing = null;
+            string createdOn = null;
             #endregion
 
             EmbedBuilder eb = new EmbedBuilder();
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
             eb.Color = new Color(0x0cc6d3);
             if (usr == null)
             {
@@ -310,6 +312,7 @@ namespace EdgyBot.Modules
                 status = Context.User.Status.ToString();
                 pfpUrl = Context.User.GetAvatarUrl();
                 playing = Context.User.Game.ToString();
+                createdOn = Context.User.CreatedAt.ToUniversalTime().ToString();
             } else
             {
                 username = usr.Username;
@@ -321,6 +324,7 @@ namespace EdgyBot.Modules
                 status = usr.Status.ToString();
                 pfpUrl = usr.GetAvatarUrl();
                 playing = usr.Game.ToString();
+                createdOn = usr.CreatedAt.ToUniversalTime().ToString();
             }
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username);
@@ -335,7 +339,9 @@ namespace EdgyBot.Modules
             eb.AddField("Status", status);
             if (playing != null) eb.AddField("Playing", playing); else eb.AddField("Playing", "None");
             eb.AddField("User ID", userID);
-            eb.AddField("Is Bot", isBot.ToString());
+            eb.AddField("Is Bot", isBot.ToString());                       
+            embedFooterBuilder.Text = "Created on " + createdOn;
+            eb.Footer = embedFooterBuilder;
 
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);
