@@ -90,7 +90,7 @@ namespace EdgyBot.Modules
             
         }
         [Command("setstatus")]
-        public async Task SetStatus(string input)
+        public async Task SetStatusCMD(string input)
         {
             if (Context.User.Id == 257247527630274561)
             {
@@ -102,7 +102,7 @@ namespace EdgyBot.Modules
             }
         }
         [Command("sha512")]
-        public async Task EncryptSHA512(string input)
+        public async Task HashSHA512CMD(string input)
         {
             EmbedBuilder e = new EmbedBuilder();
             e.Color = new Color(0x0cc6d3);
@@ -112,7 +112,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("b64e")]
-        public async Task B64Encrypt(string input)
+        public async Task B64EncryptCMD(string input)
         {
             byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             string result = System.Convert.ToBase64String(inputBytes);
@@ -125,7 +125,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("b64d")]
-        public async Task B64Decode(string input)
+        public async Task B64DecodeCMD(string input)
         {
             byte[] inputBytes = System.Convert.FromBase64String(input);
             string result = System.Text.Encoding.UTF8.GetString(inputBytes);
@@ -138,7 +138,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("randomnum")]
-        public async Task RandomNum (int min, int max)
+        public async Task RandomNumCMD(int min, int max)
         {
             if (min >= max)
             {
@@ -237,12 +237,12 @@ namespace EdgyBot.Modules
             }
         }
         [Command("e")]
-        public async Task Secret01()
+        public async Task Secret01CMD()
         {
             await ReplyAsync("monstah is not gay german");
         }
         [Command("chance")]
-        public async Task ChaceCMD(string input)
+        public async Task ChanceCMD(string input)
         {
             Random rand = new Random();
             int num = rand.Next(-1, 100);
@@ -267,7 +267,7 @@ namespace EdgyBot.Modules
             }
         }
         [Command("channelinfo")]
-        public async Task ChannelInfoCmd()
+        public async Task ChannelInfoCMD()
         {
             string cChannelname = Context.Channel.Name;
             string cCreated = Context.Channel.CreatedAt.ToString();
