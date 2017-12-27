@@ -8,32 +8,28 @@ namespace EdgyBot
     {
         private LoginInfo loginInfo = new LoginInfo();
 
+        public Color lightBlue = new Color(0x0cc6d3);
+
         public Embed createEmbedWithText (string title = null, string text = null)
         {
             if (title == null || text == null)
             {
                 EmbedBuilder ebInv = new EmbedBuilder();
                 ebInv.AddField("Error", "One or more parameters are missing.");
-                ebInv.Color = new Color(0x0cc6d3);
+                ebInv.Color = lightBlue;
                 Embed err = ebInv.Build();
                 return err;
             }
             EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = new Color(0x0cc6d3);
+            eb.Color = lightBlue;
             eb.AddField(title, text);
             Embed e = eb.Build();
 
             return e;
         }
-        public String getInviteLink (string botInput)
+        public String getInviteLink ()
         {
-            switch (botInput)
-            {
-                default:
-                    return null;
-                case "live":
-                    return loginInfo.invLink;
-            }
+            return loginInfo.invLink;          
         }
         public string getToken ()
         {

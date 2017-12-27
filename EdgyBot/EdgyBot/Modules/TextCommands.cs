@@ -68,7 +68,7 @@ namespace EdgyBot.Modules
         [Command("invite")]
         public async Task InviteCMD ()
         {
-            Embed e = lib.createEmbedWithText("Invite Link", lib.getInviteLink("live") + "\nThanks for inviting EdgyBot, you're awesome :)");
+            Embed e = lib.createEmbedWithText("Invite Link", lib.getInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
         [Command("kys")]

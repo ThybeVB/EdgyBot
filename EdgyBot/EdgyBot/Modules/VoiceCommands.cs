@@ -3,6 +3,7 @@ using Discord;
 using Discord.Commands;
 using System.Diagnostics;
 using Discord.Audio;
+using System.IO;
 
 namespace EdgyBot.Modules
 {
@@ -19,19 +20,13 @@ namespace EdgyBot.Modules
                 return;
             }
             var audioClient = await channel.ConnectAsync();
-            //await SendASync(audioClient, "menuLoop.mp3");
-            
-        }
-        [Command("leavetest")]
-        public async Task LeaveCMD(IVoiceChannel channel)
-        {
-            await ReplyAsync("Leaving...");
+            await SendASync(audioClient, "endStart_02.ogg");
         }
         private Process CreateStream (string path)
         {
-            var ffmpeg = new ProcessStartInfo
+            ProcessStartInfo ffmpeg = new ProcessStartInfo
             {
-                FileName = "ffmpeg",
+                FileName = "ffmpeg.exe",
                 Arguments = $"-i {path} -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute = false,
                 RedirectStandardInput = true,
@@ -40,8 +35,8 @@ namespace EdgyBot.Modules
         }
         private async Task SendASync (IAudioClient client, string path)
         {
-            var ffmpeg = CreateStream(path);
-            var output = ffmpeg.StandardOutput.BaseStream;
+            Process ffmpeg = CreateStream(path);
+            Stream output = ffmpeg.StandardOutput.BaseStream;
             AudioOutStream discord = client.CreatePCMStream(AudioApplication.Mixed);
             await output.CopyToAsync(discord);
             await discord.FlushAsync();
