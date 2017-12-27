@@ -44,14 +44,15 @@ namespace EdgyBot.Modules
             e.AddField("kys", "Tell EdgyBot to go kill himself.");
             e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
             e.AddField("lol", "[MENTION] **LOL'S SOMEBODY** not what lol means but ok");
-            e.AddField("chance", "[STRING], Calculates your chances.");
-            e.AddField("say", "[STRING], repeats your message.");
-            e.AddField("sayd", "[STRING], repeats your message and deletes it.");
+            e.AddField("chance", "[TEXT], Calculates your chances.");
+            e.AddField("say", "[TEXT], repeats your message.");
+            e.AddField("sayd", "[TEXT], repeats your message and deletes it.");
             e.AddField("channelinfo", "Gives info about the channel you are in.");
+            e.AddField("userinfo", "[MENTION], Gives info about you or another user.");
             e.AddField("randomnum", "[number] minimum, [number] maximum, [number] your number");
-            e.AddField("sha512", "[STRING], Hashes a string to SHA512");
-            e.AddField("b64e", "[STRING], encrypts a string to Base64");
-            e.AddField("b64d", "[STRING], decrypts a string from Base64");
+            e.AddField("sha512", "[TEXT], Hashes a string to SHA512");
+            e.AddField("b64e", "[TEXT], encrypts a string to Base64");
+            e.AddField("b64d", "[TEXT], decrypts a string from Base64");
             e.AddField("ping", "Checks the speed of the bot.");
 
             Embed a = e.Build();
