@@ -57,21 +57,23 @@ namespace EdgyBot.Modules.Categories
             #endregion
             #region Embed
             EmbedBuilder eb = lib.setupEmbedWithDefaults();
-            eb.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
-            eb.AddField("Username", finalResult[1]);
-            eb.AddField("Stars", finalResult[13]);
-            eb.AddField("Diamonds", finalResult[15]);
-            eb.AddField("User Coins", finalResult[7]);
-            eb.AddField("Coins", finalResult[5]);
-            eb.AddField("Demons", finalResult[17]);
-            eb.AddField("Creator Points", finalResult[19]);
+            string gdpicurl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            eb.ThumbnailUrl = gdpicurl;
+            eb.AddInlineField("Username", finalResult[1]);
+            eb.AddInlineField("Stars", finalResult[13]);
+            eb.AddInlineField("Diamonds", finalResult[15]);
+            eb.AddInlineField("User Coins", finalResult[7]);
+            eb.AddInlineField("Coins", finalResult[5]);
+            eb.AddInlineField("Demons", finalResult[17]);
+            eb.AddInlineField("Creator Points", finalResult[19]);
             #region SocialMediaChecks
-            if (finalResult[27] != null && finalResult[27] != "") eb.AddField("YouTube", finalResult[27]); else eb.AddField("YouTube", "None");
-            if (finalResult[55] != null && finalResult[55] != "") eb.AddField("Twitter", finalResult[55]); else eb.AddField("Twitter", "None");
-            if (finalResult[53] != null && finalResult[53] != "") eb.AddField("Twitch", finalResult[53]); else eb.AddField("Twitch", "None");
+            if (finalResult[27] != null && finalResult[27] != "") eb.AddInlineField("YouTube", finalResult[27]); else eb.AddInlineField("YouTube", "None");
+            if (finalResult[55] != null && finalResult[55] != "") eb.AddInlineField("Twitch", finalResult[55]); else eb.AddInlineField("Twitch", "None");
+            if (finalResult[53] != null && finalResult[53] != "") eb.AddInlineField("Twitter", finalResult[53]); else eb.AddInlineField("Twitter", "None");
             #endregion 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User ID = {finalResult[3]}, Account ID = {targetAccountID}";
+            footer.IconUrl = gdpicurl;
             eb.Footer = footer;
             #endregion
             Embed e = eb.Build();

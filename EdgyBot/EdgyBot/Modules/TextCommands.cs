@@ -91,7 +91,7 @@ namespace EdgyBot.Modules
         [Command("ping")]
         public async Task PingCMD ()
         {
-            Embed e = lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
+            Embed e = lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds", true);
             await ReplyAsync("", embed: e);
         }
         [Command("invite")]
@@ -216,7 +216,8 @@ namespace EdgyBot.Modules
         public async Task FlipCoinCMD ()
         {
             Random random = new Random();
-            Embed e = lib.createEmbedWithText();
+            EmbedBuilder a = new EmbedBuilder();
+            Embed e = a.Build();
             switch (random.Next(1, 3))
             {
                 default:

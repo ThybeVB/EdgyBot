@@ -10,17 +10,15 @@ namespace EdgyBot
 
         public Color lightBlue = new Color(0x0cc6d3);
 
-        public Embed createEmbedWithText (string title = null, string text = null)
+        public Embed createEmbedWithText (string title, string text, bool footerEnabled = false)
         {
-            if (title == null || text == null)
-            {
-                EmbedBuilder ebInv = new EmbedBuilder();
-                ebInv.AddField("Error", "One or more parameters are missing.");
-                ebInv.Color = lightBlue;
-                Embed err = ebInv.Build();
-                return err;
-            }
             EmbedBuilder eb = new EmbedBuilder();
+            if (footerEnabled)
+            {
+                EmbedFooterBuilder footer = new EmbedFooterBuilder();
+                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+                eb.Footer = footer;
+            }         
             eb.Color = lightBlue;
             eb.AddField(title, text);
             Embed e = eb.Build();
