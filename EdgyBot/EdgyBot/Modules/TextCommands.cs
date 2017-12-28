@@ -28,9 +28,36 @@ namespace EdgyBot.Modules
         }
         #endregion
         [Command("help")]
-        public async Task HelpCMD()
+        public async Task HelpCMD(string catergory = null)
         {
             IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
+
+            if (catergory != null)
+            {
+                if (catergory == "categories")
+                {
+                    EmbedBuilder ebCat = new EmbedBuilder();
+                    ebCat.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+                    ebCat.Color = new Color(0x0cc6d3);
+
+                    ebCat.AddField("Category", "Description");
+                    ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
+
+                    Embed eCat = ebCat.Build();
+                    await dm.SendMessageAsync("", embed: eCat);
+                    await ReplyAsync("I sent you a message with the available categories, " + Context.User.Mention + "!");
+                }
+                if (catergory == "geometrydash")
+                {
+                    EmbedBuilder gdBuilder = new EmbedBuilder();
+                    gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+                    gdBuilder.Color = new Color(0x0cc6d3);
+                    gdBuilder.AddField("Bot Prefix", "e!");
+                    gdBuilder.AddField("profile", "[NAME], shows info about a player.");
+                }
+
+                return;
+            }
 
             EmbedBuilder e = new EmbedBuilder();
             e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
@@ -39,7 +66,7 @@ namespace EdgyBot.Modules
             e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
             e.AddField("Bot Prefix", "e!");
             e.AddField("[TEXT]", "A place where you need to place some text.");
-            e.AddField("help", "Shows this message!");
+            e.AddField("help", "**OPTIONAL [TEXT]** (e!help categories for available categories)");
             e.AddField("invite", "Get a link to invite the bot to other servers.");
             e.AddField("kys", "Tell EdgyBot to go kill himself.");
             e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");

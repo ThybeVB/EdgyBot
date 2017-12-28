@@ -132,6 +132,7 @@
     <Compile Include="CommandHandler.cs" />
     <Compile Include="libEdgyBot.cs" />
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="Modules\Categories\GDCommands.cs" />
     <Compile Include="Modules\TextCommands.cs" />
     <Compile Include="Modules\VoiceCommands.cs" />
     <Compile Include="Program.cs" />
