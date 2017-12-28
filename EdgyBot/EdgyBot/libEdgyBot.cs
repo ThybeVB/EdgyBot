@@ -27,7 +27,16 @@ namespace EdgyBot
 
             return e;
         }
-        public String getInviteLink ()
+        public Embed createEmbedWithImage(string title, string text, string imgUrl)
+        {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Color = lightBlue;
+            eb.AddField(title, text);
+            eb.ImageUrl = imgUrl;
+            Embed e = eb.Build();
+            return e;
+        }
+        public string getInviteLink ()
         {
             return loginInfo.invLink;          
         }

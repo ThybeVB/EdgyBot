@@ -354,5 +354,19 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: e);
 
         }
+        [Command("stab")]
+        public async Task StabCMD (SocketUser usr = null)
+        {
+            if (usr == null)
+            {
+                await ReplyAsync("You need to mention an user!\nTry **e!stab @User123**.");
+                return;
+            }
+            string title = "Stab";
+            string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
+            string imgUrl = "https://media.giphy.com/media/xUySTCy0JHxUxw4fao/giphy.gif";
+            Embed e = lib.createEmbedWithImage(title, text, imgUrl);
+            await ReplyAsync("", embed: e);
+        }
     }
 }

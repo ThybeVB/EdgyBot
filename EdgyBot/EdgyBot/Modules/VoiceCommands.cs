@@ -26,7 +26,7 @@ namespace EdgyBot.Modules
         {
             ProcessStartInfo ffmpeg = new ProcessStartInfo
             {
-                FileName = "ffmpeg.exe",
+                FileName = "ffmpeg",
                 Arguments = $"-i {path} -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute = false,
                 RedirectStandardInput = true,
