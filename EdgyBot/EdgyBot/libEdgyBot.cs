@@ -36,6 +36,12 @@ namespace EdgyBot
             Embed e = eb.Build();
             return e;
         }
+        public EmbedBuilder setupEmbedWithDefaults ()
+        {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Color = lightBlue;
+            return eb;
+        }
         public string getInviteLink ()
         {
             return loginInfo.invLink;          
@@ -43,6 +49,10 @@ namespace EdgyBot
         public string getToken ()
         {
             return loginInfo.token;
+        }
+        public string getGJP ()
+        {
+            return loginInfo.gjp;
         }
         public Task Log(LogMessage message)
         {
