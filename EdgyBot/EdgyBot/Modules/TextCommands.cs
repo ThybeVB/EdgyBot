@@ -224,14 +224,13 @@ namespace EdgyBot.Modules
                     await ReplyAsync("Error.");
                     break;
                 case 1:
-                    e = lib.createEmbedWithText("Coinflip", "You Got Heads!");
+                    e = lib.createEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
                     break;
                 case 2:
-                    e = lib.createEmbedWithText("Coinflip", "You Got Tails!");
+                    e = lib.createEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
                     break;
             }
             await ReplyAsync("", embed: e);
-            await ReplyAsync("(Image of Heads & Tails soon)");
         }
         [Command("say")]
         public async Task SayCMD (string input = null)
@@ -244,22 +243,25 @@ namespace EdgyBot.Modules
             await ReplyAsync(input);
         }
         [Command("sayd")]
-        public async Task SaydCMD (string input)
+        public async Task SaydCMD (string input = null)
         {
-            await ReplyAsync(input);
-            await Context.Message.DeleteAsync();
+            if (input == null)
+            {
+                Embed e = lib.createEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
+                await ReplyAsync("", embed: e);
+            } else
+            {
+                await ReplyAsync(input);
+                await Context.Message.DeleteAsync();
+            }         
         }
         [Command("amigay")]
         public async Task AmIGayCMD()
         {
             Random rand = new Random();
-            int num = rand.Next(0, 3);
+            int num = rand.Next(1, 3);
             switch (num)
             {
-                default:
-                    await ReplyAsync("idk");
-                    break;
-
                 case 1:
                     await ReplyAsync("yes boi");
                     break;
