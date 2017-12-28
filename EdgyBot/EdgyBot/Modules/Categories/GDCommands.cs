@@ -56,7 +56,7 @@ namespace EdgyBot.Modules.Categories
             #endregion
             #endregion
             #region Embed
-            EmbedBuilder eb = lib.setupEmbedWithDefaults();
+            EmbedBuilder eb = lib.setupEmbedWithDefaults(false);
             string gdpicurl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
             eb.ThumbnailUrl = gdpicurl;
             eb.AddInlineField("Username", finalResult[1]);
@@ -67,9 +67,9 @@ namespace EdgyBot.Modules.Categories
             eb.AddInlineField("Demons", finalResult[17]);
             eb.AddInlineField("Creator Points", finalResult[19]);
             #region SocialMediaChecks
-            if (finalResult[27] != null && finalResult[27] != "") eb.AddInlineField("YouTube", finalResult[27]); else eb.AddInlineField("YouTube", "None");
-            if (finalResult[55] != null && finalResult[55] != "") eb.AddInlineField("Twitch", finalResult[55]); else eb.AddInlineField("Twitch", "None");
-            if (finalResult[53] != null && finalResult[53] != "") eb.AddInlineField("Twitter", finalResult[53]); else eb.AddInlineField("Twitter", "None");
+            if (finalResult[27] != null && finalResult[27] != "") eb.AddInlineField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")"); else eb.AddInlineField("YouTube", "None");
+            if (finalResult[55] != null && finalResult[55] != "") eb.AddInlineField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")"); else eb.AddInlineField("Twitch", "None");
+            if (finalResult[53] != null && finalResult[53] != "") eb.AddInlineField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")"); else eb.AddInlineField("Twitter", "None");
             #endregion 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User ID = {finalResult[3]}, Account ID = {targetAccountID}";

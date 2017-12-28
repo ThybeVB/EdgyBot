@@ -34,9 +34,15 @@ namespace EdgyBot
             Embed e = eb.Build();
             return e;
         }
-        public EmbedBuilder setupEmbedWithDefaults ()
+        public EmbedBuilder setupEmbedWithDefaults (bool footerEnabled = false)
         {
             EmbedBuilder eb = new EmbedBuilder();
+            if (footerEnabled)
+            {
+                EmbedFooterBuilder footer = new EmbedFooterBuilder();
+                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+                eb.Footer = footer;
+            }
             eb.Color = lightBlue;
             return eb;
         }
