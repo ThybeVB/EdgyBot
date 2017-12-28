@@ -84,9 +84,11 @@ namespace EdgyBot.Modules
                 await ReplyAsync("You can't jeff yourself :joy:");
                 return;
             }
+            string imgUrl = "http://sigmastudios.tk/SigmaFiles/jeff.jpg";
+            string textStr = user.Mention + ", You just got jeffed by " + Context.User.Mention;
+            Embed e = lib.createEmbedWithImage("Jeff", textStr, imgUrl);
 
-            await Context.Channel.SendFileAsync("jeff.jpg");
-            await ReplyAsync(user.Mention + ", You just got jeffed by " + Context.User.Mention);
+            await ReplyAsync("", embed: e);
             
         }
         [Command("setstatus")]
