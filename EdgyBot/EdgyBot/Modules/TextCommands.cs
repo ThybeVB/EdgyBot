@@ -359,28 +359,28 @@ namespace EdgyBot.Modules
                 status = usr.Status.ToString();
                 pfpUrl = usr.GetAvatarUrl();
                 playing = usr.Game.ToString();
-                createdOn = usr.CreatedAt.LocalDateTime.ToLongTimeString();
+                createdOn = usr.CreatedAt.ToUniversalTime().ToString();
             }
             eb.ThumbnailUrl = pfpUrl;
-            eb.AddField("Username", username);
+            eb.AddInlineField("Username", username);
             if (nickname == null || nickname == "")
             {
-                eb.AddField("Nickname", "None");
+                eb.AddInlineField("Nickname", "None");
             } else
             {
-                eb.AddField("Nickname", nickname);
+                eb.AddInlineField("Nickname", nickname);
             }
-            eb.AddField("Discriminator (tag)", discriminator);
-            eb.AddField("Status", status);
+            eb.AddInlineField("Discriminator (tag)", discriminator);
+            eb.AddInlineField("Status", status);
             if (playing == "" || playing == null)
             {
-                eb.AddField("Playing", "None");
+                eb.AddInlineField("Playing", "None");
             } else
             {
-                eb.AddField("Playing", playing);
+                eb.AddInlineField("Playing", playing);
             }
-            eb.AddField("User ID", userID);
-            eb.AddField("Is Bot", isBot.ToString());                       
+            eb.AddInlineField("User ID", userID);
+            eb.AddInlineField("Is Bot", isBot.ToString());                       
             embedFooterBuilder.Text = "Created on " + createdOn;
             eb.Footer = embedFooterBuilder;
 

@@ -72,7 +72,7 @@ namespace EdgyBot.Modules.Categories
             if (finalResult[53] != null && finalResult[53] != "") eb.AddInlineField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")"); else eb.AddInlineField("Twitter", "None");
             #endregion 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
-            footer.Text = $"User ID = {finalResult[3]}, Account ID = {targetAccountID}";
+            footer.Text = $"User ID: {finalResult[3]}, Account ID: {targetAccountID}";
             footer.IconUrl = gdpicurl;
             eb.Footer = footer;
             #endregion
