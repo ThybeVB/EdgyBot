@@ -402,5 +402,11 @@ namespace EdgyBot.Modules
             Embed e = lib.createEmbedWithImage(title, text, imgUrl);
             await ReplyAsync("", embed: e);
         }
+        [Command("gay")]
+        public async Task GayCmd(IGuildUser usr)
+        {
+            await Context.Message.DeleteAsync();
+            await ReplyAsync(usr.Mention + ", ur gay :joy: :ok_hand:");
+        }
     }
 }
