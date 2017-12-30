@@ -86,7 +86,7 @@ namespace EdgyBot.Modules
 
             Embed a = e.Build();
             await dm.SendMessageAsync("", embed: a);
-            await ReplyAsync("I sent you a list of the commands in DM, " + Context.User.Mention);
+            await Context.Message.AddReactionAsync(new Emoji("📫"));
         }
         [Command("ping")]
         public async Task PingCMD ()

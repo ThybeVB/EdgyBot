@@ -54,10 +54,14 @@ namespace EdgyBot
         {
             return loginInfo.token;
         }
-        public string getGJP ()
+        public string getGJP()
         {
             return loginInfo.gjp;
         }
+        public string getGDAccID()
+        {
+            return loginInfo.accID;
+        }      
         public Task Log(LogMessage message)
         {
             Console.WriteLine(message.ToString());
