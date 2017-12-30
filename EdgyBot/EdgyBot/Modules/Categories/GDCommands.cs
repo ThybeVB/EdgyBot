@@ -44,7 +44,7 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", "3117595"},
+                {"accountID", lib.getGDAccID()},
                 {"gjp", lib.getGJP()},
                 {"targetAccountID", targetAccountID},
                 {"secret", "Wmfd2893gb7"}
