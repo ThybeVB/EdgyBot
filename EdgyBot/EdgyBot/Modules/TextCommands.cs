@@ -54,6 +54,8 @@ namespace EdgyBot.Modules
                     gdBuilder.Color = new Color(0x0cc6d3);
                     gdBuilder.AddField("Bot Prefix", "e!");
                     gdBuilder.AddField("profile", "[NAME], shows info about a player.");
+                    gdBuilder.AddField("top10", "Shows the Top 10 leaderboard.");
+                    gdBuilder.AddField("top", "[NUMBER], Shows the leaderboard based on your number.");
                     Embed gdEmbed = gdBuilder.Build();
                     await ReplyAsync("", embed: gdEmbed);
                 }
