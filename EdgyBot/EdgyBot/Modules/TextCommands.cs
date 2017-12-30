@@ -135,8 +135,7 @@ namespace EdgyBot.Modules
         [Command("sha512")]
         public async Task HashSHA512CMD(string input)
         {
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
             e.AddField("Encrypted SHA512 String", GetHashString(input));
             Embed a = e.Build();
 
@@ -148,8 +147,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             string result = System.Convert.ToBase64String(inputBytes);
 
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
             e.AddField("Encoded Base64 String", result);
             Embed a = e.Build();
 
@@ -161,8 +159,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Convert.FromBase64String(input);
             string result = System.Text.Encoding.UTF8.GetString(inputBytes);
 
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
             e.AddField("Decoded Base64 String", result);
             Embed a = e.Build();
 
@@ -179,8 +176,7 @@ namespace EdgyBot.Modules
             }
             Random rand = new Random();
             int result = rand.Next(min, max);
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
 
             e.AddField("Random Number Generator", "You got " + result.ToString() + "!");
 
@@ -205,11 +201,7 @@ namespace EdgyBot.Modules
             }
             input = reverseTxt;
             #endregion
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
-            e.AddField("Reversed Text", input);
-            Embed a = e.Build();
-
+            Embed a = lib.createEmbedWithText("Reversed Text", input, false);
             await ReplyAsync("", embed: a);
         }
         [Command("flipcoin")]
@@ -282,8 +274,7 @@ namespace EdgyBot.Modules
             int num = rand.Next(-1, 100);
             string numStr = num.ToString();
 
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
             e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
@@ -307,8 +298,7 @@ namespace EdgyBot.Modules
             string cCreated = Context.Channel.CreatedAt.ToString();
             string cId = Context.Channel.Id.ToString();
 
-            EmbedBuilder e = new EmbedBuilder();
-            e.Color = new Color(0x0cc6d3);
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
 
             e.AddField("Channel Name", cChannelname);
             e.AddField("Channel ID", cId);
@@ -332,10 +322,7 @@ namespace EdgyBot.Modules
             string playing = null;
             string createdOn = null;
             #endregion
-
-            EmbedBuilder eb = new EmbedBuilder();
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-            eb.Color = new Color(0x0cc6d3);
+            EmbedBuilder eb = lib.setupEmbedWithDefaults(true);
             if (usr == null)
             {
                 username = Context.User.Username;
@@ -381,8 +368,6 @@ namespace EdgyBot.Modules
             }
             eb.AddInlineField("User ID", userID);
             eb.AddInlineField("Is Bot", isBot.ToString());                       
-            embedFooterBuilder.Text = "Created on " + createdOn;
-            eb.Footer = embedFooterBuilder;
 
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);
