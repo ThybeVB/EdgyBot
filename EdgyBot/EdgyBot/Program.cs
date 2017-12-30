@@ -35,8 +35,7 @@ namespace EdgyBot
         }
         public async Task Ready()
         {
-            int guildNum = _client.Guilds.Count;
-            await _client.SetGameAsync("e!help | EdgyBot for " + guildNum + " servers!");
+            await _client.SetGameAsync("e!help | EdgyBot for " + _client.Guilds.Count + " servers!");
         }      
         private async Task UserLeft(SocketGuildUser user)
         {
