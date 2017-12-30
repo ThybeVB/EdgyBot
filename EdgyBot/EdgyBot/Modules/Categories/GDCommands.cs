@@ -116,5 +116,53 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
+        [Command("top")]
+        public async Task TopGDCMD(int count)
+        {
+            if (count > 25)
+            {
+                Embed aErr = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                await ReplyAsync("", embed: aErr);
+                return;
+            } else if (count <= 0)
+            {
+                Embed aErr1 = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                await ReplyAsync("", embed: aErr1);
+                return;
+            }
+            var top10ReqDict = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", lib.getGDAccID()},
+                {"gjp", lib.getGJP()},
+                {"type", "top"},
+                {"count", count.ToString()},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
+            HttpResponseMessage getScoresResponse = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
+            string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
+            string[] users = getScoresResponseString.Split('|');
+            int lbPlace = 1;
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            foreach (string user in users)
+            {
+                if (user == "") continue;
+                string[] userData = user.Split(':');
+                string username = userData[1];
+                string stars = userData[23];
+                string placeWording = "nd";
+                if (lbPlace == 3) placeWording = "d";
+                if (lbPlace >= 4) placeWording = "th";
+                if (lbPlace == 1) placeWording = "st";
+                e.AddField(lbPlace + placeWording + " Place", $"**{username}**" + " with " + $"**{stars}" + " stars**");
+                lbPlace++;
+            }
+            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
+        }
     }
 }
