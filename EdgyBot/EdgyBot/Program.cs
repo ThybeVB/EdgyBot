@@ -27,12 +27,18 @@ namespace EdgyBot
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
             _client.JoinedGuild += _client_JoinedGuild;
+            _client.Connected += _client_Connected;
             
             await _client.LoginAsync(TokenType.Bot, lib.getToken());
             await _client.StartAsync();           
             await _handler.InitializeAsync(_client);
 
             await Task.Delay(-1);
+        }
+
+        private async Task _client_Connected()
+        {
+            await lib.Log(new LogMessage(LogSeverity.Verbose, "EDGYBOT", "CONNECTED"));
         }
 
         private async Task _client_JoinedGuild(SocketGuild arg)
