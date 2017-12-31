@@ -26,12 +26,18 @@ namespace EdgyBot
             _client.Log += lib.Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
+            _client.JoinedGuild += _client_JoinedGuild;
             
             await _client.LoginAsync(TokenType.Bot, lib.getToken());
             await _client.StartAsync();           
             await _handler.InitializeAsync(_client);
 
             await Task.Delay(-1);
+        }
+
+        private async Task _client_JoinedGuild(SocketGuild arg)
+        {
+            await arg.DefaultChannel.SendMessageAsync("SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **e!help**.");
         }
         public async Task Ready()
         {
