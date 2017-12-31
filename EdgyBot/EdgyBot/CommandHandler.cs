@@ -8,7 +8,7 @@ namespace EdgyBot
     public class CommandHandler
     {
         private DiscordSocketClient _client;
-        private CommandService _service;
+        public CommandService _service;
         public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;

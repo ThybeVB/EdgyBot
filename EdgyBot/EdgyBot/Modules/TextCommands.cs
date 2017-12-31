@@ -5,12 +5,14 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Discord.WebSocket;
+using System.Linq;
 
 namespace EdgyBot.Modules
 {
     public class TextCommands : ModuleBase<SocketCommandContext>
     {
         private libEdgyBot lib = new libEdgyBot();
+        CommandHandler handler = new CommandHandler();
 
         #region Hashes
         public static byte[] GetHash(string inputString)
@@ -27,70 +29,71 @@ namespace EdgyBot.Modules
             return sb.ToString();
         }
         #endregion
-        [Command("help")]
-        public async Task HelpCMD(string catergory = null)
-        {
-            IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
-
-            if (catergory != null)
-            {
-                if (catergory == "categories")
-                {
-                    EmbedBuilder ebCat = new EmbedBuilder();
-                    ebCat.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-                    ebCat.Color = new Color(0x0cc6d3);
-
-                    ebCat.AddField("Category", "Description");
-                    ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
-
-                    Embed eCat = ebCat.Build();
-                    await dm.SendMessageAsync("", embed: eCat);
-                    await ReplyAsync("I sent you a message with the available categories, " + Context.User.Mention + "!");
-                }
-                if (catergory == "geometrydash")
-                {
-                    EmbedBuilder gdBuilder = new EmbedBuilder();
-                    gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300").WithName("EdgyBot");
-                    gdBuilder.Color = new Color(0x0cc6d3);
-                    gdBuilder.AddField("Bot Prefix", "e!");
-                    gdBuilder.AddField("profile", "[NAME], shows info about a player.");
-                    gdBuilder.AddField("top10", "Shows the Top 10 leaderboard.");
-                    gdBuilder.AddField("top", "[NUMBER], Shows the leaderboard based on your number.");
-                    Embed gdEmbed = gdBuilder.Build();
-                    await ReplyAsync("", embed: gdEmbed);
-                }
-
-                return;
-            }
-
-            EmbedBuilder e = new EmbedBuilder();
-            e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-            e.Color = new Color(0x0cc6d3);
-
-            e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
-            e.AddField("Bot Prefix", "e!");
-            e.AddField("[TEXT]", "A place where you need to place some text.");
-            e.AddField("help", "**OPTIONAL [TEXT]** (e!help categories for available categories)");
-            e.AddField("invite", "Get a link to invite the bot to other servers.");
-            e.AddField("kys", "Tell EdgyBot to go kill himself.");
-            e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
-            e.AddField("lol", "[MENTION] **LOL'S SOMEBODY** not what lol means but ok");
-            e.AddField("chance", "[TEXT], Calculates your chances.");
-            e.AddField("say", "[TEXT], repeats your message.");
-            e.AddField("sayd", "[TEXT], repeats your message and deletes it.");
-            e.AddField("channelinfo", "Gives info about the channel you are in.");
-            e.AddField("userinfo", "[MENTION], Gives info about you or another user.");
-            e.AddField("randomnum", "[number] minimum, [number] maximum, [number] your number");
-            e.AddField("sha512", "[TEXT], Hashes a string to SHA512");
-            e.AddField("b64e", "[TEXT], encrypts a string to Base64");
-            e.AddField("b64d", "[TEXT], decrypts a string from Base64");
-            e.AddField("ping", "Checks the speed of the bot.");
-
-            Embed a = e.Build();
-            await dm.SendMessageAsync("", embed: a);
-            await Context.Message.AddReactionAsync(new Emoji("📫"));
-        }
+       [Command("help")]
+       public async Task HelpCMD(string catergory = null)
+       {
+           IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
+       
+           if (catergory != null)
+           {
+               if (catergory == "categories")
+               {
+                   EmbedBuilder ebCat = new EmbedBuilder();
+                   ebCat.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+                   ebCat.Color = new Color(0x0cc6d3);
+       
+                   ebCat.AddField("Category", "Description");
+                   ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
+       
+                   Embed eCat = ebCat.Build();
+                   await dm.SendMessageAsync("", embed: eCat);
+                   await ReplyAsync("I sent you a message with the available categories, " + Context.User.Mention + "!");
+               }
+               if (catergory == "geometrydash")
+               {
+                   EmbedBuilder gdBuilder = new EmbedBuilder();
+                   gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300").WithName("EdgyBot");
+                   gdBuilder.Color = new Color(0x0cc6d3);
+                   gdBuilder.AddField("Bot Prefix", "e!");
+                   gdBuilder.AddField("profile", "[NAME], shows info about a player.");
+                   gdBuilder.AddField("top10", "Shows the Top 10 leaderboard.");
+                   gdBuilder.AddField("top", "[NUMBER], Shows the leaderboard based on your number.");
+                   Embed gdEmbed = gdBuilder.Build();
+                   await ReplyAsync("", embed: gdEmbed);
+               }
+       
+               return;
+           }
+       
+           EmbedBuilder e = new EmbedBuilder();
+           e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+           e.Color = new Color(0x0cc6d3);
+       
+           e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
+           e.AddField("Bot Prefix", "e!");
+           e.AddField("[TEXT]", "A place where you need to place some text.");
+           e.AddField("help", "**OPTIONAL [TEXT]** (e!help categories for available categories)");
+           e.AddField("invite", "Get a link to invite the bot to other servers.");
+           e.AddField("kys", "Tell EdgyBot to go kill himself.");
+           e.AddField("jeff", "[MENTION], **JEFF'S SOMEBODY**");
+           e.AddField("lol", "[MENTION] **LOL'S SOMEBODY** not what lol means but ok");
+           e.AddField("chance", "[TEXT], Calculates your chances.");
+           e.AddField("say", "[TEXT], repeats your message.");
+           e.AddField("sayd", "[TEXT], repeats your message and deletes it.");
+           e.AddField("channelinfo", "Gives info about the channel you are in.");
+           e.AddField("userinfo", "[MENTION], Gives info about you or another user.");
+           e.AddField("randomnum", "[number] minimum, [number] maximum, [number] your number");
+           e.AddField("sha512", "[TEXT], Hashes a string to SHA512");
+           e.AddField("b64e", "[TEXT], encrypts a string to Base64");
+           e.AddField("b64d", "[TEXT], decrypts a string from Base64");
+           e.AddField("ping", "Checks the speed of the bot.");
+       
+           Embed a = e.Build();
+           await dm.SendMessageAsync("", embed: a);
+           await Context.Message.AddReactionAsync(new Emoji("📫"));
+       } 
         [Command("ping")]
+        [Summary("Shows the response time from the Discord Server.")]
         public async Task PingCMD ()
         {
             Embed e = lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds", true);
