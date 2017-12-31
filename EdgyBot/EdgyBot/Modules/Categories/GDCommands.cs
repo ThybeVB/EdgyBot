@@ -164,5 +164,45 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
+        [Command("top10creators")]
+        public async Task Top10CreatorsCMD()
+        {
+            #region Request
+            var values = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", lib.getGDAccID()},
+                {"gjp", lib.getGJP()},
+                {"type", "creators"},
+                {"count", "10"},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent content = new FormUrlEncodedContent(values);
+            HttpResponseMessage response = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
+            string responseString = await response.Content.ReadAsStringAsync();
+            #endregion
+            string[] users = responseString.Split('|');
+            int place = 1;
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            foreach (string user in users)
+            {
+                if (user == "") continue;
+                string[] userData = user.Split(':');
+                string username = userData[1];
+                string cp = userData[25];
+                string placeWording = "nd";
+                if (place == 3) placeWording = "rd";
+                if (place >= 4) placeWording = "th";
+                if (place == 1) placeWording = "st";
+                e.AddField(place + placeWording + " Place", $"**{username}** with **{cp} Creator Points**");
+                
+                place++;
+            }
+            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
+        }
     }
 }

@@ -135,6 +135,7 @@
     <Compile Include="Modules\Categories\GDCommands.cs" />
     <Compile Include="Modules\TextCommands.cs" />
     <Compile Include="Modules\VoiceCommands.cs" />
+    <Compile Include="Modules\XPCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

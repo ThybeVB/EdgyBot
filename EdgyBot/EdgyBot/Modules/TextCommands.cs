@@ -50,7 +50,7 @@ namespace EdgyBot.Modules
                 if (catergory == "geometrydash")
                 {
                     EmbedBuilder gdBuilder = new EmbedBuilder();
-                    gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+                    gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300").WithName("EdgyBot");
                     gdBuilder.Color = new Color(0x0cc6d3);
                     gdBuilder.AddField("Bot Prefix", "e!");
                     gdBuilder.AddField("profile", "[NAME], shows info about a player.");
@@ -376,11 +376,17 @@ namespace EdgyBot.Modules
 
         }
         [Command("stab")]
+        [Summary("Stabs a user")]
         public async Task StabCMD (SocketUser usr = null)
         {
             if (usr == null)
             {
                 await ReplyAsync("You need to mention an user!\nTry **e!stab @User123**.");
+                return;
+            }
+            if (usr.Id == Context.User.Id)
+            {
+                await ReplyAsync("Yo bro that's fucked up.");
                 return;
             }
             string title = "Stab";
