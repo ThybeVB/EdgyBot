@@ -68,6 +68,21 @@ namespace EdgyBot
         }      
         public Task Log(LogMessage message)
         {
+            switch (message.Severity)
+            {
+                case LogSeverity.Critical:
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case LogSeverity.Debug:
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
+                case LogSeverity.Error:
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case LogSeverity.Warning:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+            }
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
         }

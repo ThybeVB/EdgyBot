@@ -8,8 +8,8 @@ namespace EdgyBot
 {
     public class Program : ModuleBase<SocketCommandContext>
     {
-        public static void Main(string[] args)
-        => new Program().StartAsync().GetAwaiter().GetResult();
+        private static void Main(string[] args)
+            => new Program().StartAsync().GetAwaiter().GetResult();
 
         public DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig
         {

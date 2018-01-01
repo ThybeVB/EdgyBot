@@ -21,11 +21,13 @@ namespace EdgyBot
         }
         public async Task Ready()
         {
-            await _client.SetGameAsync("e!help | EdgyBot for " + _client.Guilds.Count + " servers!");
+            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
+            await _client.SetGameAsync(gameStatus);
+            await _lib.Log(new LogMessage(LogSeverity.Verbose, "EdgyBot", "Set Game to " + gameStatus));
         }
         private async Task Client_Connected()
         {
-            await _lib.Log(new LogMessage(LogSeverity.Verbose, "EDGYBOT", "CONNECTED TO GATEWAY, CONNECTING TO SERVERS"));
+            await _lib.Log(new LogMessage(LogSeverity.Verbose, "EdgyBot", "Connecting to servers..."));
         }
 
         private static async Task Client_JoinedGuild(SocketGuild arg)
