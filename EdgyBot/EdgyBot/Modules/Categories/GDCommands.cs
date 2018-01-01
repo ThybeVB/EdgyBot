@@ -147,13 +147,13 @@ namespace EdgyBot.Modules.Categories
             string[] users = getScoresResponseString.Split('|');
             int lbPlace = 1;
             EmbedBuilder e = lib.setupEmbedWithDefaults();
-            foreach (string user in users)
+            foreach (var user in users)
             {
                 if (user == "") continue;
-                string[] userData = user.Split(':');
-                string username = userData[1];
-                string stars = userData[23];
-                string placeWording = "nd";
+                var userData = user.Split(':');
+                var username = userData[1];
+                var stars = userData[23];
+                var placeWording = "nd";
                 if (lbPlace == 3) placeWording = "d";
                 if (lbPlace >= 4) placeWording = "th";
                 if (lbPlace == 1) placeWording = "st";
@@ -189,10 +189,10 @@ namespace EdgyBot.Modules.Categories
             foreach (string user in users)
             {
                 if (user == "") continue;
-                string[] userData = user.Split(':');
-                string username = userData[1];
-                string cp = userData[25];
-                string placeWording = "nd";
+                var userData = user.Split(':');
+                var username = userData[1];
+                var cp = userData[25];
+                var placeWording = "nd";
                 if (place == 3) placeWording = "rd";
                 if (place >= 4) placeWording = "th";
                 if (place == 1) placeWording = "st";

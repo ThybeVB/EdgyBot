@@ -8,7 +8,7 @@ namespace EdgyBot
     public class CommandHandler
     {
         private DiscordSocketClient _client;
-        public CommandService _service;
+        private CommandService _service;
         public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;
@@ -19,10 +19,10 @@ namespace EdgyBot
         }
         private async Task HandleCommandAsync(SocketMessage s)
         {
-            var msg = s as SocketUserMessage;
+            var msg = (SocketUserMessage)s;
             if (msg == null) return;
             var context = new SocketCommandContext(_client, msg);
-            int argPos = 0;
+            var argPos = 0;
             if (msg.HasStringPrefix("e!", ref argPos))
             {
                 var result = await _service.ExecuteAsync(context, argPos);

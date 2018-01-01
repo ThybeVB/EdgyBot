@@ -11,48 +11,47 @@ namespace EdgyBot
         public static void Main(string[] args)
         => new Program().StartAsync().GetAwaiter().GetResult();
 
-        public DiscordSocketClient _client = new DiscordSocketClient(new DiscordSocketConfig
+        public DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig
         {
             LogLevel = LogSeverity.Verbose
         });
-        public CommandHandler _handler = new CommandHandler();
-        private LoginInfo loginInfo = new LoginInfo();
-        private libEdgyBot lib = new libEdgyBot();
+        private readonly CommandHandler  _handler = new CommandHandler();
+        private readonly libEdgyBot _lib = new libEdgyBot();
 
         public async Task StartAsync ()
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
-            _client.Log += lib.Log;
-            _client.Ready += Ready;
-            _client.UserLeft += UserLeft;
-            _client.JoinedGuild += _client_JoinedGuild;
-            _client.Connected += _client_Connected;
+            Client.Log += _lib.Log;
+            Client.Ready += Ready;
+            Client.UserLeft += UserLeft;
+            Client.JoinedGuild += Client_JoinedGuild;
+            Client.Connected += Client_Connected;
             
-            await _client.LoginAsync(TokenType.Bot, lib.getToken());
-            await _client.StartAsync();           
-            await _handler.InitializeAsync(_client);
+            await Client.LoginAsync(TokenType.Bot, _lib.getToken());
+            await Client.StartAsync();           
+            await _handler.InitializeAsync(Client);
 
             await Task.Delay(-1);
         }
 
-        private async Task _client_Connected()
+        private async Task Client_Connected()
         {
-            await lib.Log(new LogMessage(LogSeverity.Verbose, "EDGYBOT", "CONNECTED"));
+            await _lib.Log(new LogMessage(LogSeverity.Verbose, "EDGYBOT", "CONNECTED"));
         }
 
-        private async Task _client_JoinedGuild(SocketGuild arg)
+        private static async Task Client_JoinedGuild(SocketGuild arg)
         {
             await arg.DefaultChannel.SendMessageAsync("SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **e!help**.");
         }
         public async Task Ready()
         {
-            await _client.SetGameAsync("e!help | EdgyBot for " + _client.Guilds.Count + " servers!");
+            await Client.SetGameAsync("e!help | EdgyBot for " + Client.Guilds.Count + " servers!");
         }      
         private async Task UserLeft(SocketGuildUser user)
         {
-            IDMChannel dm = await user.GetOrCreateDMChannelAsync();
-            Embed e = lib.createEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
+            var dm = await user.GetOrCreateDMChannelAsync();
+            var e = _lib.createEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
             await ReplyAsync("", embed: e);
         }
     }
