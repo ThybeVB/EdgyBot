@@ -125,7 +125,7 @@ namespace EdgyBot.Modules
             
         }
         [Command("setstatus")]
-        public async Task SetStatusCMD(string input)
+        public async Task SetStatusCMD([Remainder]string input)
         {
             if (Context.User.Id == 257247527630274561)
             {
@@ -137,7 +137,7 @@ namespace EdgyBot.Modules
             }
         }
         [Command("sha512")]
-        public async Task HashSHA512CMD(string input)
+        public async Task HashSHA512CMD([Remainder]string input)
         {
             EmbedBuilder e = _lib.setupEmbedWithDefaults();
             e.AddField("Encrypted SHA512 String", GetHashString(input));
@@ -146,7 +146,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("b64e")]
-        public async Task B64EncryptCMD(string input)
+        public async Task B64EncryptCMD([Remainder]string input)
         {
             byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             string result = System.Convert.ToBase64String(inputBytes);
@@ -158,7 +158,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("b64d")]
-        public async Task B64DecodeCMD(string input)
+        public async Task B64DecodeCMD([Remainder]string input)
         {
             byte[] inputBytes = System.Convert.FromBase64String(input);
             string result = System.Text.Encoding.UTF8.GetString(inputBytes);
@@ -188,7 +188,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: a);
         }
         [Command("flip")]
-        public async Task ReverseCMD(string input = null)
+        public async Task ReverseCMD([Remainder]string input = null)
         {
             if (input == null)
             {
@@ -229,7 +229,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: e);
         }
         [Command("say")]
-        public async Task SayCMD (string input = null)
+        public async Task SayCMD ([Remainder]string input = null)
         {
             if (input == null)
             {
@@ -239,7 +239,7 @@ namespace EdgyBot.Modules
             await ReplyAsync(input);
         }
         [Command("sayd")]
-        public async Task SaydCMD (string input = null)
+        public async Task SaydCMD ([Remainder]string input = null)
         {
             if (input == null)
             {
@@ -272,7 +272,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("monstah is not gay german");
         }
         [Command("chance")]
-        public async Task ChanceCMD(string input)
+        public async Task ChanceCMD([Remainder]string input)
         {
             Random rand = new Random();
             int num = rand.Next(-1, 100);
@@ -354,7 +354,7 @@ namespace EdgyBot.Modules
             }
             eb.ThumbnailUrl = pfpUrl;
             eb.AddInlineField("Username", username);
-            if (nickname == null || nickname == "")
+            if (String.IsNullOrEmpty(nickname))
             {
                 eb.AddInlineField("Nickname", "None");
             } else
@@ -363,6 +363,7 @@ namespace EdgyBot.Modules
             }
             eb.AddInlineField("Discriminator (tag)", discriminator);
             eb.AddInlineField("Status", status);
+            eb.AddInlineField("Created At", createdOn);
             if (playing == "" || playing == null)
             {
                 eb.AddInlineField("Playing", "None");
@@ -378,7 +379,6 @@ namespace EdgyBot.Modules
 
         }
         [Command("stab")]
-        [Summary("Stabs a user")]
         public async Task StabCMD (SocketUser usr = null)
         {
             if (usr == null)
@@ -395,6 +395,7 @@ namespace EdgyBot.Modules
             string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
             string imgUrl = "https://media.giphy.com/media/xUySTCy0JHxUxw4fao/giphy.gif";
             Embed e = _lib.createEmbedWithImage(title, text, imgUrl);
+
             await ReplyAsync("", embed: e);
         }
         [Command("gay")]
