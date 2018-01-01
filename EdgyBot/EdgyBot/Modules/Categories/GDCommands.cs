@@ -8,8 +8,10 @@ namespace EdgyBot.Modules.Categories
 {
     public class GDCommands : ModuleBase<SocketCommandContext>
     {
-        LibEdgyBot lib = new LibEdgyBot();
-        HttpClient client = new HttpClient();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly HttpClient _client = new HttpClient();
+
+        private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
         [Command("profile")]
         public async Task ProfileGDCMD (string strInput = null)
@@ -32,7 +34,7 @@ namespace EdgyBot.Modules.Categories
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
-            HttpResponseMessage gjUsersResponse = await client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
+            HttpResponseMessage gjUsersResponse = await _client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
             string responseString = await gjUsersResponse.Content.ReadAsStringAsync();
             string[] accountStuff = responseString.Split(':');
             string targetAccountID = accountStuff[21];
@@ -43,20 +45,20 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", lib.getGDAccID()},
-                {"gjp", lib.getGJP()},
+                {"accountID", _lib.getGDAccID()},
+                {"gjp", _lib.getGJP()},
                 {"targetAccountID", targetAccountID},
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent getUserContent = new FormUrlEncodedContent(getUserValues);
-            HttpResponseMessage getUserResponse = await client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
+            HttpResponseMessage getUserResponse = await _client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
             string getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
             string[] finalResult = getUserResponseString.Split(':');
             #endregion
             #endregion
             #region Embed
-            EmbedBuilder eb = lib.setupEmbedWithDefaults(false);
-            string gdpicurl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            EmbedBuilder eb = _lib.setupEmbedWithDefaults(false);
+            string gdpicurl = gdThumbPic;
             eb.ThumbnailUrl = gdpicurl;
             eb.AddInlineField("Username", finalResult[1]);
             eb.AddInlineField("Stars", finalResult[13]);
@@ -86,18 +88,18 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", lib.getGDAccID()},
-                {"gjp", lib.getGJP()},
+                {"accountID", _lib.getGDAccID()},
+                {"gjp", _lib.getGJP()},
                 {"type", "top"},
                 {"count", "10"},
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
-            HttpResponseMessage getScoresResponse = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
+            HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
             string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
             string[] users = getScoresResponseString.Split('|');
             int lbPlace = 1;
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             foreach (string user in users)
             {
                 if (user == "") continue;
@@ -111,7 +113,7 @@ namespace EdgyBot.Modules.Categories
                 e.AddField(lbPlace + placeWording + " Place", $"**{username}**" + " with " + $"**{stars}" + " stars**");
                 lbPlace++;
             }
-            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            e.ThumbnailUrl = gdThumbPic;
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
@@ -120,12 +122,12 @@ namespace EdgyBot.Modules.Categories
         {
             if (count > 25)
             {
-                Embed aErr = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                Embed aErr = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
                 await ReplyAsync("", embed: aErr);
                 return;
             } else if (count <= 0)
             {
-                Embed aErr1 = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                Embed aErr1 = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
@@ -134,18 +136,18 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", lib.getGDAccID()},
-                {"gjp", lib.getGJP()},
+                {"accountID", _lib.getGDAccID()},
+                {"gjp", _lib.getGJP()},
                 {"type", "top"},
                 {"count", count.ToString()},
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
-            HttpResponseMessage getScoresResponse = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
+            HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
             string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
             string[] users = getScoresResponseString.Split('|');
             int lbPlace = 1;
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             foreach (var user in users)
             {
                 if (user == "") continue;
@@ -159,7 +161,7 @@ namespace EdgyBot.Modules.Categories
                 e.AddField(lbPlace + placeWording + " Place", $"**{username}**" + " with " + $"**{stars}" + " stars**");
                 lbPlace++;
             }
-            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            e.ThumbnailUrl = gdThumbPic;
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
@@ -172,19 +174,19 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", lib.getGDAccID()},
-                {"gjp", lib.getGJP()},
+                {"accountID", _lib.getGDAccID()},
+                {"gjp", _lib.getGJP()},
                 {"type", "creators"},
                 {"count", "10"},
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
-            HttpResponseMessage response = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
+            HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
             string responseString = await response.Content.ReadAsStringAsync();
             #endregion
             string[] users = responseString.Split('|');
             int place = 1;
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             foreach (string user in users)
             {
                 if (user == "") continue;
@@ -199,7 +201,7 @@ namespace EdgyBot.Modules.Categories
                 
                 place++;
             }
-            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            e.ThumbnailUrl = gdThumbPic;
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
@@ -208,13 +210,13 @@ namespace EdgyBot.Modules.Categories
         {
             if (count > 25)
             {
-                var aErr = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                var aErr = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
                 await ReplyAsync("", embed: aErr);
                 return;
             }
             else if (count <= 0)
             {
-                var aErr1 = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                var aErr1 = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
@@ -224,19 +226,19 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", lib.getGDAccID()},
-                {"gjp", lib.getGJP()},
+                {"accountID", _lib.getGDAccID()},
+                {"gjp", _lib.getGJP()},
                 {"type", "creators"},
                 {"count", count.ToString()},
                 {"secret", "Wmfd2893gb7"}
             };
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
-            HttpResponseMessage response = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
+            HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
             string responseString = await response.Content.ReadAsStringAsync();
             #endregion
             string[] users = responseString.Split('|');
             int place = 1;
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             foreach (string user in users)
             {
                 if (user == "") continue;
@@ -251,7 +253,7 @@ namespace EdgyBot.Modules.Categories
 
                 place++;
             }
-            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            e.ThumbnailUrl = gdThumbPic;
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
