@@ -16,7 +16,7 @@ namespace EdgyBot
             LogLevel = LogSeverity.Verbose
         });
         private readonly CommandHandler  _handler = new CommandHandler();
-        private readonly libEdgyBot _lib = new libEdgyBot();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         public async Task StartAsync ()
         {

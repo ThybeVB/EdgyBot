@@ -11,7 +11,7 @@ namespace EdgyBot.Modules
 {
     public class TextCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly libEdgyBot _lib = new libEdgyBot();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         #region Hashes
         public static byte[] GetHash(string inputString)

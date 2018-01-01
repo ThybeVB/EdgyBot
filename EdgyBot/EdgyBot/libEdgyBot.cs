@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EdgyBot
 {
-    public class libEdgyBot
+    public class LibEdgyBot
     {
         private LoginInfo loginInfo = new LoginInfo();
 
@@ -53,6 +53,10 @@ namespace EdgyBot
         public string getToken ()
         {
             return loginInfo.token;
+        }
+        public string getPrefix()
+        {
+            return loginInfo.prefix;
         }
         public string getGJP()
         {

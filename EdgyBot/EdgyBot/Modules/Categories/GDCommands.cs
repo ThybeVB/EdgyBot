@@ -8,7 +8,7 @@ namespace EdgyBot.Modules.Categories
 {
     public class GDCommands : ModuleBase<SocketCommandContext>
     {
-        libEdgyBot lib = new libEdgyBot();
+        LibEdgyBot lib = new LibEdgyBot();
         HttpClient client = new HttpClient();
 
         [Command("profile")]
@@ -115,7 +115,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("top")]
+        [Command("topplayers")]
         public async Task TopGDCMD(int count)
         {
             if (count > 25)
@@ -197,6 +197,58 @@ namespace EdgyBot.Modules.Categories
                 if (place == 1) placeWording = "st";
                 e.AddField(place + placeWording + " Place", $"**{username}** with **{cp} Creator Points**");
                 
+                place++;
+            }
+            e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
+            Embed a = e.Build();
+            await ReplyAsync("", embed: a);
+        }
+        [Command("topcreators")]
+        public async Task TopCreatorsCMD(int count)
+        {
+            if (count > 25)
+            {
+                var aErr = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                await ReplyAsync("", embed: aErr);
+                return;
+            }
+            else if (count <= 0)
+            {
+                var aErr1 = lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                await ReplyAsync("", embed: aErr1);
+                return;
+            }
+            #region Request
+            var values = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", lib.getGDAccID()},
+                {"gjp", lib.getGJP()},
+                {"type", "creators"},
+                {"count", count.ToString()},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent content = new FormUrlEncodedContent(values);
+            HttpResponseMessage response = await client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
+            string responseString = await response.Content.ReadAsStringAsync();
+            #endregion
+            string[] users = responseString.Split('|');
+            int place = 1;
+            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            foreach (string user in users)
+            {
+                if (user == "") continue;
+                var userData = user.Split(':');
+                var username = userData[1];
+                var cp = userData[25];
+                var placeWording = "nd";
+                if (place == 3) placeWording = "rd";
+                if (place >= 4) placeWording = "th";
+                if (place == 1) placeWording = "st";
+                e.AddField(place + placeWording + " Place", $"**{username}** with **{cp} Creator Points**");
+
                 place++;
             }
             e.ThumbnailUrl = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
