@@ -3,7 +3,6 @@ using Discord.Commands;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System;
 
 namespace EdgyBot.Modules.Categories
 {

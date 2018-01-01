@@ -11,8 +11,7 @@ namespace EdgyBot.Modules
 {
     public class TextCommands : ModuleBase<SocketCommandContext>
     {
-        private libEdgyBot lib = new libEdgyBot();
-        CommandHandler handler = new CommandHandler();
+        private readonly libEdgyBot _lib = new libEdgyBot();
 
         #region Hashes
         public static byte[] GetHash(string inputString)
@@ -96,13 +95,13 @@ namespace EdgyBot.Modules
         [Summary("Shows the response time from the Discord Server.")]
         public async Task PingCMD ()
         {
-            Embed e = lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds", true);
+            Embed e = _lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds", true);
             await ReplyAsync("", embed: e);
         }
         [Command("invite")]
         public async Task InviteCMD ()
         {
-            Embed e = lib.createEmbedWithText("Invite Link", lib.getInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
+            Embed e = _lib.createEmbedWithText("Invite Link", _lib.getInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
         [Command("kys")]
@@ -120,7 +119,7 @@ namespace EdgyBot.Modules
             }
             string imgUrl = "http://sigmastudios.tk/SigmaFiles/jeff.jpg";
             string textStr = user.Mention + ", You just got jeffed by " + Context.User.Mention;
-            Embed e = lib.createEmbedWithImage("Jeff", textStr, imgUrl);
+            Embed e = _lib.createEmbedWithImage("Jeff", textStr, imgUrl);
 
             await ReplyAsync("", embed: e);
             
@@ -140,7 +139,7 @@ namespace EdgyBot.Modules
         [Command("sha512")]
         public async Task HashSHA512CMD(string input)
         {
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             e.AddField("Encrypted SHA512 String", GetHashString(input));
             Embed a = e.Build();
 
@@ -152,7 +151,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             string result = System.Convert.ToBase64String(inputBytes);
 
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             e.AddField("Encoded Base64 String", result);
             Embed a = e.Build();
 
@@ -164,7 +163,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Convert.FromBase64String(input);
             string result = System.Text.Encoding.UTF8.GetString(inputBytes);
 
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             e.AddField("Decoded Base64 String", result);
             Embed a = e.Build();
 
@@ -175,13 +174,13 @@ namespace EdgyBot.Modules
         {
             if (min >= max)
             {
-                Embed err = lib.createEmbedWithText("EdgyBot", "Invalid number input.");
+                Embed err = _lib.createEmbedWithText("EdgyBot", "Invalid number input.");
                 await ReplyAsync("", embed: err);
                 return;
             }
             Random rand = new Random();
             int result = rand.Next(min, max);
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
 
             e.AddField("Random Number Generator", "You got " + result.ToString() + "!");
 
@@ -206,7 +205,7 @@ namespace EdgyBot.Modules
             }
             input = reverseTxt;
             #endregion
-            Embed a = lib.createEmbedWithText("Reversed Text", input, false);
+            Embed a = _lib.createEmbedWithText("Reversed Text", input, false);
             await ReplyAsync("", embed: a);
         }
         [Command("flipcoin")]
@@ -221,10 +220,10 @@ namespace EdgyBot.Modules
                     await ReplyAsync("Error.");
                     break;
                 case 1:
-                    e = lib.createEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
+                    e = _lib.createEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
                     break;
                 case 2:
-                    e = lib.createEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
+                    e = _lib.createEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
                     break;
             }
             await ReplyAsync("", embed: e);
@@ -244,7 +243,7 @@ namespace EdgyBot.Modules
         {
             if (input == null)
             {
-                Embed e = lib.createEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
+                Embed e = _lib.createEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
                 await ReplyAsync("", embed: e);
             } else
             {
@@ -279,7 +278,7 @@ namespace EdgyBot.Modules
             int num = rand.Next(-1, 100);
             string numStr = num.ToString();
 
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
             e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
@@ -303,7 +302,7 @@ namespace EdgyBot.Modules
             string cCreated = Context.Channel.CreatedAt.ToString();
             string cId = Context.Channel.Id.ToString();
 
-            EmbedBuilder e = lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.setupEmbedWithDefaults();
 
             e.AddField("Channel Name", cChannelname);
             e.AddField("Channel ID", cId);
@@ -327,7 +326,7 @@ namespace EdgyBot.Modules
             string playing = null;
             string createdOn = null;
             #endregion
-            EmbedBuilder eb = lib.setupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.setupEmbedWithDefaults(true);
             if (usr == null)
             {
                 username = Context.User.Username;
@@ -395,7 +394,7 @@ namespace EdgyBot.Modules
             string title = "Stab";
             string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
             string imgUrl = "https://media.giphy.com/media/xUySTCy0JHxUxw4fao/giphy.gif";
-            Embed e = lib.createEmbedWithImage(title, text, imgUrl);
+            Embed e = _lib.createEmbedWithImage(title, text, imgUrl);
             await ReplyAsync("", embed: e);
         }
         [Command("gay")]

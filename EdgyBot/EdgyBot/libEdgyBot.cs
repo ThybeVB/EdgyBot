@@ -56,7 +56,7 @@ namespace EdgyBot
         }
         public string getGJP()
         {
-            return loginInfo.gjp;
+            return loginInfo.GJP;
         }
         public string getGDAccID()
         {
