@@ -11,10 +11,7 @@ namespace EdgyBot
         private static void Main(string[] args)
             => new Program().StartAsync().GetAwaiter().GetResult();
 
-        public DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig
-        {
-            LogLevel = LogSeverity.Verbose
-        });
+        public DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig{LogLevel = LogSeverity.Verbose});
         private readonly CommandHandler  _handler = new CommandHandler();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private EventHandler _ehandler;

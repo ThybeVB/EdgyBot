@@ -120,14 +120,15 @@ namespace EdgyBot.Modules.Categories
         [Command("topplayers")]
         public async Task TopGDCMD(int count)
         {
+            string countStr = count.ToString();
             if (count > 25)
             {
-                Embed aErr = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                Embed aErr = _lib.createEmbedWithText("Top " + countStr, "The number you entered is too big.\n[MAX = 25]", false);
                 await ReplyAsync("", embed: aErr);
                 return;
             } else if (count <= 0)
             {
-                Embed aErr1 = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                Embed aErr1 = _lib.createEmbedWithText("Top " + countStr, "The number you entered is invalid.", false);
                 await ReplyAsync("", embed: aErr1);
                 return;
             }

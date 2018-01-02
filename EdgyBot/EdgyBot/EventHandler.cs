@@ -13,6 +13,7 @@ namespace EdgyBot
         public EventHandler(DiscordSocketClient client)
         {
             _client = client;
+
             _client.Log += _lib.Log;
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;

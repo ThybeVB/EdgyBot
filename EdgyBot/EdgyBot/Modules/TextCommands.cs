@@ -364,7 +364,7 @@ namespace EdgyBot.Modules
             eb.AddInlineField("Discriminator (tag)", discriminator);
             eb.AddInlineField("Status", status);
             eb.AddInlineField("Created At", createdOn);
-            if (playing == "" || playing == null)
+            if (String.IsNullOrEmpty(playing))
             {
                 eb.AddInlineField("Playing", "None");
             } else
