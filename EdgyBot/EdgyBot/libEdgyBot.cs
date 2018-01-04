@@ -84,6 +84,8 @@ namespace EdgyBot
                 case LogSeverity.Warning:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
+                case LogSeverity.Verbose:
+                    break;
             }
             Console.WriteLine(message.ToString());
             return Task.CompletedTask;
@@ -92,7 +94,7 @@ namespace EdgyBot
         public Task eLog(string msg)
         {
             LogMessage logMessage = new LogMessage(LogSeverity.Verbose, "EdgyBot", msg);
-            Console.WriteLine(msg);
+            Console.WriteLine(logMessage.ToString());
             return Task.CompletedTask;
         }
     }

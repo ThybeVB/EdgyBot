@@ -390,6 +390,10 @@ namespace EdgyBot.Modules
             {
                 await ReplyAsync("Yo bro that's fucked up.");
                 return;
+            } else if (usr.Id == Context.Client.CurrentUser.Id)
+            {
+                await ReplyAsync("I'm unstabbable.");
+                return;
             }
             string title = "Stab";
             string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
