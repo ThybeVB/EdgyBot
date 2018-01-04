@@ -6,7 +6,7 @@ namespace EdgyBot
 {
     public class LibEdgyBot
     {
-        private LoginInfo loginInfo = new LoginInfo();
+        private readonly LoginInfo loginInfo = new LoginInfo();
 
         public Color lightBlue = new Color(0x0cc6d3);
 
@@ -73,6 +73,8 @@ namespace EdgyBot
                 case LogSeverity.Critical:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     break;
+                case LogSeverity.Info:
+                    break;
                 case LogSeverity.Debug:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     break;
@@ -84,6 +86,13 @@ namespace EdgyBot
                     break;
             }
             Console.WriteLine(message.ToString());
+            return Task.CompletedTask;
+        }
+
+        public Task eLog(string msg)
+        {
+            LogMessage logMessage = new LogMessage(LogSeverity.Verbose, "EdgyBot", msg);
+            Console.WriteLine(msg);
             return Task.CompletedTask;
         }
     }

@@ -211,13 +211,13 @@ namespace EdgyBot.Modules.Categories
         {
             if (count > 25)
             {
-                var aErr = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is too big.\n[MAX = 25]", false);
+                var aErr = _lib.createEmbedWithText("Top " + count, "The number you entered is too big.\n[MAX = 25]");
                 await ReplyAsync("", embed: aErr);
                 return;
             }
             else if (count <= 0)
             {
-                var aErr1 = _lib.createEmbedWithText("Top " + count.ToString(), "The number you entered is invalid.", false);
+                var aErr1 = _lib.createEmbedWithText("Top " + count, "The number you entered is invalid.");
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
