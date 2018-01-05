@@ -8,7 +8,7 @@ namespace EdgyBot
     {
         private readonly LoginInfo loginInfo = new LoginInfo();
 
-        public Color lightBlue = new Color(0x0cc6d3);
+        private readonly Color lightBlue = new Color(0x0cc6d3);
 
         public Embed createEmbedWithText (string title, string text, bool footerEnabled = false)
         {
