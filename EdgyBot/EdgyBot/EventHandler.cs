@@ -25,6 +25,7 @@ namespace EdgyBot
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
             await _lib.eLog("Set game to " + gameStatus);
+            await _lib.eLog("Fully loaded EdgyBot v1.0.");
         }
         private async Task Client_Connected()
         {

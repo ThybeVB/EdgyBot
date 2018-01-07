@@ -10,9 +10,10 @@ namespace EdgyBot.Modules
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
         [Command("teststuff", RunMode = RunMode.Async)]
-        public async Task TestStuff(IVoiceChannel channel = null)
+        public async Task TestStuff(string path =  null, IVoiceChannel channel = null)
         {
             await ReplyAsync("Starting...");
+            if (path == null) return;
             channel = channel ?? (Context.Message.Author as IGuildUser)?.VoiceChannel;
             if (channel == null)
             {
@@ -20,14 +21,14 @@ namespace EdgyBot.Modules
                 return;
             }
             var audioClient = await channel.ConnectAsync();
-            await SendASync(audioClient, "endStart_02.ogg");
+            await SendASync(audioClient, path);
         }
         private Process CreateStream (string path)
         {
             ProcessStartInfo ffmpeg = new ProcessStartInfo
             {
                 FileName = "ffmpeg",
-                Arguments = $"-i {path} -ac 2 -f s16le -ar 48000 pipe:1",
+                Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute = false,
                 RedirectStandardInput = true,
             };

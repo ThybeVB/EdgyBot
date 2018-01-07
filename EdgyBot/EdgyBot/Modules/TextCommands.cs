@@ -407,6 +407,7 @@ namespace EdgyBot.Modules
         [Command("gay")]
         public async Task GayCmd(IGuildUser usr)
         {
+            //Delete the message by user.
             await Context.Message.DeleteAsync();
             await ReplyAsync(usr.Mention + ", ur gay :joy: :ok_hand:");
         }

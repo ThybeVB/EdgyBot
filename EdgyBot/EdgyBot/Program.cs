@@ -11,12 +11,12 @@ namespace EdgyBot
         private static void Main(string[] args)
             => new Program().StartAsync().GetAwaiter().GetResult();
 
-        private readonly DiscordSocketClient _client = new DiscordSocketClient(new DiscordSocketConfig{LogLevel = LogSeverity.Verbose});
+        private readonly DiscordSocketClient _client = new DiscordSocketClient(new DiscordSocketConfig{LogLevel = LogSeverity.Verbose, DefaultRetryMode = RetryMode.RetryRatelimit});
         private readonly CommandHandler  _handler = new CommandHandler();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private EventHandler _ehandler;
 
-        private async Task StartAsync ()
+        public async Task StartAsync ()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             _ehandler = new EventHandler(_client);
