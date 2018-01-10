@@ -5,9 +5,6 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Discord.WebSocket;
-using System.Linq;
-using System.Timers;
-using Timer = System.Threading.Timer;
 
 namespace EdgyBot.Modules
 {
