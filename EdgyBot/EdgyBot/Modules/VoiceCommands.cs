@@ -4,13 +4,24 @@ using Discord.Commands;
 using System.Diagnostics;
 using Discord.Audio;
 using System.IO;
+using System.Collections.Concurrent;
 
 namespace EdgyBot.Modules
 {
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-        [Command("teststuff", RunMode = RunMode.Async)]
-        public async Task TestStuff(string path =  null, IVoiceChannel channel = null)
+        private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
+
+        [Command("disc", RunMode = RunMode.Async)]
+        public async Task DisconnectCmd ()
+        {
+            IGuild guild = Context.Guild;
+
+            IAudioClient client = guild.AudioClient;
+            await client.StopAsync();
+        }
+        [Command("connect", RunMode = RunMode.Async)]
+        public async Task ConnectCmd(string path = null, IVoiceChannel channel = null)
         {
             await ReplyAsync("Starting...");
             if (path == null) return;
@@ -20,15 +31,15 @@ namespace EdgyBot.Modules
                 await ReplyAsync("You are not in a voice channel!");
                 return;
             }
-            var audioClient = await channel.ConnectAsync();
-            await SendASync(audioClient, path);
+            IAudioClient client = await channel.ConnectAsync();
+            await SendASync(client, path);      
         }
         private Process CreateStream (string path)
         {
             ProcessStartInfo ffmpeg = new ProcessStartInfo
             {
-                FileName = "ffmpeg",
-                Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
+                FileName = "ffmpeg.exe",
+                Arguments = $"-hide_banner -loglevel quiet -i \"{path}\" -ac 2 -f s16le -ar 48000",
                 UseShellExecute = false,
                 RedirectStandardInput = true,
             };
@@ -38,7 +49,7 @@ namespace EdgyBot.Modules
         {
             Process ffmpeg = CreateStream(path);
             Stream output = ffmpeg.StandardOutput.BaseStream;
-            AudioOutStream discord = client.CreatePCMStream(AudioApplication.Mixed);
+            AudioOutStream discord = client.CreatePCMStream(AudioApplication.Music);
             await output.CopyToAsync(discord);
             await discord.FlushAsync();
         }
