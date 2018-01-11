@@ -291,22 +291,22 @@ namespace EdgyBot.Modules
             } else
             {
                 await Context.Message.DeleteAsync();
-                await ReplyAsync(user.Mention + " lol");
+                await ReplyAsync(user.Mention + " ....lol");
             }
         }
         [Command("channelinfo")]
         public async Task ChannelInfoCMD()
         {
-            string cChannelname = Context.Channel.Name;
-            string cCreated = Context.Channel.CreatedAt.ToString();
-            string cId = Context.Channel.Id.ToString();
+            string channelName = Context.Channel.Name;
+            string createdAt = Context.Channel.CreatedAt.ToString();
+            string channelID = Context.Channel.Id.ToString();
 
             EmbedBuilder e = _lib.setupEmbedWithDefaults();
 
-            e.AddField("Channel Name", cChannelname);
-            e.AddField("Channel ID", cId);
+            e.AddField("Channel Name", channelName);
+            e.AddField("Channel ID", channelID);
             e.AddField("Is NSFW?", Context.Channel.IsNsfw.ToString());
-            e.AddField("Created", cCreated);
+            e.AddField("Created", createdAt);
 
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
