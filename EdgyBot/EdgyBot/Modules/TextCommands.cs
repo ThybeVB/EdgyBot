@@ -403,9 +403,35 @@ namespace EdgyBot.Modules
         [Command("gay")]
         public async Task GayCmd(IGuildUser usr)
         {
-            //Delete the message by user.
             await Context.Message.DeleteAsync();
             await ReplyAsync(usr.Mention + ", ur gay :joy: :ok_hand:");
+        }
+
+        [Command("serverinfo")]
+        public async Task ServerInfoCmd()
+        {
+            var eb = _lib.setupEmbedWithDefaults(true);         
+
+            string name = Context.Guild.Name;
+            string createdAt = Context.Guild.CreatedAt.ToString();
+            string serverGuildIconUrl = Context.Guild.IconUrl;
+            string serverId = Context.Guild.Id.ToString();
+            string memberCount = Context.Guild.MemberCount.ToString();
+            string emoteCount = Context.Guild.Emotes.Count.ToString();
+            string roleCount = Context.Guild.Roles.Count.ToString();
+            string channelCount = Context.Guild.Channels.Count.ToString();
+            eb.ThumbnailUrl = serverGuildIconUrl;
+
+            eb.AddInlineField("Server Name", name);
+            eb.AddInlineField("Server ID", serverId);
+            eb.AddInlineField("Member Count", memberCount);
+            eb.AddInlineField("Emote Count", emoteCount);
+            eb.AddInlineField("Role Count", roleCount);
+            eb.AddInlineField("Channel Count", channelCount);
+            eb.AddInlineField("Created At", createdAt);
+
+            Embed a = eb.Build();
+            await ReplyAsync("", embed: a);
         }
     }
 }
