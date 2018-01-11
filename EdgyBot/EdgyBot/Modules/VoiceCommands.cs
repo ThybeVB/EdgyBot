@@ -10,7 +10,6 @@ namespace EdgyBot.Modules
 {
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
         [Command("disc", RunMode = RunMode.Async)]
         public async Task DisconnectCmd ()
@@ -34,24 +33,23 @@ namespace EdgyBot.Modules
             IAudioClient client = await channel.ConnectAsync();
             await SendASync(client, path);      
         }
-        private Process CreateStream (string path)
+        private Process CreateStream(string path)
         {
-            ProcessStartInfo ffmpeg = new ProcessStartInfo
+            return Process.Start(new ProcessStartInfo
             {
                 FileName = "ffmpeg.exe",
-                Arguments = $"-hide_banner -loglevel quiet -i \"{path}\" -ac 2 -f s16le -ar 48000",
+                Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute = false,
-                RedirectStandardInput = true,
-            };
-            return Process.Start(ffmpeg);
+                RedirectStandardOutput = true
+            });
         }
         private async Task SendASync (IAudioClient client, string path)
         {
             Process ffmpeg = CreateStream(path);
             Stream output = ffmpeg.StandardOutput.BaseStream;
-            AudioOutStream discord = client.CreatePCMStream(AudioApplication.Music);
-            await output.CopyToAsync(discord);
-            await discord.FlushAsync();
+            AudioOutStream stream = client.CreateDirectPCMStream(AudioApplication.Mixed);
+            await output.CopyToAsync(stream);
+            await stream.FlushAsync();
         }
     }
 }
