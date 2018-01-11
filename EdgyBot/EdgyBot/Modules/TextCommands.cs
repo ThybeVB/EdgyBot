@@ -422,13 +422,13 @@ namespace EdgyBot.Modules
             string channelCount = Context.Guild.Channels.Count.ToString();
             eb.ThumbnailUrl = serverGuildIconUrl;
 
-            eb.AddInlineField("Server Name", name);
-            eb.AddInlineField("Server ID", serverId);
-            eb.AddInlineField("Member Count", memberCount);
-            eb.AddInlineField("Emote Count", emoteCount);
-            eb.AddInlineField("Role Count", roleCount);
-            eb.AddInlineField("Channel Count", channelCount);
-            eb.AddInlineField("Created At", createdAt);
+            eb.AddField("Server Name", name);
+            eb.AddField("Server ID", serverId);
+            eb.AddField("Member Count", memberCount);
+            eb.AddField("Emote Count", emoteCount);
+            eb.AddField("Role Count", roleCount);
+            eb.AddField("Channel Count", channelCount);
+            eb.AddField("Created At", createdAt);
 
             Embed a = eb.Build();
             await ReplyAsync("", embed: a);
