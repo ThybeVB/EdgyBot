@@ -1,13 +1,15 @@
 ﻿using Discord;
 using System;
 using System.Threading.Tasks;
+using Discord.Commands;
+using Discord.WebSocket;
 
 namespace EdgyBot
 {
     /// <summary>
     /// Library for EdgyBot
     /// </summary>
-    public class LibEdgyBot
+    public class LibEdgyBot : ModuleBase<SocketCommandContext>
     {
         private readonly LoginInfo _loginInfo = new LoginInfo();
 
@@ -107,7 +109,13 @@ namespace EdgyBot
         public string getGDAccID()
         {
             return _loginInfo.accID;
-        }      
+        }
+
+        public string getProfilePicUrl()
+        {
+            string pfpUrl = Context.Client.CurrentUser.GetAvatarUrl();
+            return pfpUrl;
+        }
         public Task Log(LogMessage message)
         {
             switch (message.Severity)

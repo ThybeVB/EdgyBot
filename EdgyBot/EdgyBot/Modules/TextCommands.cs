@@ -91,11 +91,13 @@ namespace EdgyBot.Modules
            await Context.Message.AddReactionAsync(new Emoji("📫"));
        } 
         [Command("ping")]
-        [Summary("Shows the response time from the Discord Server.")]
         public async Task PingCMD ()
         {
-            Embed e = _lib.createEmbedWithText("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds", true);
-            await ReplyAsync("", embed: e);
+            EmbedBuilder eb = _lib.setupEmbedWithDefaults(true);
+            eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
+
+            Embed a = eb.Build();
+            await ReplyAsync("", embed: a);
         }
         [Command("invite")]
         public async Task InviteCMD ()
