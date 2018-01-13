@@ -243,10 +243,10 @@ namespace EdgyBot.Modules.Categories
             foreach (string user in usersStr)
             {
                 if (user == "") continue;
-                var userData = user.Split(':');
-                var username = userData[1];
-                var cp = userData[25];
-                var placeWording = "nd";
+                string[] userData = user.Split(':');
+                string username = userData[1];
+                string cp = userData[25];
+                string placeWording = "nd";
                 if (place == 3) placeWording = "rd";
                 if (place >= 4) placeWording = "th";
                 if (place == 1) placeWording = "st";
