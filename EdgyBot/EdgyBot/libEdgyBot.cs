@@ -37,6 +37,14 @@ namespace EdgyBot
 
             return e;
         }
+        public Embed createEmbedWithImage (string text, string imgUrl)
+        {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Color = _lightBlue;
+            eb.ImageUrl = imgUrl;
+            eb.AddField("EdgyBot", text);
+            return eb.Build();
+        }
         /// <summary>
         /// Creates an embed with a field and an image.
         /// </summary>

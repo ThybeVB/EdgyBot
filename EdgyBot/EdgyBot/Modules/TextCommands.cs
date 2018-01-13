@@ -437,5 +437,13 @@ namespace EdgyBot.Modules
             Embed a = eb.Build();
             await ReplyAsync("", embed: a);
         }
+
+        [Command("stop")]
+        public async Task StopCmd(IGuildUser usr)
+        {
+            string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
+            Embed a = _lib.createEmbedWithImage(usr.Mention, stopUrl);
+            await ReplyAsync("", embed: a);
+        }
     }
 }
