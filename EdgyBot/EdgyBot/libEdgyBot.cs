@@ -139,7 +139,9 @@ namespace EdgyBot
                     Console.ForegroundColor = ConsoleColor.Green;
                     break;
             }
-            Console.WriteLine(message.ToString());
+
+            string messageStr = message.ToString();
+            Console.WriteLine(messageStr);
             return Task.CompletedTask;
         }
 
@@ -148,9 +150,9 @@ namespace EdgyBot
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task eLog(string msg)
+        public Task eLog(LogSeverity severity, string msg)
         {
-            LogMessage logMessage = new LogMessage(LogSeverity.Verbose, "EdgyBot", msg);
+            LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
             Console.WriteLine(logMessage.ToString());
             return Task.CompletedTask;
         }

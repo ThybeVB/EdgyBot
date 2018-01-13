@@ -10,7 +10,6 @@ namespace EdgyBot.Modules
 {
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-
         [Command("disc", RunMode = RunMode.Async)]
         public async Task DisconnectCmd ()
         {
