@@ -115,8 +115,12 @@ namespace EdgyBot.Modules
             {
                 await ReplyAsync("You can't jeff yourself :joy:");
                 return;
+            } else if (user.Id == Context.Client.CurrentUser.Id)
+            {
+                await ReplyAsync("HAHAHAHAHAHAHAH NO.");
+                return;
             }
-            string imgUrl = "http://sigmastudios.tk/SigmaFiles/jeff.jpg";
+            string imgUrl = "http://monstahhhbot.890m.com/MonstahhhFiles/jeff.jpg";
             string textStr = user.Mention + ", You just got jeffed by " + Context.User.Mention;
             Embed e = _lib.createEmbedWithImage("Jeff", textStr, imgUrl);
 

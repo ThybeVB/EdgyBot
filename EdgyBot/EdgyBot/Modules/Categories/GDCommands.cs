@@ -237,10 +237,10 @@ namespace EdgyBot.Modules.Categories
             HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
             string responseString = await response.Content.ReadAsStringAsync();
             #endregion
-            string[] users = responseString.Split('|');
+            string[] usersStr = responseString.Split('|');
             int place = 1;
             EmbedBuilder e = _lib.setupEmbedWithDefaults();
-            foreach (string user in users)
+            foreach (string user in usersStr)
             {
                 if (user == "") continue;
                 var userData = user.Split(':');
