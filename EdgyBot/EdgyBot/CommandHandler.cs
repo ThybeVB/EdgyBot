@@ -22,7 +22,7 @@ namespace EdgyBot
         }
         private async Task HandleCommandAsync(SocketMessage s)
         {
-            SocketUserMessage msg = s as SocketUserMessage;
+            SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
             var context = new SocketCommandContext(_client, msg);
             int argPos = 0;
@@ -36,7 +36,7 @@ namespace EdgyBot
                         await context.Channel.SendMessageAsync("**ERROR:** Could not send messages to this user. Either the user does not allow private messages from unknown's, or it is a bot.");
                         return;
                     }
-                    await _lib.eLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR:" + result.ErrorReason);
+                    await _lib.edgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR:" + result.ErrorReason);
                     await context.Channel.SendMessageAsync(result.ErrorReason);
                 }
             }

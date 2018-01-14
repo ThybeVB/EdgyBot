@@ -110,7 +110,7 @@ namespace EdgyBot
             return _loginInfo.prefix;
         }
         /// <summary>
-        /// Gets the GeometryJumpPassword the bot is connected to.
+        /// Gets the Geometry Jump Password the bot is connected to.
         /// </summary>
         /// <returns></returns>
         public string getGJP()
@@ -170,10 +170,10 @@ namespace EdgyBot
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task eLog(LogSeverity severity, string msg)
+        public Task edgyLog(LogSeverity severity, string msg)
         {
             LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
-            Console.WriteLine(logMessage.ToString());
+            Log(logMessage);
             return Task.CompletedTask;
         }
 

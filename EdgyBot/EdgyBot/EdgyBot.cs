@@ -28,7 +28,7 @@ namespace EdgyBot
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private EventHandler _ehandler;
 
-        public async Task StartAsync ()
+        private async Task StartAsync ()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             _ehandler = new EventHandler(Client);
