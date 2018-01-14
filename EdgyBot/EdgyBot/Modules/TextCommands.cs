@@ -448,5 +448,23 @@ namespace EdgyBot.Modules
             Embed a = _lib.createEmbedWithImage(usr.Mention, stopUrl);
             await ReplyAsync("", embed: a);
         }
+
+        [Command("announce")]
+        public async Task AnnounceCmd([Remainder]string msg)
+        {
+            if (Context.User.Id != 257247527630274561)
+            {
+                await ReplyAsync("Permission Denied.");
+                return;
+            }           
+            foreach (IGuild guild in Context.Client.Guilds)
+            {
+                ITextChannel channel = await guild.GetDefaultChannelAsync();
+                if (channel == null) continue;
+                Embed e = _lib.createAnnouncementEmbed(msg, true);
+                await channel.SendMessageAsync("", embed: e);
+            }
+            await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
+        }
     }
 }

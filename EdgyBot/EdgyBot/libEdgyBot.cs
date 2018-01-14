@@ -130,6 +130,11 @@ namespace EdgyBot
             string pfpUrl = Context.Client.CurrentUser.GetAvatarUrl();
             return pfpUrl;
         }
+        /// <summary>
+        /// Logs a LogMessage to the Console.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public Task Log(LogMessage message)
         {
             switch (message.Severity)
@@ -169,6 +174,25 @@ namespace EdgyBot
             LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
             Console.WriteLine(logMessage.ToString());
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Creates an Embed used for the Announcement command.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public Embed createAnnouncementEmbed(string msg, bool footerEnabled)
+        {
+            EmbedBuilder eb = new EmbedBuilder();
+            if (footerEnabled)
+            {
+                EmbedFooterBuilder footer = new EmbedFooterBuilder();
+                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+                eb.Footer = footer;
+            }
+            eb.Color = _lightBlue;
+            eb.AddField("ANNOUNCEMENT!", msg);
+            return eb.Build();
         }
     }
 }

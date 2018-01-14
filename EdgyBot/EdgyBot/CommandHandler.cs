@@ -22,7 +22,7 @@ namespace EdgyBot
         }
         private async Task HandleCommandAsync(SocketMessage s)
         {
-            var msg = (SocketUserMessage)s;
+            SocketUserMessage msg = s as SocketUserMessage;
             if (msg == null) return;
             var context = new SocketCommandContext(_client, msg);
             int argPos = 0;
