@@ -80,7 +80,7 @@ namespace EdgyBot.Modules.Categories
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);
         }
-        [Command("top10")]
+        [Command("top10players")]
         public async Task Top10GDCMD()
         {
             var top10ReqDict = new Dictionary<string, string>

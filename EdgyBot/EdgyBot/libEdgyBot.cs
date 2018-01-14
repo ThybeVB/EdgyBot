@@ -37,6 +37,12 @@ namespace EdgyBot
 
             return e;
         }
+        /// <summary>
+        /// Creates an Embed with Text and an image.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="imgUrl"></param>
+        /// <returns></returns>
         public Embed createEmbedWithImage (string text, string imgUrl)
         {
             EmbedBuilder eb = new EmbedBuilder();

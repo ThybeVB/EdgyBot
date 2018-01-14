@@ -53,8 +53,10 @@ namespace EdgyBot.Modules
                    gdBuilder.Color = new Color(0x0cc6d3);
                    gdBuilder.AddField("Bot Prefix", "e!");
                    gdBuilder.AddField("profile", "[NAME], shows info about a player.");
-                   gdBuilder.AddField("top10", "Shows the Top 10 leaderboard.");
-                   gdBuilder.AddField("top", "[NUMBER], Shows the leaderboard based on your number.");
+                   gdBuilder.AddField("top10players", "Shows the Top 10 leaderboard.");
+                   gdBuilder.AddField("topplayers", "[NUMBER], Shows the leaderboard based on your number.");
+                   gdBuilder.AddField("topcreators", "[NUMBER] Shows the Creator leaderboard based on your number.");
+                   gdBuilder.AddField("top10creators", "Shows the Top 10 creators.");
                    Embed gdEmbed = gdBuilder.Build();
                    await ReplyAsync("", embed: gdEmbed);
                }
@@ -82,7 +84,8 @@ namespace EdgyBot.Modules
            e.AddField("sha512", "[TEXT], Hashes a string to SHA512");
            e.AddField("b64e", "[TEXT], encrypts a string to Base64");
            e.AddField("b64d", "[TEXT], decrypts a string from Base64");
-           e.AddField("ping", "Checks the speed of the bot.");
+           e.AddField("ping", "Checks the response time of the bot.");
+           e.AddField("stop", "[MENTION], tells somebody to stop.");
        
            Embed a = e.Build();
            await dm.SendMessageAsync("", embed: a);
