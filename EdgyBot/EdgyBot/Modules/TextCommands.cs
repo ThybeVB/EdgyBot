@@ -11,6 +11,7 @@ namespace EdgyBot.Modules
     public class TextCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly Database _database = new Database();
 
         #region Hashes
         public static byte[] GetHash(string inputString)
@@ -461,10 +462,17 @@ namespace EdgyBot.Modules
             {
                 ITextChannel channel = await guild.GetDefaultChannelAsync();
                 if (channel == null) continue;
+
                 Embed e = _lib.createAnnouncementEmbed(msg, true);
-                await channel.SendMessageAsync("", embed: e);
+                await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
+        }
+
+        [Command("stopannounce")]
+        public async Task StopAnnounce()
+        {
+            _database.BlacklistServer();
         }
     }
 }

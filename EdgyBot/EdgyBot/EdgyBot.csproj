@@ -162,6 +162,7 @@
     <Compile Include="EventHandler.cs" />
     <Compile Include="LibEdgyBot.cs" />
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="Modules\Categories\AdminCommands.cs" />
     <Compile Include="Modules\Categories\GDCommands.cs" />
     <Compile Include="Modules\TextCommands.cs" />
     <Compile Include="Modules\VoiceCommands.cs" />

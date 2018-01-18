@@ -15,6 +15,7 @@ namespace EdgyBot
         string invLink
         string GJP
         string accID
+        long ownerID
         **************
         GJP AND ACCID ARE GEOMETRY DASH VARIABLES, IF YOU DO NOT HAVE THEM SIMPLY LEAVE THEM EMPTY
      */

@@ -125,11 +125,17 @@ namespace EdgyBot
         {
             return _loginInfo.accID;
         }
-
+        /// <summary>
+        /// Get's the Discord User ID of the bot admin.
+        /// </summary>
+        /// <returns></returns>
+        public ulong getOwnerID()
+        {
+            return _loginInfo.ownerID;
+        }
         public string getProfilePicUrl()
         {
-            string pfpUrl = Context.Client.CurrentUser.GetAvatarUrl();
-            return pfpUrl;
+            return Context.Client.CurrentUser.GetAvatarUrl();
         }
         /// <summary>
         /// Logs a LogMessage to the Console.
@@ -166,7 +172,7 @@ namespace EdgyBot
         }
 
         /// <summary>
-        /// Logs a Message under the EdgyBot domain.
+        /// Logs a Message under the EdgyBot name.
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
@@ -178,7 +184,7 @@ namespace EdgyBot
         }
 
         /// <summary>
-        /// Creates an Embed used for the Announcement command.
+        /// Creates an Embed exclusively for the Announce Command.
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
