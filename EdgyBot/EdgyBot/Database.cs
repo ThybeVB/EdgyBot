@@ -31,7 +31,9 @@ namespace EdgyBot
             SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
-            cmd.CommandText = "SELECT serverID from blacklistedservers";
+            cmd.CommandText = $"INSERT INTO blacklistedservers (serverID) VALUES ('{serverID}')";
+            cmd.ExecuteNonQuery();
+            conn.Clone();
         }
     }
 }

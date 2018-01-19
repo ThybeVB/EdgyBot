@@ -470,10 +470,12 @@ namespace EdgyBot.Modules
         }
 
         [Command("stopannounce")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task StopAnnounceCmd()
         {
             ulong serverID = Context.Guild.Id;
             _database.BlacklistServer(serverID);
+            await ReplyAsync("De server antwoord met een neutraal antwoord, " + serverID);
         }
     }
 }
