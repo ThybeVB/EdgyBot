@@ -22,7 +22,11 @@ namespace EdgyBot
             conn.Close();
         }
 
-        public void BlacklistServer()
+        /// <summary>
+        /// Excludes a server from recieving announcements etc...
+        /// </summary>
+        /// <param name="serverID"></param>
+        public void BlacklistServer (ulong serverID)
         {
             //TODO
         }

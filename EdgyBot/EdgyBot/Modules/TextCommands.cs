@@ -470,9 +470,10 @@ namespace EdgyBot.Modules
         }
 
         [Command("stopannounce")]
-        public async Task StopAnnounce()
+        public async Task StopAnnounceCmd()
         {
-            _database.BlacklistServer();
+            ulong serverID = Context.Guild.Id;
+            _database.BlacklistServer(serverID);
         }
     }
 }
