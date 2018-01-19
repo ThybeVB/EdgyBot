@@ -28,7 +28,10 @@ namespace EdgyBot
         /// <param name="serverID"></param>
         public void BlacklistServer (ulong serverID)
         {
-            //TODO
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = "SELECT serverID from blacklistedservers";
         }
     }
 }
