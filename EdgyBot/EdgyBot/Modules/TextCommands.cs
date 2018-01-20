@@ -469,11 +469,15 @@ namespace EdgyBot.Modules
             }           
             foreach (IGuild guild in Context.Client.Guilds)
             {
-                ITextChannel channel = await guild.GetDefaultChannelAsync();
-                if (channel == null) continue;
+                if (guild == null) continue;
+                if (!_database.IsServerBlacklisted(guild.Id))
+                {
+                    ITextChannel channel = await guild.GetDefaultChannelAsync();
+                    if (channel == null) continue;
 
-                Embed e = _lib.createAnnouncementEmbed(msg, true);
-                await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
+                    Embed e = _lib.createAnnouncementEmbed(msg, true);
+                    await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
+                }
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
         }

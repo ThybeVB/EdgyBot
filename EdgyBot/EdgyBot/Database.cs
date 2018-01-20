@@ -34,5 +34,10 @@ namespace EdgyBot
             cmd.ExecuteNonQuery();
             conn.Clone();
         }
+        public bool IsServerBlacklisted (ulong serverID)
+        {
+            //TODO
+            return false;
+        }
     }
 }
