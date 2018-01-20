@@ -43,6 +43,7 @@ namespace EdgyBot.Modules
        
                    ebCat.AddField("Category", "Description");
                    ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
+                   ebCat.AddField("admin", "Gives commands for people with the Administrator permission.");
        
                    Embed eCat = ebCat.Build();
                    await dm.SendMessageAsync("", embed: eCat);
@@ -60,7 +61,15 @@ namespace EdgyBot.Modules
                    gdBuilder.AddField("top10creators", "Shows the Top 10 creators.");
                    Embed gdEmbed = gdBuilder.Build();
                    await ReplyAsync("", embed: gdEmbed);
-               }
+               } else if (category == "admin")
+                {
+                    EmbedBuilder adminBuilder = new EmbedBuilder();
+                    adminBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
+                    adminBuilder.Color = _lib._lightBlue;
+                    adminBuilder.AddField("stopannounce", "Stop the server from receiving announcements.");
+                    Embed adminEmbed = adminBuilder.Build();
+                    await ReplyAsync("", embed: adminEmbed);
+                }
                 return;
            }
        

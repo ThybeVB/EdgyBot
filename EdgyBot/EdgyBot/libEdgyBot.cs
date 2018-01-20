@@ -14,7 +14,7 @@ namespace EdgyBot
     {
         private readonly LoginInfo _loginInfo = new LoginInfo();
 
-        private readonly Color _lightBlue = new Color(0x0cc6d3);
+        public readonly Color _lightBlue = new Color(0x0cc6d3);
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
