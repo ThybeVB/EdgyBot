@@ -39,7 +39,7 @@ namespace EdgyBot.Modules
                {
                    EmbedBuilder ebCat = new EmbedBuilder();
                    ebCat.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-                   ebCat.Color = new Color(0x0cc6d3);
+                    ebCat.Color = _lib._lightBlue;
        
                    ebCat.AddField("Category", "Description");
                    ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
@@ -52,7 +52,7 @@ namespace EdgyBot.Modules
                {
                    EmbedBuilder gdBuilder = new EmbedBuilder();
                    gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300").WithName("EdgyBot");
-                   gdBuilder.Color = new Color(0x0cc6d3);
+                    gdBuilder.Color = _lib._lightBlue;
                    gdBuilder.AddField("Bot Prefix", "e!");
                    gdBuilder.AddField("profile", "[NAME], shows info about a player.");
                    gdBuilder.AddField("top10players", "Shows the Top 10 leaderboard.");
@@ -75,7 +75,7 @@ namespace EdgyBot.Modules
        
            EmbedBuilder e = new EmbedBuilder();
            e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-           e.Color = new Color(0x0cc6d3);
+            e.Color = _lib._lightBlue;
        
            e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
            e.AddField("Bot Prefix", "e!");
@@ -143,7 +143,7 @@ namespace EdgyBot.Modules
         [Command("setstatus")]
         public async Task SetStatusCmd([Remainder]string input)
         {
-            if (Context.User.Id == 257247527630274561)
+            if (Context.User.Id == _lib.getOwnerID())
             {
                 await Context.Client.SetGameAsync(input);
                 await ReplyAsync("Changed Status.");
@@ -291,7 +291,7 @@ namespace EdgyBot.Modules
         public async Task ChanceCmd([Remainder]string input)
         {
             Random rand = new Random();
-            int num = rand.Next(-1, 100);
+            int num = rand.Next(-1, 101);
             string numStr = num.ToString();
 
             EmbedBuilder e = _lib.setupEmbedWithDefaults();
@@ -462,7 +462,7 @@ namespace EdgyBot.Modules
         [Command("announce")]
         public async Task AnnounceCmd([Remainder]string msg)
         {
-            if (Context.User.Id != 257247527630274561)
+            if (Context.User.Id != _lib.getOwnerID())
             {
                 await ReplyAsync("Permission Denied.");
                 return;
