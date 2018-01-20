@@ -466,7 +466,8 @@ namespace EdgyBot.Modules
             {
                 await ReplyAsync("Permission Denied.");
                 return;
-            }           
+            }
+            await _lib.edgyLog(LogSeverity.Info, "Sending announcement " + msg);
             foreach (IGuild guild in Context.Client.Guilds)
             {
                 if (guild == null) continue;
@@ -477,6 +478,9 @@ namespace EdgyBot.Modules
 
                     Embed e = _lib.createAnnouncementEmbed(msg, true);
                     await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
+                } else
+                {
+                    await _lib.edgyLog(LogSeverity.Info, guild.Name + " did not recieve announcement due to blacklisting.");
                 }
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
