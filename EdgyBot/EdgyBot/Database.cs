@@ -34,6 +34,11 @@ namespace EdgyBot
             cmd.ExecuteNonQuery();
             conn.Clone();
         }
+        /// <summary>
+        /// Check if a server is blacklisted from recieving announcements.
+        /// </summary>
+        /// <param name="serverID"></param>
+        /// <returns></returns>
         public bool IsServerBlacklisted (ulong serverID)
         {
             //TODO
