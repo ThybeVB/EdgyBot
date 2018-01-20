@@ -485,5 +485,19 @@ namespace EdgyBot.Modules
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
         }
+        [Command("vertical")]
+        public async Task VerticalCmd ([Remainder]string msg)
+        {
+            StringBuilder sb = new StringBuilder();
+            msg = msg.Trim();            
+            sb.Append("```\n");
+            char[] msgArray = msg.ToCharArray();
+            foreach (char letter in msgArray)
+            {
+                sb.Append(letter + "\n");
+            }
+            sb.Append("```\n");
+            await ReplyAsync(sb.ToString());
+        }
     }
 }
