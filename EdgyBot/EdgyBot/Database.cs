@@ -5,7 +5,7 @@ namespace EdgyBot
 {
     public class Database
     {
-        private string _dbname = "database.db";
+        private readonly string _dbname = "database.db";
 
         /// <summary>
         /// Executes a SQL Command to the database.
@@ -16,7 +16,6 @@ namespace EdgyBot
             SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
-
             cmd.CommandText = query;
             cmd.ExecuteNonQuery();
             conn.Close();
