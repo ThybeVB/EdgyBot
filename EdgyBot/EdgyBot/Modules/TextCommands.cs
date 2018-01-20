@@ -488,8 +488,7 @@ namespace EdgyBot.Modules
         [Command("vertical")]
         public async Task VerticalCmd ([Remainder]string msg)
         {
-            StringBuilder sb = new StringBuilder();
-            msg = msg.Trim();            
+            StringBuilder sb = new StringBuilder();     
             sb.Append("```\n");
             char[] msgArray = msg.ToCharArray();
             foreach (char letter in msgArray)
