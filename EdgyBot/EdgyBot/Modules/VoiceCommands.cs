@@ -4,7 +4,6 @@ using Discord.Commands;
 using System.Diagnostics;
 using Discord.Audio;
 using System.IO;
-using System.Collections.Concurrent;
 
 namespace EdgyBot.Modules
 {
