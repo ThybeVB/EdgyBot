@@ -489,14 +489,25 @@ namespace EdgyBot.Modules
         public async Task VerticalCmd ([Remainder]string msg)
         {
             StringBuilder sb = new StringBuilder();     
-            sb.Append("```\n");
+            sb.Append("```" + "\n");
             char[] msgArray = msg.ToCharArray();
             foreach (char letter in msgArray)
             {
                 sb.Append(letter + "\n");
             }
-            sb.Append("```\n");
+            sb.Append("```" + "\n");
             await ReplyAsync(sb.ToString());
         }
+        //[Command("binary")]
+        //public async Task BinaryCmd ([Remainder]string msg)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (char letter in msg.ToCharArray())
+        //    {
+        //        sb.Append(Convert.ToString(letter, 2).PadLeft(8, '0'));
+        //    }
+        //    Embed e = _lib.createEmbedWithText("Text to Binary", sb.ToString());
+        //    await ReplyAsync("", embed: e);
+        //}
     }
 }
