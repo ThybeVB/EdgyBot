@@ -5,6 +5,9 @@ namespace EdgyBot
 {
     public class Database
     {
+        /// <summary>
+        /// File name of the Database.
+        /// </summary>
         private readonly string _dbname = "database.db";
 
         /// <summary>
