@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Data.SQLite;
 
 namespace EdgyBot
 {
@@ -51,7 +52,7 @@ namespace EdgyBot
                 isBlackListed = (string)r["serverID"];
             }
             conn.Close();
-            if (string.IsNullOrEmpty(isBlackListed))
+            if (String.IsNullOrEmpty(isBlackListed))
             {
                 return false;
             } else

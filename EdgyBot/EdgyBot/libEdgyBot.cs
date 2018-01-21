@@ -196,7 +196,7 @@ namespace EdgyBot
             if (footerEnabled)
             {
                 EmbedFooterBuilder footer = new EmbedFooterBuilder();
-                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+                footer.Text = DateTime.Now.ToUniversalTime().ToString() + " | If you want to stop getting these, use e!stopannounce.";
                 eb.Footer = footer;
             }
             eb.Color = _lightBlue;

@@ -40,11 +40,7 @@ namespace EdgyBot.Modules.Categories
                     if (channel == null) continue;
 
                     Embed e = _lib.createAnnouncementEmbed(msg, true);
-                    await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
-                }
-                else
-                {
-                    await _lib.edgyLog(LogSeverity.Info, guild.Name + " did not recieve announcement due to blacklisting.");
+                    await channel.SendMessageAsync("", embed: e);
                 }
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
