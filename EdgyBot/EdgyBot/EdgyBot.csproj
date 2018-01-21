@@ -180,6 +180,7 @@
     <Compile Include="Modules\Categories\AdminCommands.cs" />
     <Compile Include="Modules\Categories\FunCommands.cs" />
     <Compile Include="Modules\Categories\GDCommands.cs" />
+    <Compile Include="Modules\Categories\RandomCommands.cs" />
     <Compile Include="Modules\TextCommands.cs" />
     <Compile Include="Modules\VoiceCommands.cs" />
     <Compile Include="EdgyBot.cs" />

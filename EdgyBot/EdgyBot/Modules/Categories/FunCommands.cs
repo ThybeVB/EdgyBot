@@ -74,33 +74,6 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
-        [Command("amigay")]
-        public async Task AmIGayCmd()
-        {
-            Random rand = new Random();
-            int num = rand.Next(1, 3);
-            switch (num)
-            {
-                case 1:
-                    await ReplyAsync("yes boi");
-                    break;
-                case 2:
-                    await ReplyAsync("no boi");
-                    break;
-            }
-        }
-        [Command("chance")]
-        public async Task ChanceCmd([Remainder]string input)
-        {
-            Random rand = new Random();
-            int num = rand.Next(-1, 101);
-            string numStr = num.ToString();
-
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
-            e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
-        }
         [Command("lol")]
         public async Task LolCmd(IGuildUser user)
         {
