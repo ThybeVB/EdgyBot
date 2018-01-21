@@ -66,6 +66,10 @@ namespace EdgyBot
             Embed e = eb.Build();
             return e;
         }
+        public Embed createEmbedWithError(string errTitle, string errText)
+        {
+            return null;
+        }
         /// <summary>
         /// Creates an Embed with defaults.
         /// </summary>

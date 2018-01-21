@@ -40,8 +40,24 @@ namespace EdgyBot
         /// <returns></returns>
         public bool IsServerBlacklisted (ulong serverID)
         {
-            //TODO
-            return false;
+            string isBlackListed = null;
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = $"SELECT * FROM blacklistedservers WHERE serverID='{serverID}'";
+            SQLiteDataReader r = cmd.ExecuteReader();
+            while (r.Read())
+            {
+                isBlackListed = (string)r["serverID"];
+            }
+            conn.Close();
+            if (string.IsNullOrEmpty(isBlackListed))
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
         }
     }
 }

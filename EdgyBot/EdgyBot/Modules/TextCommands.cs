@@ -460,33 +460,6 @@ namespace EdgyBot.Modules
             Embed a = _lib.createEmbedWithImage(usr.Mention, stopUrl);
             await ReplyAsync("", embed: a);
         }
-
-        [Command("announce")]
-        public async Task AnnounceCmd([Remainder]string msg)
-        {
-            if (Context.User.Id != _lib.getOwnerID())
-            {
-                await ReplyAsync("Permission Denied.");
-                return;
-            }
-            await _lib.edgyLog(LogSeverity.Info, "Sending announcement " + msg);
-            foreach (IGuild guild in Context.Client.Guilds)
-            {
-                if (guild == null) continue;
-                if (!_database.IsServerBlacklisted(guild.Id))
-                {
-                    ITextChannel channel = await guild.GetDefaultChannelAsync();
-                    if (channel == null) continue;
-
-                    Embed e = _lib.createAnnouncementEmbed(msg, true);
-                    await channel.SendMessageAsync("If you want to stop getting these, use e!stopannounce", embed: e);
-                } else
-                {
-                    await _lib.edgyLog(LogSeverity.Info, guild.Name + " did not recieve announcement due to blacklisting.");
-                }
-            }
-            await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
-        }
         [Command("vertical")]
         public async Task VerticalCmd ([Remainder]string msg)
         {
@@ -498,6 +471,28 @@ namespace EdgyBot.Modules
                 sb.Append(letter + "\n");
             }
             sb.Append("```" + "\n");
+            await ReplyAsync(sb.ToString());
+        }
+        [Command("bigletter")]
+        public async Task BigLetterCmd ([Remainder]string msg) 
+        {
+            msg = msg.ToLower();
+            StringBuilder sb = new StringBuilder();
+            char[] letters = msg.ToCharArray();
+            foreach (char letter in letters)
+            {
+                if (letter == '?' || letter == '!' || letter == '.')
+                {
+                    await ReplyAsync("Message cannot contain such symbols.");
+                    return;
+                }
+                if (letter == ' ')
+                {
+                    sb.Append(" ");
+                    continue;
+                }               
+                sb.Append(":regional_indicator_" + letter + ":");
+            }
             await ReplyAsync(sb.ToString());
         }
         //[Command("binary")]
