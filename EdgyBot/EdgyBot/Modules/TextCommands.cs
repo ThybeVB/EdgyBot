@@ -324,7 +324,6 @@ namespace EdgyBot.Modules
 
             e.AddField("Channel Name", channelName);
             e.AddField("Channel ID", channelID);
-            e.AddField("Is NSFW?", Context.Channel.IsNsfw.ToString());
             e.AddField("Created", createdAt);
 
             Embed a = e.Build();
@@ -355,7 +354,7 @@ namespace EdgyBot.Modules
                 isBot = Context.User.IsBot;
                 status = Context.User.Status.ToString();
                 pfpUrl = Context.User.GetAvatarUrl();
-                playing = Context.User.Game.ToString();
+                playing = Context.User.Activity.Name;
                 createdOn = Context.User.CreatedAt.LocalDateTime.ToLongTimeString();
             } else
             {
@@ -367,30 +366,30 @@ namespace EdgyBot.Modules
                 isBot = usr.IsBot;
                 status = usr.Status.ToString();
                 pfpUrl = usr.GetAvatarUrl();
-                playing = usr.Game.ToString();
+                playing = usr.Activity.Name;
                 createdOn = usr.CreatedAt.ToUniversalTime().ToString();
             }
             eb.ThumbnailUrl = pfpUrl;
-            eb.AddInlineField("Username", username);
+            eb.AddField("Username", username);
             if (String.IsNullOrEmpty(nickname))
             {
-                eb.AddInlineField("Nickname", "None");
+                eb.AddField("Nickname", "None");
             } else
             {
-                eb.AddInlineField("Nickname", nickname);
+                eb.AddField("Nickname", nickname);
             }
-            eb.AddInlineField("Discriminator (tag)", discriminator);
-            eb.AddInlineField("Status", status);
-            eb.AddInlineField("Created At", createdOn);
+            eb.AddField("Discriminator (tag)", discriminator);
+            eb.AddField("Status", status);
+            eb.AddField("Created At", createdOn);
             if (String.IsNullOrEmpty(playing))
             {
-                eb.AddInlineField("Playing", "None");
+                eb.AddField("Playing", "None");
             } else
             {
-                eb.AddInlineField("Playing", playing);
+                eb.AddField("Playing", playing);
             }
-            eb.AddInlineField("User ID", userID);
-            eb.AddInlineField("Is Bot", isBot.ToString());                       
+            eb.AddField("User ID", userID);
+            eb.AddField("Is Bot", isBot.ToString());                       
 
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);

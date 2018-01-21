@@ -60,17 +60,17 @@ namespace EdgyBot.Modules.Categories
             EmbedBuilder eb = _lib.setupEmbedWithDefaults(false);
             string gdpicurl = gdThumbPic;
             eb.ThumbnailUrl = gdpicurl;
-            eb.AddInlineField("Username", finalResult[1]);
-            eb.AddInlineField("Stars", finalResult[13]);
-            eb.AddInlineField("Diamonds", finalResult[15]);
-            eb.AddInlineField("User Coins", finalResult[7]);
-            eb.AddInlineField("Coins", finalResult[5]);
-            eb.AddInlineField("Demons", finalResult[17]);
-            eb.AddInlineField("Creator Points", finalResult[19]);
+            eb.AddField("Username", finalResult[1], true);
+            eb.AddField("Stars", finalResult[13], true);
+            eb.AddField("Diamonds", finalResult[15], true);
+            eb.AddField("User Coins", finalResult[7], true);
+            eb.AddField("Coins", finalResult[5], true);
+            eb.AddField("Demons", finalResult[17], true);
+            eb.AddField("Creator Points", finalResult[19], true);
             #region SocialMediaChecks
-            if (finalResult[27] != null && finalResult[27] != "") eb.AddInlineField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")"); else eb.AddInlineField("YouTube", "None");
-            if (finalResult[55] != null && finalResult[55] != "") eb.AddInlineField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")"); else eb.AddInlineField("Twitch", "None");
-            if (finalResult[53] != null && finalResult[53] != "") eb.AddInlineField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")"); else eb.AddInlineField("Twitter", "None");
+            if (finalResult[27] != null && finalResult[27] != "") eb.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")", true); else eb.AddField("YouTube", "None", true);
+            if (finalResult[55] != null && finalResult[55] != "") eb.AddField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")", true); else eb.AddField("Twitch", "None", true);
+            if (finalResult[53] != null && finalResult[53] != "") eb.AddField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")", true); else eb.AddField("Twitter", "None", true);
             #endregion 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User ID: {finalResult[3]}, Account ID: {targetAccountID}";
