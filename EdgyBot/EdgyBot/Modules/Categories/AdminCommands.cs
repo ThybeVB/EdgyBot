@@ -22,6 +22,19 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("You do not have permission to use this command.");
             }        
         }
+        [Command("isblacklisted")]
+        [Alias("blacklisted")]
+        public async Task IsBlackListedCmd (ulong serverID)
+        {
+            bool isBlackListed = database.IsServerBlacklisted(serverID);
+            if (isBlackListed)
+            {
+                await ReplyAsync("This server is blacklisted.");
+            } else
+            {
+                await ReplyAsync("This server is not blacklisted.");
+            } 
+        }
         [Command("announce")]
         public async Task AnnounceCmd([Remainder]string msg)
         {

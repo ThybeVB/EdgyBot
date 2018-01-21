@@ -68,6 +68,7 @@ namespace EdgyBot.Modules
                      adminBuilder.Color = _lib._lightBlue;
                      adminBuilder.AddField("Bot Prefix", _lib.getPrefix());
                      adminBuilder.AddField("stopannounce", "Stop the server from receiving announcements.");
+                     adminBuilder.AddField("blacklisted", "[SERVER ID], Checks if a server is blacklisted.");                    
                      Embed adminEmbed = adminBuilder.Build();
                      await ReplyAsync("", embed: adminEmbed);
                  }
