@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using Discord;
 using Discord.Commands;
+using System;
 
 namespace EdgyBot
 {
@@ -19,7 +20,14 @@ namespace EdgyBot
             _client.UserLeft += UserLeft;
             _client.JoinedGuild += Client_JoinedGuild;
             _client.Connected += Client_Connected;
+            _client.Disconnected += Client_Disconnected;
         }
+
+        private async Task Client_Disconnected(Exception exception)
+        {
+            await _lib.edgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, " + exception.Message);
+        }
+
         public async Task Ready()
         {
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";

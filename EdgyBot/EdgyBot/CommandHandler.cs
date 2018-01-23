@@ -24,20 +24,20 @@ namespace EdgyBot
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
-            var context = new SocketCommandContext(_client, msg);
+            var Context = new SocketCommandContext(_client, msg);
             int argPos = 0;
             if (msg.HasStringPrefix(_lib.getPrefix(), ref argPos))
             {
-                var result = await _service.ExecuteAsync(context, argPos);
+                var result = await _service.ExecuteAsync(Context, argPos);
                 if (!result.IsSuccess)
                 {
                     if (result.ToString() == "The server responded with error 50007: Cannot send messages to this user")
                     {
-                        await context.Channel.SendMessageAsync("**ERROR:** Could not send messages to this user. Either the user does not allow private messages from unknown's, or it is a bot.");
+                        await Context.Channel.SendMessageAsync("**ERROR:** Could not send messages to this user. Either the user does not allow private messages from unknown's, or it is a bot.");
                         return;
                     }
                     await _lib.edgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                    await context.Channel.SendMessageAsync(result.ErrorReason);
+                    await Context.Channel.SendMessageAsync(result.ErrorReason);
                 }
             }
         }

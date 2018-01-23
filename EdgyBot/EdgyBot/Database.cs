@@ -55,7 +55,7 @@ namespace EdgyBot
                 isBlackListed = (string)r["serverID"];
             }
             conn.Close();
-            if (String.IsNullOrEmpty(isBlackListed))
+            if (string.IsNullOrEmpty(isBlackListed))
             {
                 return false;
             } else

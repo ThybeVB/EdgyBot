@@ -12,6 +12,9 @@ namespace EdgyBot
     {
         private readonly LoginInfo _loginInfo = new LoginInfo();
 
+        /// <summary>
+        /// The default embed color for EdgyBot.
+        /// </summary>
         public readonly Color _lightBlue = new Color(0x0cc6d3);
 
         /// <summary>
