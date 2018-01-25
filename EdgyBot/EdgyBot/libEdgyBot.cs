@@ -15,7 +15,7 @@ namespace EdgyBot
         /// <summary>
         /// The default embed color for EdgyBot.
         /// </summary>
-        public readonly Color _lightBlue = new Color(0x0cc6d3);
+        public readonly Color LightBlue = new Color(0x0cc6d3);
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -24,7 +24,7 @@ namespace EdgyBot
         /// <param name="text"></param>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public Embed createEmbedWithText (string title, string text, bool footerEnabled = false)
+        public Embed CreateEmbedWithText (string title, string text, bool footerEnabled = false)
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
@@ -33,7 +33,7 @@ namespace EdgyBot
                 footer.Text = DateTime.Now.ToUniversalTime().ToString();
                 eb.Footer = footer;
             }         
-            eb.Color = _lightBlue;
+            eb.Color = LightBlue;
             eb.AddField(title, text);
             Embed e = eb.Build();
 
@@ -45,10 +45,10 @@ namespace EdgyBot
         /// <param name="text"></param>
         /// <param name="imgUrl"></param>
         /// <returns></returns>
-        public Embed createEmbedWithImage (string text, string imgUrl)
+        public Embed CreateEmbedWithImage (string text, string imgUrl)
         {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = _lightBlue;
+            eb.Color = LightBlue;
             eb.ImageUrl = imgUrl;
             eb.AddField("EdgyBot", text);
             return eb.Build();
@@ -60,17 +60,18 @@ namespace EdgyBot
         /// <param name="text"></param>
         /// <param name="imgUrl"></param>
         /// <returns></returns>
-        public Embed createEmbedWithImage(string title, string text, string imgUrl)
+        public Embed CreateEmbedWithImage(string title, string text, string imgUrl)
         {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = _lightBlue;
+            eb.Color = LightBlue;
             eb.AddField(title, text);
             eb.ImageUrl = imgUrl;
             Embed e = eb.Build();
             return e;
         }
-        public Embed createEmbedWithError(string errTitle, string errText)
+        public Embed CreateEmbedWithError(string errTitle, string errText)
         {
+            //TODO
             return null;
         }
         /// <summary>
@@ -78,7 +79,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public EmbedBuilder setupEmbedWithDefaults (bool footerEnabled = false)
+        public EmbedBuilder SetupEmbedWithDefaults (bool footerEnabled = false)
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
@@ -87,14 +88,14 @@ namespace EdgyBot
                 footer.Text = DateTime.Now.ToUniversalTime().ToString();
                 eb.Footer = footer;
             }
-            eb.Color = _lightBlue;
+            eb.Color = LightBlue;
             return eb;
         }
         /// <summary>
         /// Gets the bot's Invite Link
         /// </summary>
         /// <returns></returns>
-        public string getInviteLink ()
+        public string GetInviteLink ()
         {
             return _loginInfo.invLink;          
         }
@@ -102,7 +103,7 @@ namespace EdgyBot
         /// Gets the bot's token.
         /// </summary>
         /// <returns></returns>
-        public string getToken ()
+        public string GetToken ()
         {
             return _loginInfo.token;
         }
@@ -110,7 +111,7 @@ namespace EdgyBot
         /// Gets the bot's prefix.
         /// </summary>
         /// <returns></returns>
-        public string getPrefix()
+        public string GetPrefix()
         {
             return _loginInfo.prefix;
         }
@@ -118,7 +119,7 @@ namespace EdgyBot
         /// Gets the Geometry Jump Password the bot is connected to.
         /// </summary>
         /// <returns></returns>
-        public string getGJP()
+        public string GetGJP()
         {
             return _loginInfo.GJP;
         }
@@ -126,7 +127,7 @@ namespace EdgyBot
         /// Gets the Geometry Dash Account ID the bot is connected to.
         /// </summary>
         /// <returns></returns>
-        public string getGDAccID()
+        public string GetGDAccID()
         {
             return _loginInfo.accID;
         }
@@ -134,11 +135,11 @@ namespace EdgyBot
         /// Get's the Discord User ID of the bot admin.
         /// </summary>
         /// <returns></returns>
-        public ulong getOwnerID()
+        public ulong GetOwnerID()
         {
             return _loginInfo.ownerID;
         }
-        public string getProfilePicUrl()
+        public string GetProfilePicUrl()
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
@@ -181,7 +182,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task edgyLog(LogSeverity severity, string msg)
+        public Task EdgyLog(LogSeverity severity, string msg)
         {
             LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
             Log(logMessage);
@@ -193,7 +194,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Embed createAnnouncementEmbed(string msg, bool footerEnabled)
+        public Embed CreateAnnouncementEmbed(string msg, bool footerEnabled)
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
@@ -202,7 +203,7 @@ namespace EdgyBot
                 footer.Text = DateTime.Now.ToUniversalTime().ToString() + " | If you want to stop getting these, use e!stopannounce.";
                 eb.Footer = footer;
             }
-            eb.Color = _lightBlue;
+            eb.Color = LightBlue;
             eb.AddField("ANNOUNCEMENT!", msg);
             return eb.Build();
         }

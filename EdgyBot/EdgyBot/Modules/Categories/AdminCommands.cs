@@ -15,10 +15,10 @@ namespace EdgyBot.Modules.Categories
         [Command("execquery")]
         public async Task ExecuteQuery([Remainder]string queryInput)
         {
-            if (Context.User.Id == _lib.getOwnerID())
+            if (Context.User.Id == _lib.GetOwnerID())
             {
                 database.ExecuteQuery(queryInput);
-                Embed e = _lib.createEmbedWithText("Success", "Code " + queryInput + " has been executed.");
+                Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
                 await ReplyAsync("", embed: e);
             } else
             {
@@ -41,12 +41,12 @@ namespace EdgyBot.Modules.Categories
         [Command("announce")]
         public async Task AnnounceCmd([Remainder]string msg)
         {
-            if (Context.User.Id != _lib.getOwnerID())
+            if (Context.User.Id != _lib.GetOwnerID())
             {
                 await ReplyAsync("Permission Denied.");
                 return;
             }
-            await _lib.edgyLog(LogSeverity.Info, "Sending announcement " + msg);
+            await _lib.EdgyLog(LogSeverity.Info, "Sending announcement " + msg);
             foreach (IGuild guild in Context.Client.Guilds)
             {
                 if (guild == null) continue;
@@ -55,14 +55,14 @@ namespace EdgyBot.Modules.Categories
                     ITextChannel channel =  await guild.GetDefaultChannelAsync();
                     if (channel == null) continue;
                     
-                    Embed e = _lib.createAnnouncementEmbed(msg, true);
+                    Embed e = _lib.CreateAnnouncementEmbed(msg, true);
                     try
                     {
                         await channel.SendMessageAsync("", embed: e);
                     }
                     catch
                     {
-                        await _lib.edgyLog(LogSeverity.Error, "Could not send announcement to " + guild.Name);
+                        await _lib.EdgyLog(LogSeverity.Error, "Could not send announcement to " + guild.Name);
                     }                    
                 }
             }
@@ -74,7 +74,7 @@ namespace EdgyBot.Modules.Categories
         {
             ulong serverID = Context.Guild.Id;
             database.BlacklistServer(serverID);
-            Embed e = _lib.createEmbedWithText("Announcement Unsub", Context.Guild.Name + " has been excluded from recieving announcements.");
+            Embed e = _lib.CreateEmbedWithText("Announcement Unsub", Context.Guild.Name + " has been excluded from recieving announcements.");
 
             await ReplyAsync("", embed: e);
         }

@@ -40,7 +40,7 @@ namespace EdgyBot.Modules
                 {
                     EmbedBuilder ebCat = new EmbedBuilder();
                     ebCat.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-                     ebCat.Color = _lib._lightBlue;
+                     ebCat.Color = _lib.LightBlue;
         
                     ebCat.AddField("Category", "Description");
                     ebCat.AddField("geometrydash", "Gives commands related to Geometry Dash.");
@@ -53,8 +53,8 @@ namespace EdgyBot.Modules
                 {
                     EmbedBuilder gdBuilder = new EmbedBuilder();
                     gdBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300").WithName("EdgyBot");
-                    gdBuilder.Color = _lib._lightBlue;
-                    gdBuilder.AddField("Bot Prefix", _lib.getPrefix());
+                    gdBuilder.Color = _lib.LightBlue;
+                    gdBuilder.AddField("Bot Prefix", _lib.GetPrefix());
                     gdBuilder.AddField("profile", "[NAME], shows info about a player.");
                     gdBuilder.AddField("top10players", "Shows the Top 10 leaderboard.");
                     gdBuilder.AddField("topplayers", "[NUMBER], Shows the leaderboard based on your number.");
@@ -66,8 +66,8 @@ namespace EdgyBot.Modules
                  {
                      EmbedBuilder adminBuilder = new EmbedBuilder();
                      adminBuilder.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-                     adminBuilder.Color = _lib._lightBlue;
-                     adminBuilder.AddField("Bot Prefix", _lib.getPrefix());
+                     adminBuilder.Color = _lib.LightBlue;
+                     adminBuilder.AddField("Bot Prefix", _lib.GetPrefix());
                      adminBuilder.AddField("stopannounce", "Stop the server from receiving announcements.");
                      adminBuilder.AddField("blacklisted", "[SERVER ID], Checks if a server is blacklisted.");                    
                      Embed adminEmbed = adminBuilder.Build();
@@ -78,10 +78,10 @@ namespace EdgyBot.Modules
         
             EmbedBuilder e = new EmbedBuilder();
             e.Author = new EmbedAuthorBuilder().WithIconUrl("").WithName("EdgyBot");
-             e.Color = _lib._lightBlue;
+             e.Color = _lib.LightBlue;
         
             e.AddField("**WARNING**", "**EDGYBOT IS STILL IN DEVELOPMENT AND HAS MANY BUGS. IF YOU FIND ANY, MONSTAHHH#9629**");
-            e.AddField("Bot Prefix", _lib.getPrefix());
+            e.AddField("Bot Prefix", _lib.GetPrefix());
             e.AddField("[TEXT]", "A place where you need to place some text.");
             e.AddField("help", "**OPTIONAL [TEXT]** (e!help categories for available categories)");
             e.AddField("invite", "Get a link to invite the bot to other servers.");
@@ -108,7 +108,7 @@ namespace EdgyBot.Modules
         [Command("ping")]
         public async Task PingCmd ()
         {
-            EmbedBuilder eb = _lib.setupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
 
             Embed a = eb.Build();
@@ -117,7 +117,7 @@ namespace EdgyBot.Modules
         [Command("invite")]
         public async Task InviteCmd ()
         {
-            Embed e = _lib.createEmbedWithText("Invite Link", _lib.getInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
+            Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
         [Command("kys")]
@@ -129,7 +129,7 @@ namespace EdgyBot.Modules
         [Command("setstatus")]
         public async Task SetStatusCmd([Remainder]string input)
         {
-            if (Context.User.Id == _lib.getOwnerID())
+            if (Context.User.Id == _lib.GetOwnerID())
             {
                 await Context.Client.SetGameAsync(input);
                 await ReplyAsync("Changed Status.");
@@ -141,7 +141,7 @@ namespace EdgyBot.Modules
         [Command("sha512")]
         public async Task HashSHA512Cmd([Remainder]string input)
         {
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             e.AddField("Encrypted SHA512 String", GetHashString(input));
             Embed a = e.Build();
 
@@ -153,7 +153,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             string result = System.Convert.ToBase64String(inputBytes);
 
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             e.AddField("Encoded Base64 String", result);
             Embed a = e.Build();
 
@@ -165,7 +165,7 @@ namespace EdgyBot.Modules
             byte[] inputBytes = System.Convert.FromBase64String(input);
             string result = System.Text.Encoding.UTF8.GetString(inputBytes);
 
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             e.AddField("Decoded Base64 String", result);
             Embed a = e.Build();
 
@@ -186,7 +186,7 @@ namespace EdgyBot.Modules
         {
             if (input == null)
             {
-                Embed e = _lib.createEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
+                Embed e = _lib.CreateEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
                 await ReplyAsync("", embed: e);
             } else
             {
@@ -206,7 +206,7 @@ namespace EdgyBot.Modules
             string createdAt = Context.Channel.CreatedAt.ToString();
             string channelID = Context.Channel.Id.ToString();
 
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
 
             e.AddField("Channel Name", channelName);
             e.AddField("Channel ID", channelID);
@@ -243,7 +243,7 @@ namespace EdgyBot.Modules
             string playing = null;
             string createdOn = null;
             #endregion
-            EmbedBuilder eb = _lib.setupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             if (usr == null)
             {
                 username = Context.User.Username;
@@ -298,7 +298,7 @@ namespace EdgyBot.Modules
         [Command("serverinfo")]
         public async Task ServerInfoCmd()
         {
-            var eb = _lib.setupEmbedWithDefaults(true);         
+            var eb = _lib.SetupEmbedWithDefaults(true);         
 
             string name = Context.Guild.Name;
             string createdAt = Context.Guild.CreatedAt.ToString();
