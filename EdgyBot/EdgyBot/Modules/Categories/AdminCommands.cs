@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -49,11 +52,18 @@ namespace EdgyBot.Modules.Categories
                 if (guild == null) continue;
                 if (!database.IsServerBlacklisted(guild.Id))
                 {
-                    ITextChannel channel = await guild.GetDefaultChannelAsync();
+                    ITextChannel channel =  await guild.GetDefaultChannelAsync();
                     if (channel == null) continue;
-
+                    
                     Embed e = _lib.createAnnouncementEmbed(msg, true);
-                    await channel.SendMessageAsync("", embed: e);
+                    try
+                    {
+                        await channel.SendMessageAsync("", embed: e);
+                    }
+                    catch
+                    {
+                        await _lib.edgyLog(LogSeverity.Error, "Could not send announcement to " + guild.Name);
+                    }                    
                 }
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
