@@ -45,8 +45,8 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _lib.getGDAccID()},
-                {"gjp", _lib.getGJP()},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
                 {"targetAccountID", targetAccountID},
                 {"secret", "Wmfd2893gb7"}
             };
@@ -57,7 +57,7 @@ namespace EdgyBot.Modules.Categories
             #endregion
             #endregion
             #region Embed
-            EmbedBuilder eb = _lib.setupEmbedWithDefaults(false);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(false);
             string gdpicurl = gdThumbPic;
             eb.ThumbnailUrl = gdpicurl;
             eb.AddField("Username", finalResult[1], true);
@@ -88,8 +88,8 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _lib.getGDAccID()},
-                {"gjp", _lib.getGJP()},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
                 {"type", "top"},
                 {"count", "10"},
                 {"secret", "Wmfd2893gb7"}
@@ -99,7 +99,7 @@ namespace EdgyBot.Modules.Categories
             string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
             string[] users = getScoresResponseString.Split('|');
             int lbPlace = 1;
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (string user in users)
             {
                 if (user == "") continue;
@@ -123,12 +123,12 @@ namespace EdgyBot.Modules.Categories
             string countStr = count.ToString();
             if (count > 25)
             {
-                Embed aErr = _lib.createEmbedWithText("Top " + countStr, "The number you entered is too big.\n[MAX = 25]", false);
+                Embed aErr = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is too big.\n[MAX = 25]", false);
                 await ReplyAsync("", embed: aErr);
                 return;
             } else if (count <= 0)
             {
-                Embed aErr1 = _lib.createEmbedWithText("Top " + countStr, "The number you entered is invalid.", false);
+                Embed aErr1 = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is invalid.", false);
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
@@ -137,8 +137,8 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _lib.getGDAccID()},
-                {"gjp", _lib.getGJP()},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
                 {"type", "top"},
                 {"count", count.ToString()},
                 {"secret", "Wmfd2893gb7"}
@@ -148,7 +148,7 @@ namespace EdgyBot.Modules.Categories
             string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
             string[] users = getScoresResponseString.Split('|');
             int lbPlace = 1;
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (var user in users)
             {
                 if (user == "") continue;
@@ -175,8 +175,8 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _lib.getGDAccID()},
-                {"gjp", _lib.getGJP()},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
                 {"type", "creators"},
                 {"count", "10"},
                 {"secret", "Wmfd2893gb7"}
@@ -187,7 +187,7 @@ namespace EdgyBot.Modules.Categories
             #endregion
             string[] users = responseString.Split('|');
             int place = 1;
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (string user in users)
             {
                 if (user == "") continue;
@@ -211,12 +211,12 @@ namespace EdgyBot.Modules.Categories
         {
             if (count > 25)
             {
-                var aErr = _lib.createEmbedWithText("Top " + count, "The number you entered is too big.\n[MAX = 25]");
+                var aErr = _lib.CreateEmbedWithText("Top " + count, "The number you entered is too big.\n[MAX = 25]");
                 await ReplyAsync("", embed: aErr);
                 return;
             } else if (count <= 0)
             {
-                var aErr1 = _lib.createEmbedWithText("Top " + count, "The number you entered is invalid.");
+                var aErr1 = _lib.CreateEmbedWithText("Top " + count, "The number you entered is invalid.");
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
@@ -226,8 +226,8 @@ namespace EdgyBot.Modules.Categories
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _lib.getGDAccID()},
-                {"gjp", _lib.getGJP()},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
                 {"type", "creators"},
                 {"count", count.ToString()},
                 {"secret", "Wmfd2893gb7"}
@@ -238,7 +238,7 @@ namespace EdgyBot.Modules.Categories
             #endregion
             string[] usersStr = responseString.Split('|');
             int place = 1;
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (string user in usersStr)
             {
                 if (user == "") continue;

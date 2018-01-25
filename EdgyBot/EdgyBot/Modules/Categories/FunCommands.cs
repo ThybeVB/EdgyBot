@@ -51,7 +51,7 @@ namespace EdgyBot.Modules.Categories
         public async Task StopCmd(IGuildUser usr)
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
-            Embed a = _lib.createEmbedWithImage(usr.Mention, stopUrl);
+            Embed a = _lib.CreateEmbedWithImage(usr.Mention, stopUrl);
             await ReplyAsync("", embed: a);
         }
         [Command("jeff")]
@@ -69,7 +69,7 @@ namespace EdgyBot.Modules.Categories
             }
             string imgUrl = "http://monstahhhbot.890m.com/MonstahhhFiles/jeff.jpg";
             string textStr = user.Mention + ", You just got jeffed by " + Context.User.Mention;
-            Embed e = _lib.createEmbedWithImage("Jeff", textStr, imgUrl);
+            Embed e = _lib.CreateEmbedWithImage("Jeff", textStr, imgUrl);
 
             await ReplyAsync("", embed: e);
 
@@ -107,7 +107,7 @@ namespace EdgyBot.Modules.Categories
             }
             string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
             string imgUrl = "https://media.giphy.com/media/xUySTCy0JHxUxw4fao/giphy.gif";
-            Embed e = _lib.createEmbedWithImage("Stab", text, imgUrl);
+            Embed e = _lib.CreateEmbedWithImage("Stab", text, imgUrl);
 
             await ReplyAsync("", embed: e);
         }

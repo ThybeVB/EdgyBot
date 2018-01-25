@@ -34,7 +34,7 @@ namespace EdgyBot
         {
             Console.ForegroundColor = ConsoleColor.Green;
             _ehandler = new EventHandler(Client);
-            await Client.LoginAsync(TokenType.Bot, _lib.getToken());
+            await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();          
             await _handler.InitializeAsync(Client);
 

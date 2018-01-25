@@ -16,13 +16,13 @@ namespace EdgyBot.Modules.Categories
         {
             if (min >= max)
             {
-                Embed err = _lib.createEmbedWithText("EdgyBot", "Invalid number input.");
+                Embed err = _lib.CreateEmbedWithText("EdgyBot", "Invalid number input.");
                 await ReplyAsync("", embed: err);
                 return;
             }
             Random rand = new Random();
             int result = rand.Next(min, max);
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
 
             e.AddField("Random Number Generator", "You got " + result.ToString() + "!");
 
@@ -62,7 +62,7 @@ namespace EdgyBot.Modules.Categories
             }
             input = reverseTxt;
             #endregion
-            Embed a = _lib.createEmbedWithText("Reversed Text", input, false);
+            Embed a = _lib.CreateEmbedWithText("Reversed Text", input, false);
             await ReplyAsync("", embed: a);
         }
         [Command("flipcoin")]
@@ -77,10 +77,10 @@ namespace EdgyBot.Modules.Categories
                     await ReplyAsync("Error.");
                     break;
                 case 1:
-                    e = _lib.createEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
+                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
                     break;
                 case 2:
-                    e = _lib.createEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
+                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
                     break;
             }
             await ReplyAsync("", embed: e);
@@ -92,7 +92,7 @@ namespace EdgyBot.Modules.Categories
             int num = rand.Next(-1, 101);
             string numStr = num.ToString();
 
-            EmbedBuilder e = _lib.setupEmbedWithDefaults();
+            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
