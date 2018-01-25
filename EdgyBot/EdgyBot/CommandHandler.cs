@@ -31,13 +31,9 @@ namespace EdgyBot
                 var result = await _service.ExecuteAsync(Context, argPos);
                 if (!result.IsSuccess)
                 {
-                    if (result.ToString() == "The server responded with error 50007: Cannot send messages to this user")
-                    {
-                        await Context.Channel.SendMessageAsync("**ERROR:** Could not send messages to this user. Either the user does not allow private messages from unknown's, or it is a bot.");
-                        return;
-                    }
                     await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                    await Context.Channel.SendMessageAsync(result.ErrorReason);
+                    Embed errEmbed = _lib.CreateEmbedWithError("Error", result.ErrorReason);
+                    await Context.Channel.SendMessageAsync("", embed: errEmbed);
                 }
             }
         }

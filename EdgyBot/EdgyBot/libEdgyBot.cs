@@ -69,10 +69,19 @@ namespace EdgyBot
             Embed e = eb.Build();
             return e;
         }
+        /// <summary>
+        /// Creates an Error Embed.
+        /// </summary>
+        /// <param name="errTitle"></param>
+        /// <param name="errText"></param>
+        /// <returns></returns>
         public Embed CreateEmbedWithError(string errTitle, string errText)
         {
-            //TODO
-            return null;
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Color = Color.DarkRed;
+            eb.AddField(errTitle, errText);
+            Embed e = eb.Build();
+            return e;
         }
         /// <summary>
         /// Creates an Embed with defaults.
@@ -180,6 +189,7 @@ namespace EdgyBot
         /// <summary>
         /// Logs a Message under the EdgyBot name.
         /// </summary>
+        /// <param name="severity"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
         public Task EdgyLog(LogSeverity severity, string msg)
@@ -193,6 +203,7 @@ namespace EdgyBot
         /// Creates an Embed exclusively for the Announce Command.
         /// </summary>
         /// <param name="msg"></param>
+        /// <param name="footerEnabled"></param>
         /// <returns></returns>
         public Embed CreateAnnouncementEmbed(string msg, bool footerEnabled)
         {
