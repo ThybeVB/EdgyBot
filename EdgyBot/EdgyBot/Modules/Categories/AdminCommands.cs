@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -45,12 +44,12 @@ namespace EdgyBot.Modules.Categories
                 return;
             }
             await _lib.edgyLog(LogSeverity.Info, "Sending announcement " + msg);
-            foreach (SocketGuild guild in Context.Client.Guilds)
+            foreach (IGuild guild in Context.Client.Guilds)
             {
                 if (guild == null) continue;
                 if (!database.IsServerBlacklisted(guild.Id))
                 {
-                    SocketTextChannel channel = guild.DefaultChannel;
+                    ITextChannel channel = await guild.GetDefaultChannelAsync();
                     if (channel == null) continue;
 
                     Embed e = _lib.createAnnouncementEmbed(msg, true);
