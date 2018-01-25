@@ -26,17 +26,17 @@ namespace EdgyBot
 
         private async Task Client_Disconnected(Exception exception)
         {
-            await _lib.edgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, " + exception.Message);
+            await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, " + exception.Message);
         }
 
         public async Task Ready()
         {
-            OwnerUser = _client.GetUser(_lib.getOwnerID());
+            OwnerUser = _client.GetUser(_lib.GetOwnerID());
 
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
-            await _lib.edgyLog(LogSeverity.Info, "Set game to " + gameStatus);
-            await _lib.edgyLog(LogSeverity.Info, "Fully loaded EdgyBot v1.0.");
+            await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
+            await _lib.EdgyLog(LogSeverity.Info, "Fully loaded EdgyBot v1.0.");
         }
         private async Task Client_Connected()
         {
@@ -51,7 +51,7 @@ namespace EdgyBot
         private async Task UserLeft(SocketGuildUser user)
         {
             var dm = await user.GetOrCreateDMChannelAsync();
-            var e = _lib.createEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
+            var e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
             await dm.SendMessageAsync("", embed: e);
         }
     }
