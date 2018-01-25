@@ -29,7 +29,7 @@ namespace EdgyBot.Modules
             return sb.ToString();
         }
         #endregion
-        [Command("help")]
+        [Command("help")][Name("Help")][Summary("Gives EdgyBot's commands and what they do.")]
         public async Task HelpCmd(string category = null)
         {
             IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
@@ -105,7 +105,7 @@ namespace EdgyBot.Modules
             await dm.SendMessageAsync("", embed: a);
             await Context.Message.AddReactionAsync(new Emoji("📫"));
         } 
-        [Command("ping")]
+        [Command("ping")][Name("ping")][Summary("Checks EdgyBot's speed to the server.")]
         public async Task PingCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
@@ -114,18 +114,18 @@ namespace EdgyBot.Modules
             Embed a = eb.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("invite")]
+        [Command("invite")][Name("invite")][Summary("Gives the Invite Link for EdgyBot.")]
         public async Task InviteCmd ()
         {
             Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
-        [Command("kys")]
+        [Command("kys")][Name("kys")][Summary("Tells EdgyBot to go kill himself.")]
         public async Task KysCmd ()
         {
             await ReplyAsync("NO GO FUCK YOURSELF");
         }
-        
+        //Go from here
         [Command("setstatus")]
         public async Task SetStatusCmd([Remainder]string input)
         {
