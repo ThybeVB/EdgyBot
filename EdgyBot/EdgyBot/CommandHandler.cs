@@ -32,8 +32,7 @@ namespace EdgyBot
                 if (!result.IsSuccess)
                 {
                     await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                    Embed errEmbed = _lib.CreateEmbedWithError("Error", result.ErrorReason);
-                    await context.Channel.SendMessageAsync("", embed: errEmbed);
+                    await context.Channel.SendMessageAsync(result.ErrorReason);
                 }
             }
         }
