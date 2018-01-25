@@ -12,6 +12,7 @@ namespace EdgyBot.Modules
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
+        private DiscordSocketClient _client;
 
         #region Hashes
         public static byte[] GetHash(string inputString)
@@ -214,6 +215,20 @@ namespace EdgyBot.Modules
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
+
+        [Command("suggest")][Alias("sg")]
+        public async Task SuggestCmd ([Remainder]string msg = null)
+        {
+            if (msg != null)
+            {
+                await EventHandler.OwnerUser.SendMessageAsync(msg);
+                await ReplyAsync("Your message has been sent!");
+            }
+            else
+            {
+                await ReplyAsync("Please enter a message.");
+            }      
+        }
         [Command("userinfo")]
         public async Task UserInfoCmd (IGuildUser usr = null)
         {
@@ -256,7 +271,7 @@ namespace EdgyBot.Modules
             }
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username);
-            if (String.IsNullOrEmpty(nickname))
+            if (string.IsNullOrEmpty(nickname))
             {
                 eb.AddField("Nickname", "None");
             } else
@@ -266,7 +281,7 @@ namespace EdgyBot.Modules
             eb.AddField("Discriminator (tag)", discriminator);
             eb.AddField("Status", status);
             eb.AddField("Created At", createdOn);
-            if (String.IsNullOrEmpty(playing))
+            if (string.IsNullOrEmpty(playing))
             {
                 eb.AddField("Playing", "None");
             } else

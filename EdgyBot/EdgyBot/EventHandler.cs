@@ -10,6 +10,7 @@ namespace EdgyBot
     {
         private readonly DiscordSocketClient _client;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        public static SocketUser OwnerUser;
 
         public EventHandler(DiscordSocketClient client)
         {
@@ -30,6 +31,8 @@ namespace EdgyBot
 
         public async Task Ready()
         {
+            OwnerUser = _client.GetUser(_lib.getOwnerID());
+
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
             await _lib.edgyLog(LogSeverity.Info, "Set game to " + gameStatus);
