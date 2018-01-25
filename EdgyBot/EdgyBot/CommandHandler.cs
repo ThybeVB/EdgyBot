@@ -24,16 +24,16 @@ namespace EdgyBot
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
-            var Context = new SocketCommandContext(_client, msg);
+            var context = new SocketCommandContext(_client, msg);
             int argPos = 0;
             if (msg.HasStringPrefix(_lib.GetPrefix(), ref argPos))
             {
-                var result = await _service.ExecuteAsync(Context, argPos);
+                var result = await _service.ExecuteAsync(context, argPos);
                 if (!result.IsSuccess)
                 {
                     await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
                     Embed errEmbed = _lib.CreateEmbedWithError("Error", result.ErrorReason);
-                    await Context.Channel.SendMessageAsync("", embed: errEmbed);
+                    await context.Channel.SendMessageAsync("", embed: errEmbed);
                 }
             }
         }
