@@ -11,7 +11,7 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
 
-        [Command("randomnum")]
+        [Command("randomnum")][Name("randomnum")][Summary("Gives you a random number between your 2 numbers.")]
         public async Task RandomNumCmd(int min, int max)
         {
             if (min >= max)
@@ -29,7 +29,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("amigay")]
+        [Command("amigay")][Name("amigay")][Summary("Are you gay?")]
         public async Task AmIGayCmd()
         {
             Random rand = new Random();
@@ -44,7 +44,7 @@ namespace EdgyBot.Modules.Categories
                     break;
             }
         }
-        [Command("flip")]
+        [Command("flip")][Name("flip")][Summary("Flips your message.")]
         public async Task ReverseCmd([Remainder]string input = null)
         {
             if (input == null)
@@ -65,7 +65,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = _lib.CreateEmbedWithText("Reversed Text", input, false);
             await ReplyAsync("", embed: a);
         }
-        [Command("flipcoin")]
+        [Command("flipcoin")][Name("flipcoin")][Summary("Flips a coin.")]
         public async Task FlipCoinCmd()
         {
             Random random = new Random();
@@ -85,7 +85,7 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
-        [Command("chance")]
+        [Command("chance")][Name("chance")][Summary("What chance do you have of **x**?")]
         public async Task ChanceCmd([Remainder]string input)
         {
             Random rand = new Random();

@@ -3,6 +3,8 @@ using Discord.WebSocket;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
+using EdgyBot.Modules;
+using EdgyBot.Modules.Categories;
 
 namespace EdgyBot
 {
@@ -17,7 +19,7 @@ namespace EdgyBot
             _client = client;
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
-
+            new HelpCommand(_service);
             _client.MessageReceived += HandleCommandAsync;
         }
         private async Task HandleCommandAsync(SocketMessage s)

@@ -27,6 +27,8 @@ namespace EdgyBot.Modules.Categories
         }
         [Command("isblacklisted")]
         [Alias("blacklisted")]
+        [Name("blacklisted")]
+        [Summary("Checks if a server is blacklisted.")]
         public async Task IsBlackListedCmd (ulong serverID)
         {
             bool isBlackListed = database.IsServerBlacklisted(serverID);
@@ -68,7 +70,7 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
         }
-        [Command("stopannounce")]
+        [Command("stopannounce")][Name("stopannounce")][Summary("Stops receiving announcements from EdgyBot")]
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task StopAnnounceCmd()
         {
@@ -77,6 +79,19 @@ namespace EdgyBot.Modules.Categories
             Embed e = _lib.CreateEmbedWithText("Announcement Unsub", Context.Guild.Name + " has been excluded from recieving announcements.");
 
             await ReplyAsync("", embed: e);
+        }
+        [Command("setstatus")]
+        public async Task SetStatusCmd([Remainder]string input)
+        {
+            if (Context.User.Id == _lib.GetOwnerID())
+            {
+                await Context.Client.SetGameAsync(input);
+                await ReplyAsync("Changed Status.");
+            }
+            else
+            {
+                await ReplyAsync("No Permissions.");
+            }
         }
     }
 }

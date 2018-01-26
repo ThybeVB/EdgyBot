@@ -12,7 +12,7 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
 
-        [Command("vertical")]
+        [Command("vertical")][Name("vertical")][Summary("Converts your message to a vertical one")]
         public async Task VerticalCmd([Remainder]string msg)
         {
             StringBuilder sb = new StringBuilder();
@@ -25,7 +25,7 @@ namespace EdgyBot.Modules.Categories
             sb.Append("```" + "\n");
             await ReplyAsync(sb.ToString());
         }
-        [Command("bigletter")]
+        [Command("bigletter")][Name("bigletter")][Summary("Converts your message to Big Letters")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
             msg = msg.ToLower();
@@ -47,14 +47,14 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync(sb.ToString());
         }
-        [Command("stop")]
+        [Command("stop")][Name("stop")][Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
             Embed a = _lib.CreateEmbedWithImage(usr.Mention, stopUrl);
             await ReplyAsync("", embed: a);
         }
-        [Command("jeff")]
+        [Command("jeff")][Name("jeff")][Summary("Jeff's somebody.")]
         public async Task JeffCmd(IGuildUser user)
         {
             if (user.Id == Context.User.Id)
@@ -74,7 +74,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
-        [Command("lol")]
+        [Command("lol")][Name("lol")][Summary("useless")]
         public async Task LolCmd(IGuildUser user)
         {
             if (user.Id == Context.Message.Author.Id)
@@ -87,7 +87,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync(user.Mention + " ....lol");
             }
         }
-        [Command("stab")]
+        [Command("stab")][Name("stab")][Summary("Stabs an user.")]
         public async Task StabCmd(SocketUser usr = null)
         {
             if (usr == null)
@@ -111,7 +111,7 @@ namespace EdgyBot.Modules.Categories
 
             await ReplyAsync("", embed: e);
         }
-        [Command("gay")]
+        [Command("gay")][Name("gay")][Summary("Tells somebody they're gay.")]
         public async Task GayCmd(IGuildUser usr)
         {
             await Context.Message.DeleteAsync();

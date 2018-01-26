@@ -13,7 +13,7 @@ namespace EdgyBot.Modules.Categories
 
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
-        [Command("profile")]
+        [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
         public async Task ProfileGDCMD (string strInput = null)
         {
             if (strInput == null)
@@ -80,7 +80,7 @@ namespace EdgyBot.Modules.Categories
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);
         }
-        [Command("top10players")]
+        [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
         public async Task Top10GDCMD()
         {
             var top10ReqDict = new Dictionary<string, string>
@@ -117,7 +117,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("topplayers")]
+        [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
         public async Task TopGDCMD(int count)
         {
             string countStr = count.ToString();
@@ -166,7 +166,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("top10creators")]
+        [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
         public async Task Top10CreatorsCMD()
         {
             #region Request
@@ -206,7 +206,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("topcreators")]
+        [Command("topcreators")][Name("topcreators")][Summary("Same thing as top10creators, but it is based on your number.")]
         public async Task TopCreatorsCMD(int count)
         {
             if (count > 25)
