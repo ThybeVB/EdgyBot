@@ -87,6 +87,13 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync(user.Mention + " ....lol");
             }
         }
+        [Command("kys")]
+        [Name("kys")]
+        [Summary("Tells EdgyBot to go kill himself.")]
+        public async Task KysCmd()
+        {
+            await ReplyAsync("NO GO FUCK YOURSELF");
+        }
         [Command("stab")][Name("stab")][Summary("Stabs an user.")]
         public async Task StabCmd(SocketUser usr = null)
         {
