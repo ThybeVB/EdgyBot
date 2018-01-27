@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +38,6 @@ namespace EdgyBot.Modules.Categories
         }
         [Command("b64e")]
         [Name("b64e")]
-        [Alias("b64encode")]
         [Summary("Encodes a message to Base 64.")]
         public async Task B64EncryptCmd([Remainder]string input)
         {
@@ -54,7 +52,6 @@ namespace EdgyBot.Modules.Categories
         }
         [Command("b64d")]
         [Name("b64d")]
-        [Alias("b64decode")]
         [Summary("Decrypts a Base 64 Encoded message.")]
         public async Task B64DecodeCmd([Remainder]string input)
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using Discord.Commands;
-using Discord.WebSocket;
 using System.Threading.Tasks;
 using Discord;
 
@@ -85,7 +84,7 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
-        [Command("chance")][Name("chance")][Summary("What chance do you have of **x**?")]
+        [Command("chance")][Name("chance")][Summary("What chance do you have of x?")]
         public async Task ChanceCmd([Remainder]string input)
         {
             Random rand = new Random();
