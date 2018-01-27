@@ -2,13 +2,11 @@
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
-using EdgyBot.Modules;
 
 namespace EdgyBot
 {
     /*
         EDGYBOT /// 2017-2018
-        DISCLAIMER
         IF YOU WANT TO MODIFY OR RUN THIS BOT, PLEASE CREATE A CLASS CALLED LoginInfo.cs WITH THE FOLLOWING VARIABLES
         *************
         string token
