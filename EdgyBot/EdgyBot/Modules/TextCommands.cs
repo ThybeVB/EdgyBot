@@ -12,7 +12,6 @@ namespace EdgyBot.Modules
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
-        private DiscordSocketClient _client;
 
         #region Hashes
         public static byte[] GetHash(string inputString)
@@ -49,7 +48,6 @@ namespace EdgyBot.Modules
         {
             await ReplyAsync("NO GO FUCK YOURSELF");
         }
-        //Go from here
         [Command("sha512")][Name("sha512")][Summary("Encrypts a message to SHA512")]
         public async Task HashSHA512Cmd([Remainder]string input)
         {

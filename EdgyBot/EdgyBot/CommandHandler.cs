@@ -20,6 +20,7 @@ namespace EdgyBot
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
             new HelpCommand(_service);
+
             _client.MessageReceived += HandleCommandAsync;
         }
         private async Task HandleCommandAsync(SocketMessage s)
