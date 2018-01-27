@@ -25,23 +25,30 @@ namespace EdgyBot.Modules
         public async Task HelpCmd ()
         {
             IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
 
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            EmbedBuilder eb2 = _lib.SetupEmbedWithDefaults();
+
+            eb.AddField("Bot Prefix", _lib.GetPrefix());
+
+            int lineCount = 0;
             foreach (CommandInfo c in _service.Commands)
             {
                 if (c == null) continue;
-                try
+                if (c.Name == null || c.Summary == null) continue;
+                if (lineCount >= 24)
                 {
-                    eb.AddField(c.Name, c.Summary);
+                    eb2.AddField(c.Name, c.Summary);
+                    lineCount++;
+                    continue;
                 }
-                catch
-                {
-                    await _lib.EdgyLog(LogSeverity.Warning, "Could not add " + c.Name + " to the Help command.");
-                }
+                eb.AddField(c.Name, c.Summary);
+                lineCount++;
             }
-
             Embed e = eb.Build();
+            Embed e2 = eb2.Build();
             await dm.SendMessageAsync("", embed: e);
+            await dm.SendMessageAsync("", embed: e2);
             await Context.Message.AddReactionAsync(new Emoji("📫"));
         }
     }
