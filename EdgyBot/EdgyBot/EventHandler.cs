@@ -40,7 +40,7 @@ namespace EdgyBot
         }
         private async Task Client_Connected()
         {
-            await _lib.Log(new LogMessage(LogSeverity.Verbose, "EdgyBot", "Connecting to servers..."));
+            await _lib.EdgyLog(LogSeverity.Verbose, "Connected.");
         }
 
         private static async Task Client_JoinedGuild(SocketGuild arg)
@@ -50,8 +50,8 @@ namespace EdgyBot
 
         private async Task UserLeft(SocketGuildUser user)
         {
-            var dm = await user.GetOrCreateDMChannelAsync();
-            var e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
+            IDMChannel dm = await user.GetOrCreateDMChannelAsync();
+            Embed e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
             await dm.SendMessageAsync("", embed: e);
         }
     }

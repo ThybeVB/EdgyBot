@@ -27,7 +27,7 @@ namespace EdgyBot
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
-            var context = new SocketCommandContext(_client, msg);
+            SocketCommandContext context = new SocketCommandContext(_client, msg);
             int argPos = 0;
             if (msg.HasStringPrefix(_lib.GetPrefix(), ref argPos))
             {
