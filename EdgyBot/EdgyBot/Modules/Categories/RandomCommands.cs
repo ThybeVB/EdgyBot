@@ -8,7 +8,6 @@ namespace EdgyBot.Modules.Categories
     public class RandomCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        private readonly Database _database = new Database();
 
         [Command("randomnum")][Name("randomnum")][Summary("Gives you a random number between your 2 numbers.")]
         public async Task RandomNumCmd(int min, int max)
