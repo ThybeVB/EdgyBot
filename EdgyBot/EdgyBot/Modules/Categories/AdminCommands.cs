@@ -9,7 +9,7 @@ namespace EdgyBot.Modules.Categories
 {
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly Database database = new Database();
+        private readonly Database _database = new Database();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("execquery")]
@@ -17,7 +17,7 @@ namespace EdgyBot.Modules.Categories
         {
             if (Context.User.Id == _lib.GetOwnerID())
             {
-                database.ExecuteQuery(queryInput);
+                _database.ExecuteQuery(queryInput);
                 Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
                 await ReplyAsync("", embed: e);
             } else
@@ -31,7 +31,7 @@ namespace EdgyBot.Modules.Categories
         [Summary("Checks if a server is blacklisted.")]
         public async Task IsBlackListedCmd (ulong serverID)
         {
-            bool isBlackListed = database.IsServerBlacklisted(serverID);
+            bool isBlackListed = _database.IsServerBlacklisted(serverID);
             if (isBlackListed)
             {
                 await ReplyAsync("This server is blacklisted.");
@@ -52,7 +52,7 @@ namespace EdgyBot.Modules.Categories
             foreach (IGuild guild in Context.Client.Guilds)
             {
                 if (guild == null) continue;
-                if (!database.IsServerBlacklisted(guild.Id))
+                if (!_database.IsServerBlacklisted(guild.Id))
                 {
                     ITextChannel channel =  await guild.GetDefaultChannelAsync();
                     if (channel == null) continue;
@@ -75,7 +75,7 @@ namespace EdgyBot.Modules.Categories
         public async Task StopAnnounceCmd()
         {
             ulong serverID = Context.Guild.Id;
-            database.BlacklistServer(serverID);
+            _database.BlacklistServer(serverID);
             Embed e = _lib.CreateEmbedWithText("Announcement Unsub", Context.Guild.Name + " has been excluded from recieving announcements.");
 
             await ReplyAsync("", embed: e);

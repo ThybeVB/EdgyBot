@@ -10,7 +10,6 @@ namespace EdgyBot.Modules.Categories
     public class FunCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        private readonly Database _database = new Database();
 
         [Command("vertical")][Name("vertical")][Summary("Converts your message to a vertical one")]
         public async Task VerticalCmd([Remainder]string msg)
