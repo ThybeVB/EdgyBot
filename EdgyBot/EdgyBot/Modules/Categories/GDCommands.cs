@@ -245,11 +245,11 @@ namespace EdgyBot.Modules.Categories
                 string[] userData = user.Split(':');
                 string username = userData[1];
                 string cp = userData[25];
-                string placeWording = "nd";
-                if (place == 3) placeWording = "rd";
-                if (place >= 4) placeWording = "th";
-                if (place == 1) placeWording = "st";
-                e.AddField(place + placeWording + " Place", $"**{username}** with **{cp} Creator Points**");
+                string wording = "nd";
+                if (place == 3) wording = "rd";
+                if (place >= 4) wording = "th";
+                if (place == 1) wording = "st";
+                e.AddField(place + wording + " Place", $"**{username}** with **{cp} Creator Points**");
 
                 place++;
             }

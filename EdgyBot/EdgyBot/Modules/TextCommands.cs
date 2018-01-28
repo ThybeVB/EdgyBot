@@ -1,10 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
-using System;
-using System.Security.Cryptography;
-using System.Text;
-using Discord.WebSocket;
 
 namespace EdgyBot.Modules
 {
