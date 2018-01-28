@@ -20,7 +20,6 @@ namespace EdgyBot
             _client.Ready += Ready;
             _client.UserLeft += UserLeft;
             _client.JoinedGuild += Client_JoinedGuild;
-            _client.Connected += Client_Connected;
             _client.Disconnected += Client_Disconnected;
         }
 
@@ -37,10 +36,6 @@ namespace EdgyBot
             await _client.SetGameAsync(gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Fully loaded EdgyBot v1.0");
-        }
-        private async Task Client_Connected()
-        {
-            await _lib.EdgyLog(LogSeverity.Verbose, "Connected.");
         }
 
         private static async Task Client_JoinedGuild(SocketGuild arg)
