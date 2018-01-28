@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 
 namespace EdgyBot.Modules
 {
@@ -22,7 +17,7 @@ namespace EdgyBot.Modules
         [Command("help")]
         [Name("help")]
         [Summary("Gives EdgyBot's commands and what they do.")]
-        public async Task HelpCmd ()
+        public async Task HelpCmd()
         {
             IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
 
