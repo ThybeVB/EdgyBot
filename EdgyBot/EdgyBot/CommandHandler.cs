@@ -30,7 +30,7 @@ namespace EdgyBot
             int argPos = 0;
             if (msg.HasStringPrefix(_lib.GetPrefix(), ref argPos))
             {
-                var result = await _service.ExecuteAsync(context, argPos);
+                IResult result = await _service.ExecuteAsync(context, argPos);
                 if (!result.IsSuccess)
                 {
                     await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);

@@ -15,7 +15,7 @@ namespace EdgyBot.Modules
             Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
-        [Command("source")][Alias("sourcecode"][Name("source")][Summary("Links the Source Code of EdgyBot")]
+        [Command("source")][Alias("sourcecode")][Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
         {
             Embed e = _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot");
