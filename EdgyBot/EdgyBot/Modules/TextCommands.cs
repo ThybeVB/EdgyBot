@@ -36,7 +36,7 @@ namespace EdgyBot.Modules
         {
             if (input == null)
             {
-                Embed e = _lib.CreateEmbedWithText("Sayd", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
+                Embed e = _lib.CreateEmbedWithText("EdgyBot", "Please enter a message.\nDon't forget to use **Quotation Marks**!", true);
                 await ReplyAsync("", embed: e);
             } else
             {

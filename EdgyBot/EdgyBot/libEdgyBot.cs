@@ -180,9 +180,7 @@ namespace EdgyBot
                     Console.ForegroundColor = ConsoleColor.Green;
                     break;
             }
-
-            string messageStr = message.ToString();
-            Console.WriteLine(messageStr);
+            Console.WriteLine(message.ToString());
             return Task.CompletedTask;
         }
 
