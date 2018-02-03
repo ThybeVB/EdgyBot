@@ -24,6 +24,18 @@ namespace EdgyBot.Modules.Categories
 
             return sb.ToString();
         }
+        public static string EncodeB64 (string input)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            string result = System.Convert.ToBase64String(inputBytes);
+            return result;
+        }
+        public static string DecodeB64 (string encodedInput)
+        {
+            byte[] inputBytes = System.Convert.FromBase64String(encodedInput);
+            string result = Encoding.UTF8.GetString(inputBytes);
+            return result;
+        }
         #endregion
         [Command("sha512")]
         [Name("sha512")]
@@ -41,11 +53,8 @@ namespace EdgyBot.Modules.Categories
         [Summary("Encodes a message to Base 64.")]
         public async Task B64EncryptCmd([Remainder]string input)
         {
-            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
-            string result = System.Convert.ToBase64String(inputBytes);
-
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
-            e.AddField("Encoded Base64 String", result);
+            e.AddField("Encoded Base64 String", EncodeB64(input));
             Embed a = e.Build();
 
             await ReplyAsync("", embed: a);
@@ -55,11 +64,8 @@ namespace EdgyBot.Modules.Categories
         [Summary("Decrypts a Base 64 Encoded message.")]
         public async Task B64DecodeCmd([Remainder]string input)
         {
-            byte[] inputBytes = System.Convert.FromBase64String(input);
-            string result = System.Text.Encoding.UTF8.GetString(inputBytes);
-
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
-            e.AddField("Decoded Base64 String", result);
+            e.AddField("Decoded Base64 String", DecodeB64(input));
             Embed a = e.Build();
 
             await ReplyAsync("", embed: a);
