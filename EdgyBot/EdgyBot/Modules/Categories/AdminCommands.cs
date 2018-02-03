@@ -37,7 +37,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("This server is not blacklisted.");
             } 
         }
-        [Command("announce")]
+        [Command("announce", RunMode = RunMode.Async)]
         public async Task AnnounceCmd([Remainder]string msg)
         {
             if (Context.User.Id != _lib.GetOwnerID())
