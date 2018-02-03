@@ -65,7 +65,7 @@ namespace EdgyBot
             EmbedBuilder eb = new EmbedBuilder();
             eb.Color = LightBlue;
             eb.AddField(title, text);
-            eb.ImageUrl = imgUrl;
+            eb.WithImageUrl(imgUrl);
             Embed e = eb.Build();
             return e;
         }
