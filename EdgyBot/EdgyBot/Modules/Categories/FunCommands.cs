@@ -3,6 +3,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using System.Text;
+using System;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -121,6 +122,23 @@ namespace EdgyBot.Modules.Categories
         {
             await Context.Message.DeleteAsync();
             await ReplyAsync(usr.Mention + ", ur gay :joy: :ok_hand:");
+        }
+        [Command("isgay")][Name("isgay")][Summary("Checks if somebody is gay.")]
+        public async Task IsGayCmd (IGuildUser usr)
+        {
+            Random random = new Random();
+            string isGay = null;
+            int i = random.Next(0, 3);
+            switch (i)
+            {
+                case 1:
+                    isGay = "gay.";
+                    break;
+                case 2:
+                    isGay = "not gay.";
+                    break;
+            }
+            await ReplyAsync(usr.Mention + " is " + isGay);
         }
     }
 }
