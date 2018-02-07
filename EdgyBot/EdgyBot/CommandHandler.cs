@@ -18,6 +18,7 @@ namespace EdgyBot
             _client = client;
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
+            //Initialize Classes that need the CommandService
             new HelpCommand(_service);
 
             _client.MessageReceived += HandleCommandAsync;
