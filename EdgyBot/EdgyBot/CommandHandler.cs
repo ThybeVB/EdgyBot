@@ -35,8 +35,14 @@ namespace EdgyBot
                 {
                     if (result.Error != CommandError.UnknownCommand)
                     {
-                        await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                        await context.Channel.SendMessageAsync(result.ErrorReason);
+                        if (result.Error != CommandError.BadArgCount)
+                        {
+                            await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                            await context.Channel.SendMessageAsync(result.ErrorReason);
+                        } else
+                        {
+                            await context.Channel.SendMessageAsync("You need to give input in this command. Check the **e!help** command for info.");
+                        }
                     } else
                     {
                         await context.Channel.SendMessageAsync("This command does not exist. Try **e!help**");
