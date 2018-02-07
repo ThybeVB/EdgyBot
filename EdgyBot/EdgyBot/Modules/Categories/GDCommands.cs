@@ -16,11 +16,6 @@ namespace EdgyBot.Modules.Categories
         [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
         public async Task ProfileGDCMD (string strInput = null)
         {
-            if (strInput == null)
-            {
-                await ReplyAsync("**ERROR:** Please enter an user.");
-                return;
-            }
             #region Collect Data
             #region GetGJUsers
             var gjUsersDict = new Dictionary<string, string>
