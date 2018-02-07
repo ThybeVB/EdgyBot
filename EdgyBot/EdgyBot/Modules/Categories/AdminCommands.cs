@@ -46,6 +46,7 @@ namespace EdgyBot.Modules.Categories
                 return;
             }
             await _lib.EdgyLog(LogSeverity.Info, "Sending announcement " + msg);
+            int sentCount = 0;
             foreach (IGuild guild in Context.Client.Guilds)
             {
                 if (guild == null) continue;
@@ -58,14 +59,15 @@ namespace EdgyBot.Modules.Categories
                     try
                     {
                         await channel.SendMessageAsync("", embed: e);
+                        sentCount++;
                     }
                     catch
                     {
                         await _lib.EdgyLog(LogSeverity.Error, "Could not send announcement to " + guild.Name);
-                    }                    
+                    }               
                 }
             }
-            await ReplyAsync("Sent message to " + Context.Client.Guilds.Count + " servers.");
+            await ReplyAsync("Sent message to " + sentCount + " servers.");
         }
         [Command("stopannounce")][Name("stopannounce")][Summary("Stops receiving announcements from EdgyBot")]
         [RequireUserPermission(GuildPermission.Administrator)]
