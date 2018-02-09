@@ -225,7 +225,7 @@ namespace EdgyBot
             eb.AddField("ANNOUNCEMENT!", msg);
             return eb.Build();
         }
-        public Embed CreateXPEmbed (string username, int currentXP)
+        public Embed CreateXPEmbed (string username, string currentXP)
         {
 
             EmbedBuilder eb = new EmbedBuilder();

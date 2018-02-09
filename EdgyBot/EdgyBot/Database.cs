@@ -46,9 +46,9 @@ namespace EdgyBot
             }         
             conn.Close();
         }
-        public int GetXPFromUserID (ulong uID)
+        public string GetXPFromUserID (ulong uID)
         {
-            int currentXP = 0;
+            string currentXP = null;
             SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
@@ -56,7 +56,7 @@ namespace EdgyBot
             SQLiteDataReader r = cmd.ExecuteReader();
             while (r.Read())
             {
-                currentXP = (int)r["userXP"];
+                currentXP = (string)r["userXP"];
             }
             conn.Close();
             return currentXP;
@@ -113,10 +113,10 @@ namespace EdgyBot
             SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
-            cmd.CommandText = $"SELECT * FROM users WHERE userID='{uID}'";
-            conn.Close();
+            cmd.CommandText = $"SELECT * FROM users WHERE userID='{uID}'";            
             SQLiteDataReader r = cmd.ExecuteReader();
             while (r.Read()) userExists = (string)r["userID"];
+            conn.Close();
             if (string.IsNullOrEmpty(userExists))
             {
                 return false;
