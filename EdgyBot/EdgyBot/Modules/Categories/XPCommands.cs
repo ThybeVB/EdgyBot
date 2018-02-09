@@ -18,13 +18,17 @@ namespace EdgyBot.Modules.Categories
         public async Task XPCheckCommand (SocketGuildUser usr = null)
         {
             if (usr == null) usr = (SocketGuildUser)Context.Message.Author;
-            if (!database.DoesUserExist(usr.Id))
+            if (!usr.IsBot)
             {
-                database.InsertUser(usr.Id, usr.Username);
-                await ReplyAsync("```Looks I don't know you yet, so I registered you in my database!```");
-            } 
-            Embed xpEmbed = _lib.CreateXPEmbed(usr.Username, database.GetXPFromUserID(usr.Id));
-            await ReplyAsync("", embed: xpEmbed);
+                if (!database.DoesUserExist(usr.Id))
+                {
+                    database.InsertUser(usr.Id, usr.Username);
+                    await ReplyAsync("```Looks I don't know you yet, so I registered you in my database!```");
+                }
+                Embed xpEmbed = _lib.CreateXPEmbed(usr.Username, database.GetXPFromUserID(usr.Id));
+                await ReplyAsync("", embed: xpEmbed);
+            }
+            else await ReplyAsync("Bots cannot take part in the Experience System.");      
         }
     }
 }
