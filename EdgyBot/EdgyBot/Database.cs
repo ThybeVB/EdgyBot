@@ -46,16 +46,6 @@ namespace EdgyBot
             conn.Close();
         }
         /// <summary>
-        /// Checks if a user exists in the database.
-        /// </summary>
-        /// <param name="uID"></param>
-        /// <returns></returns>
-        public bool DoesUserExist (ulong uID)
-        {
-            return false;
-        }
-
-        /// <summary>
         /// Excludes a server from recieving announcements etc...
         /// </summary>
         /// <param name="serverID"></param>
@@ -87,6 +77,30 @@ namespace EdgyBot
             }
             conn.Close();
             if (string.IsNullOrEmpty(isBlackListed))
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Checks if a user exists in the database.
+        /// </summary>
+        /// <param name="uID"></param>
+        /// <returns></returns>
+        public bool DoesUserExist(ulong uID)
+        {
+            string userExists = null;
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = $"SELECT * FROM users WHERE userID='{uID}'";
+            conn.Close();
+            SQLiteDataReader r = cmd.ExecuteReader();
+            while (r.Read()) userExists = (string)r["userID"];
+            if (string.IsNullOrEmpty(userExists))
             {
                 return false;
             } else
