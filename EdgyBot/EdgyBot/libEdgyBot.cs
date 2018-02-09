@@ -153,6 +153,14 @@ namespace EdgyBot
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
         /// <summary>
+        /// The default XP value for every starting user.
+        /// </summary>
+        /// <returns></returns>
+        public int GetDefaultXP ()
+        {
+            return 0;
+        }
+        /// <summary>
         /// Logs a LogMessage to the Console.
         /// </summary>
         /// <param name="message"></param>

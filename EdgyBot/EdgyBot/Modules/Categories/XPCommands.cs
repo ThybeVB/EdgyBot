@@ -16,7 +16,7 @@ namespace EdgyBot.Modules.Categories
         public async Task XPCheckCommand (SocketGuildUser usr = null)
         {
             if (usr == null) usr = (SocketGuildUser)Context.Message.Author;
-            
+            if (!database.DoesUserExist(usr.Id)) database.InsertUser(usr.Id, usr.Username);
         }
     }
 }
