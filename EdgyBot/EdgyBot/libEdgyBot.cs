@@ -158,7 +158,7 @@ namespace EdgyBot
         /// <returns></returns>
         public int GetDefaultXP ()
         {
-            return 0;
+            return _loginInfo.startersXP;
         }
         /// <summary>
         /// Logs a LogMessage to the Console.

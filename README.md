@@ -11,6 +11,7 @@ The handy and all around fun bot that can be used for any kind of server!
  * string GJP
  * string accID
  * ulong ownerID
+ * int startersXP
  
  ## Example
  ```cs
@@ -24,6 +25,7 @@ The handy and all around fun bot that can be used for any kind of server!
         public string GJP = "topsecretGJP";
         public string accID = "gdaccID";
         public ulong ownerID = supercoolID;
+		public int startersXP = 0;
     }
 }
  ```

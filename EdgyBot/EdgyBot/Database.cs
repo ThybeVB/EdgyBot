@@ -25,6 +25,7 @@ namespace EdgyBot
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+
         /// <summary>
         /// Insert a user into the database.
         /// </summary>
@@ -58,6 +59,7 @@ namespace EdgyBot
             cmd.ExecuteNonQuery();
             conn.Clone();
         }
+
         /// <summary>
         /// Check if a server is blacklisted from recieving announcements.
         /// </summary>
