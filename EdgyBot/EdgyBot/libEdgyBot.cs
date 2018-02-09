@@ -16,6 +16,7 @@ namespace EdgyBot
         /// The default embed color for EdgyBot.
         /// </summary>
         public readonly Color LightBlue = new Color(0x0cc6d3);
+        private readonly Color moneyGreen = new Color(0x85bb65);
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -222,6 +223,17 @@ namespace EdgyBot
             }
             eb.Color = LightBlue;
             eb.AddField("ANNOUNCEMENT!", msg);
+            return eb.Build();
+        }
+        public Embed CreateXPEmbed (string username, int currentXP)
+        {
+
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Title = "EdgyBot Experience System";
+            eb.Color = moneyGreen;
+            eb.AddField("Username", username, true);
+            eb.AddField("Experience", currentXP, true);
+            
             return eb.Build();
         }
     }
