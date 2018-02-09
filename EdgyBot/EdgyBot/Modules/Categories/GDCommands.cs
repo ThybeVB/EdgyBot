@@ -62,11 +62,9 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Coins", finalResult[5], true);
             eb.AddField("Demons", finalResult[17], true);
             eb.AddField("Creator Points", finalResult[19], true);
-            #region SocialMediaChecks
             if (!string.IsNullOrEmpty(finalResult[27])) eb.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")", true); else eb.AddField("YouTube", "None", true);
             if (!string.IsNullOrEmpty(finalResult[55])) eb.AddField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")", true); else eb.AddField("Twitch", "None", true);
             if (!string.IsNullOrEmpty(finalResult[53])) eb.AddField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")", true); else eb.AddField("Twitter", "None", true);
-            #endregion 
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
             footer.Text = $"User ID: {finalResult[3]}, Account ID: {targetAccountID}";
             footer.IconUrl = gdpicurl;

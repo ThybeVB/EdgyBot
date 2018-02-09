@@ -22,6 +22,23 @@ namespace EdgyBot
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        /// <summary>
+        /// Insert a user into the database.
+        /// </summary>
+        /// <param name="uID"></param>
+        public void InsertUser (ulong uID)
+        {
+            //TODO
+        }
+        /// <summary>
+        /// Checks if a user exists in the database.
+        /// </summary>
+        /// <param name="uID"></param>
+        /// <returns></returns>
+        public bool DoesUserExist (ulong uID)
+        {
+            return false;
+        }
 
         /// <summary>
         /// Excludes a server from recieving announcements etc...
