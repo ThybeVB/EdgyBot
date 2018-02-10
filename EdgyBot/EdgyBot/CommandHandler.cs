@@ -47,6 +47,9 @@ namespace EdgyBot
                     {
                         await context.Channel.SendMessageAsync("This command does not exist. Try **e!help**");
                     }
+                } else
+                {
+                    //ADD TO EXPERIENCE
                 }
             }
         }
