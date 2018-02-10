@@ -75,6 +75,12 @@ namespace EdgyBot
             conn.Close();
         }
 
+        public void AddExperience (ulong uID)
+        {
+            string query = $"UPDATE users SET userXP='{_lib.GetDefaultAddedXP()}' WHERE userID='{uID}'";
+            ExecuteQuery(query);
+        }
+
         /// <summary>
         /// Check if a server is blacklisted from recieving announcements.
         /// </summary>

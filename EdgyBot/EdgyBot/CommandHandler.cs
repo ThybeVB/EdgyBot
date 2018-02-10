@@ -12,6 +12,7 @@ namespace EdgyBot
         private DiscordSocketClient _client;
         private CommandService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private Database _database = new Database();
 
         public async Task InitializeAsync(DiscordSocketClient client)
         {
@@ -49,7 +50,7 @@ namespace EdgyBot
                     }
                 } else
                 {
-                    //ADD TO EXPERIENCE
+                    _database.AddExperience(context.User.Id);
                 }
             }
         }
