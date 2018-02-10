@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Data.SQLite;
 using Discord;
 
 namespace EdgyBot
@@ -110,6 +111,16 @@ namespace EdgyBot
             {
                 return true;
             }
+        }
+
+        public void DeleteFromBlacklisted(ulong serverID)
+        {
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = $"DELETE FROM blacklistedservers WHERE serverID='{serverID}'";
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
         /// <summary>

@@ -79,6 +79,14 @@ namespace EdgyBot.Modules.Categories
 
             await ReplyAsync("", embed: e);
         }
+        [Command("enableannounce")][Name("enableannounce")][Summary("Start recieving announcements again.")]
+        public async Task EnableAnnounceCmd ()
+        {
+            ulong serverID = Context.Guild.Id;
+            _database.DeleteFromBlacklisted(serverID);
+            Embed e = _lib.CreateEmbedWithText("Announcement Enable", Context.Guild.Name + " has started recieving announcements again.");
+            await ReplyAsync("", embed: e);
+        }
         [Command("setstatus")]
         public async Task SetStatusCmd([Remainder]string input)
         {
