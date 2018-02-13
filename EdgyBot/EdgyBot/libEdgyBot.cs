@@ -12,10 +12,8 @@ namespace EdgyBot
     {
         private readonly LoginInfo _loginInfo = new LoginInfo();
 
-        /// <summary>
-        /// The default embed color for EdgyBot.
-        /// </summary>
         public readonly Color LightBlue = new Color(0x0cc6d3);
+        private readonly Color moneyGreen = new Color(0x85bb65);
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -153,6 +151,18 @@ namespace EdgyBot
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
         /// <summary>
+        /// The default XP value for every starting user.
+        /// </summary>
+        /// <returns></returns>
+        public int GetDefaultXP ()
+        {
+            return _loginInfo.startersXP;
+        }
+        public int GetDefaultAddedXP ()
+        {
+            return _loginInfo.defAddedXP;
+        }
+        /// <summary>
         /// Logs a LogMessage to the Console.
         /// </summary>
         /// <param name="message"></param>
@@ -214,6 +224,18 @@ namespace EdgyBot
             }
             eb.Color = LightBlue;
             eb.AddField("ANNOUNCEMENT!", msg);
+            return eb.Build();
+        }
+        public Embed CreateXPEmbed (string username, string currentXP)
+        {
+
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.Title = "EdgyBot Experience System";
+            eb.Color = moneyGreen;
+            eb.ThumbnailUrl = "https://www.wpclipart.com/money/US_Currency/US_hundred_dollar_bill.png";
+            eb.AddField("Username", username, true);
+            eb.AddField("Experience", currentXP, true);
+            
             return eb.Build();
         }
     }

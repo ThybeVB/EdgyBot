@@ -73,10 +73,16 @@ namespace EdgyBot.Modules.Categories
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task StopAnnounceCmd()
         {
-            ulong serverID = Context.Guild.Id;
-            _database.BlacklistServer(serverID);
+            _database.BlacklistServer(Context.Guild.Id);
             Embed e = _lib.CreateEmbedWithText("Announcement Unsub", Context.Guild.Name + " has been excluded from recieving announcements.");
 
+            await ReplyAsync("", embed: e);
+        }
+        [Command("enableannounce")][Name("enableannounce")][Summary("Start recieving announcements again.")]
+        public async Task EnableAnnounceCmd ()
+        {
+            _database.DeleteFromBlacklisted(Context.Guild.Id);
+            Embed e = _lib.CreateEmbedWithText("Announcement Enable", Context.Guild.Name + " has started recieving announcements again.");
             await ReplyAsync("", embed: e);
         }
         [Command("setstatus")]

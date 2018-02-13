@@ -13,19 +13,18 @@ namespace EdgyBot.Modules
         {
             _service = service;
         }
-
         [Command("help", RunMode = RunMode.Async)]
         [Name("help")]
         [Summary("Gives EdgyBot's commands and what they do.")]
         public async Task HelpCmd()
         {
             IDMChannel dm = await Context.User.GetOrCreateDMChannelAsync();
-
+        
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             EmbedBuilder eb2 = _lib.SetupEmbedWithDefaults();
-
+        
             eb.AddField("Bot Prefix", _lib.GetPrefix());
-
+        
             int lineCount = 0;
             foreach (CommandInfo c in _service.Commands)
             {

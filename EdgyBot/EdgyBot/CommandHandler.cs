@@ -12,13 +12,13 @@ namespace EdgyBot
         private DiscordSocketClient _client;
         private CommandService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private Database _database = new Database();
 
         public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
-            //Initialize Classes that need the CommandService
             new HelpCommand(_service);
 
             _client.MessageReceived += HandleCommandAsync;
@@ -48,6 +48,9 @@ namespace EdgyBot
                     {
                         await context.Channel.SendMessageAsync("This command does not exist. Try **e!help**");
                     }
+                } else
+                {
+                    _database.AddExperience(context.User.Id);
                 }
             }
         }
