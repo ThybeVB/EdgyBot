@@ -126,17 +126,20 @@ namespace EdgyBot.Modules.Categories
         [Command("isgay")][Name("isgay")][Summary("Checks if somebody is gay.")]
         public async Task IsGayCmd (IGuildUser usr)
         {
-            Random random = new Random();
             string isGay = null;
-            int i = random.Next(0, 3);
-            switch (i)
+
+            char[] userIDChars = usr.Id.ToString().ToCharArray();
+            string userIDStr = usr.Id.ToString();
+            string firstChar = userIDChars[0].ToString();
+            int choosingInt = Convert.ToInt32(firstChar);
+
+            if (choosingInt < 5)
             {
-                case 1:
-                    isGay = "gay.";
-                    break;
-                case 2:
-                    isGay = "not gay.";
-                    break;
+                isGay = "not gay.";
+            }
+            if (choosingInt >= 5)
+            {
+                isGay = "gay.";
             }
             await ReplyAsync(usr.Mention + " is " + isGay);
         }
