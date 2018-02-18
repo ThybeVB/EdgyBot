@@ -44,32 +44,19 @@ namespace EdgyBot.Modules.Categories
             string createdOn = null;
             #endregion
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
-            if (usr == null)
-            {
-                username = Context.User.Username;
-                SocketGuildUser guildUser = (SocketGuildUser)Context.User;
-                nickname = guildUser.Nickname;
-                discriminator = Context.User.Discriminator;
-                userID = Context.User.Id.ToString();
-                isBot = Context.User.IsBot;
-                status = Context.User.Status.ToString();
-                pfpUrl = Context.User.GetAvatarUrl();
-                playing = Context.User.Activity.Name;
-                createdOn = Context.User.CreatedAt.LocalDateTime.ToLongTimeString();
-            }
-            else
-            {
-                username = usr.Username;
-                SocketGuildUser guildUserMnt = (SocketGuildUser)usr;
-                nickname = guildUserMnt.Nickname;
-                discriminator = usr.Discriminator;
-                userID = usr.Id.ToString();
-                isBot = usr.IsBot;
-                status = usr.Status.ToString();
-                pfpUrl = usr.GetAvatarUrl();
-                playing = usr.Activity.Name;
-                createdOn = usr.CreatedAt.ToUniversalTime().ToString();
-            }
+            if (usr == null) usr = (IGuildUser)Context.Message.Author;
+            
+            username = usr.Username;
+            SocketGuildUser guildUserMnt = (SocketGuildUser)usr;
+            nickname = guildUserMnt.Nickname;
+            discriminator = usr.Discriminator;
+            userID = usr.Id.ToString();
+            isBot = usr.IsBot;
+            status = usr.Status.ToString();
+            pfpUrl = usr.GetAvatarUrl();
+            playing = usr.Activity.Name;
+            createdOn = usr.CreatedAt.ToUniversalTime().ToString();
+            
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username);
             if (string.IsNullOrEmpty(nickname))

@@ -42,15 +42,18 @@ namespace EdgyBot
                             await context.Channel.SendMessageAsync(result.ErrorReason);
                         } else
                         {
-                            await context.Channel.SendMessageAsync("You need to give input in this command. Check the **e!help** command for info.");
+                            await context.Channel.SendMessageAsync($"You need to give input in this command. Check the **{_lib.GetPrefix()}help** command for info.");
                         }
                     } else
                     {
-                        await context.Channel.SendMessageAsync("This command does not exist. Try **e!help**");
+                        await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
                     }
                 } else
                 {
-                    _database.AddExperience(context.User.Id);
+                    if (!context.User.IsBot)
+                    {
+                        _database.AddExperience(context.User.Id);
+                    }                  
                 }
             }
         }

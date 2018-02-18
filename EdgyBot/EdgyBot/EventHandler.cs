@@ -40,7 +40,8 @@ namespace EdgyBot
 
         private static async Task Client_JoinedGuild(SocketGuild arg)
         {
-            await arg.DefaultChannel.SendMessageAsync("SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **e!help**.");
+            LibEdgyBot lib = new LibEdgyBot();
+            await arg.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
         }
 
         private async Task UserLeft(SocketGuildUser user)

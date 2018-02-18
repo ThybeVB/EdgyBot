@@ -28,14 +28,21 @@ namespace EdgyBot.Modules.Categories
         [Summary("Checks if a server is blacklisted.")]
         public async Task IsBlackListedCmd (ulong serverID)
         {
-            bool isBlackListed = _database.IsServerBlacklisted(serverID);
-            if (isBlackListed)
+            if (Context.Client.GetGuild(serverID) != null)
             {
-                await ReplyAsync("This server is blacklisted.");
+                bool isBlackListed = _database.IsServerBlacklisted(serverID);
+                if (isBlackListed)
+                {
+                    await ReplyAsync("This server is blacklisted.");
+                }
+                else
+                {
+                    await ReplyAsync("This server is not blacklisted.");
+                }
             } else
             {
-                await ReplyAsync("This server is not blacklisted.");
-            } 
+                await ReplyAsync("I'm not in that server! :cry:");
+            }     
         }
         [Command("announce", RunMode = RunMode.Async)]
         public async Task AnnounceCmd([Remainder]string msg)
