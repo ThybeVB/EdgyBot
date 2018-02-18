@@ -185,7 +185,7 @@
     <Compile Include="Modules\Categories\RandomCommands.cs" />
     <Compile Include="Modules\Categories\XPCommands.cs" />
     <Compile Include="Modules\HelpCommand.cs" />
-    <Compile Include="Modules\TextCommands.cs" />
+    <Compile Include="Modules\Categories\MiscCommands.cs" />
     <Compile Include="EdgyBot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

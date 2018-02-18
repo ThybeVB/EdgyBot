@@ -105,6 +105,7 @@ namespace EdgyBot.Modules.Categories
         {
             var eb = _lib.SetupEmbedWithDefaults(true);
 
+            #region ServerInfo
             string name = Context.Guild.Name;
             string createdAt = Context.Guild.CreatedAt.ToString();
             string serverGuildIconUrl = Context.Guild.IconUrl;
@@ -113,8 +114,9 @@ namespace EdgyBot.Modules.Categories
             string emoteCount = Context.Guild.Emotes.Count.ToString();
             string roleCount = Context.Guild.Roles.Count.ToString();
             string channelCount = Context.Guild.Channels.Count.ToString();
-            eb.ThumbnailUrl = serverGuildIconUrl;
+            #endregion
 
+            eb.ThumbnailUrl = serverGuildIconUrl;
             eb.AddField("Server Name", name);
             eb.AddField("Server ID", serverId);
             eb.AddField("Member Count", memberCount);

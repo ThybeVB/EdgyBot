@@ -4,7 +4,7 @@ using Discord;
 
 namespace EdgyBot.Modules
 {
-    public class TextCommands : ModuleBase<SocketCommandContext>
+    public class MiscCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
