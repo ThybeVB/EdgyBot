@@ -14,7 +14,7 @@ namespace EdgyBot.Modules.Categories
         private Database database = new Database();
         private LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("xp")][Name("xp")][Summary("[MENTION] (Optional), Shows your xp.")]
+        [Command("xp", RunMode = RunMode.Async)][Name("xp")][Summary("[MENTION] (Optional), Shows your xp.")]
         public async Task XPCheckCommand (SocketGuildUser usr = null)
         {
             if (usr == null) usr = (SocketGuildUser)Context.Message.Author;
