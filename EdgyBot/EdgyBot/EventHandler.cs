@@ -35,7 +35,6 @@ namespace EdgyBot
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
-            await _lib.EdgyLog(LogSeverity.Info, "Fully loaded EdgyBot v1.0");
         }
 
         private static async Task Client_JoinedGuild(SocketGuild arg)
