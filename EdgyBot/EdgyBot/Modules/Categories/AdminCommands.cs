@@ -14,7 +14,7 @@ namespace EdgyBot.Modules.Categories
         {
             if (Context.User.Id == _lib.GetOwnerID())
             {
-                _database.ExecuteQuery(queryInput);
+                try { _database.ExecuteQuery(queryInput); } catch { await ReplyAsync("Error executing query."); return; }
                 Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
                 await ReplyAsync("", embed: e);
             } else
