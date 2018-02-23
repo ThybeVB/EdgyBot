@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="2.0.0-beta-00880" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.107" />
+  </ItemGroup>
+
 </Project>
