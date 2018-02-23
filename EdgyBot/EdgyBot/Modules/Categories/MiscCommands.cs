@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
+using System;
 
 namespace EdgyBot.Modules
 {
-    public class TextCommands : ModuleBase<SocketCommandContext>
+    public class MiscCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly Database _database = new Database();
@@ -33,22 +34,23 @@ namespace EdgyBot.Modules
             await Context.Message.DeleteAsync();      
         }    
         [Command("e")]
-        public async Task Secret01Cmd()
+        public async Task SecretECmd()
         {
             await ReplyAsync("monstah is not gay german");
         }
-        [Command("suggest")][Alias("sg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
+        /* Marking suggest command as async because it was throwing MessageRecieved errors. */
+        [Command("suggest", RunMode = RunMode.Async)][Alias("sg", "sugg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
         public async Task SuggestCmd ([Remainder]string msg = null)
         {
-            if (msg != null)
-            {
-                await EventHandler.OwnerUser.SendMessageAsync(msg);
-                await ReplyAsync("Your message has been sent!");
-            }
-            else
-            {
-                await ReplyAsync("Please enter a message.");
-            }      
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("New Suggestion!", msg);
+            #region Footer
+            EmbedFooterBuilder efb = new EmbedFooterBuilder();
+            efb.Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString();
+            eb.Footer = efb;
+            #endregion
+            await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
+            await ReplyAsync("Your message has been sent!");
         }
     }
 }
