@@ -6,12 +6,12 @@ namespace EdgyBot
 {
     public class EdgyBot
     {
-        private static void Main () => new EdgyBot().StartAsync().GetAwaiter().GetResult();
+        private static void Main () => new EdgyBot().MainAsync().GetAwaiter().GetResult();
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig{LogLevel = LogSeverity.Verbose});
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        private async Task StartAsync ()
+        private async Task MainAsync ()
         {
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
