@@ -175,6 +175,7 @@
     <Compile Include="CommandHandler.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="EventHandler.cs" />
+    <Compile Include="GDLib.cs" />
     <Compile Include="LibEdgyBot.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Modules\Categories\AdminCommands.cs" />
