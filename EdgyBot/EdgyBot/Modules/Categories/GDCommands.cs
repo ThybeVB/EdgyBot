@@ -84,21 +84,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
-            var top10ReqDict = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"type", "top"},
-                {"count", count.ToString()},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
-            HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
-            string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
-            string[] users = getScoresResponseString.Split('|');
+            string[] users = await _gdLib.getGJScores20("top", count);
             int lbPlace = 1;
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (var user in users)
@@ -121,23 +107,7 @@ namespace EdgyBot.Modules.Categories
         [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
         public async Task Top10CreatorsCMD()
         {
-            #region Request
-            var values = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"type", "creators"},
-                {"count", "10"},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent content = new FormUrlEncodedContent(values);
-            HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
-            string responseString = await response.Content.ReadAsStringAsync();
-            #endregion
-            string[] users = responseString.Split('|');
+            string[] users = await _gdLib.getGJScores20("creators", 10);
             int place = 1;
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (string user in users)
@@ -172,26 +142,10 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
-            #region Request
-            var values = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"type", "creators"},
-                {"count", count.ToString()},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent content = new FormUrlEncodedContent(values);
-            HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", content);
-            string responseString = await response.Content.ReadAsStringAsync();
-            #endregion
-            string[] usersStr = responseString.Split('|');
+            string[] users = await _gdLib.getGJScores20("creators", count);
             int place = 1;
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
-            foreach (string user in usersStr)
+            foreach (string user in users)
             {
                 if (user == "") continue;
                 string[] userData = user.Split(':');
