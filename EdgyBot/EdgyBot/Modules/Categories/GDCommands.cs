@@ -145,10 +145,10 @@ namespace EdgyBot.Modules.Categories
             foreach (var user in users)
             {
                 if (user == "") continue;
-                var userData = user.Split(':');
-                var username = userData[1];
-                var stars = userData[23];
-                var placeWording = "nd";
+                string[] userData = user.Split(':');
+                string username = userData[1];
+                string stars = userData[23];
+                string placeWording = "nd";
                 if (lbPlace == 3) placeWording = "d";
                 if (lbPlace >= 4) placeWording = "th";
                 if (lbPlace == 1) placeWording = "st";
