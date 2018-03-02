@@ -49,5 +49,24 @@ namespace EdgyBot
             string[] finalResult = getUserResponseString.Split(':');
             return finalResult;
         }
+        public async Task<string[]> getGJScores20 (string type, int count)
+        {
+            var top10ReqDict = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
+                {"type", type},
+                {"count", count.ToString()},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
+            HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
+            string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
+            string[] users = getScoresResponseString.Split('|');
+            return users;
+        }
     }
 }

@@ -47,21 +47,8 @@ namespace EdgyBot.Modules.Categories
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
         public async Task Top10GDCMD()
         {
-            var top10ReqDict = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"type", "top"},
-                {"count", "10"},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
-            HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
-            string getScoresResponseString = await getScoresResponse.Content.ReadAsStringAsync();
-            string[] users = getScoresResponseString.Split('|');
+            string[] users = await _gdLib.getGJScores20("top", 10);
+            
             int lbPlace = 1;
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
             foreach (string user in users)
@@ -79,6 +66,7 @@ namespace EdgyBot.Modules.Categories
             }
             e.ThumbnailUrl = gdThumbPic;
             Embed a = e.Build();
+
             await ReplyAsync("", embed: a);
         }
         [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
