@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EdgyBot
 {
-    //WIP
     public class GDLib
     {
         private readonly HttpClient _client = new HttpClient();
@@ -36,12 +34,13 @@ namespace EdgyBot
 
             return targetAccountID;
         }
+
         /// <summary>
         /// Gets an users info from the Geometry Dash Database.
         /// </summary>
         /// <param name="inputStr"></param>
         /// <returns></returns>
-        public async Task<string[]> getGJUserInfo(string inputStr)
+        public async Task<string[]> getGJUserInfo (string inputStr)
         {
             var getUserValues = new Dictionary<string, string>
             {
@@ -59,6 +58,7 @@ namespace EdgyBot
             string[] finalResult = getUserResponseString.Split(':');
             return finalResult;
         }
+
         /// <summary>
         /// Gets Scores from the Geometry Dash Leaderboards
         /// </summary>
