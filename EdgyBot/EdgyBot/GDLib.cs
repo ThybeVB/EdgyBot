@@ -11,6 +11,11 @@ namespace EdgyBot
         private readonly HttpClient _client = new HttpClient();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
+        /// <summary>
+        /// Gets the first Geometry Dash user based on their username.
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
         public async Task<string> GetGJUsers (string strInput)
         {
             var gjUsersDict = new Dictionary<string, string>
@@ -31,6 +36,11 @@ namespace EdgyBot
 
             return targetAccountID;
         }
+        /// <summary>
+        /// Gets an users info from the Geometry Dash Database.
+        /// </summary>
+        /// <param name="inputStr"></param>
+        /// <returns></returns>
         public async Task<string[]> getGJUserInfo(string inputStr)
         {
             var getUserValues = new Dictionary<string, string>
@@ -49,6 +59,12 @@ namespace EdgyBot
             string[] finalResult = getUserResponseString.Split(':');
             return finalResult;
         }
+        /// <summary>
+        /// Gets Scores from the Geometry Dash Leaderboards
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public async Task<string[]> getGJScores20 (string type, int count)
         {
             var top10ReqDict = new Dictionary<string, string>
