@@ -9,6 +9,7 @@ namespace EdgyBot.Modules.Categories
     public class GDCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly GDLib _gdLib = new GDLib();
         private readonly HttpClient _client = new HttpClient();
 
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
@@ -16,45 +17,13 @@ namespace EdgyBot.Modules.Categories
         [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
         public async Task ProfileGDCMD (string strInput = null)
         {
-            #region Collect Data
-            #region GetGJUsers
-            var gjUsersDict = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"str", strInput},
-                {"total", "0"},
-                {"page", "0"},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
-            HttpResponseMessage gjUsersResponse = await _client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
-            string responseString = await gjUsersResponse.Content.ReadAsStringAsync();
-            string[] accountStuff = responseString.Split(':');
-            string targetAccountID = accountStuff[21];
-            #endregion
-            #region getGJUserInfo
-            var getUserValues = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"targetAccountID", targetAccountID},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent getUserContent = new FormUrlEncodedContent(getUserValues);
-            HttpResponseMessage getUserResponse = await _client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
-            string getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
-            string[] finalResult = getUserResponseString.Split(':');
-            #endregion
-            #endregion
-            #region Embed
+            string accID = await _gdLib.GetGJUsers(strInput);
+            string[] finalResult = await _gdLib.getGJUserInfo(accID);
+
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(false);
             string gdpicurl = gdThumbPic;
             eb.ThumbnailUrl = gdpicurl;
+
             eb.AddField("Username", finalResult[1], true);
             eb.AddField("Stars", finalResult[13], true);
             eb.AddField("Diamonds", finalResult[15], true);
@@ -62,15 +31,17 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Coins", finalResult[5], true);
             eb.AddField("Demons", finalResult[17], true);
             eb.AddField("Creator Points", finalResult[19], true);
+
             if (!string.IsNullOrEmpty(finalResult[27])) eb.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")", true); else eb.AddField("YouTube", "None", true);
             if (!string.IsNullOrEmpty(finalResult[55])) eb.AddField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")", true); else eb.AddField("Twitch", "None", true);
             if (!string.IsNullOrEmpty(finalResult[53])) eb.AddField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")", true); else eb.AddField("Twitter", "None", true);
             EmbedFooterBuilder footer = new EmbedFooterBuilder();
-            footer.Text = $"User ID: {finalResult[3]}, Account ID: {targetAccountID}";
+
+            footer.Text = $"User ID: {finalResult[3]}, Account ID: {accID}";
             footer.IconUrl = gdpicurl;
             eb.Footer = footer;
-            #endregion
             Embed e = eb.Build();
+
             await ReplyAsync("", embed: e);
         }
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
