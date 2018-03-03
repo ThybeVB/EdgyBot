@@ -1,7 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EdgyBot.Modules.Categories
@@ -10,7 +8,6 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly GDLib _gdLib = new GDLib();
-        private readonly HttpClient _client = new HttpClient();
 
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
