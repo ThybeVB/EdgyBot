@@ -175,6 +175,8 @@ namespace EdgyBot.Modules.Categories
 
             string[] comments = await _gdLib.getGJComments21(levelID);
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.ThumbnailUrl = gdThumbPic;
+            eb.Footer = new EmbedFooterBuilder () { Text = "If you see usernames as numbers, it is probarbly a bug with RobTop's server. This error usually occurs when the user is a Moderator." };
             int bug = 0;
             foreach (string comment in comments)
             {
@@ -188,10 +190,8 @@ namespace EdgyBot.Modules.Categories
                 {
                     username = commentInfo[14];
                 }          
-                string encodedComment = commentInfo[1];
-                string likeAmount = commentInfo[5];
-                eb.AddField(username, encodedComment + " | Likes: " + likeAmount);
-
+                string decodedComment = _lib.DecodeB64(commentInfo[1]);
+                eb.AddField(username, decodedComment + " | Likes: " + commentInfo[5]);
                 bug++;
             }
             Embed e = eb.Build();
