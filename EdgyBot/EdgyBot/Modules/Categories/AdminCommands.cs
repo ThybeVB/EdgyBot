@@ -105,5 +105,18 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("No Permissions.");
             }
         }
+        [Command("bancommand")][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
+        public async Task BlacklistCmd ([Remainder]string commandStr)
+        {
+            try
+            {
+                _database.BanCommand(commandStr);
+                Embed e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
+            } catch
+            {
+                Embed e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
+                await ReplyAsync("", embed: e);
+            }
+        }
     }
 }

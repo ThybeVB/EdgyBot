@@ -124,6 +124,19 @@ namespace EdgyBot
         }
 
         /// <summary>
+        /// Bans a command from the Guild in that Context
+        /// </summary>
+        /// <param name="commandStr"></param>
+        public void BanCommand (string commandStr)
+        {
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = "";
+            conn.Close();
+        }
+
+        /// <summary>
         /// Checks if a user exists in the database.
         /// </summary>
         /// <param name="uID"></param>
