@@ -12,7 +12,7 @@ namespace EdgyBot.Modules.Categories
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
         [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
-        public async Task ProfileGDCMD (string strInput = null)
+        public async Task ProfileGDCMD ([Remainder]string strInput = null)
         {
             string accID = await _gdLib.GetGJUsers(strInput);
             string[] finalResult = await _gdLib.getGJUserInfo(accID);
@@ -160,10 +160,42 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("levelcomments")][Name("levelcomments")][Summary("Shows comments on a Geometry Dash Level")]
-        public async Task LevelCommentsCMD ()
+        [Command("topcomments")][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
+        public async Task LevelCommentsCMD ([Remainder]string str = null)
         {
-            /* WIP */
+            if (str == null)
+            {
+                await ReplyAsync("Please enter the **name** or **ID** of a level!");
+                return;
+            }
+            string[] levels = await _gdLib.getGJLevels21(str);
+            string level = levels[0];
+            string[] levelInfo = level.Split(':');
+            string levelID = levelInfo[1];
+
+            string[] comments = await _gdLib.getGJComments21(levelID);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            int bug = 0;
+            foreach (string comment in comments)
+            {
+                if (comment == null) continue;
+                string[] commentInfo = comment.Split('~');
+                string username;
+                if (bug == 0)
+                {
+                    username = commentInfo[18];
+                } else
+                {
+                    username = commentInfo[14];
+                }          
+                string encodedComment = commentInfo[1];
+                string likeAmount = commentInfo[5];
+                eb.AddField(username, encodedComment + " | Likes: " + likeAmount);
+
+                bug++;
+            }
+            Embed e = eb.Build();
+            await ReplyAsync("", embed: e);
         }
     }
 }

@@ -84,5 +84,66 @@ namespace EdgyBot
             string[] users = getScoresResponseString.Split('|');
             return users;
         }
+
+        /// <summary>
+        /// Gets the top comments of a level.
+        /// </summary>
+        /// <param name="levelID"></param>
+        /// <returns></returns>
+        public async Task<string[]> getGJComments21 (string levelID)
+        {
+            var gjCommentsDict = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"page", "0"},
+                {"total", "0"},
+                {"secret", "Wmfd2893gb7"},
+                {"mode", "1"},
+                {"levelID", levelID},
+                {"count", "10"}
+            };
+            FormUrlEncodedContent encodedContent = new FormUrlEncodedContent(gjCommentsDict);
+            HttpResponseMessage responseMessage = await _client.PostAsync("http://boomlings.com/database/getGJComments21.php", encodedContent);
+            string responseStr = await responseMessage.Content.ReadAsStringAsync();
+            string[] messages = responseStr.Split('|');
+            return messages;
+        }
+
+        /// <summary>
+        /// Gets the first level found in getGJLevels21.php
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
+        public async Task<string[]> getGJLevels21 (string strInput)
+        {
+            var gjLevelsDict = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"type", "0"},
+                {"str", strInput},
+                {"diff", "-"},
+                {"len", "-"},
+                {"page", "0"},
+                {"total", "0"},
+                {"unCompleted", "0"},
+                {"onlyCompleted", "0"},
+                {"featured", "0"},
+                {"original", "0"},
+                {"twoPlayer", "0"},
+                {"coins", "0"},
+                {"epic", "0"},
+                {"demonFilter", "1"},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent encodedContent = new FormUrlEncodedContent(gjLevelsDict);
+            HttpResponseMessage responseMessage = await _client.PostAsync("http://boomlings.com/database/getGJLevels21.php", encodedContent);
+            string responseStr = await responseMessage.Content.ReadAsStringAsync();
+            string[] levels = responseStr.Split('|');
+            return levels;
+        }
     }
 }
