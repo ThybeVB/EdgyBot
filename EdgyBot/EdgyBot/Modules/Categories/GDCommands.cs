@@ -160,5 +160,10 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
+        [Command("levelcomments")][Name("levelcomments")][Summary("Shows comments on a Geometry Dash Level")]
+        public async Task LevelCommentsCMD ()
+        {
+            /* WIP */
+        }
     }
 }
