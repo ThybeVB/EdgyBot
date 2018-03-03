@@ -11,6 +11,21 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
+        [Command("clap")][Name("clap")][Summary("Puts your message into claps")]
+        public async Task ClapCmd ([Remainder]string input)
+        {
+            char[] characters = input.ToCharArray();
+            StringBuilder sb = new StringBuilder();
+            foreach (char character in characters)
+            {
+                if (character == ' ')
+                {
+                    sb.Append(":clap:");
+                }
+                sb.Append(character);
+            }
+            await ReplyAsync(sb.ToString());
+        }
         [Command("vertical")][Name("vertical")][Summary("Converts your message to a vertical one")]
         public async Task VerticalCmd([Remainder]string msg)
         {
