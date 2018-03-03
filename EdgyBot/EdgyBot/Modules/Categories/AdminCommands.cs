@@ -105,18 +105,19 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("No Permissions.");
             }
         }
-        [Command("bancommand")][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
+        [Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
         public async Task BlacklistCmd ([Remainder]string commandStr)
         {
+            Embed e = null;
             try
             {
-                _database.BanCommand(Context.Guild.Id, commandStr);
-                Embed e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
+                _database.BanCommand(System.Convert.ToString(Context.Guild.Id), commandStr);
+                e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
             } catch
             {
-                Embed e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
-                await ReplyAsync("", embed: e);
+                e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
             }
+            await ReplyAsync("", embed: e);
         }
     }
 }

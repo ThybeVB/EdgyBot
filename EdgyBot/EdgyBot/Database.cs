@@ -127,29 +127,51 @@ namespace EdgyBot
         /// Bans a command from the Guild in that Context
         /// </summary>
         /// <param name="commandStr"></param>
-        public void BanCommand (ulong serverID, string commandStr)
+        public void BanCommand (string serverID, string commandStr)
         {
             SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
             if (GuildHasBanRecord(serverID))
             {
-                //UPDATE
+                string bannedCommands = GetBannedCommands(serverID);
+                string finalStr = bannedCommands + commandStr + "|";
+                cmd.CommandText = $"UPDATE bannedcommands SET commands='{finalStr}' WHERE serverID='{serverID}'";
             } else
             {
-                //INSERT
+                cmd.CommandText = $"INSERT INTO bannedcommands (serverID, commands) VALUES ('{serverID}', '{commandStr}|')";
             }
+            cmd.ExecuteNonQuery();
             conn.Close();
         }
-        private bool GuildHasBanRecord (ulong serverID)
+
+        private string GetBannedCommands(string serverID)
         {
-            SQLiteConnection conn = new SQLiteConnection();
+            string commands = null;
+
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
             cmd.CommandText = $"SELECT * FROM bannedcommands WHERE serverID='{serverID}'";
             SQLiteDataReader r = cmd.ExecuteReader();
             while (r.Read())
             {
-                if ((string)r["serverID"] != null)
+                commands = (string)r["commands"];
+            }
+            conn.Close();
+            return commands;
+        }
+
+        private bool GuildHasBanRecord (string serverID)
+        {
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(conn);
+            cmd.CommandText = $"SELECT * FROM bannedcommands WHERE serverID='{serverID}'";
+            SQLiteDataReader r = cmd.ExecuteReader();
+            while (r.Read())
+            {
+                if (!string.IsNullOrEmpty((string)r["serverID"]))
                 {
                     return false;
                 } else
