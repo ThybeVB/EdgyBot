@@ -129,6 +129,8 @@ namespace EdgyBot
         /// <param name="commandStr"></param>
         public void BanCommand (ulong serverID, string commandStr)
         {
+            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            conn.Open();
             if (GuildHasBanRecord(serverID))
             {
                 //UPDATE
@@ -136,6 +138,7 @@ namespace EdgyBot
             {
                 //INSERT
             }
+            conn.Close();
         }
         private bool GuildHasBanRecord (ulong serverID)
         {
