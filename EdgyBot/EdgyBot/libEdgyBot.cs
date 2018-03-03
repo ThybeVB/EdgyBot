@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Discord.Commands;
+using System.Text;
 
 namespace EdgyBot
 {
@@ -97,6 +98,17 @@ namespace EdgyBot
             }
             eb.Color = LightBlue;
             return eb;
+        }
+        /// <summary>
+        /// Decodes a message from Base 64.
+        /// </summary>
+        /// <param name="encodedMessage"></param>
+        /// <returns></returns>
+        public string DecodeB64 (string encodedMessage)
+        {
+            byte[] inputBytes = Convert.FromBase64String(encodedMessage);
+            string result = Encoding.UTF8.GetString(inputBytes);
+            return result;
         }
         /// <summary>
         /// Gets the bot's Invite Link
