@@ -110,7 +110,7 @@ namespace EdgyBot.Modules.Categories
         {
             try
             {
-                _database.BanCommand(commandStr);
+                _database.BanCommand(Context.Guild.Id, commandStr);
                 Embed e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
             } catch
             {

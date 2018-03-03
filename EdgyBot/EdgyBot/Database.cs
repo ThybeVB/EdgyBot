@@ -127,13 +127,35 @@ namespace EdgyBot
         /// Bans a command from the Guild in that Context
         /// </summary>
         /// <param name="commandStr"></param>
-        public void BanCommand (string commandStr)
+        public void BanCommand (ulong serverID, string commandStr)
         {
-            SQLiteConnection conn = new SQLiteConnection("DataSource=" + _dbname);
+            if (GuildHasBanRecord(serverID))
+            {
+                //UPDATE
+            } else
+            {
+                //INSERT
+            }
+        }
+        private bool GuildHasBanRecord (ulong serverID)
+        {
+            SQLiteConnection conn = new SQLiteConnection();
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(conn);
-            cmd.CommandText = "";
+            cmd.CommandText = $"SELECT * FROM bannedcommands WHERE serverID='{serverID}'";
+            SQLiteDataReader r = cmd.ExecuteReader();
+            while (r.Read())
+            {
+                if ((string)r["serverID"] != null)
+                {
+                    return false;
+                } else
+                {
+                    return false;
+                }
+            }
             conn.Close();
+            return false;
         }
 
         /// <summary>
