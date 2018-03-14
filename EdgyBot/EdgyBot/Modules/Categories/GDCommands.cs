@@ -160,7 +160,7 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("topcomments")][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
+        [Command("topcomments", RunMode = RunMode.Async)][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
         public async Task LevelCommentsCMD ([Remainder]string str = null)
         {
             if (str == null)
@@ -168,30 +168,25 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("Please enter the **name** or **ID** of a level!");
                 return;
             }
-            string[] levels = await _gdLib.getGJLevels21(str);
-            string level = levels[0];
+            string level = await _gdLib.getGJLevel21(str);
             string[] levelInfo = level.Split(':');
             string levelID = levelInfo[1];
 
             string[] comments = await _gdLib.getGJComments21(levelID);
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             eb.ThumbnailUrl = gdThumbPic;
-            eb.Footer = new EmbedFooterBuilder () { Text = "If you see usernames as numbers, it is probarbly a bug with RobTop's server. This error usually occurs when the user is a Moderator." };
+            eb.Footer = new EmbedFooterBuilder ()
+            {
+                Text = "If you see usernames as numbers, it is probarbly a bug with RobTop's server. This problem usually occurs when the user is a Moderator."
+            };
             int bug = 0;
             foreach (string comment in comments)
             {
                 if (comment == null) continue;
                 string[] commentInfo = comment.Split('~');
                 string username;
-                if (bug == 0)
-                {
-                    username = commentInfo[18];
-                } else
-                {
-                    username = commentInfo[14];
-                }          
-                string decodedComment = _lib.DecodeB64(commentInfo[1]);
-                eb.AddField(username, decodedComment + " | Likes: " + commentInfo[5]);
+                username = commentInfo[14];    
+                eb.AddField(username, _lib.DecodeB64(commentInfo[1]) + " | Likes: " + commentInfo[5]);
                 bug++;
             }
             Embed e = eb.Build();
