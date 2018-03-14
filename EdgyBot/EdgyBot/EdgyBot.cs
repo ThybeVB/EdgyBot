@@ -6,7 +6,8 @@ namespace EdgyBot
 {
     public class EdgyBot
     {
-        private static void Main () => new EdgyBot().MainAsync().GetAwaiter().GetResult();
+        private static void Main () 
+            => new EdgyBot().MainAsync().GetAwaiter().GetResult();
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig{LogLevel = LogSeverity.Verbose});
         private readonly LibEdgyBot _lib = new LibEdgyBot();

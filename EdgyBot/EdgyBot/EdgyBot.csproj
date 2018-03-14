@@ -172,11 +172,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandler.cs" />
+    <Compile Include="Handler\CommandHandler.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="EventHandler.cs" />
-    <Compile Include="GDLib.cs" />
-    <Compile Include="LibEdgyBot.cs" />
+    <Compile Include="Handler\EventHandler.cs" />
+    <Compile Include="Lib\GDLib.cs" />
+    <Compile Include="Lib\LibEdgyBot.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Modules\Categories\AdminCommands.cs" />
     <Compile Include="Modules\Categories\FunCommands.cs" />
