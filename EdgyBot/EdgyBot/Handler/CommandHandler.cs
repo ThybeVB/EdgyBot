@@ -31,6 +31,8 @@ namespace EdgyBot
             int argPos = 0;
             if (msg.HasStringPrefix(_lib.GetPrefix(), ref argPos))
             {
+                if (msg.Author.IsBot) return;
+
                 IResult result = await _service.ExecuteAsync(context, argPos);
                 if (!result.IsSuccess)
                 {

@@ -101,13 +101,6 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync(user.Mention + " ....lol");
             }
         }
-        [Command("kys")]
-        [Name("kys")]
-        [Summary("Tells EdgyBot to go kill himself.")]
-        public async Task KysCmd()
-        {
-            await ReplyAsync("NO GO FUCK YOURSELF");
-        }
         [Command("stab")][Name("stab")][Summary("Stabs an user.")]
         public async Task StabCmd(SocketUser usr = null)
         {
@@ -131,32 +124,6 @@ namespace EdgyBot.Modules.Categories
             Embed e = _lib.CreateEmbedWithImage("Stab", text, imgUrl);
 
             await ReplyAsync("", embed: e);
-        }
-        [Command("gay")][Name("gay")][Summary("Tells somebody they're gay.")]
-        public async Task GayCmd(IGuildUser usr)
-        {
-            await Context.Message.DeleteAsync();
-            await ReplyAsync(usr.Mention + ", ur gay :joy: :ok_hand:");
-        }
-        [Command("isgay")][Name("isgay")][Summary("Checks if somebody is gay.")]
-        public async Task IsGayCmd (IGuildUser usr)
-        {
-            string isGay = null;
-
-            char[] userIDChars = usr.Id.ToString().ToCharArray();
-            string userIDStr = usr.Id.ToString();
-            string firstChar = userIDChars[0].ToString();
-            int choosingInt = Convert.ToInt32(firstChar);
-
-            if (choosingInt < 5)
-            {
-                isGay = "not gay.";
-            }
-            if (choosingInt >= 5)
-            {
-                isGay = "gay.";
-            }
-            await ReplyAsync(usr.Mention + " is " + isGay);
         }
     }
 }

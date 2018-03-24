@@ -27,21 +27,6 @@ namespace EdgyBot.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
-        [Command("amigay")][Name("amigay")][Summary("Are you gay?")]
-        public async Task AmIGayCmd()
-        {
-            Random rand = new Random();
-            int num = rand.Next(1, 3);
-            switch (num)
-            {
-                case 1:
-                    await ReplyAsync("yes boi");
-                    break;
-                case 2:
-                    await ReplyAsync("no boi");
-                    break;
-            }
-        }
         [Command("flip")][Name("flip")][Summary("Flips your message.")]
         public async Task ReverseCmd([Remainder]string input = null)
         {

@@ -11,6 +11,16 @@ namespace EdgyBot.Modules.Categories
 
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
+        [Command("level")][Alias("gdlevel")][Name("level")][Summary("Gets a level from Geometry Dash")]
+        public async Task LevelCmd ([Remainder]string strInput = null)
+        {
+            string level = await _gdLib.getGJLevel21(strInput);
+            string[] levelData = level.Split(':');
+            
+            string levelID = levelData[1];
+            string levelName = levelData[3];
+            //string author = 
+        }
         [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
         public async Task ProfileGDCMD ([Remainder]string strInput = null)
         {

@@ -105,19 +105,38 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("No Permissions.");
             }
         }
-        [Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
-        public async Task BlacklistCmd ([Remainder]string commandStr)
+        /*
+         * EdgyBot Administratory Commands
+        */
+        [Command("kick")][Name("kick")][Summary("Kicks a user from the guild")]
+        [RequireUserPermission(GuildPermission.Administrator)]
+        public async Task KickCmd (IGuildUser usr,[Remainder]string reason)
         {
             Embed e = null;
             try
             {
-                _database.BanCommand(System.Convert.ToString(Context.Guild.Id), commandStr);
-                e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
+                await usr.KickAsync(reason);
+                e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", "Kicked user " + usr.Username + " for reason " + reason);
             } catch
             {
-                e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
+                e = _lib.CreateEmbedWithError("EdgyBot Administrative Commands Error", ":exclamation: *Could not kick this user.*");
             }
             await ReplyAsync("", embed: e);
         }
+        
+        //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
+        //public async Task BlacklistCmd ([Remainder]string commandStr)
+       //{
+       //    Embed e = null;
+       //    try
+       //    {
+       //        _database.BanCommand(System.Convert.ToString(Context.Guild.Id), commandStr);
+       //        e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
+       //    } catch
+       //    {
+       //        e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
+       //    }
+       //    await ReplyAsync("", embed: e);
+       //}
     }
 }
