@@ -14,7 +14,7 @@ namespace EdgyBot
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private Database _database = new Database();
 
-        public async Task InitializeAsync(DiscordSocketClient client)
+        public async Task InitializeAsync (DiscordSocketClient client)
         {
             _client = client;
             _service = new CommandService();
@@ -23,7 +23,7 @@ namespace EdgyBot
 
             _client.MessageReceived += HandleCommandAsync;
         }
-        private async Task HandleCommandAsync(SocketMessage s)
+        private async Task HandleCommandAsync (SocketMessage s)
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;

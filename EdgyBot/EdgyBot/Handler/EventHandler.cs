@@ -12,7 +12,7 @@ namespace EdgyBot
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         public static SocketUser OwnerUser;
 
-        public EventHandler(DiscordSocketClient client)
+        public EventHandler (DiscordSocketClient client)
         {
             _client = client;
 
@@ -22,12 +22,12 @@ namespace EdgyBot
             _client.Disconnected += Client_Disconnected;
         }
 
-        private async Task Client_Disconnected(Exception exception)
+        private async Task Client_Disconnected (Exception exception)
         {
-            await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, " + exception.Message);
+            await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, \n" + exception.Message);
         }
 
-        public async Task Ready()
+        public async Task Ready ()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
 
@@ -36,13 +36,13 @@ namespace EdgyBot
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
         }
 
-        private static async Task Client_JoinedGuild(SocketGuild arg)
+        private static async Task Client_JoinedGuild (SocketGuild arg)
         {
             LibEdgyBot lib = new LibEdgyBot();
             await arg.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
         }
 
-        //private async Task UserLeft(SocketGuildUser user)
+        //private async Task UserLeft (SocketGuildUser user)
         //{
         //    IDMChannel dm = await user.GetOrCreateDMChannelAsync();
         //    Embed e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
