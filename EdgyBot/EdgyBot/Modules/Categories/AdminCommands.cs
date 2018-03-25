@@ -123,6 +123,25 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
+        [Command("ban")][Name("ban")][Summary("Bans a user from the Guild. Optionally, You can provide a reason.")]
+        public async Task BanCmd (IGuildUser usr, string reason = null)
+        {
+            bool hasReason = true;
+            if (reason == null) hasReason = false;
+            Embed e = null;
+            try
+            {
+                if (hasReason)
+                {
+                    await usr.Guild.AddBanAsync(usr, 0, reason);
+                } else await usr.Guild.AddBanAsync(usr);
+                e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", $"Successfully banned user {usr.Username}!");
+            } catch
+            {
+                e = _lib.CreateEmbedWithError("EdgyBot Administrative Commands Error", ":exclamation: *Could not ban this user.*");
+            }
+            await ReplyAsync("", embed: e);
+        }
         
         //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
         //public async Task BlacklistCmd ([Remainder]string commandStr)
