@@ -126,5 +126,13 @@ namespace EdgyBot.Modules.Categories
             Embed a = eb.Build();
             await ReplyAsync("", embed: a);
         }
+        [Command("botinfo")]
+        public async Task BotInfoCmd ()
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
+            eb.AddField("Bot Name", "EdgyBot");
+            eb.AddField("Server Count", Context.Client.Guilds.Count);
+            eb.AddField("Developer", _lib.GetOwnerID() + " Monstahhh#9629");
+        }
     }
 }
