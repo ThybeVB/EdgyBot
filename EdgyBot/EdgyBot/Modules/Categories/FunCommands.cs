@@ -81,7 +81,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("HAHAHAHAHAHAHAH NO.");
                 return;
             }
-            string imgUrl = "http://monstahhhbot.890m.com/MonstahhhFiles/jeff.jpg";
+            string imgUrl = "https://pbs.twimg.com/profile_images/880813322194612224/mgXPDJRq_400x400.jpg";
             string textStr = user.Mention + ", You just got jeffed by " + Context.User.Mention;
             Embed e = _lib.CreateEmbedWithImage("Jeff", textStr, imgUrl);
 
