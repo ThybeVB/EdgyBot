@@ -18,7 +18,6 @@ namespace EdgyBot
 
             _client.Log += _lib.Log;
             _client.Ready += Ready;
-            _client.UserLeft += UserLeft;
             _client.JoinedGuild += Client_JoinedGuild;
             _client.Disconnected += Client_Disconnected;
         }
@@ -43,11 +42,11 @@ namespace EdgyBot
             await arg.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
         }
 
-        private async Task UserLeft(SocketGuildUser user)
-        {
-            IDMChannel dm = await user.GetOrCreateDMChannelAsync();
-            Embed e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
-            await dm.SendMessageAsync("", embed: e);
-        }
+        //private async Task UserLeft(SocketGuildUser user)
+        //{
+        //    IDMChannel dm = await user.GetOrCreateDMChannelAsync();
+        //    Embed e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
+        //    await dm.SendMessageAsync("", embed: e);
+        //}
     }
 }
