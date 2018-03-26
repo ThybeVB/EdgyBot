@@ -112,8 +112,7 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Channel Count", channelCount);
             eb.AddField("Created At", createdAt);
 
-            Embed a = eb.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: eb.Build());
         }
         [Command("ping")]
         [Name("ping")]
@@ -122,17 +121,16 @@ namespace EdgyBot.Modules.Categories
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
-
-            Embed a = eb.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: eb.Build());
         }
-        [Command("botinfo")]
+        [Command("botinfo")][Name("botinfo")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.AddField("Bot Name", "EdgyBot");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Developer", _lib.GetOwnerID() + " Monstahhh#9629");
+            await ReplyAsync("", embed: eb.Build());
         }
     }
 }
