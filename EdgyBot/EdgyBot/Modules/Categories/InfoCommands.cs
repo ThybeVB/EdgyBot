@@ -129,7 +129,7 @@ namespace EdgyBot.Modules.Categories
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.AddField("Bot Name", "EdgyBot");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
-            eb.AddField("Developer", null);
+            eb.AddField("Developer", _lib.getOwnerDiscordName());
             await ReplyAsync("", embed: eb.Build());
         }
     }
