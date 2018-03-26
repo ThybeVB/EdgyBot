@@ -151,7 +151,15 @@ namespace EdgyBot
             return _loginInfo.accID;
         }
         /// <summary>
-        /// Get's the Discord User ID of the bot admin.
+        /// Gets the Discord Username and Discriminator of the bot admin.
+        /// </summary>
+        /// <returns></returns>
+        public string getOwnerDiscordName ()
+        {
+            return _loginInfo.ownerDiscordName;
+        }
+        /// <summary>
+        /// Gets the Discord User ID of the bot admin.
         /// </summary>
         /// <returns></returns>
         public ulong GetOwnerID()
