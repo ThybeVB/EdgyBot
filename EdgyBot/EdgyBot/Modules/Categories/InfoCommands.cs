@@ -127,6 +127,7 @@ namespace EdgyBot.Modules.Categories
         public async Task BotInfoCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
+            eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
             eb.AddField("Bot Name", "EdgyBot");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Developer", _lib.getOwnerDiscordName());
