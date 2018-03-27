@@ -52,5 +52,16 @@ namespace EdgyBot.Modules
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("Your message has been sent!");
         }
+        [Command("support")][Name("support")][Summary("Tells you how you can support the development of EdgyBot")]
+        public async Task SupportCmd ()
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("Discord Bot List", "Upvoting EdgyBot on the Discord Bot List helps EdgyBot get into more servers for even more fun.");
+            eb.AddField("Bot List Link", "https://discordbots.org/bot/373163613390897163");
+            eb.AddField("Moneys!11!", "Having a concurrent earning of a bit under 10$, I can keep EdgyBot running 24/7");
+            eb.AddField("Support Link", "https://www.paypal.me/monstahhh");          
+            eb.WithFooter(new EmbedFooterBuilder{Text = "Thanks for taking your time to even look at this command. People like you keep EdgyBot running."});
+            await ReplyAsync("", embed: eb.Build());
+        }
     }
 }
