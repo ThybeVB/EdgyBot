@@ -4,6 +4,9 @@ using Discord;
 
 namespace EdgyBot
 {
+    /// <summary>
+    /// EdgyBot Database used for the Experience System and storing other data.
+    /// </summary>
     public class Database
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
