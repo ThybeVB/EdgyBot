@@ -63,8 +63,13 @@ namespace EdgyBot.Modules.Categories
         public async Task B64DecodeCmd([Remainder]string input)
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.AddField("Decoded Base64 String", DecodeB64(input));
-
+            try { input = _lib.DecodeB64(input); } catch
+            {
+                Embed errEmbed = _lib.CreateEmbedWithError("Base 64 Decoder", "The Base64 input you gave was invalid.");
+                await ReplyAsync("", embed: errEmbed);
+                return;
+            }
+            eb.AddField("Decoded Base64 String", input);
             await ReplyAsync("", embed: eb.Build());
         }
     }
