@@ -8,6 +8,7 @@ The handy and all around fun bot that can be used for any kind of server!
  To use/run EdgyBot, create a class called LoginInfo.cs with the following variables:
 
  * string token
+ * string dblToken (OPTIONAL)
  * string prefix 
  * string invLink
  * string GJP
@@ -23,6 +24,7 @@ The handy and all around fun bot that can be used for any kind of server!
     public class LoginInfo
     {
 		public string token = "mytopsecrettoken";
+		public string dblToken = "discord bot list token" (OPTIONAL)
 		public string prefix = "e!";
 		public string invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=373163613390897163";
 		public string GJP = "topsecretGJP";
