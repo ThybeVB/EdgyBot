@@ -136,6 +136,20 @@ namespace EdgyBot
             return sb.ToString();
         }
         /// <summary>
+        /// Gets the Discord Bot ID
+        /// </summary>
+        /// <returns></returns>
+        public ulong GetBotId ()
+        {
+            return Context.Client.CurrentUser.Id;
+        }
+        public string getDBLToken ()
+        {
+            string dblToken = _loginInfo.dblToken;
+            if (string.IsNullOrEmpty(dblToken)) return null;
+            return dblToken;
+        }
+        /// <summary>
         /// Gets the bot's Invite Link
         /// </summary>
         /// <returns></returns>

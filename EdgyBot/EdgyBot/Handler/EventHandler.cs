@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using Discord;
 using Discord.Commands;
 using System;
+using DiscordBotsList.Api;
 
 namespace EdgyBot
 {
@@ -11,11 +12,24 @@ namespace EdgyBot
         private readonly DiscordSocketClient _client;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         public static SocketUser OwnerUser;
+        public AuthDiscordBotListApi dblApi;
 
         public EventHandler (DiscordSocketClient client)
         {
             _client = client;
 
+            InitDBLApi();
+            InitEvents();
+        }
+
+        private void InitDBLApi ()
+        {
+            AuthDiscordBotListApi api = new AuthDiscordBotListApi(_lib.GetBotId(), _lib.getDBLToken());
+            dblApi = api;
+        }
+
+        private void InitEvents ()
+        {
             _client.Log += _lib.Log;
             _client.Ready += Ready;
             _client.JoinedGuild += Client_JoinedGuild;
