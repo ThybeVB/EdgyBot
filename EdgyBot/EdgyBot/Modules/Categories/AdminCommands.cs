@@ -95,8 +95,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e);
         }
         
-        //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
-        //public async Task BlacklistCmd ([Remainder]string commandStr)
+       //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
+       //public async Task BlacklistCmd ([Remainder]string commandStr)
        //{
        //    Embed e = null;
        //    try

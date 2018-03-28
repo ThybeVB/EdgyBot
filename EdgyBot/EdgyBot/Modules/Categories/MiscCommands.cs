@@ -19,7 +19,7 @@ namespace EdgyBot.Modules
         [Command("source")][Alias("sourcecode")][Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
         {
-            Embed e = _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot");
+            Embed e = _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!");
             await ReplyAsync("", embed: e);
         }
         [Command("say")][Name("say")][Summary("Have EdgyBot send your message.")]
