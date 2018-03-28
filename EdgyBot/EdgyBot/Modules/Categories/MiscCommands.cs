@@ -31,7 +31,10 @@ namespace EdgyBot.Modules
         public async Task SaydCmd ([Remainder]string input = null)
         {
             await ReplyAsync(input);
-            await Context.Message.DeleteAsync();      
+            try { await Context.Message.DeleteAsync(); } catch
+            {
+                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Say Delete Command", "Could not delete the message. Does the bot have the permissions to do so?"));
+            }      
         }    
         [Command("e")]
         public async Task SecretECmd()
