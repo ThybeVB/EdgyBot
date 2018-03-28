@@ -12,20 +12,21 @@ namespace EdgyBot
         private readonly DiscordSocketClient _client;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         public static SocketUser OwnerUser;
-        public AuthDiscordBotListApi dblApi;
+        public static AuthDiscordBotListApi DBLApi;
 
         public EventHandler (DiscordSocketClient client)
         {
             _client = client;
 
-            InitDBLApi();
+            InstallDBLApi();
             InitEvents();
         }
 
-        private void InitDBLApi ()
+        private void InstallDBLApi ()
         {
             AuthDiscordBotListApi api = new AuthDiscordBotListApi(_lib.GetBotId(), _lib.getDBLToken());
-            dblApi = api;
+
+            DBLApi = api;
         }
 
         private void InitEvents ()
