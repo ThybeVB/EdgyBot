@@ -197,7 +197,7 @@ namespace EdgyBot.Modules.Categories
                 username = commentInfo[14];
                 try { eb.AddField(username, _lib.DecodeB64(commentInfo[1]) + " | Likes: " + commentInfo[5]); } catch
                 {
-                    eb.AddField(username, "**Error**: Invalid User.");
+                    eb.AddField(username, "**Error**: Invalid Comment.");
                 }
             }
             Embed e = eb.Build();
