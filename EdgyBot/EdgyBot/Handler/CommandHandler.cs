@@ -44,7 +44,7 @@ namespace EdgyBot
                             await context.Channel.SendMessageAsync(result.ErrorReason);
                         } else
                         {
-                            await context.Channel.SendMessageAsync($"You need to give input in this command. Check the **{_lib.GetPrefix()}help** command for info.");
+                            await context.Channel.SendMessageAsync($"You gave wrong input in this command. Check the **{_lib.GetPrefix()}help** command for info.");
                         }
                     } else
                     {

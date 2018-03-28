@@ -83,7 +83,7 @@ namespace EdgyBot
         {
             int defXp = _lib.GetDefaultAddedXP();
             string currentXPStr = GetXPFromUserID(uID);
-            int currentXP = System.Convert.ToInt32(currentXPStr);
+            int currentXP = Convert.ToInt32(currentXPStr);
 
             string query = $"UPDATE users SET userXP='{defXp + currentXP}' WHERE userID='{uID}'";
             ExecuteQuery(query);

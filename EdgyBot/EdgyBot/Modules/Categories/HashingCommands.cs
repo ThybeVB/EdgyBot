@@ -30,7 +30,7 @@ namespace EdgyBot.Modules.Categories
             string result = System.Convert.ToBase64String(inputBytes);
             return result;
         }
-        public static string DecodeB64 (string encodedInput)
+        public static string DecodeB64(string encodedInput)
         {
             byte[] inputBytes = System.Convert.FromBase64String(encodedInput);
             string result = Encoding.UTF8.GetString(inputBytes);
