@@ -189,15 +189,16 @@ namespace EdgyBot.Modules.Categories
             {
                 Text = "If you see usernames as numbers, it is probarbly a bug with RobTop's server. This problem usually occurs when the user is a Moderator."
             };
-            int bug = 0;
             foreach (string comment in comments)
             {
                 if (comment == null) continue;
                 string[] commentInfo = comment.Split('~');
                 string username;
-                username = commentInfo[14];    
-                eb.AddField(username, _lib.DecodeB64(commentInfo[1]) + " | Likes: " + commentInfo[5]);
-                bug++;
+                username = commentInfo[14];
+                try { eb.AddField(username, _lib.DecodeB64(commentInfo[1]) + " | Likes: " + commentInfo[5]); } catch
+                {
+                    eb.AddField(username, "**Error**: Invalid User.");
+                }
             }
             Embed e = eb.Build();
             await ReplyAsync("", embed: e);
