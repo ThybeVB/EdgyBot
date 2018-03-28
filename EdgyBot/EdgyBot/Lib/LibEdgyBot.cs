@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Discord.Commands;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace EdgyBot
 {
@@ -100,7 +101,18 @@ namespace EdgyBot
             return eb;
         }
         /// <summary>
-        /// Decodes a message from Base 64.
+        /// Encodes a string to Base 64
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public string EncodeB64(string input)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            string result = System.Convert.ToBase64String(inputBytes);
+            return result;
+        }
+        /// <summary>
+        /// Decodes a string from Base 64
         /// </summary>
         /// <param name="encodedMessage"></param>
         /// <returns></returns>
@@ -109,6 +121,19 @@ namespace EdgyBot
             byte[] inputBytes = Convert.FromBase64String(encodedMessage);
             string result = Encoding.UTF8.GetString(inputBytes);
             return result;
+        }
+        private byte[] GetHash(string inputString)
+        {
+            HashAlgorithm algorithm = SHA512.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+        public string GetSHA512String(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("x2"));
+
+            return sb.ToString();
         }
         /// <summary>
         /// Gets the bot's Invite Link
