@@ -14,7 +14,11 @@ namespace EdgyBot.Modules.Categories
         {
             if (Context.User.Id == _lib.GetOwnerID())
             {
-                try { _database.ExecuteQuery(queryInput); } catch { await ReplyAsync("Error executing query."); return; }
+                try { _database.ExecuteQuery(queryInput); } catch
+                {
+                    await ReplyAsync("Error executing query.");
+                    return;
+                }
                 Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
                 await ReplyAsync("", embed: e);
             } else
@@ -45,10 +49,16 @@ namespace EdgyBot.Modules.Categories
             }     
         }
         [Command("setstatus")]
-        public async Task SetStatusCmd([Remainder]string input)
+        public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (Context.User.Id == _lib.GetOwnerID())
             {
+                if (input == "default")
+                {
+                    await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
+                    await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
+                    return;
+                }
                 await Context.Client.SetGameAsync(input);
                 await ReplyAsync("Changed Status.");
             }
