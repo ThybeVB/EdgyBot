@@ -54,12 +54,12 @@ namespace EdgyBot.Modules.Categories
             isBot = usr.IsBot;
             status = usr.Status.ToString();
             pfpUrl = usr.GetAvatarUrl();
-            playing = usr.Activity.Name;
+            playing = usr.Activity?.Name;
             createdOn = usr.CreatedAt.ToUniversalTime().ToString();
             
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username);
-            if (string.IsNullOrEmpty(nickname))
+            if (string.IsNullOrEmpty(playing))
             {
                 eb.AddField("Nickname", "None");
             }
