@@ -158,58 +158,30 @@ namespace EdgyBot
             if (string.IsNullOrEmpty(dblToken)) return null;
             return dblToken;
         }
-        /// <summary>
-        /// Gets the bot's Invite Link
-        /// </summary>
-        /// <returns></returns>
         public string GetInviteLink ()
         {
             return _loginInfo.invLink;          
         }
-        /// <summary>
-        /// Gets the bot's token.
-        /// </summary>
-        /// <returns></returns>
         public string GetToken ()
         {
             return _loginInfo.token;
         }
-        /// <summary>
-        /// Gets the bot's prefix.
-        /// </summary>
-        /// <returns></returns>
         public string GetPrefix()
         {
             return _loginInfo.prefix;
         }
-        /// <summary>
-        /// Gets the Geometry Jump Password the bot is connected to.
-        /// </summary>
-        /// <returns></returns>
         public string GetGJP()
         {
             return _loginInfo.GJP;
         }
-        /// <summary>
-        /// Gets the Geometry Dash Account ID the bot is connected to.
-        /// </summary>
-        /// <returns></returns>
         public string GetGDAccID()
         {
             return _loginInfo.accID;
         }
-        /// <summary>
-        /// Gets the Discord Username and Discriminator of the bot admin.
-        /// </summary>
-        /// <returns></returns>
         public string getOwnerDiscordName ()
         {
             return _loginInfo.ownerDiscordName;
         }
-        /// <summary>
-        /// Gets the Discord User ID of the bot admin.
-        /// </summary>
-        /// <returns></returns>
         public ulong GetOwnerID()
         {
             return _loginInfo.ownerID;
@@ -218,10 +190,6 @@ namespace EdgyBot
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
-        /// <summary>
-        /// The default XP value for every starting user.
-        /// </summary>
-        /// <returns></returns>
         public int GetDefaultXP ()
         {
             return _loginInfo.startersXP;
@@ -229,6 +197,10 @@ namespace EdgyBot
         public int GetDefaultAddedXP ()
         {
             return _loginInfo.defAddedXP;
+        }
+        public string GetDatabaseFileName ()
+        {
+            return _loginInfo.dbname;
         }
         /// <summary>
         /// Logs a LogMessage to the Console.

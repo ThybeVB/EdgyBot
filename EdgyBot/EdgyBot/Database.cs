@@ -14,7 +14,7 @@ namespace EdgyBot
         /// <summary>
         /// File name of the Database.
         /// </summary>
-        private readonly string _dbname = "database.db";
+        private readonly string _dbname = new LibEdgyBot().GetDatabaseFileName();
 
         /// <summary>
         /// Executes a SQL Command to the database.
