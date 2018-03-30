@@ -101,6 +101,15 @@ namespace EdgyBot
             return eb;
         }
         /// <summary>
+        /// Updates the Bots "Playing" message to the default EdgyBot status.
+        /// </summary>
+        /// <returns></returns>
+        public async Task UpdateBotCountGameStatus ()
+        {
+            string gameStatus = "e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!";
+            await Context.Client.SetGameAsync(gameStatus, type: ActivityType.Watching);
+        }
+        /// <summary>
         /// Encodes a string to Base 64
         /// </summary>
         /// <param name="input"></param>
