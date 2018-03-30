@@ -16,6 +16,7 @@ The handy and all around fun bot that can be used for any kind of server!
  * string ownerDiscordName
  * ulong ownerID
  * int defAddedXP
+ * string dbname
  
  ## Example
  ```cs
@@ -33,6 +34,7 @@ The handy and all around fun bot that can be used for any kind of server!
 		public ulong ownerID = supercoolID;
 		public int startersXP = 0;
 		public int defAddedXP = 275;
+		public string dbname = "database.db";
     }
 }
  ```
