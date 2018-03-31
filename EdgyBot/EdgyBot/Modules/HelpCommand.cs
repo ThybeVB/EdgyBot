@@ -44,6 +44,7 @@ namespace EdgyBot.Modules
             await dm.SendMessageAsync("", embed: e);
             await dm.SendMessageAsync("", embed: e2);
             await Context.Message.AddReactionAsync(new Emoji("📫"));
+            await Context.Message.AddReactionAsync(new Emoji("✅"));
         }
     }
 }

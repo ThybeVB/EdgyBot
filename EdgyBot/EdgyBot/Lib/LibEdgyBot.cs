@@ -119,8 +119,8 @@ namespace EdgyBot
         public string DecodeB64 (string encodedMessage)
         {
             byte[] inputBytes = Convert.FromBase64String(encodedMessage);
-            string result = Encoding.UTF8.GetString(inputBytes);
-            return result;
+            string decodedMessage = Encoding.UTF8.GetString(inputBytes);
+            return decodedMessage;
         }
         private byte[] GetHash(string inputString)
         {
