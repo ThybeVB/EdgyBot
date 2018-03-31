@@ -19,19 +19,25 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("", embed: _lib.CreateEmbedWithError("Duel Command", "Please mention a user!"));
                 return;
             }
-            IUserMessage msg = await Context.Channel.SendMessageAsync(":crossed_swords: Dueling " + usr.Username + "...");
-            await Task.Delay(TimeSpan.FromSeconds(2.0));
-            int random = rand.Next(-1, 2);
-            switch (random)
+            IUserMessage msg;
+            msg = await Context.Channel.SendMessageAsync(":crossed_swords: Dueling " + usr.Username + ".");
+            await Task.Delay(TimeSpan.FromSeconds(1.0));
+
+            await msg.ModifyAsync(x => x.Content = ":crossed_swords: Dueling " + usr.Username + "..");
+            await Task.Delay(TimeSpan.FromSeconds(1.0));
+
+            await msg.ModifyAsync(x => x.Content = ":crossed_swords: Dueling " + usr.Username + "...");
+
+            switch (rand.Next(-1, 2))
             {
                 default:
-                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Username + " won!");
+                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Mention + " has won!");
                     break;
                 case 1:
-                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Username + " won!");
+                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Mention + " has won!");
                     break;
                 case 2:
-                    await msg.ModifyAsync(x => x.Content = usr.Username + " won!");
+                    await msg.ModifyAsync(x => x.Content = usr.Mention + " has won!");
                     break;
             }
         }
