@@ -10,6 +10,14 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
+        [Command("duel")][Name("duel")][Summary("Duels a user")]
+        public async Task DuelCmd (SocketGuildUser usr = null)
+        {
+            if (usr == null) {
+                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Duel Command", "Please mention a user!"));
+            }
+            //Actual Code
+        }
         [Command("clap")][Name("clap")][Summary("Puts your message into claps")]
         public async Task ClapCmd ([Remainder]string input)
         {
