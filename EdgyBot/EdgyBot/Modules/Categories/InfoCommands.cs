@@ -130,6 +130,7 @@ namespace EdgyBot.Modules.Categories
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
             eb.AddField("Bot Name", "EdgyBot");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
+            eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.getOwnerDiscordName());
             await ReplyAsync("", embed: eb.Build());
         }
