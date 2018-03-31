@@ -59,7 +59,7 @@ namespace EdgyBot.Modules.Categories
             
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username);
-            if (string.IsNullOrEmpty(playing))
+            if (string.IsNullOrEmpty(nickname))
             {
                 eb.AddField("Nickname", "None");
             }
