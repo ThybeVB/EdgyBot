@@ -3,6 +3,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using System.Text;
+using System;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -10,13 +11,29 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("duel")][Name("duel")][Summary("Duels a user")]
+        [Command("duel", RunMode = RunMode.Async)][Name("duel")][Summary("Duels a user")]
         public async Task DuelCmd (SocketGuildUser usr = null)
         {
-            if (usr == null) {
+            Random rand = new Random();
+            if (usr == null || usr == Context.Message.Author) {
                 await ReplyAsync("", embed: _lib.CreateEmbedWithError("Duel Command", "Please mention a user!"));
+                return;
             }
-            //Actual Code
+            IUserMessage msg = await Context.Channel.SendMessageAsync(":crossed_swords: Dueling " + usr.Username + "...");
+            await Task.Delay(TimeSpan.FromSeconds(2.0));
+            int random = rand.Next(-1, 2);
+            switch (random)
+            {
+                default:
+                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Username + " won!");
+                    break;
+                case 1:
+                    await msg.ModifyAsync(x => x.Content = Context.Message.Author.Username + " won!");
+                    break;
+                case 2:
+                    await msg.ModifyAsync(x => x.Content = usr.Username + " won!");
+                    break;
+            }
         }
         [Command("clap")][Name("clap")][Summary("Puts your message into claps")]
         public async Task ClapCmd ([Remainder]string input)
