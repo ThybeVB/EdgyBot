@@ -48,16 +48,14 @@ namespace EdgyBot
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
 
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
-            await _lib.UpdateBotCountGameStatus();
-            //await _client.SetGameAsync(gameStatus, type: ActivityType.Watching);
+            await _client.SetGameAsync(gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
         }
 
-        private static async Task Client_JoinedGuild (SocketGuild arg)
+        private static async Task Client_JoinedGuild (SocketGuild guild)
         {
             LibEdgyBot lib = new LibEdgyBot();
-            await arg.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
-            await lib.UpdateBotCountGameStatus();
+            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
         }
 
         //private async Task UserLeft (SocketGuildUser user)
