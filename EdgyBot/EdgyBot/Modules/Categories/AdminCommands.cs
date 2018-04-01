@@ -71,13 +71,19 @@ namespace EdgyBot.Modules.Categories
          * EdgyBot Administratory Commands
         */
         [Command("kick")][Name("kick")][Summary("Kicks a user from the guild")]
-        [RequireUserPermission(GuildPermission.Administrator)]
-        public async Task KickCmd (IGuildUser usr,[Remainder]string reason)
+        [RequireUserPermission(GuildPermission.KickMembers)]
+        public async Task KickCmd (IGuildUser usr, [Remainder]string reason = null)
         {
             Embed e = null;
             try
             {
-                await usr.KickAsync(reason);
+                if (string.IsNullOrEmpty(reason))
+                {
+                    await usr.KickAsync();
+                } else
+                {
+                    await usr.KickAsync(reason);
+                }
                 e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", "Kicked user " + usr.Username + " for reason " + reason);
             } catch
             {
@@ -105,7 +111,7 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
-        
+       // VV postponed 
        //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
        //public async Task BlacklistCmd ([Remainder]string commandStr)
        //{
