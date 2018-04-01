@@ -9,8 +9,7 @@ namespace EdgyBot.Modules.Categories
         private readonly Database _database = new Database();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("execquery")]
-        [RequireOwner]
+        [Command("execquery")][RequireOwner]
         public async Task ExecuteQuery([Remainder]string queryInput)
         {
             if (Context.User.Id == _lib.GetOwnerID())
@@ -49,8 +48,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("I'm not in that server! :cry:");
             }     
         }
-        [Command("setstatus")]
-        [RequireOwner]
+        [Command("setstatus")][RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (Context.User.Id == _lib.GetOwnerID())
@@ -88,7 +86,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e);
         }
         [Command("ban")][Name("ban")][Summary("Bans a user from the Guild. Optionally, You can provide a reason.")]
-        public async Task BanCmd (IGuildUser usr, string reason = null)
+        [RequireUserPermission(GuildPermission.BanMembers)]
+        public async Task BanCmd (IGuildUser usr, [Remainder]string reason = null)
         {
             bool hasReason = true;
             if (reason == null) hasReason = false;
@@ -97,7 +96,7 @@ namespace EdgyBot.Modules.Categories
             {
                 if (hasReason)
                 {
-                    await usr.Guild.AddBanAsync(usr, 0, reason);
+                    await usr.Guild.AddBanAsync(usr, reason: reason);
                 } else await usr.Guild.AddBanAsync(usr);
                 e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", $"Successfully banned user {usr.Username}!");
             } catch
