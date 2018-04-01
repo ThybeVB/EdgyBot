@@ -6,6 +6,10 @@ namespace EdgyBot
 {
     public class EdgyBot
     {
+        /*
+         * EdgyBot 2018
+         * If you are trying to run this bot, make sure to read the README to see how you can set up the bot.
+        */
         private static void Main () 
             => new EdgyBot().MainAsync().GetAwaiter().GetResult();
 
