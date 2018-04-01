@@ -163,7 +163,9 @@ namespace EdgyBot
         }
         public string GetGJP()
         {
-            return _loginInfo.GJP;
+            string gjp = _loginInfo.GJP;
+            if (string.IsNullOrEmpty(gjp)) return null;
+            return gjp;
         }
         public string GetGDAccID()
         {

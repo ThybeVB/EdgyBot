@@ -10,6 +10,7 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("execquery")]
+        [RequireOwner]
         public async Task ExecuteQuery([Remainder]string queryInput)
         {
             if (Context.User.Id == _lib.GetOwnerID())
@@ -49,6 +50,7 @@ namespace EdgyBot.Modules.Categories
             }     
         }
         [Command("setstatus")]
+        [RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (Context.User.Id == _lib.GetOwnerID())
