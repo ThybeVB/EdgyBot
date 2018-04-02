@@ -3,7 +3,7 @@ using Discord.WebSocket;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
-//using EdgyBot.Modules;
+using EdgyBot.Modules;
 
 namespace EdgyBot
 {
@@ -12,7 +12,7 @@ namespace EdgyBot
         private DiscordSocketClient _client;
         private CommandService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        //private Database _database = new Database();
+        private Database _database = new Database();
 
         public async Task InitializeAsync(DiscordSocketClient client)
         {
@@ -20,7 +20,7 @@ namespace EdgyBot
 
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
-            //new HelpCommand(_service);
+            new HelpCommand(_service);
 
             _client.MessageReceived += HandleCommandAsync;
         }
