@@ -17,6 +17,7 @@ namespace EdgyBot
         public async Task InitializeAsync (DiscordSocketClient client)
         {
             _client = client;
+
             _service = new CommandService();
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
             new HelpCommand(_service);

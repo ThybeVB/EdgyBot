@@ -14,25 +14,20 @@ namespace EdgyBot.Modules.Categories
         [Summary("Gives you info about the channel you are in.")]
         public async Task ChannelInfoCmd()
         {
-            string channelName = Context.Channel.Name;
-            string createdAt = Context.Channel.CreatedAt.ToString();
-            string channelID = Context.Channel.Id.ToString();
-
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
 
-            e.AddField("Channel Name", channelName);
-            e.AddField("Channel ID", channelID);
-            e.AddField("Created", createdAt);
+            e.AddField("Channel Name", Context.Channel.Name);
+            e.AddField("Channel ID", Context.Channel.Id.ToString());
+            e.AddField("Created", Context.Channel.CreatedAt.ToString());
 
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
         [Command("userinfo")]
         [Name("userinfo")]
         [Summary("Mention an user or leave it empty for a description on the user.")]
         public async Task UserInfoCmd(IGuildUser usr = null)
         {
-            #region VarRegistration
+            #region Variables
             string username = null;
             string nickname = null;
             string discriminator = null;
@@ -90,7 +85,7 @@ namespace EdgyBot.Modules.Categories
         [Summary("Gives you info about the server you are in.")]
         public async Task ServerInfoCmd()
         {
-            var eb = _lib.SetupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
 
             #region ServerInfo
             string name = Context.Guild.Name;
@@ -132,6 +127,7 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.getOwnerDiscordName());
+
             await ReplyAsync("", embed: eb.Build());
         }
     }

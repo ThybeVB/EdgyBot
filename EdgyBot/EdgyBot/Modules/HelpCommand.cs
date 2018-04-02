@@ -30,6 +30,7 @@ namespace EdgyBot.Modules
             {
                 if (c == null) continue;
                 if (c.Name == null || c.Summary == null) continue;
+                //We are not using 25 because a field called Bot Prefix already exists.
                 if (lineCount >= 24)
                 {
                     eb2.AddField(c.Name, c.Summary);
@@ -39,10 +40,9 @@ namespace EdgyBot.Modules
                 eb.AddField(c.Name, c.Summary);
                 lineCount++;
             }
-            Embed e = eb.Build();
-            Embed e2 = eb2.Build();
-            await dm.SendMessageAsync("", embed: e);
-            await dm.SendMessageAsync("", embed: e2);
+            await dm.SendMessageAsync("", embed: eb.Build());
+            await dm.SendMessageAsync("", embed: eb2.Build());
+
             await Context.Message.AddReactionAsync(new Emoji("📫"));
             await Context.Message.AddReactionAsync(new Emoji("✅"));
         }
