@@ -6,26 +6,26 @@ namespace EdgyBot.Modules.Categories
 {
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly Database _database = new Database();
+        //private readonly Database _database = new Database();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("execquery")][RequireOwner]
-        public async Task ExecuteQuery([Remainder]string queryInput)
-        {
-            if (Context.User.Id == _lib.GetOwnerID())
-            {
-                try { _database.ExecuteQuery(queryInput); } catch
-                {
-                    await ReplyAsync("Error executing query.");
-                    return;
-                }
-                Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
-                await ReplyAsync("", embed: e);
-            } else
-            {
-                await ReplyAsync("You do not have permission to use this command.");
-            }        
-        }
+        //[Command("execquery")][RequireOwner]
+        //public async Task ExecuteQuery([Remainder]string queryInput)
+        //{
+        //    if (Context.User.Id == _lib.GetOwnerID())
+        //    {
+        //        try { _database.ExecuteQuery(queryInput); } catch
+        //        {
+        //            await ReplyAsync("Error executing query.");
+        //            return;
+        //        }
+        //        Embed e = _lib.CreateEmbedWithText("Success", "Code " + queryInput + " has been executed.");
+        //        await ReplyAsync("", embed: e);
+        //    } else
+        //    {
+        //        await ReplyAsync("You do not have permission to use this command.");
+        //    }        
+        //}
         [Command("isblacklisted")]
         [Alias("blacklisted")]
         [Name("blacklisted")]
