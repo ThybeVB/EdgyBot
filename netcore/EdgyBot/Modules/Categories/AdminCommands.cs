@@ -26,28 +26,28 @@ namespace EdgyBot.Modules.Categories
         //        await ReplyAsync("You do not have permission to use this command.");
         //    }        
         //}
-        [Command("isblacklisted")]
-        [Alias("blacklisted")]
-        [Name("blacklisted")]
-        [Summary("Checks if a server is blacklisted.")]
-        public async Task IsBlackListedCmd (ulong serverID)
-        {
-            if (Context.Client.GetGuild(serverID) != null)
-            {
-                bool isBlackListed = _database.IsServerBlacklisted(serverID);
-                if (isBlackListed)
-                {
-                    await ReplyAsync("This server is blacklisted.");
-                }
-                else
-                {
-                    await ReplyAsync("This server is not blacklisted.");
-                }
-            } else
-            {
-                await ReplyAsync("I'm not in that server! :cry:");
-            }     
-        }
+        //[Command("isblacklisted")]
+        //[Alias("blacklisted")]
+        //[Name("blacklisted")]
+        //[Summary("Checks if a server is blacklisted.")]
+        //public async Task IsBlackListedCmd (ulong serverID)
+        //{
+        //    if (Context.Client.GetGuild(serverID) != null)
+        //    {
+        //        bool isBlackListed = _database.IsServerBlacklisted(serverID);
+        //        if (isBlackListed)
+        //        {
+        //            await ReplyAsync("This server is blacklisted.");
+        //        }
+        //        else
+        //        {
+        //            await ReplyAsync("This server is not blacklisted.");
+        //        }
+        //    } else
+        //    {
+        //        await ReplyAsync("I'm not in that server! :cry:");
+        //    }     
+        //}
         [Command("setstatus")][RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
