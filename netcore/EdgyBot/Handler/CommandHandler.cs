@@ -11,7 +11,7 @@ namespace EdgyBot
     {
         private DiscordSocketClient _client;
         private CommandService _service;
-        //private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
         //private Database _database = new Database();
 
         public async Task InitializeAsync(DiscordSocketClient client)
@@ -30,7 +30,7 @@ namespace EdgyBot
             if (msg == null) return;
             SocketCommandContext context = new SocketCommandContext(_client, msg);
             int argPos = 0;
-            if (msg.HasStringPrefix(/*_lib.GetPrefix()*/"e!", ref argPos))
+            if (msg.HasStringPrefix(_lib.GetPrefix(), ref argPos))
             {
                 if (msg.Author.IsBot) return;
 
@@ -41,17 +41,17 @@ namespace EdgyBot
                     {
                         if (result.Error != CommandError.BadArgCount)
                         {
-                            //await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                            await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
                             await context.Channel.SendMessageAsync(result.ErrorReason);
                         }
                         else
                         {
-                            await context.Channel.SendMessageAsync($"You gave wrong input in this command. Check the **{/*_lib.GetPrefix()*/"e!"}help** command for info.");
+                            await context.Channel.SendMessageAsync($"You gave wrong input in this command. Check the **{_lib.GetPrefix()}help** command for info.");
                         }
                     }
                     else
                     {
-                        await context.Channel.SendMessageAsync($"This command does not exist. Try **{/*_lib.GetPrefix()*/"e!"}help**");
+                        await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
                     }
                 }
                 else
