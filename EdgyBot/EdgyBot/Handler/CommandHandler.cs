@@ -14,7 +14,7 @@ namespace EdgyBot
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private Database _database = new Database();
 
-        public async Task InitializeAsync (DiscordSocketClient client)
+        public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;
 
@@ -24,7 +24,7 @@ namespace EdgyBot
 
             _client.MessageReceived += HandleCommandAsync;
         }
-        private async Task HandleCommandAsync (SocketMessage s)
+        private async Task HandleCommandAsync(SocketMessage s)
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
@@ -43,20 +43,23 @@ namespace EdgyBot
                         {
                             await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
                             await context.Channel.SendMessageAsync(result.ErrorReason);
-                        } else
+                        }
+                        else
                         {
                             await context.Channel.SendMessageAsync($"You gave wrong input in this command. Check the **{_lib.GetPrefix()}help** command for info.");
                         }
-                    } else
+                    }
+                    else
                     {
                         await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
                     }
-                } else
+                }
+                else
                 {
                     if (!context.User.IsBot)
                     {
-                        _database.AddExperience(context.User.Id);
-                    }                  
+                        //_database.AddExperience(context.User.Id);
+                    }
                 }
             }
         }

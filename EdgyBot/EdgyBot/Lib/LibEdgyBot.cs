@@ -24,7 +24,7 @@ namespace EdgyBot
         /// <param name="text"></param>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public Embed CreateEmbedWithText (string title, string text, bool footerEnabled = false)
+        public Embed CreateEmbedWithText(string title, string text, bool footerEnabled = false)
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
@@ -32,7 +32,7 @@ namespace EdgyBot
                 EmbedFooterBuilder footer = new EmbedFooterBuilder();
                 footer.Text = DateTime.Now.ToUniversalTime().ToString();
                 eb.Footer = footer;
-            }         
+            }
             eb.Color = LightBlue;
             eb.AddField(title, text);
             Embed e = eb.Build();
@@ -45,7 +45,7 @@ namespace EdgyBot
         /// <param name="text"></param>
         /// <param name="imgUrl"></param>
         /// <returns></returns>
-        public Embed CreateEmbedWithImage (string text, string imgUrl)
+        public Embed CreateEmbedWithImage(string text, string imgUrl)
         {
             EmbedBuilder eb = new EmbedBuilder();
             eb.Color = LightBlue;
@@ -88,7 +88,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public EmbedBuilder SetupEmbedWithDefaults (bool footerEnabled = false)
+        public EmbedBuilder SetupEmbedWithDefaults(bool footerEnabled = false)
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
@@ -116,7 +116,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="encodedMessage"></param>
         /// <returns></returns>
-        public string DecodeB64 (string encodedMessage)
+        public string DecodeB64(string encodedMessage)
         {
             byte[] inputBytes = Convert.FromBase64String(encodedMessage);
             string decodedMessage = Encoding.UTF8.GetString(inputBytes);
@@ -139,21 +139,21 @@ namespace EdgyBot
         /// Gets the Discord Bot ID
         /// </summary>
         /// <returns></returns>
-        public ulong GetBotId ()
+        public ulong GetBotId()
         {
             return Context.Client.CurrentUser.Id;
         }
-        public string getDBLToken ()
+        public string getDBLToken()
         {
             string dblToken = _loginInfo.dblToken;
             if (string.IsNullOrEmpty(dblToken)) return null;
             return dblToken;
         }
-        public string GetInviteLink ()
+        public string GetInviteLink()
         {
-            return _loginInfo.invLink;          
+            return _loginInfo.invLink;
         }
-        public string GetToken ()
+        public string GetToken()
         {
             return _loginInfo.token;
         }
@@ -171,7 +171,7 @@ namespace EdgyBot
         {
             return _loginInfo.accID;
         }
-        public string getOwnerDiscordName ()
+        public string getOwnerDiscordName()
         {
             return _loginInfo.ownerDiscordName;
         }
@@ -183,15 +183,15 @@ namespace EdgyBot
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
-        public int GetDefaultXP ()
+        public int GetDefaultXP()
         {
             return _loginInfo.startersXP;
         }
-        public int GetDefaultAddedXP ()
+        public int GetDefaultAddedXP()
         {
             return _loginInfo.defAddedXP;
         }
-        public string GetDatabaseFileName ()
+        public string GetDatabaseFileName()
         {
             return _loginInfo.dbname;
         }
@@ -259,7 +259,7 @@ namespace EdgyBot
             eb.AddField("ANNOUNCEMENT!", msg);
             return eb.Build();
         }
-        public Embed CreateXPEmbed (string username, string currentXP)
+        public Embed CreateXPEmbed(string username, string currentXP)
         {
 
             EmbedBuilder eb = new EmbedBuilder();
@@ -268,7 +268,7 @@ namespace EdgyBot
             eb.ThumbnailUrl = "https://www.wpclipart.com/money/US_Currency/US_hundred_dollar_bill.png";
             eb.AddField("Username", username, true);
             eb.AddField("Experience", currentXP, true);
-            
+
             return eb.Build();
         }
     }

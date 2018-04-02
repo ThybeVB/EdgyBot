@@ -14,7 +14,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="strInput"></param>
         /// <returns></returns>
-        public async Task<string> GetGJUsers (string strInput)
+        public async Task<string> GetGJUsers(string strInput)
         {
             var gjUsersDict = new Dictionary<string, string>
             {
@@ -40,7 +40,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="inputStr"></param>
         /// <returns></returns>
-        public async Task<string[]> getGJUserInfo (string inputStr)
+        public async Task<string[]> getGJUserInfo(string inputStr)
         {
             var getUserValues = new Dictionary<string, string>
             {
@@ -65,7 +65,7 @@ namespace EdgyBot
         /// <param name="type"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public async Task<string[]> getGJScores20 (string type, int count)
+        public async Task<string[]> getGJScores20(string type, int count)
         {
             var top10ReqDict = new Dictionary<string, string>
             {
@@ -90,7 +90,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="levelID"></param>
         /// <returns></returns>
-        public async Task<string[]> getGJComments21 (string levelID)
+        public async Task<string[]> getGJComments21(string levelID)
         {
             var gjCommentsDict = new Dictionary<string, string>
             {
@@ -116,7 +116,7 @@ namespace EdgyBot
         /// </summary>
         /// <param name="strInput"></param>
         /// <returns></returns>
-        public async Task<string[]> getGJLevels21 (string strInput)
+        public async Task<string[]> getGJLevels21(string strInput)
         {
             var gjLevelsDict = new Dictionary<string, string>
             {
