@@ -8,11 +8,14 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		EdgyBot|Any CPU = EdgyBot|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.EdgyBot|Any CPU.ActiveCfg = EdgyBot|Any CPU
+		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.EdgyBot|Any CPU.Build.0 = EdgyBot|Any CPU
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
