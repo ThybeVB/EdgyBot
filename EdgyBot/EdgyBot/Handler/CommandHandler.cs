@@ -51,7 +51,8 @@ namespace EdgyBot
                     }
                     else
                     {
-                        await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
+                        await context.Message.AddReactionAsync(new Emoji("❌"));
+                        //await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
                     }
                 }
                 else
