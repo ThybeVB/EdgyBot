@@ -4,6 +4,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using System.Text;
 using System;
+using System.Linq;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -129,6 +130,39 @@ namespace EdgyBot.Modules.Categories
             {
                 await Context.Message.DeleteAsync();
                 await ReplyAsync(user.Mention + " ....lol");
+            }
+        }
+        [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
+        public async Task AcronymCmd ()
+        {
+            //Stage 1
+            IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In a few seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
+            string acroLetters = _lib.GetRandomLetters(6);
+            await Task.Delay(TimeSpan.FromSeconds(7.5));
+
+            //Stage 2
+            await msg.ModifyAsync(x => x.Content = $":timer: *You have 1 minute to make an acronym with the following!* **{acroLetters}** *(Only 10 submissions allowed)*");
+            await Task.Delay(TimeSpan.FromSeconds(5));
+            IUserMessage msg2 = await Context.Channel.SendMessageAsync("To submit an acronym, send your message starting with '*'. After that, just write your acronym.");
+            await Task.Delay(TimeSpan.FromMinutes(1));
+
+            //Stage 3
+            await msg2.DeleteAsync();
+            var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
+            //Get Message Count (shitcode bc i'm shit with enumerators)
+            int messageCount = messages.Count(m => m.Content.StartsWith("*"));
+            int winnerNum = new Random().Next(-1, messageCount + 1);
+            int otherShit = 0;
+            foreach (var message in messages)
+            {
+                if (message == null) continue;
+                if (winnerNum == otherShit)
+                {
+                    if (message.Author.IsBot) continue;
+                    await msg.ModifyAsync(x => x.Content = $"{message.Author.Mention} has won the the acronym {message.Content}");
+                    return;
+                }
+                otherShit++;
             }
         }
         [Command("stab")][Name("stab")][Summary("Stabs an user.")]

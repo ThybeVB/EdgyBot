@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using System.Text;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace EdgyBot
 {
@@ -157,6 +158,15 @@ namespace EdgyBot
         {
             return _loginInfo.token;
         }
+
+        public string GetRandomLetters(int size)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, size)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public string GetPrefix()
         {
             return _loginInfo.prefix;
