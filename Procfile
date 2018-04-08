@@ -1,1 +1,0 @@
-worker: "dotnet /EdgyBot/EdgyBot/bin/EdgyBot/netcoreapp2.0/EdgyBot.dll"
