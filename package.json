@@ -4,7 +4,7 @@
   "description": "/",
   "main": "index.js",
   "scripts": {
-    "start": "dotnet \EdgyBot\EdgyBot\bin\EdgyBot\netcoreapp2.0\EdgyBot.dll"
+    "start": "dotnet /EdgyBot/EdgyBot/bin/EdgyBot/netcoreapp2.0/EdgyBot.dll"
   },
   "repository": {
     "type": "git",
