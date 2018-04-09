@@ -20,7 +20,13 @@ namespace EdgyBot
             _client = client;
 
             InstallDBLApi();
+            InstallHost();
             InitEvents();
+        }
+
+        private void InstallHost ()
+        {
+
         }
 
         private void InstallDBLApi()
