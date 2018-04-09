@@ -3,7 +3,6 @@ using Discord.WebSocket;
 using Discord;
 using Discord.Commands;
 using System;
-//using DiscordBotsList.Api;
 
 namespace EdgyBot
 {
@@ -12,28 +11,11 @@ namespace EdgyBot
         private readonly DiscordSocketClient _client;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         public static SocketUser OwnerUser;
-        //public static AuthDiscordBotListApi DBLApi;
-        //public static DiscordBotListApi DBLApi;
 
         public EventHandler(DiscordSocketClient client)
         {
             _client = client;
-
-            InstallDBLApi();
-            InstallHost();
             InitEvents();
-        }
-
-        private void InstallHost ()
-        {
-
-        }
-
-        private void InstallDBLApi()
-        {
-            //AuthDiscordBotListApi api = new AuthDiscordBotListApi(_lib.GetBotId(), _lib.getDBLToken());
-            //DiscordBotListApi api = new DiscordBotListApi();
-            //DBLApi = api;
         }
 
         private void InitEvents()
@@ -45,9 +27,8 @@ namespace EdgyBot
         }
 
         private async Task Client_Disconnected(Exception exception)
-        {
-            await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS CRASHED WITH AN EXCEPTION, \n" + exception.Message);
-        }
+            => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Message);
+        
 
         public async Task Ready()
         {
@@ -59,16 +40,7 @@ namespace EdgyBot
         }
 
         private static async Task Client_JoinedGuild(SocketGuild guild)
-        {
-            LibEdgyBot lib = new LibEdgyBot();
-            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{lib.GetPrefix()}help**.");
-        }
-
-        //private async Task UserLeft (SocketGuildUser user)
-        //{
-        //    IDMChannel dm = await user.GetOrCreateDMChannelAsync();
-        //    Embed e = _lib.CreateEmbedWithText("EdgyBot", "We hope you enjoyed your stay, " + user.Username + "!");
-        //    await dm.SendMessageAsync("", embed: e);
-        //}
+            => await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
+        
     }
 }

@@ -9,7 +9,7 @@ namespace EdgyBot
 {
     public class EdgyBot
     {
-        public static void Main(string[] args)
+        private static void Main()
             => new EdgyBot().MainAsync().GetAwaiter().GetResult();
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
@@ -26,7 +26,7 @@ namespace EdgyBot
             await Task.Delay(-1);
         }
     }
-    public class ASPStartup
+    internal class ASPStartup
     {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
