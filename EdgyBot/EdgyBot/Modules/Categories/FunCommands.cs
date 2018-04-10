@@ -115,7 +115,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
-        [Command("lol")][Name("lol")][Summary("useless")]
+        [Command("lol")][Name("lol")][Summary("Lols someone.... kms")]
         public async Task LolCmd(IGuildUser user)
         {
             if (user.Id == Context.Message.Author.Id)
@@ -145,7 +145,7 @@ namespace EdgyCore.Modules.Categories
             //Stage 3
             await msg2.DeleteAsync();
             var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
-            //Get Message Count (shitcode bc i'm shit with enumerators)
+            //Get Message Count
             int messageCount = messages.Count(m => m.Content.StartsWith("*"));
             int winnerNum = new Random().Next(-1, messageCount + 1);
             int otherShit = 0;

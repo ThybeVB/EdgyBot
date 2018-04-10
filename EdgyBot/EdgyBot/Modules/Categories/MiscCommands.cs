@@ -16,7 +16,7 @@ namespace EdgyCore.Modules
             Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
-        [Command("source")][Alias("sourcecode")][Name("source")][Summary("Links the Source Code of EdgyBot")]
+        [Command("source")][Alias("sourcecode", "github")][Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
         {
             Embed e = _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!");
@@ -37,7 +37,7 @@ namespace EdgyCore.Modules
             }      
         }    
         [Command("e")]
-        public async Task SecretECmd()
+        public async Task SecretCmd01 ()
         {
             await ReplyAsync("monstah is not gay german");
         }
@@ -47,15 +47,15 @@ namespace EdgyCore.Modules
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             eb.AddField("New Suggestion!", msg);
-            #region Footer
-            EmbedFooterBuilder efb = new EmbedFooterBuilder();
-            efb.Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString();
+            EmbedFooterBuilder efb = new EmbedFooterBuilder
+            {
+                Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString()
+            };
             eb.Footer = efb;
-            #endregion
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("Your message has been sent!");
         }
-        [Command("support")][Name("support")][Summary("Tells you how you can support the development of EdgyBot")]
+        [Command("support")][Name("support")][Alias("helpedgy")][Summary("Tells you how you can support the development of EdgyBot")]
         public async Task SupportCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
