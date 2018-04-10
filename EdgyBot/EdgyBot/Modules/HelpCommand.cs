@@ -2,7 +2,7 @@
 using Discord;
 using Discord.Commands;
 
-namespace EdgyBot.Modules
+namespace EdgyCore.Modules
 {
     public class HelpCommand : ModuleBase<SocketCommandContext>
     {

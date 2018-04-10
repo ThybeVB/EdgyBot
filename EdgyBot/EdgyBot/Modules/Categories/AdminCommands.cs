@@ -2,7 +2,7 @@
 using Discord;
 using Discord.Commands;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {

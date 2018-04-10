@@ -6,7 +6,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Linq;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     /// <summary>
     /// Library for EdgyBot

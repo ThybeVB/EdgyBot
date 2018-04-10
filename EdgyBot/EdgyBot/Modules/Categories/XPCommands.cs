@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class XPCommands : ModuleBase<SocketCommandContext>
     {

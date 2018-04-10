@@ -6,7 +6,7 @@ using System.Text;
 using System;
 using System.Linq;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class FunCommands : ModuleBase<SocketCommandContext>
     {

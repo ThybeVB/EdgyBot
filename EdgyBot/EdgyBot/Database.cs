@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     public class Database
     {

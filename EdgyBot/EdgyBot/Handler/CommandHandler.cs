@@ -3,9 +3,9 @@ using Discord.WebSocket;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
-using EdgyBot.Modules;
+using EdgyCore.Modules;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     public class CommandHandler
     {

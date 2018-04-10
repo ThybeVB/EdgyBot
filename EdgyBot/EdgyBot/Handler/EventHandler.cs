@@ -4,9 +4,9 @@ using Discord;
 using Discord.Commands;
 using System;
 using System.Threading;
-using EdgyBot.Handler;
+using EdgyCore.Handler;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     public class EventHandler : ModuleBase<SocketCommandContext>
     {

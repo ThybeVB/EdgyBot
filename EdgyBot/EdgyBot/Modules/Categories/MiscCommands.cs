@@ -3,7 +3,7 @@ using Discord.Commands;
 using Discord;
 using System;
 
-namespace EdgyBot.Modules
+namespace EdgyCore.Modules
 {
     public class MiscCommands : ModuleBase<SocketCommandContext>
     {

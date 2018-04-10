@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     public class GDLib
     {

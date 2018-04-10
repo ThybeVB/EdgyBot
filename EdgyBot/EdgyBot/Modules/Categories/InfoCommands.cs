@@ -3,7 +3,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class InfoCommands : ModuleBase<SocketCommandContext>
     {

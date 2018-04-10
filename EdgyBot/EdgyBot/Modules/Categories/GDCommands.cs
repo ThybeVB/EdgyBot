@@ -2,7 +2,7 @@
 using Discord.Commands;
 using System.Threading.Tasks;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class GDCommands : ModuleBase<SocketCommandContext>
     {

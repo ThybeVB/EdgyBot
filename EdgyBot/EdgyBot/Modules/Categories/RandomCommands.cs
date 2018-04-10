@@ -3,7 +3,7 @@ using Discord.Commands;
 using System.Threading.Tasks;
 using Discord;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyCore.Modules.Categories
 {
     public class RandomCommands : ModuleBase<SocketCommandContext>
     {

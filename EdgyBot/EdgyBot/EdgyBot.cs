@@ -4,8 +4,9 @@ using Discord.WebSocket;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using EdgyBot.Server;
 
-namespace EdgyBot
+namespace EdgyCore
 {
     public class EdgyBot
     {
@@ -24,16 +25,6 @@ namespace EdgyBot
             await new CommandHandler().InitializeAsync(Client);
             host.Run();
             await Task.Delay(-1);
-        }
-    }
-    internal class ASPStartup
-    {
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            /*
-             * The reason i am using a configurator, is a bug in ASP.NET. For some reason,
-             * if you don't use one, you will get errors upon running.
-             */
         }
     }
 }
