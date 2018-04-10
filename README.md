@@ -1,5 +1,6 @@
 # EdgyBot
 [![Discord Bots](https://discordbots.org/api/widget/status/373163613390897163.svg)](https://discordbots.org/bot/373163613390897163)
+[![Discord Bots](https://discordbots.org/api/widget/servers/373163613390897163.svg)](https://discordbots.org/bot/373163613390897163)
 
 The handy and all around fun bot that can be used for any kind of server!
 
