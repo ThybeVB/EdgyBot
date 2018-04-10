@@ -167,6 +167,11 @@ namespace EdgyCore
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public bool IsEnglishLetter(char c)
+        {
+            return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+        }
+
         public string GetPrefix()
         {
             return _loginInfo.prefix;

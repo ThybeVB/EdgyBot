@@ -78,11 +78,7 @@ namespace EdgyCore.Modules.Categories
             char[] letters = msg.ToCharArray();
             foreach (char letter in letters)
             {
-                if (letter == '?' || letter == '!' || letter == '.')
-                {
-                    await ReplyAsync("Message cannot contain such symbols.");
-                    return;
-                }
+                if (!_lib.IsEnglishLetter(letter)) return;
                 if (letter == ' ')
                 {
                     sb.Append(" ");
