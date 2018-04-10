@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using EdgyBot.Server;
 
 namespace EdgyCore
 {
