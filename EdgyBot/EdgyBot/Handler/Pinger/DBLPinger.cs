@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Timers;
 using DiscordBotList.Models;
 using DiscordBotsList.Api;
 using EdgyCore;
@@ -9,7 +10,6 @@ namespace EdgyBot.Handler
     public class DBLPinger
     {
         private LibEdgyBot _lib = new LibEdgyBot();
-
         private AuthDiscordBotListApi dblApi;
 
         public DBLPinger ()
@@ -22,6 +22,7 @@ namespace EdgyBot.Handler
             }
             dblApi = new AuthDiscordBotListApi(373163613390897163, dblToken);
         }
+
         public async Task UpdateStats (int serverCount)
         {
             IDblSelfBot self = await dblApi.GetMeAsync();

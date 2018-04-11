@@ -4,7 +4,6 @@ using Discord;
 using Discord.Commands;
 using System;
 using System.Threading;
-using EdgyCore.Handler;
 using EdgyBot.Handler;
 
 namespace EdgyCore
@@ -20,7 +19,6 @@ namespace EdgyCore
         {
             _client = client;
             InitEvents();
-            new ASPPinger();
             dblPinger = new DBLPinger();
         }
 
@@ -45,7 +43,9 @@ namespace EdgyCore
             => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Message);
 
         private async Task Client_JoinedGuild(SocketGuild guild)
-        => await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
-        
+        {
+            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
+            await dblPinger.UpdateStats(_client.Guilds.Count);
+        }
     }
 }
