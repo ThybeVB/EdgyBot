@@ -5,6 +5,7 @@ using Discord.Commands;
 using System;
 using System.Threading;
 using EdgyCore.Handler;
+using EdgyBot.Handler;
 
 namespace EdgyCore
 {
@@ -18,13 +19,8 @@ namespace EdgyCore
         {
             _client = client;
             InitEvents();
-            new EdgyPinger();
-        }
-
-        private void PingClient()
-        {
-            //This function is being called every 25 minutes to make sure the bot doesn't go idle.
-            _lib.EdgyLog(LogSeverity.Info, "Pinged");
+            new ASPPinger();
+            new DBLPinger();
         }
 
         private void InitEvents()

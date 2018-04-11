@@ -5,9 +5,9 @@ using System.Timers;
 
 namespace EdgyCore.Handler
 {
-    public class EdgyPinger
+    public class ASPPinger
     {
-        public EdgyPinger ()
+        public ASPPinger ()
         {
             //new LibEdgyBot().EdgyLog(LogSeverity.Info, "Ping!");
             Timer timer = new Timer();
