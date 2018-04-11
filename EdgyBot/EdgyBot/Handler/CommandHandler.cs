@@ -51,8 +51,9 @@ namespace EdgyCore
                     }
                     else
                     {
+                        if (msg.Content == "e!") return;
+
                         await context.Message.AddReactionAsync(new Emoji("❌"));
-                        //await context.Channel.SendMessageAsync($"This command does not exist. Try **{_lib.GetPrefix()}help**");
                     }
                 }
                 else
