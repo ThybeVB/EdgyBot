@@ -13,6 +13,7 @@ namespace EdgyCore
     {
         private readonly DiscordSocketClient _client;
         private LibEdgyBot _lib = new LibEdgyBot();
+        private static DBLPinger dblPinger;
         public static SocketUser OwnerUser;
 
         public EventHandler(DiscordSocketClient client)
@@ -20,7 +21,7 @@ namespace EdgyCore
             _client = client;
             InitEvents();
             new ASPPinger();
-            new DBLPinger();
+            dblPinger = new DBLPinger();
         }
 
         private void InitEvents()
@@ -34,17 +35,17 @@ namespace EdgyCore
         public async Task Ready()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
-
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
+            await dblPinger.UpdateStats(_client.Guilds.Count);
         }
 
         private async Task Client_Disconnected(Exception exception)
             => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Message);
 
-        private static async Task Client_JoinedGuild(SocketGuild guild)
-            => await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
+        private async Task Client_JoinedGuild(SocketGuild guild)
+        => await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
         
     }
 }
