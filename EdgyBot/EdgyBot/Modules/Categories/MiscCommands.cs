@@ -55,6 +55,25 @@ namespace EdgyCore.Modules
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("Your message has been sent!");
         }
+        /* Same thing here */
+        [Command("bugreport")][Alias("reportbug")][Name("bugreport")][Summary("Submits a bug to the owner of the bot. Please use this command wisely. The command, steps to reproduce, etc...")]
+        public async Task BugReportCmd ([Remainder]string msg)
+        {
+            if (msg == null)
+            {
+                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Bug Report Error", "Please enter a message. The command, steps to reproduce, etc..."));
+                return;
+            }
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("New Bug!", msg);
+            EmbedFooterBuilder efb = new EmbedFooterBuilder
+            {
+                Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString()
+            };
+            eb.Footer = efb;
+            await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
+            await ReplyAsync("Your Bug Report has been sent!");
+        }
         [Command("support")][Name("support")][Alias("helpedgy")][Summary("Tells you how you can support the development of EdgyBot")]
         public async Task SupportCmd ()
         {
