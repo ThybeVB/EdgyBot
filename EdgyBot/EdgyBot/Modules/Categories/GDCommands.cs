@@ -47,9 +47,8 @@ namespace EdgyCore.Modules.Categories
             footer.Text = $"User ID: {finalResult[3]}, Account ID: {accID}";
             footer.IconUrl = gdpicurl;
             eb.Footer = footer;
-            Embed e = eb.Build();
 
-            await ReplyAsync("", embed: e);
+            await ReplyAsync("", embed: eb.Build());
         }
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
         public async Task Top10GDCMD()
@@ -72,9 +71,8 @@ namespace EdgyCore.Modules.Categories
                 lbPlace++;
             }
             e.ThumbnailUrl = gdThumbPic;
-            Embed a = e.Build();
 
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
         [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
         public async Task TopGDCMD(int count)
@@ -108,8 +106,7 @@ namespace EdgyCore.Modules.Categories
                 lbPlace++;
             }
             e.ThumbnailUrl = gdThumbPic;
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
         [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
         public async Task Top10CreatorsCMD()
@@ -132,8 +129,7 @@ namespace EdgyCore.Modules.Categories
                 place++;
             }
             e.ThumbnailUrl = gdThumbPic;
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
         [Command("topcreators")][Name("topcreators")][Summary("Same thing as top10creators, but it is based on your number.")]
         public async Task TopCreatorsCMD(int count)
@@ -167,8 +163,7 @@ namespace EdgyCore.Modules.Categories
                 place++;
             }
             e.ThumbnailUrl = gdThumbPic;
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
         [Command("topcomments", RunMode = RunMode.Async)][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
         public async Task LevelCommentsCMD ([Remainder]string str = null)
@@ -200,8 +195,7 @@ namespace EdgyCore.Modules.Categories
                     eb.AddField(username, "**Error**: Invalid Comment.");
                 }
             }
-            Embed e = eb.Build();
-            await ReplyAsync("", embed: e);
+            await ReplyAsync("", embed: eb.Build());
         }
     }
 }
