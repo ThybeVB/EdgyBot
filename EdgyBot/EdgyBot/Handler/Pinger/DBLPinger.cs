@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Discord;
 using System.Threading.Tasks;
-using System.Timers;
-using DiscordBotList.Models;
 using DiscordBotsList.Api;
 using EdgyCore;
 
@@ -25,8 +23,14 @@ namespace EdgyBot.Handler
 
         public async Task UpdateStats (int serverCount)
         {
-            IDblSelfBot self = await dblApi.GetMeAsync();
-            await self.UpdateStatsAsync(serverCount);
+            try
+            {
+                IDblSelfBot self = await dblApi.GetMeAsync();
+                await self.UpdateStatsAsync(serverCount);
+            } catch
+            {
+                await _lib.EdgyLog(LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
+            }
         }
     }
 }
