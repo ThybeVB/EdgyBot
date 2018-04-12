@@ -57,7 +57,7 @@ namespace EdgyCore.Modules
         }
         /* Same thing here */
         [Command("bugreport")][Alias("reportbug")][Name("bugreport")][Summary("Submits a bug to the owner of the bot. Please use this command wisely. The command, steps to reproduce, etc...")]
-        public async Task BugReportCmd ([Remainder]string msg)
+        public async Task BugReportCmd ([Remainder]string msg = null)
         {
             if (msg == null)
             {
@@ -72,7 +72,7 @@ namespace EdgyCore.Modules
             };
             eb.Footer = efb;
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
-            await ReplyAsync("Your Bug Report has been sent!");
+            await ReplyAsync("", embed: _lib.CreateEmbedWithText("Success", "Your Bug Report has been sent!"));
         }
         [Command("support")][Name("support")][Alias("helpedgy")][Summary("Tells you how you can support the development of EdgyBot")]
         public async Task SupportCmd ()
