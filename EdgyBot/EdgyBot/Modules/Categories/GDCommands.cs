@@ -21,8 +21,8 @@ namespace EdgyCore.Modules.Categories
         //    string levelName = levelData[3];
         //    //string author = 
         //}
-        [Command("profile")][Name("profile")][Summary("Gives you a profile from Geometry Dash")]
-        public async Task ProfileGDCMD ([Remainder]string strInput = null)
+        [Command("profile")] [Name("profile")] [Summary("Gives you a profile from Geometry Dash")]
+        public async Task GDProfileCmd ([Remainder]string strInput = null)
         {
             string accID = await _gdLib.GetGJUsers(strInput);
             string[] finalResult = await _gdLib.getGJUserInfo(accID);
@@ -51,7 +51,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: eb.Build());
         }
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
-        public async Task Top10GDCMD()
+        public async Task GDTop10Cmd()
         {
             string[] users = await _gdLib.getGJScores20("top", 10);
             
@@ -75,7 +75,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
         [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
-        public async Task TopGDCMD(int count)
+        public async Task GDTopPlayersCmd(int count)
         {
             string countStr = count.ToString();
             if (count > 25)
@@ -109,7 +109,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
         [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
-        public async Task Top10CreatorsCMD()
+        public async Task GDTop10CreatorsCmd()
         {
             string[] users = await _gdLib.getGJScores20("creators", 10);
             int place = 1;
@@ -132,7 +132,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
         [Command("topcreators")][Name("topcreators")][Summary("Same thing as top10creators, but it is based on your number.")]
-        public async Task TopCreatorsCMD(int count)
+        public async Task GDTopCreatorsCmd(int count)
         {
             if (count > 25)
             {
@@ -166,7 +166,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
         [Command("topcomments", RunMode = RunMode.Async)][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
-        public async Task LevelCommentsCMD ([Remainder]string str = null)
+        public async Task GDTopLevelCommentsCmd ([Remainder]string str = null)
         {
             if (str == null)
             {
