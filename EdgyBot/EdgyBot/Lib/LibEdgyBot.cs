@@ -5,6 +5,7 @@ using Discord.Commands;
 using System.Text;
 using System.Security.Cryptography;
 using System.Linq;
+using Discord.WebSocket;
 
 namespace EdgyCore
 {
@@ -188,7 +189,9 @@ namespace EdgyCore
         }
         public string getOwnerDiscordName()
         {
-            return _loginInfo.ownerDiscordName;
+            SocketUser ownerUser = EventHandler.OwnerUser;
+            if (ownerUser == null) return "Undefined";
+            return $"{ownerUser.Username}#{ownerUser.Discriminator}";
         }
         public ulong GetOwnerID()
         {

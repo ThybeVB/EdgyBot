@@ -15,7 +15,7 @@ namespace EdgyCore
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public async Task MainAsync ()
+        private async Task MainAsync ()
         {
             IWebHost host = WebHost.CreateDefaultBuilder().UseStartup<ASPStartup>().Build();
             new EventHandler(Client);

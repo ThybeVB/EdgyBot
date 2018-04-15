@@ -14,7 +14,6 @@ The handy and all around fun bot that can be used for any kind of server!
  * string invLink
  * string GJP
  * string accID
- * string ownerDiscordName
  * ulong ownerID
  * int defAddedXP
  
@@ -30,7 +29,6 @@ The handy and all around fun bot that can be used for any kind of server!
 		public string invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=373163613390897163";
 		public string GJP = "topsecretGJP";
 		public string accID = "gdaccID";
-		public string ownerDiscordName = "MyName#1234";
 		public ulong ownerID = supercoolID;
 		public int startersXP = 0;
 		public int defAddedXP = 275;
