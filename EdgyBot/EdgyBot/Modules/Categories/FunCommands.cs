@@ -115,19 +115,6 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
-        [Command("lol")][Name("lol")][Summary("Lols someone.... kms")]
-        public async Task LolCmd(IGuildUser user)
-        {
-            if (user.Id == Context.Message.Author.Id)
-            {
-                await ReplyAsync("Nah m8 why would u lol urself");
-            }
-            else
-            {
-                await Context.Message.DeleteAsync();
-                await ReplyAsync(user.Mention + " ....lol");
-            }
-        }
         [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
