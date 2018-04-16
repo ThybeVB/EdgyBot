@@ -8,14 +8,13 @@ The handy and all around fun bot that can be used for any kind of server!
 
  To use/run EdgyBot, create a class called LoginInfo.cs with the following variables:
 
- * string token
- * string dblToken (OPTIONAL)
- * string prefix 
- * string invLink
- * string GJP
- * string accID
- * ulong ownerID
- * int defAddedXP
+ * string token, The token for your bot used to connect to Discord.
+ * string dblToken, (OPTIONAL) Your API token for the Discord Bot List.
+ * string prefix, The prefix used for the bot.
+ * string invLink, The invite link to invite the bot to other guilds.
+ * string GJP, Geometry Jump Password, used for the Geometry Dash Commands.
+ * string accID, Geometry Dash Account ID used for the Geometry Dash Commands.
+ * ulong ownerID, The Discord ID of the bot owner.
  
  ## Example
  ```cs
@@ -30,8 +29,6 @@ The handy and all around fun bot that can be used for any kind of server!
 		public string GJP = "topsecretGJP";
 		public string accID = "gdaccID";
 		public ulong ownerID = supercoolID;
-		public int startersXP = 0;
-		public int defAddedXP = 275;
     }
 }
  ```
