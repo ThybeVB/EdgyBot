@@ -18,17 +18,14 @@ namespace EdgyCore.Modules
         }
         [Command("source")][Alias("sourcecode", "github")][Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
-        {
-            Embed e = _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!");
-            await ReplyAsync("", embed: e);
-        }
+            => await ReplyAsync("", embed: _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!"));
+        
         [Command("say")][Name("say")][Summary("Have EdgyBot send your message.")]
-        public async Task SayCmd ([Remainder]string input = null)
-        {
-            await ReplyAsync(input);
-        }
+        public async Task SayCmd ([Remainder]string input)
+            => await ReplyAsync(input);
+        
         [Command("sayd")][Name("sayd")][Alias("saydelete")][Summary("This does the same thing as 'sayd', but deletes the original message.")]
-        public async Task SaydCmd ([Remainder]string input = null)
+        public async Task SaydCmd ([Remainder]string input)
         {
             await ReplyAsync(input);
             try { await Context.Message.DeleteAsync(); } catch
@@ -38,9 +35,8 @@ namespace EdgyCore.Modules
         }    
         [Command("e")]
         public async Task SecretCmd01 ()
-        {
-            await ReplyAsync("monstah is not gay german");
-        }
+            => await ReplyAsync("monstah is not gay german");
+        
         /* Marking suggest command as async because it was throwing MessageRecieved errors. */
         [Command("suggest", RunMode = RunMode.Async)][Alias("sg", "sugg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
         public async Task SuggestCmd ([Remainder]string msg = null)
