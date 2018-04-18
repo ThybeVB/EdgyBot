@@ -185,6 +185,8 @@ namespace EdgyCore
         }
         public string GetGDAccID()
         {
+            string accID = _loginInfo.accID;
+            if (string.IsNullOrEmpty(accID)) return null;
             return _loginInfo.accID;
         }
         public string getOwnerDiscordName()
