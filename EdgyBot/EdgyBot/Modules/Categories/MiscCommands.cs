@@ -41,7 +41,6 @@ namespace EdgyCore.Modules
         {
             await ReplyAsync("monstah is not gay german");
         }
-        /* Marking suggest command as async because it was throwing MessageRecieved errors. */
         [Command("suggest", RunMode = RunMode.Async)][Alias("sg", "sugg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
         public async Task SuggestCmd ([Remainder]string msg = null)
         {

@@ -201,14 +201,6 @@ namespace EdgyCore
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
-        public int GetDefaultXP()
-        {
-            return _loginInfo.startersXP;
-        }
-        public int GetDefaultAddedXP()
-        {
-            return _loginInfo.defAddedXP;
-        }
         public string GetDatabaseFileName()
         {
             return _loginInfo.dbname;
