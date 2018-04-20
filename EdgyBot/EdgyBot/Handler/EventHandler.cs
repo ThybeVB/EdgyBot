@@ -46,6 +46,8 @@ namespace EdgyCore
         {
             await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
             await dblPinger.UpdateStats(_client.Guilds.Count);
+            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
+            await _client.SetGameAsync(gameStatus);
         }
     }
 }
