@@ -26,15 +26,13 @@ namespace EdgyCore
         /// <param name="text"></param>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public Embed CreateEmbedWithText(string title, string text, bool footerEnabled = false)
+        public Embed CreateEmbedWithText(string title, string text, EmbedFooterBuilder footer = null)
         {
             EmbedBuilder eb = new EmbedBuilder();
-            if (footerEnabled)
-            {
-                EmbedFooterBuilder footer = new EmbedFooterBuilder();
-                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+
+            if (footer != null) 
                 eb.Footer = footer;
-            }
+            
             eb.Color = LightBlue;
             eb.AddField(title, text);
             Embed e = eb.Build();

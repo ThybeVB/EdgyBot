@@ -45,7 +45,7 @@ namespace EdgyCore.Modules.Categories
             }
             input = reverseTxt;
             #endregion
-            Embed a = _lib.CreateEmbedWithText("Reversed Text", input, false);
+            Embed a = _lib.CreateEmbedWithText("Reversed Text", input);
             await ReplyAsync("", embed: a);
         }
         [Command("flipcoin")][Name("flipcoin")][Summary("Flips a coin.")]

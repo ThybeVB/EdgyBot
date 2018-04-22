@@ -103,9 +103,10 @@ namespace EdgyCore.Modules.Categories
         [Summary("Checks EdgyBot's speed to the server.")]
         public async Task PingCmd()
         {
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
-            eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
-            await ReplyAsync("", embed: eb.Build());
+            //EmbedBuilder builder = _lib.crea
+            //EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
+            //eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
+            //await ReplyAsync("", embed: eb.Build());
         }
         [Command("info")][Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
