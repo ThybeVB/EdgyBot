@@ -106,7 +106,7 @@ namespace EdgyCore.Modules.Categories
         {
             EmbedFooterBuilder fb = new EmbedFooterBuilder
             {
-                Text = $"Response Time: {Context.Client.Latency.ToString()} Ms | {DateTime.Now.ToUniversalTime()}"
+                Text = $"Response Time: {Context.Client.Latency.ToString()}ms | {DateTime.Now.ToUniversalTime()} GMT"
             };
             Embed e = _lib.CreateEmbedWithText("Ping", "Pong! :ping_pong:", fb);
             await ReplyAsync("", embed: e);
