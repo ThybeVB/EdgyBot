@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using System;
 using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories
@@ -103,10 +104,13 @@ namespace EdgyCore.Modules.Categories
         [Summary("Checks EdgyBot's speed to the server.")]
         public async Task PingCmd()
         {
-            //EmbedBuilder builder = _lib.crea
-            //EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
-            //eb.AddField("Response Time", $"{Context.Client.Latency.ToString()} Miliseconds");
-            //await ReplyAsync("", embed: eb.Build());
+            EmbedFooterBuilder fb = new EmbedFooterBuilder
+            {
+                Text = $"Response Time: {Context.Client.Latency.ToString()} Ms | {DateTime.Now.ToUniversalTime()}"
+            };
+            Embed e = _lib.CreateEmbedWithText("Ping", "Pong! :ping_pong:", fb);
+            await ReplyAsync("", embed: e);
+
         }
         [Command("info")][Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
