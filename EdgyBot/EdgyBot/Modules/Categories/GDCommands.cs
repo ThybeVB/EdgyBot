@@ -80,12 +80,12 @@ namespace EdgyCore.Modules.Categories
             string countStr = count.ToString();
             if (count > 25)
             {
-                Embed aErr = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is too big.\n[MAX = 25]", false);
+                Embed aErr = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is too big.\n[MAX = 25]");
                 await ReplyAsync("", embed: aErr);
                 return;
             } else if (count <= 0)
             {
-                Embed aErr1 = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is invalid.", false);
+                Embed aErr1 = _lib.CreateEmbedWithText("Top " + countStr, "The number you entered is invalid.");
                 await ReplyAsync("", embed: aErr1);
                 return;
             }
