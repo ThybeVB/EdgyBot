@@ -71,6 +71,7 @@ namespace EdgyCore.Modules.Categories
         }
         [Command("serverinfo")]
         [Name("serverinfo")]
+        [Alias("guildinfo")]
         [Summary("Gives you info about the server you are in.")]
         public async Task ServerInfoCmd()
         {
@@ -84,15 +85,17 @@ namespace EdgyCore.Modules.Categories
             string memberCount = Context.Guild.MemberCount.ToString();
             string emoteCount = Context.Guild.Emotes.Count.ToString();
             string roleCount = Context.Guild.Roles.Count.ToString();
+            string categoriesCount = Context.Guild.CategoryChannels.Count.ToString();
             string channelCount = Context.Guild.Channels.Count.ToString();
             #endregion
 
             eb.ThumbnailUrl = serverGuildIconUrl;
-            eb.AddField("Server Name", name);
+            eb.AddField("Guild Name", name);
             eb.AddField("Server ID", serverId);
             eb.AddField("Member Count", memberCount);
             eb.AddField("Emote Count", emoteCount);
             eb.AddField("Role Count", roleCount);
+            eb.AddField("Category Count", categoriesCount);
             eb.AddField("Channel Count", channelCount);
             eb.AddField("Created At", createdAt);
 
