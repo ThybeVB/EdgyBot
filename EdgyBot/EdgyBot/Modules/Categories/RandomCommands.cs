@@ -60,10 +60,10 @@ namespace EdgyCore.Modules.Categories
                     await ReplyAsync("Error.");
                     break;
                 case 1:
-                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Heads!", "http://sigmastudios.tk/SigmaFiles/heads.png");
+                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Heads!", "https://i2.wp.com/thisthingcalledcrypto.com/wp-content/uploads/2018/02/Doge-2.png?fit=296%2C300&ssl=1");
                     break;
                 case 2:
-                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Tails!", "http://sigmastudios.tk/SigmaFiles/tails.png");
+                    e = _lib.CreateEmbedWithImage("Coinflip", "You Got Tails!", "https://lh3.googleusercontent.com/OTZ_AxUMM3GBsNSSZazKCJJWbTM7wB0oT2NexK2jAm-dlU1vFxk2YFKhZbvsJfJbx3w=w300");
                     break;
             }
             await ReplyAsync("", embed: e);
