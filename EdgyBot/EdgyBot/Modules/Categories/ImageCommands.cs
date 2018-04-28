@@ -6,6 +6,7 @@ using Discord.WebSocket;
 using System.Linq;
 using ImageProcessor;
 using System.Net;
+using System.IO;
 
 namespace EdgyCore.Modules.Categories
 {
@@ -14,7 +15,7 @@ namespace EdgyCore.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("imgtest", RunMode = RunMode.Async)][RequireOwner]
-        public async Task ImgTest ()
+        public async Task ImgTestCmd ()
         {
             Attachment img = Context.Message.Attachments.SingleOrDefault();
 
@@ -23,10 +24,9 @@ namespace EdgyCore.Modules.Categories
                 await ReplyAsync("Please provide an image.");
                 return;
             }
-            try { _lib.DownloadImageAsync(img.Url); } 
-             catch {
-                await ReplyAsync("err");
-            }
+            WebClient client = new WebClient();
+            await client.DownloadFileTaskAsync(new Uri(img.Url), "UserImg/imgTest.png");
+            await Context.Channel.SendFileAsync("UserImg/imgTest.png");
         }
     }
 }

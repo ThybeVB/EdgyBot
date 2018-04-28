@@ -7,8 +7,6 @@ using System.Security.Cryptography;
 using System.Linq;
 using Discord.WebSocket;
 using System.Net;
-using System.IO;
-using System.Drawing;
 
 namespace EdgyCore
 {
@@ -19,22 +17,9 @@ namespace EdgyCore
     {
         private readonly LoginInfo _loginInfo = new LoginInfo();
 
-        public readonly Discord.Color LightBlue = new Discord.Color(0x0cc6d3);
-        private readonly Discord.Color moneyGreen = new Discord.Color(0x85bb65);
+        public readonly Color LightBlue = new Color(0x0cc6d3);
+        private readonly Color moneyGreen = new Color(0x85bb65);
         private WebClient client = new WebClient();
-
-        public void DownloadImageAsync(string url)
-        {
-            Stream stream = client.OpenRead(url);
-            Bitmap bitmap; bitmap = new Bitmap(stream);
-
-            if (bitmap != null)
-                bitmap.Save("reqImg", System.Drawing.Imaging.ImageFormat.Png);
-
-            stream.Flush();
-            stream.Close();
-            client.Dispose();
-        }
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -95,7 +80,7 @@ namespace EdgyCore
         public Embed CreateEmbedWithError(string errTitle, string errText)
         {
             EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = Discord.Color.DarkRed;
+            eb.Color = Color.DarkRed;
             eb.AddField(errTitle, errText);
             Embed e = eb.Build();
             return e;
