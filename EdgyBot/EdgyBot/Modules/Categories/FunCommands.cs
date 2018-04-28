@@ -149,13 +149,8 @@ namespace EdgyCore.Modules.Categories
             }
         }
         [Command("stab")][Name("stab")][Summary("Stabs an user.")]
-        public async Task StabCmd(SocketUser usr = null)
+        public async Task StabCmd(SocketUser usr)
         {
-            if (usr == null)
-            {
-                await ReplyAsync("You need to mention an user!\nTry **e!stab @User123**.");
-                return;
-            }
             if (usr.Id == Context.User.Id)
             {
                 await ReplyAsync("Yo bro that's fucked up.");
