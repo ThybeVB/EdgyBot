@@ -27,6 +27,7 @@ namespace EdgyCore
             _client.Log += _lib.Log;
             _client.Ready += Ready;
             _client.JoinedGuild += Client_JoinedGuild;
+            _client.LeftGuild += Client_LeftGuild;
             _client.Disconnected += Client_Disconnected;
         }
 
@@ -45,6 +46,13 @@ namespace EdgyCore
         private async Task Client_JoinedGuild(SocketGuild guild)
         {
             await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
+            await dblPinger.UpdateStats(_client.Guilds.Count);
+            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
+            await _client.SetGameAsync(gameStatus);
+        }
+
+        private async Task Client_LeftGuild(SocketGuild guild)
+        {
             await dblPinger.UpdateStats(_client.Guilds.Count);
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
