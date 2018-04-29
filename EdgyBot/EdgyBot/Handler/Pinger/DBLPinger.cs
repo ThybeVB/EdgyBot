@@ -15,7 +15,7 @@ namespace EdgyBot.Handler
             string dblToken = _lib.getDBLToken();
             if (string.IsNullOrEmpty(dblToken))
             {
-                _lib.EdgyLog(Discord.LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
+                _lib.EdgyLog(LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
                 return;
             }
             dblApi = new AuthDiscordBotListApi(373163613390897163, dblToken);

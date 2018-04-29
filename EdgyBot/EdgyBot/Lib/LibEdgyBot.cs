@@ -110,7 +110,7 @@ namespace EdgyCore
         public string EncodeB64(string input)
         {
             byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-            string result = System.Convert.ToBase64String(inputBytes);
+            string result = Convert.ToBase64String(inputBytes);
             return result;
         }
         /// <summary>
