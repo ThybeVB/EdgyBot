@@ -51,8 +51,8 @@ namespace EdgyCore
                     else
                     {
                         if (msg.Content == "e!") return;
-
-                        await context.Message.AddReactionAsync(new Emoji("❌"));
+                        await context.Message.AddReactionAsync(new Emoji("❓"));
+                        //await context.Message.AddReactionAsync(new Emoji("❌"));
                     }
                 }
                 else
