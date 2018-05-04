@@ -14,6 +14,18 @@ namespace EdgyCore.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
+        [Command("imagecommands"), Alias("image", "images", "imgcommands"), Name("imagecommands"), Summary("Some info on why there currently can be no Image Commands")]
+        public async Task ImageCommandsInfo ()
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("Why no Image Commands?", "When an Image Command is executed, The image first gets downloaded to the Machine. There are some problems with this.");
+            eb.AddField("Problems?", "The Hosting Service that EdgyBot uses does not allow downloading external files from code. This is why EdgyBot has no Image Commands");
+            eb.AddField("Fix?", "Getting a Virtual Private Server (VPS) will resolve this issue, But until that, I can't provide Images.");
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
+
         [Command("imgtest", RunMode = RunMode.Async)][RequireOwner]
         public async Task ImgTestCmd ()
         {

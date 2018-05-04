@@ -24,14 +24,14 @@ namespace EdgyCore.Modules
             EmbedBuilder eb2 = _lib.SetupEmbedWithDefaults();
         
             eb.AddField("Bot Prefix", _lib.GetPrefix());
+            eb.AddField("Image Commands", "Pleas check the 'imagecommands' Command for info.");
         
             int lineCount = 0;
             foreach (CommandInfo c in _service.Commands)
             {
                 if (c == null) continue;
                 if (c.Name == null || c.Summary == null) continue;
-                //We are not using 25 because a field called Bot Prefix already exists.
-                if (lineCount >= 24)
+                if (lineCount >= 23)
                 {
                     eb2.AddField(c.Name, c.Summary);
                     lineCount++;
