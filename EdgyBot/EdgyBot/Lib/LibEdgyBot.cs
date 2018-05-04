@@ -41,6 +41,7 @@ namespace EdgyCore
 
             return e;
         }
+
         /// <summary>
         /// Creates an Embed with Text and an image.
         /// </summary>
@@ -55,6 +56,7 @@ namespace EdgyCore
             eb.AddField("EdgyBot", text);
             return eb.Build();
         }
+
         /// <summary>
         /// Creates an embed with a field and an image.
         /// </summary>
@@ -71,6 +73,7 @@ namespace EdgyCore
             Embed e = eb.Build();
             return e;
         }
+
         /// <summary>
         /// Creates an Error Embed.
         /// </summary>
@@ -85,6 +88,7 @@ namespace EdgyCore
             Embed e = eb.Build();
             return e;
         }
+
         /// <summary>
         /// Creates an Embed with defaults.
         /// </summary>
@@ -102,6 +106,7 @@ namespace EdgyCore
             eb.Color = LightBlue;
             return eb;
         }
+
         /// <summary>
         /// Encodes a string to Base 64
         /// </summary>
@@ -113,6 +118,7 @@ namespace EdgyCore
             string result = Convert.ToBase64String(inputBytes);
             return result;
         }
+
         /// <summary>
         /// Decodes a string from Base 64
         /// </summary>
@@ -124,11 +130,13 @@ namespace EdgyCore
             string decodedMessage = Encoding.UTF8.GetString(inputBytes);
             return decodedMessage;
         }
+
         private byte[] GetHash(string inputString)
         {
             HashAlgorithm algorithm = SHA512.Create();
             return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
+
         public string GetSHA512String(string inputString)
         {
             StringBuilder sb = new StringBuilder();
@@ -137,24 +145,24 @@ namespace EdgyCore
 
             return sb.ToString();
         }
-        /// <summary>
-        /// Gets the Discord Bot ID
-        /// </summary>
-        /// <returns></returns>
+
         public ulong GetBotId()
         {
             return Context.Client.CurrentUser.Id;
         }
+
         public string getDBLToken()
         {
             string dblToken = _loginInfo.dblToken;
             if (string.IsNullOrEmpty(dblToken)) return null;
             return dblToken;
         }
+
         public string GetInviteLink()
         {
             return _loginInfo.invLink;
         }
+
         public string GetToken()
         {
             return _loginInfo.token;
@@ -177,24 +185,28 @@ namespace EdgyCore
         {
             return _loginInfo.prefix;
         }
+
         public string GetGJP()
         {
             string gjp = _loginInfo.GJP;
             if (string.IsNullOrEmpty(gjp)) return null;
             return gjp;
         }
+
         public string GetGDAccID()
         {
             string accID = _loginInfo.accID;
             if (string.IsNullOrEmpty(accID)) return null;
             return _loginInfo.accID;
         }
+
         public string getOwnerDiscordName()
         {
             SocketUser ownerUser = EventHandler.OwnerUser;
             if (ownerUser == null) return "Undefined";
             return $"{ownerUser.Username}#{ownerUser.Discriminator}";
         }
+
         public ulong GetOwnerID()
         {
             return _loginInfo.ownerID;
@@ -203,10 +215,12 @@ namespace EdgyCore
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
         }
+
         public string GetDatabaseFileName()
         {
             return _loginInfo.dbname;
         }
+
         /// <summary>
         /// Logs a LogMessage to the Console.
         /// </summary>
@@ -271,6 +285,7 @@ namespace EdgyCore
             eb.AddField("ANNOUNCEMENT!", msg);
             return eb.Build();
         }
+
         public Embed CreateXPEmbed(string username, string currentXP)
         {
 
