@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using EdgyCore.Modules;
+using EdgyCore.Modules.Categories;
 
 namespace EdgyCore
 {
@@ -23,6 +24,7 @@ namespace EdgyCore
 
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
             new HelpCommand(_service);
+            new InfoCommands(_client);
 
             _client.MessageReceived += HandleCommandAsync;
         }
