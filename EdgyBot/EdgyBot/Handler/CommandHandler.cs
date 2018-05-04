@@ -23,8 +23,8 @@ namespace EdgyCore
             _service = new CommandService();
 
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
+
             new HelpCommand(_service);
-            new InfoCommands(_client);
 
             _client.MessageReceived += HandleCommandAsync;
         }

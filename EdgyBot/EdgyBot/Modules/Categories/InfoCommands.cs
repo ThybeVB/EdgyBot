@@ -9,12 +9,6 @@ namespace EdgyCore.Modules.Categories
     public class InfoCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        private DiscordSocketClient _client;
-
-        public InfoCommands (DiscordSocketClient client)
-        {
-            _client = client;
-        }
 
         [Command("channelinfo")]
         [Name("channelinfo")]
@@ -131,25 +125,6 @@ namespace EdgyCore.Modules.Categories
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.getOwnerDiscordName());
-
-            await ReplyAsync("", embed: eb.Build());
-        }
-        [Command("lookupguild"), RequireOwner]
-        public async Task LookupGuildOwner(ulong guildID)
-        {
-            SocketGuild guild = _client.GetGuild(guildID);
-            if (guild == null)
-                return;
-
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-
-            eb.AddField("Guild Name", guild.Name);
-            eb.AddField("Server ID", guild.Id);
-            eb.AddField("Member Count", guild.MemberCount);
-            eb.AddField("Emote Count", guild.Emotes.Count);
-            eb.AddField("Role Count", guild.Roles.Count);
-            eb.AddField("Category Count", guild.CategoryChannels.Count);
-            eb.AddField("Channel Count", guild.Channels.Count);
 
             await ReplyAsync("", embed: eb.Build());
         }
