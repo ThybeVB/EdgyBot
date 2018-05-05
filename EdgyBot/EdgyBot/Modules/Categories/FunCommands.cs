@@ -79,7 +79,7 @@ namespace EdgyCore.Modules.Categories
             char[] letters = msg.ToCharArray();
             foreach (char letter in letters)
             {
-                if (!_lib.IsEnglishLetter(letter)) return;
+                if (!_lib.IsEnglishLetter(letter)) continue;
                 if (letter == ' ')
                 {
                     sb.Append(" ");
