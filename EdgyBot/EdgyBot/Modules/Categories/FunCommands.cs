@@ -16,6 +16,7 @@ namespace EdgyCore.Modules.Categories
         public async Task DuelCmd (SocketGuildUser usr = null)
         {
             Random rand = new Random();
+
             if (usr == null || usr == Context.Message.Author) {
                 await ReplyAsync("", embed: _lib.CreateEmbedWithError("Duel Command", "Please mention a user!"));
                 return;
