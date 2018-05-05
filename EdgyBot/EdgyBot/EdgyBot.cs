@@ -9,7 +9,7 @@ namespace EdgyCore
 {
     public class EdgyBot
     {
-        private static void Main()
+        private static void Main ()
             => new EdgyBot().MainAsync().GetAwaiter().GetResult();
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });

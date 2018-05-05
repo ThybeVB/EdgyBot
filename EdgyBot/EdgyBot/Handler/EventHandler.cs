@@ -10,8 +10,10 @@ namespace EdgyCore
 {
     public class EventHandler : ModuleBase<SocketCommandContext>
     {
-        private readonly DiscordSocketClient _client;
         private LibEdgyBot _lib = new LibEdgyBot();
+
+        private readonly DiscordSocketClient _client;
+
         private static DBLPinger dblPinger;
         public static SocketUser OwnerUser;
 
@@ -19,12 +21,14 @@ namespace EdgyCore
         {
             _client = client;
             InitEvents();
+
             dblPinger = new DBLPinger();
         }
 
         private void InitEvents()
         {
             _client.Log += _lib.Log;
+
             _client.Ready += Ready;
             _client.JoinedGuild += Client_JoinedGuild;
             _client.LeftGuild += Client_LeftGuild;

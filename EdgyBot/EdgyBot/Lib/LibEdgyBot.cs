@@ -234,19 +234,19 @@ namespace EdgyCore
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     break;
                 case LogSeverity.Info:
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                 case LogSeverity.Debug:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                 case LogSeverity.Error:
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case LogSeverity.Warning:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case LogSeverity.Verbose:
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     break;
             }
             Console.WriteLine(message.ToString());
@@ -264,26 +264,6 @@ namespace EdgyCore
             LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
             Log(logMessage);
             return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// Creates an Embed exclusively for the Announce Command.
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="footerEnabled"></param>
-        /// <returns></returns>
-        public Embed CreateAnnouncementEmbed(string msg, bool footerEnabled)
-        {
-            EmbedBuilder eb = new EmbedBuilder();
-            if (footerEnabled)
-            {
-                EmbedFooterBuilder footer = new EmbedFooterBuilder();
-                footer.Text = DateTime.Now.ToUniversalTime().ToString() + " | If you want to stop getting these, use e!stopannounce.";
-                eb.Footer = footer;
-            }
-            eb.Color = LightBlue;
-            eb.AddField("ANNOUNCEMENT!", msg);
-            return eb.Build();
         }
 
         public Embed CreateXPEmbed(string username, string currentXP)
