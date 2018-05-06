@@ -253,6 +253,12 @@ namespace EdgyCore
             return Task.CompletedTask;
         }
 
+        public async Task UpdateGame (string statusStr)
+        {
+            await Context.Client.SetGameAsync(statusStr);
+            await EdgyLog(LogSeverity.Verbose, "Updated Status");
+        }
+
         /// <summary>
         /// Logs a Message under the EdgyBot name.
         /// </summary>
