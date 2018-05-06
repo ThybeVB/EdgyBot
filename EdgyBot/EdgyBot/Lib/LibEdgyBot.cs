@@ -249,7 +249,7 @@ namespace EdgyCore
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
             }
-            Console.WriteLine(message.Severity.ToString().ToUpper() + message.Message);
+            Console.WriteLine(message.Severity.ToString().ToUpper() + ": " + message.Message);
         }
 
         /// <summary>
