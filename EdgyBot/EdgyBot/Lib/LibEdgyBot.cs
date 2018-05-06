@@ -253,15 +253,13 @@ namespace EdgyCore
         }
 
         /// <summary>
-        /// Logs a Message under the EdgyBot name.
+        /// Logs a Message under the EdgyBot domain.
         /// </summary>
         /// <param name="severity"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
         public async Task EdgyLog(LogSeverity severity, string msg)
-        {
-            LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
-            await LogAsync(logMessage);
-        }
+            => await LogAsync(new LogMessage(severity, "EdgyBot", msg));
+        
     }
 }
