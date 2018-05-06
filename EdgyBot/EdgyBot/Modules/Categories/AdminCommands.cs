@@ -67,6 +67,7 @@ namespace EdgyCore.Modules.Categories
                 await ReplyAsync("No Permissions.");
             }
         }
+
         /*
          * EdgyBot Administratory Commands
         */
@@ -91,6 +92,7 @@ namespace EdgyCore.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
+
         [Command("ban")][Name("ban")][Summary("Bans a user from the Guild. Optionally, You can provide a reason.")]
         [RequireUserPermission(GuildPermission.BanMembers)]
         public async Task BanCmd (IGuildUser usr, [Remainder]string reason = null)

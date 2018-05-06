@@ -23,6 +23,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: e.Build());
         }
+
         [Command("userinfo")]
         [Name("userinfo")]
         [Summary("Mention an user or leave it empty for a description on the user.")]
@@ -70,6 +71,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
+
         [Command("serverinfo")]
         [Name("serverinfo")]
         [Alias("guildinfo")]
@@ -102,6 +104,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: eb.Build());
         }
+
         [Command("ping")]
         [Name("ping")]
         [Summary("Checks EdgyBot's speed to the server.")]
@@ -115,6 +118,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
+
         [Command("info")][Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
         {

@@ -25,7 +25,6 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: eb.Build());
         }
 
-
         [Command("imgtest", RunMode = RunMode.Async)][RequireOwner]
         public async Task ImgTestCmd ()
         {

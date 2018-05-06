@@ -27,6 +27,7 @@ namespace EdgyCore.Modules.Categories
             Embed a = e.Build();
             await ReplyAsync("", embed: a);
         }
+
         [Command("flip")][Name("flip")][Summary("Flips your message.")]
         public async Task ReverseCmd([Remainder]string input = null)
         {
@@ -48,6 +49,7 @@ namespace EdgyCore.Modules.Categories
             Embed a = _lib.CreateEmbedWithText("Reversed Text", input);
             await ReplyAsync("", embed: a);
         }
+
         [Command("flipcoin")][Name("flipcoin")][Summary("Flips a coin.")]
         public async Task FlipCoinCmd()
         {
@@ -68,6 +70,7 @@ namespace EdgyCore.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
+
         [Command("chance")][Name("chance")][Summary("What chance do you have of x?")]
         public async Task ChanceCmd([Remainder]string input)
         {

@@ -50,6 +50,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: eb.Build());
         }
+
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
         public async Task GDTop10Cmd()
         {
@@ -74,6 +75,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: e.Build());
         }
+
         [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
         public async Task GDTopPlayersCmd(int count)
         {
@@ -108,6 +110,7 @@ namespace EdgyCore.Modules.Categories
             e.ThumbnailUrl = gdThumbPic;
             await ReplyAsync("", embed: e.Build());
         }
+
         [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
         public async Task GDTop10CreatorsCmd()
         {
@@ -131,6 +134,7 @@ namespace EdgyCore.Modules.Categories
             e.ThumbnailUrl = gdThumbPic;
             await ReplyAsync("", embed: e.Build());
         }
+
         [Command("topcreators")][Name("topcreators")][Summary("Same thing as top10creators, but it is based on your number.")]
         public async Task GDTopCreatorsCmd(int count)
         {
@@ -165,6 +169,7 @@ namespace EdgyCore.Modules.Categories
             e.ThumbnailUrl = gdThumbPic;
             await ReplyAsync("", embed: e.Build());
         }
+
         [Command("topcomments", RunMode = RunMode.Async)][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
         public async Task GDTopLevelCommentsCmd ([Remainder]string str = null)
         {

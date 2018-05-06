@@ -43,6 +43,7 @@ namespace EdgyCore.Modules.Categories
                     break;
             }
         }
+
         [Command("clap")][Name("clap")][Summary("Puts your message into claps")]
         public async Task ClapCmd ([Remainder]string input)
         {
@@ -58,6 +59,7 @@ namespace EdgyCore.Modules.Categories
             }
             await ReplyAsync(sb.ToString());
         }
+
         [Command("vertical")][Name("vertical")][Summary("Converts your message to a vertical one")]
         public async Task VerticalCmd([Remainder]string msg)
         {
@@ -71,6 +73,7 @@ namespace EdgyCore.Modules.Categories
             sb.Append("```" + "\n");
             await ReplyAsync(sb.ToString());
         }
+
         [Command("bigletter")][Name("bigletter")][Summary("Converts your message to Big Letters")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
@@ -89,6 +92,7 @@ namespace EdgyCore.Modules.Categories
             }
             await ReplyAsync(sb.ToString());
         }
+
         [Command("stop")][Name("stop")][Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
@@ -96,6 +100,7 @@ namespace EdgyCore.Modules.Categories
             Embed a = _lib.CreateEmbedWithImage(usr.Mention, stopUrl);
             await ReplyAsync("", embed: a);
         }
+
         [Command("jeff")][Name("jeff")][Summary("Jeff's somebody.")]
         public async Task JeffCmd(IGuildUser user)
         {
@@ -116,6 +121,7 @@ namespace EdgyCore.Modules.Categories
             await ReplyAsync("", embed: e);
 
         }
+
         [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
@@ -149,6 +155,7 @@ namespace EdgyCore.Modules.Categories
                 otherShit++;
             }
         }
+
         [Command("stab")][Name("stab")][Summary("Stabs an user.")]
         public async Task StabCmd(SocketUser usr)
         {

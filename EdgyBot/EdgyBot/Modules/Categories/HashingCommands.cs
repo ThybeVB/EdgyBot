@@ -20,6 +20,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: eb.Build());
         }
+
         [Command("b64e")]
         [Name("b64e")]
         [Summary("Encodes a message to Base 64.")]
@@ -30,6 +31,7 @@ namespace EdgyCore.Modules.Categories
 
             await ReplyAsync("", embed: eb.Build());
         }
+
         [Command("b64d")]
         [Name("b64d")]
         [Summary("Decrypts a Base 64 Encoded message.")]

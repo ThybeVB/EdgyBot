@@ -16,6 +16,7 @@ namespace EdgyCore.Modules
             Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
             await ReplyAsync("", embed: e);
         }
+
         [Command("source")][Alias("sourcecode", "github")][Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
             => await ReplyAsync("", embed: _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!"));
@@ -33,6 +34,7 @@ namespace EdgyCore.Modules
                 await ReplyAsync("", embed: _lib.CreateEmbedWithError("Say Delete Command", "Could not delete the message. Does the bot have the permissions to do so?"));
             }      
         }    
+
         [Command("e")]
         public async Task SecretCmd01 ()
             => await ReplyAsync("monstah is not gay german");
@@ -69,6 +71,7 @@ namespace EdgyCore.Modules
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("", embed: _lib.CreateEmbedWithText("Success", "Your Bug Report has been sent!"));
         }
+
         [Command("support")][Name("support")][Alias("helpedgy")][Summary("Tells you how you can support the development of EdgyBot")]
         public async Task SupportCmd ()
         {
