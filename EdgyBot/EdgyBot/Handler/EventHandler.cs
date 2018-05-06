@@ -27,7 +27,7 @@ namespace EdgyCore
 
         private void InitEvents()
         {
-            _client.Log += _lib.Log;
+            _client.Log += _lib.LogAsync;
 
             _client.Ready += Ready;
             _client.JoinedGuild += Client_JoinedGuild;

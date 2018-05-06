@@ -226,7 +226,7 @@ namespace EdgyCore
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public Task Log(LogMessage message)
+        public async Task LogAsync(LogMessage message)
         {
             switch (message.Severity)
             {
@@ -249,8 +249,7 @@ namespace EdgyCore
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
             }
-            Console.WriteLine(message.ToString());
-            return Task.CompletedTask;
+            Console.WriteLine(message.Severity.ToString().ToUpper() + message.Message);
         }
 
         /// <summary>
