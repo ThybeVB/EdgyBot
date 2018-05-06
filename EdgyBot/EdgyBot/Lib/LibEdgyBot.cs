@@ -258,11 +258,10 @@ namespace EdgyCore
         /// <param name="severity"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public Task EdgyLog(LogSeverity severity, string msg)
+        public async Task EdgyLog(LogSeverity severity, string msg)
         {
             LogMessage logMessage = new LogMessage(severity, "EdgyBot", msg);
-            Log(logMessage);
-            return Task.CompletedTask;
+            await LogAsync(logMessage);
         }
     }
 }
