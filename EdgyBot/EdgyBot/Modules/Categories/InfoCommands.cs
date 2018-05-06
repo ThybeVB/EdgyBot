@@ -121,7 +121,8 @@ namespace EdgyCore.Modules.Categories
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
             eb.AddField("Username", "EdgyBot");
-            eb.AddField("Library", "Discord.Net 2.0 Beta");
+            eb.AddField("Library", "Discord.Net");
+            eb.AddField("Library Version", "2.0.0-beta-00880");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.getOwnerDiscordName());
