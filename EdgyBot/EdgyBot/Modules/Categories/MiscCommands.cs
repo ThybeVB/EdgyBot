@@ -37,7 +37,6 @@ namespace EdgyCore.Modules
         public async Task SecretCmd01 ()
             => await ReplyAsync("monstah is not gay german");
         
-        /* Marking suggest command as async because it was throwing MessageRecieved errors. */
         [Command("suggest", RunMode = RunMode.Async)][Alias("sg", "sugg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
         public async Task SuggestCmd ([Remainder]string msg = null)
         {
@@ -51,7 +50,7 @@ namespace EdgyCore.Modules
             await EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("Your message has been sent!");
         }
-        /* Same thing here */
+
         [Command("bugreport")][Alias("reportbug")][Name("bugreport")][Summary("Submits a bug to the owner of the bot. Please use this command wisely. The command, steps to reproduce, etc...")]
         public async Task BugReportCmd ([Remainder]string msg = null)
         {

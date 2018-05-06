@@ -34,6 +34,7 @@ namespace EdgyCore
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
             SocketCommandContext context = new SocketCommandContext(_client, msg);
+
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos))
             {

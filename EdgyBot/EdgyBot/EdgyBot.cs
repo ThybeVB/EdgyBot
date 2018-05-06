@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Discord;
+using Discord.WebSocket;
 
 namespace EdgyCore
 {
