@@ -13,6 +13,7 @@ namespace EdgyCore.Modules
         {
             _service = service;
         }
+
         [Command("help", RunMode = RunMode.Async)]
         [Name("help")]
         [Summary("Gives EdgyBot's commands and what they do.")]

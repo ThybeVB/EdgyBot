@@ -265,18 +265,5 @@ namespace EdgyCore
             Log(logMessage);
             return Task.CompletedTask;
         }
-
-        public Embed CreateXPEmbed(string username, string currentXP)
-        {
-
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.Title = "EdgyBot Experience System";
-            eb.Color = moneyGreen;
-            eb.ThumbnailUrl = "https://www.wpclipart.com/money/US_Currency/US_hundred_dollar_bill.png";
-            eb.AddField("Username", username, true);
-            eb.AddField("Experience", currentXP, true);
-
-            return eb.Build();
-        }
     }
 }
