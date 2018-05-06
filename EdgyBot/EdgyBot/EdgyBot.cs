@@ -10,12 +10,12 @@ namespace EdgyCore
     public class EdgyBot
     {
         private static void Main ()
-            => new EdgyBot().MainAsync().GetAwaiter().GetResult();
+            => new EdgyBot().StartAsync().GetAwaiter().GetResult();
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        private async Task MainAsync ()
+        private async Task StartAsync ()
         {
             IWebHost host = WebHost.CreateDefaultBuilder().UseStartup<ASPStartup>().Build();
             new EventHandler(Client);
