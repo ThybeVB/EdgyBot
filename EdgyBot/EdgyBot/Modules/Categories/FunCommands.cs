@@ -111,7 +111,7 @@ namespace EdgyCore.Modules.Categories
             }
             else if (user.Id == Context.Client.CurrentUser.Id)
             {
-                await ReplyAsync("HAHAHAHAHAHAHAH NO.");
+                await ReplyAsync("You can't just jeff me like that.");
                 return;
             }
             string imgUrl = "https://pbs.twimg.com/profile_images/880813322194612224/mgXPDJRq_400x400.jpg";
@@ -125,6 +125,9 @@ namespace EdgyCore.Modules.Categories
         [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
+            await ReplyAsync("The Acronym Command is being reworked, Use **e!help** to view the other commands.");
+            return;
+
             //Stage 1
             IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In a few seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
             string acroLetters = _lib.GetRandomLetters(6);

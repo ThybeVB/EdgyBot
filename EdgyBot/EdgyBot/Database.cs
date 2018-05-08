@@ -2,6 +2,6 @@
 {
     public class Database
     {
-        //Dead since .NET Core
+        //Abandoned since .NET Core, .NET Core broke SQLite, might bring it back soon.
     }
 }
