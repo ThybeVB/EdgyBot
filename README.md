@@ -11,6 +11,7 @@ The handy and all around fun bot that can be used for any kind of server!
  * string token, The token for your bot used to connect to Discord.
  * string dblToken, (Optional) Your API token for the Discord Bot List.
  * string prefix, The prefix used for the bot.
+ * ulong clientID, The Client ID of your bot. You can get this from the Developer Portal.
  * string invLink, The invite link to invite the bot to other guilds.
  * string GJP, (Optional) Geometry Jump Password, used for the Geometry Dash Commands.
  * string accID, (Optional) Geometry Dash Account ID used for the Geometry Dash Commands.
