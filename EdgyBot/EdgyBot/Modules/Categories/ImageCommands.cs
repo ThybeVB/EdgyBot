@@ -40,7 +40,6 @@ namespace EdgyCore.Modules.Categories
             {
                 await imgLib.DownloadAndSendAsync(new Uri(img.Url), "imgtest.png", Context);
             }
-            File.Delete("C:/EdgyBot/DownloadedImages/imgtest.png");
         }
     }
 }
