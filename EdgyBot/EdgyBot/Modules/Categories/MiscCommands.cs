@@ -35,7 +35,7 @@ namespace EdgyCore.Modules
             }      
         }    
 
-        [Command("e")]
+        [Command("e"), RequireOwner]
         public async Task SecretCmd01 ()
             => await ReplyAsync("monstah is not gay german");
         
