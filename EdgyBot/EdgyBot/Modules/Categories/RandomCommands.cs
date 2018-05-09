@@ -14,8 +14,7 @@ namespace EdgyCore.Modules.Categories
         {
             if (min >= max)
             {
-                Embed err = _lib.CreateEmbedWithText("EdgyBot", "Invalid number input.");
-                await ReplyAsync("", embed: err);
+                await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot", "Invalid number input."));
                 return;
             }
             Random rand = new Random();
@@ -23,9 +22,7 @@ namespace EdgyCore.Modules.Categories
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
 
             e.AddField("Random Number Generator", "You got " + result.ToString() + "!");
-
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: e.Build());
         }
 
         [Command("flip")][Name("flip")][Summary("Flips your message.")]
@@ -46,8 +43,7 @@ namespace EdgyCore.Modules.Categories
             }
             input = reverseTxt;
             #endregion
-            Embed a = _lib.CreateEmbedWithText("Reversed Text", input);
-            await ReplyAsync("", embed: a);
+            await ReplyAsync("", embed: _lib.CreateEmbedWithText("Reversed Text", input));
         }
 
         [Command("flipcoin")][Name("flipcoin")][Summary("Flips a coin.")]
@@ -79,9 +75,8 @@ namespace EdgyCore.Modules.Categories
             string numStr = num.ToString();
 
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
-            e.AddField("Chance", "The chance that " + input + " is " + numStr + "%");
-            Embed a = e.Build();
-            await ReplyAsync("", embed: a);
+            e.AddField("Chance", $"The chance that {input} is {numStr}%");
+            await ReplyAsync("", embed: e.Build());
         }
     }
 }
