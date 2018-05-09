@@ -45,7 +45,7 @@ namespace EdgyCore
         }
 
         private async Task Client_Disconnected(Exception exception)
-            => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Message);
+            => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Source + ": " + exception.Message);
 
         private async Task Client_JoinedGuild(SocketGuild guild)
         {

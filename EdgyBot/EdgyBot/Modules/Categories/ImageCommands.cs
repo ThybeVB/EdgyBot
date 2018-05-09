@@ -13,6 +13,7 @@ namespace EdgyCore.Modules.Categories
     public class ImageCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private ImgLib imgLib = new ImgLib();
         WebClient client = new WebClient();
 
         [Command("imagecommands"), Alias("image", "images", "imgcommands"), Name("imagecommands"), Summary("Some info on why there currently can be no Image Commands")]
@@ -34,12 +35,10 @@ namespace EdgyCore.Modules.Categories
             if (img == null)
             {
                 string avUrl = Context.Message.Author.GetAvatarUrl();
-                await client.DownloadFileTaskAsync(new Uri(avUrl), "C:/EdgyBot/DownloadedImages/imgtest.png");
-                await Context.Channel.SendFileAsync("C:/EdgyBot/DownloadedImages/imgtest.png");
+                await imgLib.DownloadAndSendAsync(new Uri(avUrl), "imgtest.png", Context);
             } else
             {
-                await client.DownloadFileTaskAsync(new Uri(img.Url), "C:/EdgyBot/DownloadedImages/imgtest.png");
-                await Context.Channel.SendFileAsync("C:/EdgyBot/DownloadedImages/imgtest.png");
+                await imgLib.DownloadAndSendAsync(new Uri(img.Url), "imgtest.png", Context);
             }
             File.Delete("C:/EdgyBot/DownloadedImages/imgtest.png");
         }
