@@ -37,9 +37,7 @@ namespace EdgyCore
             
             eb.Color = LightBlue;
             eb.AddField(title, text);
-            Embed e = eb.Build();
-
-            return e;
+            return eb.Build();
         }
 
         /// <summary>
@@ -70,8 +68,7 @@ namespace EdgyCore
             eb.Color = LightBlue;
             eb.AddField(title, text);
             eb.WithImageUrl(imgUrl);
-            Embed e = eb.Build();
-            return e;
+            return eb.Build();
         }
 
         /// <summary>
@@ -85,8 +82,7 @@ namespace EdgyCore
             EmbedBuilder eb = new EmbedBuilder();
             eb.Color = Color.DarkRed;
             eb.AddField(errTitle, errText);
-            Embed e = eb.Build();
-            return e;
+            return eb.Build();
         }
 
         /// <summary>
@@ -188,7 +184,9 @@ namespace EdgyCore
 
         public string GetPrefix()
         {
-            return _loginInfo.prefix;
+            string prefix = _loginInfo.prefix;
+            if (string.IsNullOrEmpty(prefix)) return "e!";
+            return prefix;
         }
 
         public string GetGJP()
@@ -214,7 +212,7 @@ namespace EdgyCore
         public string getOwnerDiscordName()
         {
             SocketUser ownerUser = EventHandler.OwnerUser;
-            if (ownerUser == null) return "Undefined";
+            if (ownerUser == null) return "Undefined#0000";
             return $"{ownerUser.Username}#{ownerUser.Discriminator}";
         }
 
