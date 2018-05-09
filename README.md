@@ -25,8 +25,8 @@ The handy and all around fun bot that can be used for any kind of server!
 		public string token = "mytopsecrettoken";
 		public string dblToken = "discord bot list token"; (OPTIONAL)
 		public string prefix = "e!";
-		public string invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=373163613390897163";
-		public string GJP = "topsecretGJP"; (Optional)
+		public ulong clientID = 123456789;
+		public string invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=123456789"; (OPTIONAL)
 		public string accID = "gdaccID"; (Optional)
 		public ulong ownerID = supercoolID;
     }

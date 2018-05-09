@@ -160,7 +160,12 @@ namespace EdgyCore
 
         public string GetInviteLink()
         {
-            return _loginInfo.invLink;
+            string invLink = _loginInfo.invLink;
+            if (string.IsNullOrEmpty(invLink)) {
+                string clientID = GetClientID().ToString();
+                invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=" + clientID; 
+            }
+            return invLink;
         }
 
         public string GetToken()
@@ -191,6 +196,12 @@ namespace EdgyCore
             string gjp = _loginInfo.GJP;
             if (string.IsNullOrEmpty(gjp)) return null;
             return gjp;
+        }
+
+        public ulong GetClientID ()
+        {
+            ulong clientID = _loginInfo.clientID;
+            return clientID;
         }
 
         public string GetGDAccID()
