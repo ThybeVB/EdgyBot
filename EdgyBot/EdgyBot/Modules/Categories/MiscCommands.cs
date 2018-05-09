@@ -31,7 +31,7 @@ namespace EdgyCore.Modules
             await ReplyAsync(input);
             try { await Context.Message.DeleteAsync(); } catch
             {
-                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Say Delete Command", "Could not delete the message. Does the bot have the permissions to do so?"));
+                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Sayd Command", "Could not delete the message. Does the bot have the permissions to do so?"));
             }      
         }    
 
