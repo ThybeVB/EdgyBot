@@ -17,12 +17,10 @@ namespace EdgyCore
 
         private async Task StartAsync ()
         {
-            IWebHost host = WebHost.CreateDefaultBuilder().UseStartup<ASPStartup>().Build();
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
-            host.Run();
             await Task.Delay(-1);
         }
     }

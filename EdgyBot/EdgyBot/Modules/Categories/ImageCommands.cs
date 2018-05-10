@@ -14,7 +14,7 @@ namespace EdgyCore.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private ImgLib imgLib = new ImgLib();
-        WebClient client = new WebClient();
+        private WebClient client = new WebClient();
 
         [Command("imagecommands"), Alias("image", "images", "imgcommands"), Name("imagecommands"), Summary("Some info on why there currently can be no Image Commands")]
         public async Task ImageCommandsInfo ()
