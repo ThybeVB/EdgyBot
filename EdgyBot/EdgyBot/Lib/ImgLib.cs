@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using ImageSharp;
 
 namespace EdgyCore
 {
@@ -24,6 +25,12 @@ namespace EdgyCore
             await context.Channel.SendFileAsync(fileLocation + fileName);
 
             File.Delete(fileLocation + fileName);
+        }
+
+        public Image<Rgba32> OpenImage(string fileName)
+        {
+            Image<Rgba32> img = Image.Load(fileLocation + fileName);
+            return img;
         }
     }
 }

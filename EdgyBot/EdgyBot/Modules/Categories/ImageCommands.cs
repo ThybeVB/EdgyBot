@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 using System.Linq;
-using ImageProcessor;
 using System.Net;
-using System.IO;
+using ImageSharp;
 
 namespace EdgyCore.Modules.Categories
 {
@@ -40,6 +38,12 @@ namespace EdgyCore.Modules.Categories
             {
                 await imgLib.DownloadAndSendAsync(new Uri(img.Url), "imgtest.png", Context);
             }
+        }
+
+        [Command("img")]
+        public async Task ImgCmd ()
+        {
+            Image<Rgba32> img = imgLib.OpenImage("img.png");
         }
     }
 }
