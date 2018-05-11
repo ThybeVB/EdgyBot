@@ -44,7 +44,7 @@ namespace EdgyCore
         /// <param name="Context"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task<Attachment> DetermineAttachmentAndDownload(Attachment img, SocketCommandContext Context, string fileName, IUser usr = null)
+        public async Task DetermineAttachmentAndDownload(Attachment img, SocketCommandContext Context, string fileName, IUser usr = null)
         {
             if (usr != null)
             {
@@ -61,8 +61,6 @@ namespace EdgyCore
             {
                 await DownloadAsync(new Uri(img.Url), fileName, Context);
             }
-
-            return img; 
         }
     }
 }

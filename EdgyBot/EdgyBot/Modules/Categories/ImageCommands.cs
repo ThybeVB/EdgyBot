@@ -19,12 +19,12 @@ namespace EdgyCore.Modules.Categories
 
         [Name("pixelate"), Summary("Pixelizes an Image")]
         [Command("pixelate", RunMode = RunMode.Async), Alias("pixelize", "pixel")]
-        public async Task HueCmd (int pixelInput = 0, IUser usr = null)
+        public async Task HueCmd (int pixelInput = 0)
         {
             string fileName = "pixelate.png";
 
             Attachment image = Context.Message.Attachments.FirstOrDefault();
-            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
             if (pixelInput == 0)
