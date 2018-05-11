@@ -43,10 +43,11 @@ namespace EdgyCore.Modules.Categories
             if (!string.IsNullOrEmpty(finalResult[27])) eb.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")", true); else eb.AddField("YouTube", "None", true);
             if (!string.IsNullOrEmpty(finalResult[55])) eb.AddField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")", true); else eb.AddField("Twitch", "None", true);
             if (!string.IsNullOrEmpty(finalResult[53])) eb.AddField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")", true); else eb.AddField("Twitter", "None", true);
-            EmbedFooterBuilder footer = new EmbedFooterBuilder();
-
-            footer.Text = $"User ID: {finalResult[3]}, Account ID: {accID}";
-            footer.IconUrl = gdpicurl;
+            EmbedFooterBuilder footer = new EmbedFooterBuilder
+            {
+                Text = $"User ID: {finalResult[3]}, Account ID: {accID}",
+                IconUrl = gdpicurl
+            };
             eb.Footer = footer;
 
             await ReplyAsync("", embed: eb.Build());

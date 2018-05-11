@@ -130,7 +130,7 @@ namespace EdgyCore.Modules.Categories
             eb.AddField("Library Version", "2.0.0-beta-00880");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Status", Context.Client.Activity.Name);
-            eb.AddField("Developer", _lib.getOwnerDiscordName());
+            eb.AddField("Developer", _lib.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());
         }

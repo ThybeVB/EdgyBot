@@ -12,7 +12,7 @@ namespace EdgyBot.Handler
 
         public DBLPinger ()
         {
-            string dblToken = _lib.getDBLToken();
+            string dblToken = _lib.GetDBLToken();
             if (string.IsNullOrEmpty(dblToken))
                 return;
             

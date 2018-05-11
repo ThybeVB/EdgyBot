@@ -48,9 +48,11 @@ namespace EdgyCore
         /// <returns></returns>
         public Embed CreateEmbedWithImage(string text, string imgUrl)
         {
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = LightBlue;
-            eb.ImageUrl = imgUrl;
+            EmbedBuilder eb = new EmbedBuilder()
+            {
+                Color = LightBlue,
+                ImageUrl = imgUrl,
+            };
             eb.AddField("EdgyBot", text);
             return eb.Build();
         }
@@ -64,10 +66,12 @@ namespace EdgyCore
         /// <returns></returns>
         public Embed CreateEmbedWithImage(string title, string text, string imgUrl)
         {
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = LightBlue;
+            EmbedBuilder eb = new EmbedBuilder
+            {
+                Color = LightBlue,
+                ImageUrl = imgUrl
+            };
             eb.AddField(title, text);
-            eb.WithImageUrl(imgUrl);
             return eb.Build();
         }
 
@@ -79,8 +83,10 @@ namespace EdgyCore
         /// <returns></returns>
         public Embed CreateEmbedWithError(string errTitle, string errText)
         {
-            EmbedBuilder eb = new EmbedBuilder();
-            eb.Color = Color.DarkRed;
+            EmbedBuilder eb = new EmbedBuilder
+            {
+                Color = Color.DarkRed
+            };
             eb.AddField(errTitle, errText);
             return eb.Build();
         }
@@ -95,8 +101,10 @@ namespace EdgyCore
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
             {
-                EmbedFooterBuilder footer = new EmbedFooterBuilder();
-                footer.Text = DateTime.Now.ToUniversalTime().ToString();
+                EmbedFooterBuilder footer = new EmbedFooterBuilder
+                {
+                    Text = DateTime.Now.ToUniversalTime().ToString()
+                };
                 eb.Footer = footer;
             }
             eb.Color = LightBlue;
@@ -147,7 +155,7 @@ namespace EdgyCore
             return Context.Client.CurrentUser.Id;
         }
 
-        public string getDBLToken()
+        public string GetDBLToken()
         {
             string dblToken = _loginInfo.dblToken;
             if (string.IsNullOrEmpty(dblToken)) return null;
@@ -209,7 +217,7 @@ namespace EdgyCore
             return _loginInfo.accID;
         }
 
-        public string getOwnerDiscordName()
+        public string GetOwnerDiscordName()
         {
             SocketUser ownerUser = EventHandler.OwnerUser;
             if (ownerUser == null) return "Undefined#0000";
