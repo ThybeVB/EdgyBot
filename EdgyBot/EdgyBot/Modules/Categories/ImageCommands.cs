@@ -5,45 +5,43 @@ using Discord.Commands;
 using System.Linq;
 using System.Net;
 using ImageSharp;
+using System.IO;
 
 namespace EdgyCore.Modules.Categories
 {
     public class ImageCommands : ModuleBase<SocketCommandContext>
     {
+        private readonly string filePath = "C:/EdgyBot/DownloadedImages/";
+
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private ImgLib imgLib = new ImgLib();
         private WebClient client = new WebClient();
 
-        [Command("imagecommands"), Alias("image", "images", "imgcommands"), Name("imagecommands"), Summary("Some info on why there currently can be no Image Commands")]
-        public async Task ImageCommandsInfo ()
-        {
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.AddField("Why no Image Commands?", "When an Image Command is executed, The image first gets downloaded to the Machine. There are some problems with this.");
-            eb.AddField("Problems?", "The Hosting Service that EdgyBot uses does not allow downloading external files from code. This is why EdgyBot has no Image Commands");
-            eb.AddField("Fix?", "Getting a Virtual Private Server (VPS) will resolve this issue, But until that, I can't provide Images.");
-            eb.AddField("Edit", "I finally got myself a VPS, working on some image commands :smile:");
 
-            await ReplyAsync("", embed: eb.Build());
-        }
 
         [Command("imgtest", RunMode = RunMode.Async)][RequireOwner]
         public async Task ImgTestCmd ()
         {
             Attachment img = Context.Message.Attachments.FirstOrDefault();
-            if (img == null)
-            {
-                string avUrl = Context.Message.Author.GetAvatarUrl();
-                await imgLib.DownloadAndSendAsync(new Uri(avUrl), "imgtest.png", Context);
-            } else
-            {
-                await imgLib.DownloadAndSendAsync(new Uri(img.Url), "imgtest.png", Context);
-            }
+            img = await imgLib.DetermineAttachment(img, Context, "imgtest.png");
         }
 
-        [Command("img")]
-        public async Task ImgCmd ()
+        [Command("hue")]
+        public async Task HueCmd ()
         {
-            Image<Rgba32> img = imgLib.OpenImage("img.png");
+            string fileName = "hue.png";
+
+            Attachment image = Context.Message.Attachments.FirstOrDefault();
+            image = await imgLib.DetermineAttachment(image, Context, fileName);
+
+            Image<Rgba32> img = imgLib.OpenImage(fileName);
+            img.Resize(100, 100);
+            img.Hue(100);
+            img.Save(filePath + fileName);
+            await Context.Channel.SendFileAsync(filePath + fileName);
+
+            img.Dispose();
+            File.Delete(filePath + fileName);
         }
     }
 }
