@@ -17,26 +17,24 @@ namespace EdgyCore.Modules.Categories
         private ImgLib imgLib = new ImgLib();
         private WebClient client = new WebClient();
 
-
-
-        [Command("imgtest", RunMode = RunMode.Async)][RequireOwner]
-        public async Task ImgTestCmd ()
+        [Name("pixelate"), Summary("Pixelizes an Image")]
+        [Command("pixelate", RunMode = RunMode.Async), Alias("pixelize", "pixel")]
+        public async Task HueCmd (int pixelInput = 0, IUser usr = null)
         {
-            Attachment img = Context.Message.Attachments.FirstOrDefault();
-            img = await imgLib.DetermineAttachment(img, Context, "imgtest.png");
-        }
-
-        [Command("hue")]
-        public async Task HueCmd ()
-        {
-            string fileName = "hue.png";
+            string fileName = "pixelate.png";
 
             Attachment image = Context.Message.Attachments.FirstOrDefault();
-            image = await imgLib.DetermineAttachment(image, Context, fileName);
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.Resize(100, 100);
-            img.Hue(100);
+            if (pixelInput == 0)
+            {
+                img.Pixelate(4);
+            } else
+            {
+                img.Pixelate(pixelInput);
+            }
+
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
 
