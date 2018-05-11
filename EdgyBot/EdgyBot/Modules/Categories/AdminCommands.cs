@@ -4,6 +4,7 @@ using Discord.Commands;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("Admin Commands"), Summary("Administrative Commands")]
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
         //private readonly Database _database = new Database();

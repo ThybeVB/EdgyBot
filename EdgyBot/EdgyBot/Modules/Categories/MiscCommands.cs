@@ -5,6 +5,7 @@ using System;
 
 namespace EdgyCore.Modules
 {
+    [Name("Miscellanious Commands"), Summary("Commands that don't fit in any other categories.")]
     public class MiscCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

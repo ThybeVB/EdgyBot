@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("Info Commands"), Summary("Commands providing info")]
     public class InfoCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

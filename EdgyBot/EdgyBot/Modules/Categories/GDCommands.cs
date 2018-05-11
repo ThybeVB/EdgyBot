@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("GD Commands"), Summary("Commands related to Geometry Dash")]
     public class GDCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

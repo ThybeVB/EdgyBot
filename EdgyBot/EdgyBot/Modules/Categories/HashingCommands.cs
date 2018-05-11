@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("Hashing Commands"), Summary("Hash Commands centered for Developers")]
     public class HashingCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

@@ -5,6 +5,7 @@ using Discord;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("Random Commands"), Summary("Commands that have different output every time.")]
     public class RandomCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

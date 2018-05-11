@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace EdgyCore.Modules.Categories
 {
+    [Name("Fun Commands"), Summary("Commands used for FUNUNUNUN")]
     public class FunCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();

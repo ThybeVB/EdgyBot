@@ -19,7 +19,7 @@ namespace EdgyCore.Modules.Categories
 
         [Name("pixelate"), Summary("Pixelizes an Image")]
         [Command("pixelate", RunMode = RunMode.Async), Alias("pixelize", "pixel")]
-        public async Task HueCmd (int pixelInput = 0)
+        public async Task PixelCmd (int pixelInput = 0)
         {
             string fileName = "pixelate.png";
 
