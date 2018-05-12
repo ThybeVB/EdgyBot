@@ -152,7 +152,7 @@ namespace EdgyCore
 
         public ulong GetBotId()
         {
-            return Context.Client.CurrentUser.Id;
+            return _loginInfo.clientID;
         }
 
         public string GetDBLToken()
