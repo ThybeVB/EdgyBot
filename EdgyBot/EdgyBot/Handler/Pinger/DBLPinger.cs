@@ -16,7 +16,7 @@ namespace EdgyBot.Handler
             if (string.IsNullOrEmpty(dblToken))
                 return;
             
-            dblApi = new AuthDiscordBotListApi(373163613390897163, dblToken);
+            dblApi = new AuthDiscordBotListApi(_lib.GetBotId(), dblToken);
         }
 
         public async Task UpdateStats (int serverCount)

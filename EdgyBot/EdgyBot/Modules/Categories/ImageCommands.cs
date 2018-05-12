@@ -27,9 +27,10 @@ namespace EdgyCore.Modules.Categories
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
+            img.Resize(300, 300);
             if (pixelInput == 0)
             {
-                img.Pixelate(4);
+                img.Pixelate(5);
             } else
             {
                 img.Pixelate(pixelInput);
