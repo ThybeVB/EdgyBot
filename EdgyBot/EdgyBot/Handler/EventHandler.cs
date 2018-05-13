@@ -12,7 +12,6 @@ namespace EdgyCore
         private LibEdgyBot _lib = new LibEdgyBot();
 
         private readonly DiscordSocketClient _client;
-        private readonly string gameStatus;
 
         private static DBLPinger dblPinger;
         public static SocketUser OwnerUser;
@@ -20,8 +19,6 @@ namespace EdgyCore
         public EventHandler(DiscordSocketClient client)
         {
             _client = client;
-
-            gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
 
             InitEvents();
 
@@ -55,8 +52,9 @@ namespace EdgyCore
         {
             await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
 
-            await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on LeftGuild");
+            await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on JoinedGuild");
             await dblPinger.UpdateStats(_client.Guilds.Count);
+            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
         }
 
@@ -64,6 +62,7 @@ namespace EdgyCore
         {
             await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on LeftGuild");
             await dblPinger.UpdateStats(_client.Guilds.Count);
+            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
         }
     }
