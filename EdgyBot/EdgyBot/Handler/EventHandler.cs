@@ -3,7 +3,6 @@ using Discord.WebSocket;
 using Discord;
 using Discord.Commands;
 using System;
-using System.Threading;
 using EdgyBot.Handler;
 
 namespace EdgyCore

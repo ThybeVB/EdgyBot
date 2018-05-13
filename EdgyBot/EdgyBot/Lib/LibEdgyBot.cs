@@ -243,7 +243,7 @@ namespace EdgyCore
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task Log(LogMessage message)
+        public Task Log(LogMessage message)
         {
             switch (message.Severity)
             {
@@ -267,6 +267,8 @@ namespace EdgyCore
                     break;
             }
             Console.WriteLine(DateTime.Now.ToShortTimeString() + "\t" + message.Severity.ToString().ToUpper() + ": " + message.Message);
+
+            return Task.CompletedTask;
         }
 
         /// <summary>
