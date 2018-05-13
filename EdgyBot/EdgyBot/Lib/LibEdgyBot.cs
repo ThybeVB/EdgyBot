@@ -243,7 +243,7 @@ namespace EdgyCore
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task LogAsync(LogMessage message)
+        public async Task Log(LogMessage message)
         {
             switch (message.Severity)
             {
@@ -266,7 +266,7 @@ namespace EdgyCore
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
             }
-            Console.WriteLine(message.Severity.ToString().ToUpper() + ": " + message.Message);
+            Console.WriteLine(DateTime.Now.ToShortTimeString() + "\t" + message.Severity.ToString().ToUpper() + ": " + message.Message);
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace EdgyCore
         /// <param name="msg"></param>
         /// <returns></returns>
         public async Task EdgyLog(LogSeverity severity, string msg)
-            => await LogAsync(new LogMessage(severity, "EdgyBot", msg));
+            => await Log(new LogMessage(severity, "EdgyBot", msg));
         
     }
 }
