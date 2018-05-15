@@ -1,14 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Discord.WebSocket;
 using Discord;
-using Discord.Commands;
 using System;
 using EdgyBot.Handler;
-using EdgyCore.Modules.Categories;
 
 namespace EdgyCore
 {
-    public class EventHandler : ModuleBase<SocketCommandContext>
+    public class EventHandler
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 
@@ -46,11 +44,11 @@ namespace EdgyCore
         }
 
         private async Task Client_Disconnected(Exception exception)
-            => await _lib.EdgyLog(LogSeverity.Critical, "EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n" + exception.Source + ": " + exception.Message);
+            => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
         private async Task Client_JoinedGuild(SocketGuild guild)
         {
-            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **{new LibEdgyBot().GetPrefix()}help**.");
+            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **e!help**.");
 
             await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on JoinedGuild");
             await dblPinger.UpdateStats(_client.Guilds.Count);

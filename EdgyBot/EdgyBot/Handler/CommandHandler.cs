@@ -19,6 +19,7 @@ namespace EdgyCore
         public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;
+
             _prefix = _lib.GetPrefix();
             _service = new CommandService();
 
@@ -54,7 +55,7 @@ namespace EdgyCore
                         }
                         else
                         {
-                            await context.Channel.SendMessageAsync($"You gave wrong input in this command. Check the **{_prefix}help** command for info.");
+                            await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
                         }
                     }
                     else
