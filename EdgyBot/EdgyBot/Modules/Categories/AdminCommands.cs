@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace EdgyCore.Modules.Categories
 {
     [Name("Admin Commands"), Summary("Administrative Commands")]
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
+
         //private readonly Database _database = new Database();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
@@ -67,6 +69,19 @@ namespace EdgyCore.Modules.Categories
             {
                 await ReplyAsync("No Permissions.");
             }
+        }
+        [Command("lookup"), RequireOwner]
+        public async Task LookupCmd (ulong guildID)
+        {
+            SocketGuild guild;
+
+            try { Context.Client.GetGuild(guildID); } catch
+            {
+                await ReplyAsync("Could not find Guild " + guildID.ToString());
+                return;
+            }
+            guild = Context.Client.GetGuild(guildID);
+            await ReplyAsync(guild.Name);
         }
 
         /*

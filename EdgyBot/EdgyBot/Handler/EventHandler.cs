@@ -4,6 +4,7 @@ using Discord;
 using Discord.Commands;
 using System;
 using EdgyBot.Handler;
+using EdgyCore.Modules.Categories;
 
 namespace EdgyCore
 {
@@ -38,7 +39,6 @@ namespace EdgyCore
         public async Task Ready()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
-
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
             await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
