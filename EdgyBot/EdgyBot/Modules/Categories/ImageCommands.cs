@@ -18,22 +18,16 @@ namespace EdgyCore.Modules.Categories
 
         [Name("pixelate"), Summary("Pixelizes an Image")]
         [Command("pixelate", RunMode = RunMode.Async), Alias("pixelize", "pixel")]
-        public async Task PixelCmd (int pixelInput = 0)
+        public async Task PixelCmd (IUser usr = null)
         {
             string fileName = "pixelate.png";
 
             Attachment image = Context.Message.Attachments.FirstOrDefault();
-            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName);
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.Resize(300, 300);
-            if (pixelInput == 0)
-            {
-                img.Pixelate(5);
-            } else
-            {
-                img.Pixelate(pixelInput);
-            }
+            img.Resize(480, 320);
+            img.Pixelate(10);
 
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
