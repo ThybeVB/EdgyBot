@@ -14,7 +14,6 @@ namespace EdgyCore.Modules.Categories
 
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private ImgLib imgLib = new ImgLib();
-        private WebClient client = new WebClient();
 
         [Name("pixelate"), Summary("Pixelizes an Image")]
         [Command("pixelate", RunMode = RunMode.Async), Alias("pixelize", "pixel")]

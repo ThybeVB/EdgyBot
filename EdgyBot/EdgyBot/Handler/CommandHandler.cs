@@ -60,7 +60,8 @@ namespace EdgyCore
                     }
                     else
                     {
-                        await context.Message.AddReactionAsync(new Emoji("❓"));
+                        await _lib.EdgyLog(LogSeverity.Verbose, $"Unknownd Command Executed, '{msg.Content}'");
+                        //await context.Message.AddReactionAsync(new Emoji("❓"));
                     }
                 }
             }
