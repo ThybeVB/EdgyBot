@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
-using EdgyCore.Modules.Categories;
 
 namespace EdgyCore
 {
