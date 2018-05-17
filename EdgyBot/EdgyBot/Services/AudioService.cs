@@ -7,7 +7,7 @@ using Discord.Audio;
 
 namespace EdgyBot
 {
-    class AudioService
+    public class AudioService
     {
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
