@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Audio;
 
-namespace EdgyBot
+namespace EdgyCore.Services
 {
     public class AudioService
     {
