@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using EdgyCore.Modules;
-using EdgyCore.Modules.Categories;
+using EdgyCore.Services;
 
 namespace EdgyCore
 {
@@ -24,11 +24,20 @@ namespace EdgyCore
             _service = new CommandService();
 
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
+            await _service.AddModuleAsync<AudioService>();
 
             new HelpCommand(_service);
 
             _client.MessageReceived += HandleCommandAsync;
         }
+
+        //private IServiceProvider ConfigureServices ()
+        //{
+        //    return new ServiceCollection()
+        //        .AddSingleton<AudioService>()
+        //        .BuildServiceProvider();
+        //    
+        //}
 
         private async Task HandleCommandAsync(SocketMessage s)
         {
