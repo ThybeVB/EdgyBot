@@ -9,6 +9,8 @@ namespace EdgyCore.Services
 {
     public class AudioService
     {
+        private LibEdgyBot _lib = new LibEdgyBot();
+
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
         public async Task JoinAudio(IGuild guild, IVoiceChannel target)
@@ -27,9 +29,7 @@ namespace EdgyCore.Services
 
             if (ConnectedChannels.TryAdd(guild.Id, audioClient))
             {
-                // If you add a method to log happenings from this service,
-                // you can uncomment these commented lines to make use of that.
-                //await Log(LogSeverity.Info, $"Connected to voice on {guild.Name}.");
+                await _lib.EdgyLog(LogSeverity.Info, $"Connected to Voice Channel on Guild {guild.Id}");
             }
         }
 

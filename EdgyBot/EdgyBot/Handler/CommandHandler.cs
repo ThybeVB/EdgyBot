@@ -24,7 +24,8 @@ namespace EdgyCore
             _service = new CommandService();
 
             await _service.AddModulesAsync(Assembly.GetEntryAssembly());
-            await _service.AddModuleAsync<AudioService>();
+
+
 
             new HelpCommand(_service);
 
