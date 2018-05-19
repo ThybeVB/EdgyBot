@@ -19,12 +19,13 @@ namespace EdgyCore.Modules.Categories
         public async Task JoinCmd ()
         {
             await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
+            await ReplyAsync($"Joined Voice on {Context.Guild.Id}");
         }
         [Command("leave", RunMode = RunMode.Async)]
         public async Task LeaveCmd ()
         {
-            await ReplyAsync("yo");
             await _service.LeaveAudio(Context.Guild);
+            await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
     }
 }

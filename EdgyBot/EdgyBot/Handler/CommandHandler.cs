@@ -25,8 +25,8 @@ namespace EdgyCore.Handler
 
             _service = ConfigureServices();
             _prefix = _lib.GetPrefix();
-            commandService = new CommandService();
 
+            commandService = new CommandService();
             await commandService.AddModulesAsync(Assembly.GetEntryAssembly());
 
             new HelpCommand(commandService);
@@ -71,8 +71,7 @@ namespace EdgyCore.Handler
                     }
                     else
                     {
-                        await _lib.EdgyLog(LogSeverity.Verbose, $"Unknownd Command Executed, '{msg.Content}'");
-                        //await context.Message.AddReactionAsync(new Emoji("❓"));
+                        await _lib.EdgyLog(LogSeverity.Verbose, $"Unknown Command Executed, '{msg.Content}'");
                     }
                 }
             }
