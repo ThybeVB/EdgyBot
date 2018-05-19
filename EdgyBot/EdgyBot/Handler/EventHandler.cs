@@ -48,7 +48,7 @@ namespace EdgyCore.Handler
 
         private async Task Client_JoinedGuild(SocketGuild guild)
         {
-            await guild.DefaultChannel.SendMessageAsync($"SH*T THANKS FOR INVITING ME M8'S, TO SEE ME COMMANDS, USE **e!help**.");
+            await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
 
             await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on JoinedGuild");
             await dblPinger.UpdateStats(_client.Guilds.Count);
