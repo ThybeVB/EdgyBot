@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Discord;
 using EdgyCore.Modules;
 using EdgyCore.Services;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace EdgyCore.Handler
 {
@@ -13,32 +15,31 @@ namespace EdgyCore.Handler
         private string _prefix;
 
         private DiscordSocketClient _client;
-        private CommandService _service;
+        private IServiceProvider _service;
+        private CommandService commandService;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         public async Task InitializeAsync(DiscordSocketClient client)
         {
             _client = client;
 
+            _service = ConfigureServices();
             _prefix = _lib.GetPrefix();
-            _service = new CommandService();
+            commandService = new CommandService();
 
-            await _service.AddModulesAsync(Assembly.GetEntryAssembly());
+            await commandService.AddModulesAsync(Assembly.GetEntryAssembly());
 
-
-
-            new HelpCommand(_service);
+            new HelpCommand(commandService);
 
             _client.MessageReceived += HandleCommandAsync;
         }
 
-        //private IServiceProvider ConfigureServices ()
-        //{
-        //    return new ServiceCollection()
-        //        .AddSingleton<AudioService>()
-        //        .BuildServiceProvider();
-        //    
-        //}
+        private IServiceProvider ConfigureServices ()
+        {
+            return new ServiceCollection()
+                .AddSingleton(new AudioService())
+                .BuildServiceProvider();
+        }
 
         private async Task HandleCommandAsync(SocketMessage s)
         {
@@ -52,7 +53,7 @@ namespace EdgyCore.Handler
                 if (msg.Author.IsBot) return;
                 if (msg.Content == _prefix) return;
 
-                IResult result = await _service.ExecuteAsync(context, argPos);             
+                IResult result = await commandService.ExecuteAsync(context, argPos, _service);             
 
                 if (!result.IsSuccess)
                 {

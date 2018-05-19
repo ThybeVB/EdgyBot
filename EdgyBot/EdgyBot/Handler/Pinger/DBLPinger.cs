@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using EdgyCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EdgyCore.Handler.Pinger
 {

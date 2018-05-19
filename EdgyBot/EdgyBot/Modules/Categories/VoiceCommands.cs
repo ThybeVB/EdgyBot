@@ -8,7 +8,12 @@ namespace EdgyCore.Modules.Categories
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly AudioService _service = new AudioService();
+        private readonly AudioService _service;
+
+        public VoiceCommands (AudioService service)
+        {
+            _service = service;
+        }
 
         [Command("join", RunMode = RunMode.Async)]
         public async Task JoinCmd ()
@@ -18,6 +23,7 @@ namespace EdgyCore.Modules.Categories
         [Command("leave", RunMode = RunMode.Async)]
         public async Task LeaveCmd ()
         {
+            await ReplyAsync("yo");
             await _service.LeaveAudio(Context.Guild);
         }
     }

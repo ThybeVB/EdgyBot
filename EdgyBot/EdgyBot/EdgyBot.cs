@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using EdgyCore.Handler;
@@ -19,7 +20,7 @@ namespace EdgyCore
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
-            await Task.Delay(-1);
+            await Task.Delay(Timeout.Infinite);
         }
     }
 }
