@@ -2,9 +2,9 @@
 using Discord.WebSocket;
 using Discord;
 using System;
-using EdgyBot.Handler;
+using EdgyCore.Handler.Pinger;
 
-namespace EdgyCore
+namespace EdgyCore.Handler
 {
     public class EventHandler
     {

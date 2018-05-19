@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using EdgyCore;
 
-namespace EdgyBot.Handler
+namespace EdgyCore.Handler.Pinger
 {
     public class DBLPinger
     {

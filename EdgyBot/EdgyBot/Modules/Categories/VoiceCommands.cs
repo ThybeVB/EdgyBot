@@ -15,5 +15,10 @@ namespace EdgyCore.Modules.Categories
         {
             await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
         }
+        [Command("leave", RunMode = RunMode.Async)]
+        public async Task LeaveCmd ()
+        {
+            await _service.LeaveAudio(Context.Guild);
+        }
     }
 }

@@ -6,7 +6,7 @@ using Discord;
 using EdgyCore.Modules;
 using EdgyCore.Services;
 
-namespace EdgyCore
+namespace EdgyCore.Handler
 {
     public class CommandHandler
     {

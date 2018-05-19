@@ -7,11 +7,12 @@ using System.Security.Cryptography;
 using System.Linq;
 using Discord.WebSocket;
 using System.Net;
+using EdgyCore.Handler;
 
 namespace EdgyCore
 {
     /// <summary>
-    /// Library for EdgyBot
+    /// The Main Library for used for EdgyBot, Depends on some discord stuff and other stuff.
     /// </summary>
     public class LibEdgyBot : ModuleBase<SocketCommandContext>
     {
@@ -219,7 +220,7 @@ namespace EdgyCore
 
         public string GetOwnerDiscordName()
         {
-            SocketUser ownerUser = EventHandler.OwnerUser;
+            SocketUser ownerUser = Handler.EventHandler.OwnerUser;
             if (ownerUser == null) return "Undefined#0000";
             return $"{ownerUser.Username}#{ownerUser.Discriminator}";
         }

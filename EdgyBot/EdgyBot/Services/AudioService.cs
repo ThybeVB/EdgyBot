@@ -39,7 +39,7 @@ namespace EdgyCore.Services
             if (ConnectedChannels.TryRemove(guild.Id, out client))
             {
                 await client.StopAsync();
-                //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.");
+                await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}.");
             }
         }
 
