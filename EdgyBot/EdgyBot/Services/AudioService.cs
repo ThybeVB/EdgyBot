@@ -51,6 +51,7 @@ namespace EdgyCore.Services
                 await channel.SendMessageAsync("File does not exist.");
                 return;
             }
+
             IAudioClient client;
             if (ConnectedChannels.TryGetValue(guild.Id, out client))
             {
@@ -62,6 +63,8 @@ namespace EdgyCore.Services
                     finally { await stream.FlushAsync(); }
                 }
             }
+
+            await LeaveAudio(guild);
         }
 
         private Process CreateStream(string path)
