@@ -8,6 +8,7 @@ using System.Linq;
 using Discord.WebSocket;
 using System.Net;
 using EdgyCore.Handler;
+using YoutubeExtractor;
 
 namespace EdgyCore
 {
@@ -21,6 +22,18 @@ namespace EdgyCore
         public readonly Color LightBlue = new Color(0x0cc6d3);
         private readonly Color moneyGreen = new Color(0x85bb65);
         private WebClient client = new WebClient();
+
+        private static LibEdgyBot _instance = null;
+
+        public static LibEdgyBot Instance
+        {
+            get {
+                if (_instance == null)
+                    _instance = new LibEdgyBot();
+
+                return _instance;
+            }
+        }
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -40,6 +53,8 @@ namespace EdgyCore
             eb.AddField(title, text);
             return eb.Build();
         }
+
+        
 
         /// <summary>
         /// Creates an Embed with Text and an image.

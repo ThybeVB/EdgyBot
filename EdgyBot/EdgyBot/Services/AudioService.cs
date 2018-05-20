@@ -1,15 +1,20 @@
 ﻿using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Audio;
+using YoutubeExtractor;
 
 namespace EdgyCore.Services
 {
     public class AudioService
     {
-        private LibEdgyBot _lib = new LibEdgyBot();
+        private readonly string filePath = "C:/EdgyBot/DownloadedSounds/";
+
+        private LibEdgyBot _lib = LibEdgyBot.Instance;
 
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
@@ -33,6 +38,35 @@ namespace EdgyCore.Services
             }
         }
 
+        public async Task<string> FetchVideoUrlFromSearchListWhichIsCalledWithSomeQuery(string queryToSearchOrJustSomeKeywords)
+        {
+            string theAllShitThatYoutubeGot = "";
+
+            using (WebClient hui = new WebClient())
+                theAllShitThatYoutubeGot = await hui.DownloadStringTaskAsync("https://www.youtube.com/results?search_query=" + queryToSearchOrJustSomeKeywords);
+
+            string removedShitOne = theAllShitThatYoutubeGot.Remove(0, theAllShitThatYoutubeGot.IndexOf("yt-simple-endpoint style-scope ytd-video-renderer"));
+            string linkThatINeed = removedShitOne.Substring(removedShitOne.IndexOf("href") + 2, removedShitOne.IndexOf("\" title="));
+
+            return "https://youtube.com" + linkThatINeed;
+        }
+        
+        public async Task DownloadYoutubeVideo(string url)
+        {
+            var cock = await Task.Run(() => DownloadUrlResolver.GetDownloadUrls(url));
+            foreach (var cyka in cock)
+                DownloadUrlResolver.DecryptDownloadUrl(cyka);
+
+            var pidor = new VideoDownloader(cock.ElementAt(0), filePath + cock.First().Title + "." + cock.First().AudioExtension);
+            pidor.DownloadFinished += Pidor_DownloadFinished;
+            pidor.Execute();
+        }
+
+        private void Pidor_DownloadFinished(object sender, System.EventArgs e)
+        {
+            
+        }
+
         public async Task LeaveAudio(IGuild guild)
         {
             IAudioClient client;
@@ -45,7 +79,6 @@ namespace EdgyCore.Services
 
         public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
         {
-            // Your task: Get a full path to the file if the value of 'path' is only a filename.
             if (!File.Exists(path))
             {
                 await channel.SendMessageAsync("File does not exist.");
