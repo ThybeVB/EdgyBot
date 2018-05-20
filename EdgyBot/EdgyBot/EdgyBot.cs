@@ -20,6 +20,7 @@ namespace EdgyCore
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
+
             await Task.Delay(Timeout.Infinite);
         }
     }
