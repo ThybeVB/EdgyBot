@@ -48,7 +48,7 @@ namespace EdgyCore.Handler
             SocketCommandContext context = new SocketCommandContext(_client, msg);
 
             int argPos = 0;
-            if (msg.HasStringPrefix(_prefix, ref argPos))
+            if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 if (msg.Author.IsBot) return;
                 if (msg.Content == _prefix) return;

@@ -23,17 +23,17 @@ namespace EdgyCore
         private readonly Color moneyGreen = new Color(0x85bb65);
         private WebClient client = new WebClient();
 
-        private static LibEdgyBot _instance = null;
-
-        public static LibEdgyBot Instance
-        {
-            get {
-                if (_instance == null)
-                    _instance = new LibEdgyBot();
-
-                return _instance;
-            }
-        }
+       //private static LibEdgyBot _instance = null;
+       //
+       //public static LibEdgyBot Instance
+       //{
+       //    get {
+       //        if (_instance == null)
+       //            _instance = new LibEdgyBot();
+       //
+       //        return _instance;
+       //    }
+       //}
 
         /// <summary>
         /// Creates an Embed with defaults and a field.

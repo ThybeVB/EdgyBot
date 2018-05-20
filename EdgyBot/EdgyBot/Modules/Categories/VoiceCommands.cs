@@ -8,7 +8,6 @@ namespace EdgyCore.Modules.Categories
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-        private readonly string filePath = "C:/EdgyBot/DownloadedSounds/";
 
         private readonly AudioService _service;
 
@@ -29,10 +28,13 @@ namespace EdgyCore.Modules.Categories
             await _service.LeaveAudio(Context.Guild);
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
+        [Summary("Plays a video from YouTube"), RequireOwner]
         [Command("play", RunMode = RunMode.Async)]
-        public async Task PlayCmd ([Remainder]string songName)
+        public async Task PlayCmd ([Remainder]string query)
         {
-            await _service.SendAudioAsync(Context.Guild, Context.Channel, filePath + songName);
+            string link = await _service.FetchVideoUrl(query);
+            await ReplyAsync(link);
+            //await _service.SendAudioAsync(Context.Guild, Context.Channel, filePath + songName);
         }
     }
 }

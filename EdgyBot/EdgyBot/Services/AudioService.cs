@@ -14,7 +14,7 @@ namespace EdgyCore.Services
     {
         private readonly string filePath = "C:/EdgyBot/DownloadedSounds/";
 
-        private LibEdgyBot _lib = LibEdgyBot.Instance;
+        private LibEdgyBot _lib = new LibEdgyBot();
 
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
@@ -38,33 +38,33 @@ namespace EdgyCore.Services
             }
         }
 
-        public async Task<string> FetchVideoUrlFromSearchListWhichIsCalledWithSomeQuery(string queryToSearchOrJustSomeKeywords)
+        public async Task<string> FetchVideoUrl(string query)
         {
-            string theAllShitThatYoutubeGot = "";
+            string ytUrl = "";
 
-            using (WebClient hui = new WebClient())
-                theAllShitThatYoutubeGot = await hui.DownloadStringTaskAsync("https://www.youtube.com/results?search_query=" + queryToSearchOrJustSomeKeywords);
+            try
+            {
+                using (WebClient hui = new WebClient())
+                    ytUrl = await hui.DownloadStringTaskAsync("https://www.youtube.com/results?search_query=" + query);
+            } catch (System.Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
 
-            string removedShitOne = theAllShitThatYoutubeGot.Remove(0, theAllShitThatYoutubeGot.IndexOf("yt-simple-endpoint style-scope ytd-video-renderer"));
-            string linkThatINeed = removedShitOne.Substring(removedShitOne.IndexOf("href") + 2, removedShitOne.IndexOf("\" title="));
+            string removedShitOne = ytUrl.Remove(0, ytUrl.IndexOf("yt-simple-endpoint style-scope ytd-video-renderer"));
+            string finalLink = removedShitOne.Substring(removedShitOne.IndexOf("href") + 2, removedShitOne.IndexOf("\" title="));
 
-            return "https://youtube.com" + linkThatINeed;
+            return "https://youtube.com" + finalLink;
         }
         
         public async Task DownloadYoutubeVideo(string url)
         {
-            var cock = await Task.Run(() => DownloadUrlResolver.GetDownloadUrls(url));
-            foreach (var cyka in cock)
+            var resolver = await Task.Run(() => DownloadUrlResolver.GetDownloadUrls(url));
+            foreach (var cyka in resolver)
                 DownloadUrlResolver.DecryptDownloadUrl(cyka);
 
-            var pidor = new VideoDownloader(cock.ElementAt(0), filePath + cock.First().Title + "." + cock.First().AudioExtension);
-            pidor.DownloadFinished += Pidor_DownloadFinished;
-            pidor.Execute();
-        }
-
-        private void Pidor_DownloadFinished(object sender, System.EventArgs e)
-        {
-            
+            var pidor = new VideoDownloader(resolver.ElementAt(0), filePath + resolver.First().Title + "." + resolver.First().AudioExtension);
+            await Task.Run(() => pidor.Execute());
         }
 
         public async Task LeaveAudio(IGuild guild)
