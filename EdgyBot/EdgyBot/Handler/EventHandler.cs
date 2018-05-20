@@ -37,9 +37,17 @@ namespace EdgyCore.Handler
         public async Task Ready()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
+
+            await RefreshBot(true);
+        }
+
+        private async Task RefreshBot(bool startup = false)
+        {
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);
-            await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
+            if (startup) {
+                await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
+            }
             await dblPinger.UpdateStats(_client.Guilds.Count);
         }
 
@@ -49,19 +57,10 @@ namespace EdgyCore.Handler
         private async Task Client_JoinedGuild(SocketGuild guild)
         {
             await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
-
-            await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on JoinedGuild");
-            await dblPinger.UpdateStats(_client.Guilds.Count);
-            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
-            await _client.SetGameAsync(gameStatus);
+            await RefreshBot();
         }
 
         private async Task Client_LeftGuild(SocketGuild guild)
-        {
-            await _lib.EdgyLog(LogSeverity.Verbose, "Setting Game Status on LeftGuild");
-            await dblPinger.UpdateStats(_client.Guilds.Count);
-            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
-            await _client.SetGameAsync(gameStatus);
-        }
+            => await RefreshBot();
     }
 }
