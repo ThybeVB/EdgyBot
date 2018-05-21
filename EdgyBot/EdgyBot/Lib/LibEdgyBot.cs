@@ -50,12 +50,10 @@ namespace EdgyCore
             string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup");
             if (isSetup == "y")
             {
-                manager.SetVariables(true);
-                return null;
+                return manager.Read(true);
             } else
             {
-                manager.SetVariables(false);
-                return null;
+                return manager.Read(false);
             }
         }
 
