@@ -43,13 +43,14 @@ namespace EdgyCore.Handler
             _client.JoinedGuild += Client_JoinedGuild;
             _client.LeftGuild += Client_LeftGuild;
             _client.Disconnected += Client_Disconnected;
-            _client.UserJoined += Client_Updated;
-            _client.UserLeft += Client_Updated;
+            _client.UserJoined += Client_UserUpdated;
+            _client.UserLeft += Client_UserUpdated;
         }
 
-        private async Task Client_Updated (SocketGuildUser arg)
+        private Task Client_UserUpdated (SocketGuildUser arg)
         {
-            MemberCount = CalculateMemberCount();  
+            MemberCount = CalculateMemberCount();
+            return Task.CompletedTask;
         }
 
         public async Task Ready()
