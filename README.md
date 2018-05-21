@@ -4,32 +4,31 @@
 
 The handy and all around fun bot that can be used for any kind of server!
 
+ ## Commands and Features
+ 
+ EdgyBot has lots of categories of commands.
+
+* Fun Commands
+* GD Commands (Geometry Dash Commands)
+* Info Commands
+* Music Commands ()
+* Image Commands
+* Hashing Commands
+* Random Commands
+
+EdgyBot is being developed for more categories, Image Commands as the newest addition.
+We are also working on the Audio Categories, which should come soon. (You can find these in the repository)
+
 ## Running
 
- To use/run EdgyBot, create a class called LoginInfo.cs with the following variables:
-
- * string token, The token for your bot used to connect to Discord.
- * string dblToken, (Optional) Your API token for the Discord Bot List.
- * string prefix, The prefix used for the bot.
- * ulong clientID, The Client ID of your bot. You can get this from the Developer Portal.
- * string invLink, The invite link to invite the bot to other guilds.
- * string GJP, (Optional) Geometry Jump Password, used for the Geometry Dash Commands.
- * string accID, (Optional) Geometry Dash Account ID used for the Geometry Dash Commands.
- * ulong ownerID, The Discord ID of the bot owner.
- 
- ## Example
- ```cs
- namespace EdgyCore
-{
-    public class LoginInfo
-    {
-		public string token = "mytopsecrettoken";
-		public string dblToken = "discord bot list token"; (OPTIONAL)
-		public string prefix = "e!";
-		public ulong clientID = 123456789;
-		public string invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=123456789"; (OPTIONAL)
-		public string accID = "gdaccID"; (Optional)
-		public ulong ownerID = supercoolID;
-    }
-}
- ```
+ Step 1: Download the .NET Core SDK
+ Step 2: Clone the Repository
+ Step 3: Run the following command in the project root:
+```batch
+dotnet publish -c Release
+```
+Step 4: Run EdgyBot.dll with the following command:
+```batch
+dotnet EdgyBot.dll
+```
+Step 5: Follow the instructions in the Command Prompt. 
