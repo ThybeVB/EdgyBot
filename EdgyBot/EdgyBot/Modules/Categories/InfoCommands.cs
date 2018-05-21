@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories
 {
-    [Name("Info Commands"), Summary("Commands providing info")]
+    [Name("Info Commands"), Summary("Commands providing information about a certain thingyyyy")]
     public class InfoCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
@@ -14,13 +14,16 @@ namespace EdgyCore.Modules.Categories
         [Command("channelinfo")]
         [Name("channelinfo")]
         [Summary("Gives you info about the channel you are in.")]
-        public async Task ChannelInfoCmd()
+        public async Task ChannelInfoCmd (IChannel channel = null)
         {
+            if (channel == null)
+                channel = Context.Channel;
+       
             EmbedBuilder e = _lib.SetupEmbedWithDefaults();
 
-            e.AddField("Channel Name", Context.Channel.Name);
-            e.AddField("Channel ID", Context.Channel.Id.ToString());
-            e.AddField("Created", Context.Channel.CreatedAt.ToString());
+            e.AddField("Channel Name", channel.Name);
+            e.AddField("Channel ID", channel.Id.ToString());
+            e.AddField("Created", channel.CreatedAt.ToString());
 
             await ReplyAsync("", embed: e.Build());
         }
