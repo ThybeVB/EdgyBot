@@ -11,13 +11,14 @@ namespace EdgyCore
         private static void Main ()
             => new EdgyBot().StartAsync().GetAwaiter().GetResult();
 
+        public static Credientals Credientals;
+
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         private async Task StartAsync ()
         {
-            await _lib.GetCredientalsAsync();
-
+            Credientals = _lib.GetCredientals();
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();

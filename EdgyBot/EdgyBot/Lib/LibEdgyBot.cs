@@ -9,6 +9,7 @@ using Discord.WebSocket;
 using System.Net;
 using EdgyCore.Handler;
 using YoutubeExtractor;
+using EdgyBot.Handler;
 
 namespace EdgyCore
 {
@@ -42,9 +43,18 @@ namespace EdgyCore
             return eb.Build();
         }
 
-        public async Task GetCredientalsAsync ()
+        public Credientals GetCredientals ()
         {
-
+            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup");
+            if (isSetup == "y")
+            {
+                CredientalsManager.SetVariables(true);
+                return null;
+            } else
+            {
+                CredientalsManager.SetVariables(false);
+                return null;
+            }
         }
 
         /// <summary>
