@@ -16,6 +16,8 @@ namespace EdgyCore
 
         private async Task StartAsync ()
         {
+            await _lib.GetCredientalsAsync();
+
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
             await Client.StartAsync();

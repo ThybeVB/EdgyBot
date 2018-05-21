@@ -8,7 +8,6 @@ namespace EdgyCore.Modules.Categories
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<SocketCommandContext>
     {
-
         private readonly AudioService _service;
 
         public VoiceCommands (AudioService service)

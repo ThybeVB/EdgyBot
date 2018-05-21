@@ -42,7 +42,10 @@ namespace EdgyCore
             return eb.Build();
         }
 
-        
+        public async Task GetCredientalsAsync ()
+        {
+
+        }
 
         /// <summary>
         /// Creates an Embed with Text and an image.
@@ -235,11 +238,6 @@ namespace EdgyCore
         public string GetProfilePicUrl()
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
-        }
-
-        public string GetDatabaseFileName()
-        {
-            return _loginInfo.dbname;
         }
 
         /// <summary>
