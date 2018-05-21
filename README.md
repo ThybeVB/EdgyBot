@@ -21,9 +21,9 @@ We are also working on the Audio Categories, which should come soon. (You can fi
 
 ## Running
 
- Step 1: Download the .NET Core SDK
- Step 2: Clone the Repository 
- Step 3: Run the following command in the project root:
+Step 1: Download the .NET Core SDK
+Step 2: Clone the Repository
+Step 3: Run the following command in the project root:
 ```batch
 dotnet publish -c Release
 ```
