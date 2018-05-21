@@ -45,14 +45,16 @@ namespace EdgyCore
 
         public Credientals GetCredientals ()
         {
+            CredientalsManager manager = new CredientalsManager();
+
             string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup");
             if (isSetup == "y")
             {
-                CredientalsManager.SetVariables(true);
+                manager.SetVariables(true);
                 return null;
             } else
             {
-                CredientalsManager.SetVariables(false);
+                manager.SetVariables(false);
                 return null;
             }
         }

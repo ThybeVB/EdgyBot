@@ -4,7 +4,7 @@ namespace EdgyBot.Handler
 {
     public class CredientalsManager
     {
-        public static void SetVariables(bool firstTime)
+        public void SetVariables(bool firstTime)
         {
             throw new NotImplementedException();
         }
