@@ -23,9 +23,9 @@ namespace EdgyCore
 
             if (Credientals == null)
                 return;
-
+            System.Console.WriteLine(Credientals.token);
             new EventHandler(Client);
-            await Client.LoginAsync(TokenType.Bot, _lib.GetToken());
+            await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
             await Task.Delay(Timeout.Infinite);

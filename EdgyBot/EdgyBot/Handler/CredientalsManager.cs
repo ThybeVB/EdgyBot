@@ -70,7 +70,7 @@ namespace EdgyBot.Handler
 
             Credientals creds = new Credientals
             {
-                token = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
+                token = Environment.GetEnvironmentVariable(tokenEnv, EnvironmentVariableTarget.User),
                 dblToken = Environment.GetEnvironmentVariable(dblTokenEnv, EnvironmentVariableTarget.User),
                 GJP = Environment.GetEnvironmentVariable(GJPEnv, EnvironmentVariableTarget.User),
                 prefix = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
