@@ -18,12 +18,13 @@ namespace EdgyCore.Modules
         [Command("help", RunMode = RunMode.Async)]
         public async Task HelpCmd ()
         {
-            await Context.Message.AddReactionAsync(new Emoji("📫"));
 
             EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
             initEmbed.AddField("EdgyBot", "Help Command. Thanks for using EdgyBot!");
             initEmbed.AddField("Bot Prefix", _lib.GetPrefix());
             await Context.User.SendMessageAsync("", embed: initEmbed.Build());
+
+            await Context.Message.AddReactionAsync(new Emoji("📫"));
 
             foreach (ModuleInfo module in _service.Modules)
             {

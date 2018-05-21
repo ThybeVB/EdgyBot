@@ -1,7 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EdgyCore.Modules.Categories

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
-using EdgyCore.Handler;
 using System;
 
 namespace EdgyCore.Modules
@@ -10,7 +9,6 @@ namespace EdgyCore.Modules
     public class MiscCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        private readonly Database _database = new Database();
 
         [Command("invite")][Name("invite")][Summary("Gives the Invite Link for EdgyBot.")]
         public async Task InviteCmd ()

@@ -2,7 +2,6 @@
 using Discord;
 using Discord.Commands;
 using System.Linq;
-using System.Net;
 using ImageSharp;
 using System.IO;
 
