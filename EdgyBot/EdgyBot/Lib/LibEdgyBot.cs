@@ -18,8 +18,6 @@ namespace EdgyCore
     /// </summary>
     public class LibEdgyBot : ModuleBase<SocketCommandContext>
     {
-        private readonly LoginInfo _loginInfo = new LoginInfo();
-
         public readonly Color LightBlue = new Color(0x0cc6d3);
         private readonly Color moneyGreen = new Color(0x85bb65);
         private WebClient client = new WebClient();
@@ -169,19 +167,19 @@ namespace EdgyCore
 
         public ulong GetBotId()
         {
-            return _loginInfo.clientID;
+            return EdgyBot.Credientals.clientID;
         }
 
         public string GetDBLToken()
         {
-            string dblToken = _loginInfo.dblToken;
+            string dblToken = EdgyBot.Credientals.dblToken;
             if (string.IsNullOrEmpty(dblToken)) return null;
             return dblToken;
         }
 
         public string GetInviteLink()
         {
-            string invLink = _loginInfo.invLink;
+            string invLink = EdgyBot.Credientals.invLink;
             if (string.IsNullOrEmpty(invLink)) {
                 string clientID = GetClientID().ToString();
                 invLink = "https://discordapp.com/oauth2/authorize/?permissions=2146950391&scope=bot&client_id=" + clientID; 
@@ -191,7 +189,7 @@ namespace EdgyCore
 
         public string GetToken()
         {
-            return _loginInfo.token;
+            return EdgyBot.Credientals.token;
         }
 
         public string GetRandomLetters(int size)
@@ -209,29 +207,29 @@ namespace EdgyCore
 
         public string GetPrefix()
         {
-            string prefix = _loginInfo.prefix;
+            string prefix = EdgyBot.Credientals.prefix;
             if (string.IsNullOrEmpty(prefix)) return "e!";
             return prefix;
         }
 
         public string GetGJP()
         {
-            string gjp = _loginInfo.GJP;
+            string gjp = EdgyBot.Credientals.GJP;
             if (string.IsNullOrEmpty(gjp)) return null;
             return gjp;
         }
 
         public ulong GetClientID ()
         {
-            ulong clientID = _loginInfo.clientID;
+            ulong clientID = EdgyBot.Credientals.clientID;
             return clientID;
         }
 
         public string GetGDAccID()
         {
-            string accID = _loginInfo.accID;
+            string accID = EdgyBot.Credientals.accID;
             if (string.IsNullOrEmpty(accID)) return null;
-            return _loginInfo.accID;
+            return EdgyBot.Credientals.accID;
         }
 
         public string GetOwnerDiscordName()
@@ -243,7 +241,7 @@ namespace EdgyCore
 
         public ulong GetOwnerID()
         {
-            return _loginInfo.ownerID;
+            return EdgyBot.Credientals.ownerID;
         }
         public string GetProfilePicUrl()
         {
