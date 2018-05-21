@@ -18,16 +18,15 @@ namespace EdgyCore
 
         private async Task StartAsync ()
         {
-            System.Console.WriteLine("Starting Auth...");
             Credientals = _lib.GetCredientals();
-
             if (Credientals == null)
                 return;
-            System.Console.WriteLine(Credientals.token);
+
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
+
             await Task.Delay(Timeout.Infinite);
         }
     }
