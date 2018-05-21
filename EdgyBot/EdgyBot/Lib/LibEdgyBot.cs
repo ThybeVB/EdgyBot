@@ -47,7 +47,7 @@ namespace EdgyCore
         {
             CredientalsManager manager = new CredientalsManager();
 
-            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup");
+            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup", EnvironmentVariableTarget.User);
             if (isSetup == "y")
             {
                 return manager.Read(true);

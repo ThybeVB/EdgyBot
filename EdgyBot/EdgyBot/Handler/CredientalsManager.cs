@@ -31,38 +31,56 @@ namespace EdgyBot.Handler
             Console.WriteLine("EdgyBot Environment Variables, Make sure you get them right, manual edit.\nYou can leave fields empty, but note that some parts of the bot may not work.");
 
             Console.WriteLine("Bot Token");
-            Environment.SetEnvironmentVariable(tokenEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(tokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Discord Bot List Token");
-            Environment.SetEnvironmentVariable(dblTokenEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(dblTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("GJP");
-            Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
             #endregion
 
             #region General
             Console.WriteLine("Bot Prefix");
-            Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Client ID");
-            Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Invite Link (Can be generated via Client ID)");
-            Environment.SetEnvironmentVariable(invLinkEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(invLinkEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Geometry Dash Account ID");
-            Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Owner ID");
-            Environment.SetEnvironmentVariable(ownerIDEnv, Console.ReadLine());
+            Environment.SetEnvironmentVariable(ownerIDEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
             #endregion
 
-            Environment.SetEnvironmentVariable("EdgyBot_IsSetup", "y");
+            Environment.SetEnvironmentVariable("EdgyBot_IsSetup", "n", EnvironmentVariableTarget.User);
         }
 
         private Credientals ReadVariables()
         {
-            return null;
+            string clientIDStr = Environment.GetEnvironmentVariable(clientIDEnv, EnvironmentVariableTarget.User);
+            ulong clientID = Convert.ToUInt64(clientIDStr);
+
+            string ownerIDStr = Environment.GetEnvironmentVariable(ownerIDEnv, EnvironmentVariableTarget.User);
+            ulong ownerID = Convert.ToUInt64(ownerIDStr);
+
+            Credientals creds = new Credientals
+            {
+                token = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
+                dblToken = Environment.GetEnvironmentVariable(dblTokenEnv, EnvironmentVariableTarget.User),
+                GJP = Environment.GetEnvironmentVariable(GJPEnv, EnvironmentVariableTarget.User),
+                prefix = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
+                clientID = clientID,
+                invLink = Environment.GetEnvironmentVariable(invLinkEnv, EnvironmentVariableTarget.User),
+                accID = Environment.GetEnvironmentVariable(accIDEnv, EnvironmentVariableTarget.User),
+                ownerID = ownerID
+            };
+
+            return creds;
         }
     }
 }
