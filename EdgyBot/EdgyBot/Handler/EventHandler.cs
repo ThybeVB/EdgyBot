@@ -9,7 +9,7 @@ namespace EdgyCore.Handler
     public class EventHandler
     {
         private LibEdgyBot _lib = new LibEdgyBot();
-
+        public static int MemberCount;
         private readonly DiscordSocketClient _client;
 
         private static DBLPinger dblPinger;
@@ -18,10 +18,21 @@ namespace EdgyCore.Handler
         public EventHandler(DiscordSocketClient client)
         {
             _client = client;
-
             InitEvents();
 
             dblPinger = new DBLPinger();
+        }
+
+        private int CalculateMemberCount()
+        {
+            int result = 0;
+            foreach (SocketGuild guild in _client.Guilds)
+            {
+                if (guild == null)
+                    continue;
+                result = result + guild.MemberCount;
+            }
+            return result;
         }
 
         private void InitEvents()
@@ -32,12 +43,19 @@ namespace EdgyCore.Handler
             _client.JoinedGuild += Client_JoinedGuild;
             _client.LeftGuild += Client_LeftGuild;
             _client.Disconnected += Client_Disconnected;
+            _client.UserJoined += Client_Updated;
+            _client.UserLeft += Client_Updated;
+        }
+
+        private async Task Client_Updated (SocketGuildUser arg)
+        {
+            MemberCount = CalculateMemberCount();  
         }
 
         public async Task Ready()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
-
+            MemberCount = CalculateMemberCount();
             await RefreshBot(true);
         }
 

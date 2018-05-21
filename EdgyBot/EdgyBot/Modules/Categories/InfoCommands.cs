@@ -129,6 +129,7 @@ namespace EdgyCore.Modules.Categories
             eb.AddField("Library", "Discord.Net");
             eb.AddField("Library Version", "2.0.0-beta-00880");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
+            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.GetOwnerDiscordName());
 
