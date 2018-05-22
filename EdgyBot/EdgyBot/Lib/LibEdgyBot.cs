@@ -46,7 +46,7 @@ namespace EdgyCore
             CredientalsManager manager = new CredientalsManager();
 
             string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup", EnvironmentVariableTarget.User);
-            if (isSetup == "y")
+            if (string.IsNullOrEmpty(isSetup) || isSetup == "y")
             {
                 return manager.Read(true);
             } else
@@ -118,7 +118,7 @@ namespace EdgyCore
             {
                 EmbedFooterBuilder footer = new EmbedFooterBuilder
                 {
-                    Text = DateTime.Now.ToUniversalTime().ToString()
+                    Text = DateTime.Now.ToUniversalTime().ToString() + "|" + "EdgyBot"
                 };
                 eb.Footer = footer;
             }
