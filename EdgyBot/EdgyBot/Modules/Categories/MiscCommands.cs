@@ -36,8 +36,13 @@ namespace EdgyCore.Modules
         }    
 
         [Command("e")]
-        public async Task SecretCmd01 ()
-            => await ReplyAsync("monstah is not gay german");
+        public async Task ECmd ()
+        {
+            if (Context.Guild.Id != 424929039237775361)
+                return;
+
+            await ReplyAsync("monstah is not gay german");
+        }
         
         [Command("suggest", RunMode = RunMode.Async)][Alias("sg", "sugg")][Name("suggest")][Summary("Sends your suggestion to the owner of the bot.")]
         public async Task SuggestCmd ([Remainder]string msg = null)
