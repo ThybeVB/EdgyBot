@@ -15,7 +15,7 @@ namespace EdgyBot.Handler
         public string accIDEnv = "EdgyBot_AccID";
         public string ownerIDEnv = "EdgyBot_OwnerID";
 
-        public Credientals Read(bool firstTime)
+        public Credentials Read(bool firstTime)
         {
             if (firstTime)
             {
@@ -60,7 +60,7 @@ namespace EdgyBot.Handler
             Environment.SetEnvironmentVariable("EdgyBot_IsSetup", "n", EnvironmentVariableTarget.User);
         }
 
-        private Credientals ReadVariables()
+        private Credentials ReadVariables()
         {
             string clientIDStr = Environment.GetEnvironmentVariable(clientIDEnv, EnvironmentVariableTarget.User);
             ulong clientID = Convert.ToUInt64(clientIDStr);
@@ -68,7 +68,7 @@ namespace EdgyBot.Handler
             string ownerIDStr = Environment.GetEnvironmentVariable(ownerIDEnv, EnvironmentVariableTarget.User);
             ulong ownerID = Convert.ToUInt64(ownerIDStr);
 
-            Credientals creds = new Credientals
+            Credentials creds = new Credentials
             {
                 token = Environment.GetEnvironmentVariable(tokenEnv, EnvironmentVariableTarget.User),
                 dblToken = Environment.GetEnvironmentVariable(dblTokenEnv, EnvironmentVariableTarget.User),

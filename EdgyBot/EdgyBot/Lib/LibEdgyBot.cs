@@ -41,7 +41,7 @@ namespace EdgyCore
             return eb.Build();
         }
 
-        public Credientals GetCredientals ()
+        public Credentials GetCredientals ()
         {
             CredientalsManager manager = new CredientalsManager();
 

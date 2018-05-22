@@ -1,6 +1,6 @@
 ﻿namespace EdgyCore
 {
-    public class Credientals
+    public class Credentials
     {
         public string token { get; set; }
         public string dblToken { get; set; }

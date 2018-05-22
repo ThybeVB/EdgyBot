@@ -13,7 +13,7 @@ namespace EdgyCore.Modules
         [Command("invite")][Name("invite")][Summary("Gives the Invite Link for EdgyBot.")]
         public async Task InviteCmd ()
         {
-            Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot, you're awesome :)");
+            Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot! :joy:");
             await ReplyAsync("", embed: e);
         }
 

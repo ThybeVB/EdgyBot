@@ -11,7 +11,7 @@ namespace EdgyCore
         private static void Main ()
             => new EdgyBot().StartAsync().GetAwaiter().GetResult();
 
-        public static Credientals Credientals;
+        public static Credentials Credientals;
 
         public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
         private readonly LibEdgyBot _lib = new LibEdgyBot();
