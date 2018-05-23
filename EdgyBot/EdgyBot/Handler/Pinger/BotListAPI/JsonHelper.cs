@@ -25,13 +25,15 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
-                webClient.Headers["content-type"] = "application/json";
-                webClient.Headers["Authorization"] = EdgyBot.Credientals.bfdToken;
+                webClient.Headers.Add("content-type", "application/json");
+                webClient.Headers.Add("Authorization", EdgyBot.Credientals.bfdToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
                 Console.WriteLine(resString);
                 webClient.Dispose();
+
+                return true;
             } catch (Exception e)
             {
                 LogMessage msg = new LogMessage(LogSeverity.Error, "List API", e.Message);

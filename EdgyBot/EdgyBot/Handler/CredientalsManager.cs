@@ -38,7 +38,7 @@ namespace EdgyBot.Handler
             Environment.SetEnvironmentVariable(dblTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Bots For Discord Token");
-            Environment.SetEnvironmentVariable(bfdTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User)
+            Environment.SetEnvironmentVariable(bfdTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("GJP");
             Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine(), EnvironmentVariableTarget.User);

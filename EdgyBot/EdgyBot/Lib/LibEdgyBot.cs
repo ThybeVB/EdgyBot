@@ -170,6 +170,11 @@ namespace EdgyCore
             return EdgyBot.Credientals.clientID;
         }
 
+        public int GetServerCount ()
+        {
+            return Handler.EventHandler.ServerCount;
+        }
+
         public string GetDBLToken()
         {
             string dblToken = EdgyBot.Credientals.dblToken;

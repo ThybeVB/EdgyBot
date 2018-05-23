@@ -2,6 +2,7 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore.Modules.Categories
 {
@@ -9,6 +10,13 @@ namespace EdgyCore.Modules.Categories
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
+        [Command("sendcountbfd", RunMode = RunMode.Async), RequireOwner]
+        public async Task SendJson()
+        {
+            await new BotsForDiscordPinger().SendServerCountAsync();
+            await ReplyAsync("OK");
+        }
 
         [Command("setstatus")][RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
