@@ -63,8 +63,8 @@ namespace EdgyCore.Handler.Pinger
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
 
-                LogMessage msg = new LogMessage(LogSeverity.Info, "DB API", resString);
-                _lib.Log(msg);
+                LogMessage log = new LogMessage(LogSeverity.Info, "BFD API", "Success");
+                _lib.Log(log);
 
                 webClient.Dispose();
 
