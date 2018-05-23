@@ -41,7 +41,7 @@ namespace EdgyCore.Handler.Pinger
 
             } catch (Exception e)
             {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "List API", e.Message);
+                LogMessage msg = new LogMessage(LogSeverity.Error, "BFD API", e.Message);
                 new LibEdgyBot().Log(msg);
             }
 
@@ -55,7 +55,25 @@ namespace EdgyCore.Handler.Pinger
             string resString;
             byte[] reqString;
 
+            try
+            {
+                webClient.Headers.Add("content-type", "application/json");
+                webClient.Headers.Add("Authorization", EdgyBot.Credientals.token);
+                reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
+                resByte = webClient.UploadData(this.urlToPost, "post", reqString);
+                resString = Encoding.Default.GetString(resByte);
 
+                LogMessage msg = new LogMessage(LogSeverity.Info, "DB API", resString);
+                _lib.Log(msg);
+
+                webClient.Dispose();
+
+                return true;
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "DB API", e.Message);
+                new LibEdgyBot().Log(msg);
+            }
 
             return false;
         }
