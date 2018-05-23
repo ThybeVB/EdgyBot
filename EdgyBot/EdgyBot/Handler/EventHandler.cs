@@ -42,6 +42,7 @@ namespace EdgyCore.Handler
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
             MemberCount = CalculateMemberCount();
             ServerCount = _client.Guilds.Count;
+
             await RefreshBot(true);
         }
 

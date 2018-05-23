@@ -32,11 +32,11 @@ namespace EdgyCore.Handler.Pinger
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
-
-                LogMessage msg = new LogMessage(LogSeverity.Info, "BFD API", resString);
-                _lib.Log(msg);
-
                 webClient.Dispose();
+
+                LogMessage log = new LogMessage(LogSeverity.Info, "BFD API", "Success");
+                _lib.Log(log);
+
                 return true;
 
             } catch (Exception e)
