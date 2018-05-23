@@ -7,6 +7,7 @@ namespace EdgyBot.Handler
     {
         private string tokenEnv = "EdgyBot_Token";
         private string dblTokenEnv = "EdgyBot_DblToken";
+        private string dbTokenEnv = "EdgyBot_DbToken";
         private string bfdTokenEnv = "EdgyBot_BfdToken";
         private string GJPEnv = "EdgyBot_GJP";
 
@@ -33,6 +34,9 @@ namespace EdgyBot.Handler
 
             Console.WriteLine("Bot Token");
             Environment.SetEnvironmentVariable(tokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
+
+            Console.WriteLine("Discord PW Bot List Token");
+            Environment.SetEnvironmentVariable(dbTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Discord Bot List Token");
             Environment.SetEnvironmentVariable(dblTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
@@ -76,6 +80,7 @@ namespace EdgyBot.Handler
             {
                 token = Environment.GetEnvironmentVariable(tokenEnv, EnvironmentVariableTarget.User),
                 dblToken = Environment.GetEnvironmentVariable(dblTokenEnv, EnvironmentVariableTarget.User),
+                dbToken = Environment.GetEnvironmentVariable(dbTokenEnv, EnvironmentVariableTarget.User),
                 bfdToken = Environment.GetEnvironmentVariable(bfdTokenEnv, EnvironmentVariableTarget.User),
                 GJP = Environment.GetEnvironmentVariable(GJPEnv, EnvironmentVariableTarget.User),
                 prefix = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
