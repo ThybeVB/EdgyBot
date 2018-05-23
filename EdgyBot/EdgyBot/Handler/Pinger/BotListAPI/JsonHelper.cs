@@ -26,7 +26,7 @@ namespace EdgyCore.Handler.Pinger
             try
             {
                 webClient.Headers["content-type"] = "application/json";
-                webClient.Headers["Authorization"] = "";
+                webClient.Headers["Authorization"] = EdgyBot.Credientals.bfdToken;
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
