@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EdgyCore.Handler.Pinger
 {
-    class DiscordBotsPinger
+    public class DiscordBotsPinger
     {
+        private JsonHelper helper = new JsonHelper("");
+
+        public async Task PostServerCountAsync ()
+        {
+
+        }
     }
 }

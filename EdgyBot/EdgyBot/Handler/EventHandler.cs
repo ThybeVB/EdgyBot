@@ -8,13 +8,15 @@ namespace EdgyCore.Handler
 {
     public class EventHandler
     {
-        private LibEdgyBot _lib = new LibEdgyBot();
-        private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
-        public static int MemberCount;
-        public static int ServerCount;
         private readonly DiscordSocketClient _client;
 
+        private LibEdgyBot _lib = new LibEdgyBot();
+        private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
+        private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
         private static DBLPinger dblPinger = new DBLPinger();
+
+        public static int MemberCount;
+        public static int ServerCount;
         public static SocketUser OwnerUser;
 
         public EventHandler(DiscordSocketClient client)
@@ -81,7 +83,8 @@ namespace EdgyCore.Handler
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
-            await _bfdPinger.SendServerCountAsync();
+            await _bfdPinger.PostServerCountAsync();
+            await _dbPinger.PostServerCountAsync();
             await dblPinger.UpdateStats(_client.Guilds.Count);
         }
     }

@@ -9,6 +9,8 @@ namespace EdgyCore.Handler.Pinger
 {
     public class JsonHelper
     {
+        private LibEdgyBot _lib = new LibEdgyBot();
+
         private string urlToPost = "";
 
         public JsonHelper (string url)
@@ -30,15 +32,30 @@ namespace EdgyCore.Handler.Pinger
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
-                Console.WriteLine(resString);
-                webClient.Dispose();
 
+                LogMessage msg = new LogMessage(LogSeverity.Info, "BFD API", resString);
+                _lib.Log(msg);
+
+                webClient.Dispose();
                 return true;
+
             } catch (Exception e)
             {
                 LogMessage msg = new LogMessage(LogSeverity.Error, "List API", e.Message);
                 new LibEdgyBot().Log(msg);
             }
+
+            return false;
+        }
+
+        public bool postDataDiscordBots (Dictionary<string, object> dictData)
+        {
+            WebClient webClient = new WebClient();
+            byte[] resByte;
+            string resString;
+            byte[] reqString;
+
+
 
             return false;
         }

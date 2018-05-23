@@ -12,9 +12,16 @@ namespace EdgyCore.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("sendcountbfd", RunMode = RunMode.Async), RequireOwner]
-        public async Task SendJson()
+        public async Task SendServerCountBFD()
         {
-            await new BotsForDiscordPinger().SendServerCountAsync();
+            await new BotsForDiscordPinger().PostServerCountAsync();
+            await ReplyAsync("OK");
+        }
+
+        [Command("sendcountdb", RunMode = RunMode.Async), RequireOwner]
+        public async Task SendServerCountDB ()
+        {
+            await new DiscordBotsPinger().PostServerCountAsync();
             await ReplyAsync("OK");
         }
 

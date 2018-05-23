@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Net;
-using Newtonsoft.Json;
 
 namespace EdgyCore.Handler.Pinger
 {
@@ -13,11 +9,11 @@ namespace EdgyCore.Handler.Pinger
         JsonHelper helper = new JsonHelper("https://botsfordiscord.com/api/v1/bots/" + EdgyBot.Credientals.clientID);
         LibEdgyBot lib = new LibEdgyBot();
 
-        public async Task SendServerCountAsync ()
+        public async Task PostServerCountAsync ()
         {
             var dict = new Dictionary<string, object>();
-            var re = lib.GetServerCount();
-            dict.Add("server_count", re);
+            int serverCount = lib.GetServerCount();
+            dict.Add("server_count", serverCount);
 
             try { helper.postDataBotsForDiscord(dict); } catch (Exception e)
             {
