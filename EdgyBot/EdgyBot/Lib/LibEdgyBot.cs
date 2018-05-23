@@ -264,6 +264,7 @@ namespace EdgyCore
             {
                 case LogSeverity.Critical:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Handler.EventHandler.OwnerUser.SendMessageAsync(message.ToString());
                     break;
                 case LogSeverity.Info:
                     Console.ForegroundColor = ConsoleColor.Gray;
@@ -282,7 +283,7 @@ namespace EdgyCore
                     break;
             }
             Console.WriteLine(DateTime.Now.ToShortTimeString() + " | " + message.Source + ": " + message.Message);
-
+            
             return Task.CompletedTask;
         }
 

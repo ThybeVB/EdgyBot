@@ -1,12 +1,12 @@
-﻿using Discord.Commands;
-using Discord.WebSocket;
+﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using Discord;
-using EdgyCore.Modules;
-using EdgyCore.Services;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Discord;
+using Discord.WebSocket;
+using Discord.Commands;
+using EdgyCore.Services;
+using EdgyCore.Modules;
 
 namespace EdgyCore.Handler
 {
@@ -61,7 +61,7 @@ namespace EdgyCore.Handler
                     {
                         if (result.Error != CommandError.BadArgCount)
                         {
-                            await _lib.EdgyLog(LogSeverity.Critical, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                            await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
                             await context.Channel.SendMessageAsync(result.ErrorReason);
                         }
                         else
