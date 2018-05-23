@@ -58,11 +58,15 @@ namespace EdgyCore.Handler
         private async Task Client_JoinedGuild(SocketGuild guild)
         {
             await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
+            ServerCount = _client.Guilds.Count;
             await RefreshBot();
         }
 
         private async Task Client_LeftGuild(SocketGuild guild)
-            => await RefreshBot();
+        {
+            await RefreshBot();
+            ServerCount = _client.Guilds.Count;
+        }
 
         private int CalculateMemberCount()
         {
