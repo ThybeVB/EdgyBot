@@ -63,7 +63,7 @@ namespace EdgyCore.Handler.Pinger
                 resByte = webClient.UploadData(this.urlToPost, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
 
-                LogMessage log = new LogMessage(LogSeverity.Info, "BFD API", "Success");
+                LogMessage log = new LogMessage(LogSeverity.Info, "Discord Bots API", "Success");
                 _lib.Log(log);
 
                 webClient.Dispose();
@@ -71,7 +71,7 @@ namespace EdgyCore.Handler.Pinger
                 return true;
             } catch (Exception e)
             {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "DB API", e.Message);
+                LogMessage msg = new LogMessage(LogSeverity.Error, "Bots For Discord API", e.Message);
                 new LibEdgyBot().Log(msg);
             }
 
