@@ -40,8 +40,8 @@ namespace EdgyCore.Handler
         public async Task Ready()
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
-            MemberCount = CalculateMemberCount();
             ServerCount = _client.Guilds.Count;
+            MemberCount = CalculateMemberCount();
 
             await RefreshBot(true);
         }
@@ -64,8 +64,8 @@ namespace EdgyCore.Handler
 
         private async Task Client_LeftGuild(SocketGuild guild)
         {
-            await RefreshBot();
             ServerCount = _client.Guilds.Count;
+            await RefreshBot();
         }
 
         private int CalculateMemberCount()

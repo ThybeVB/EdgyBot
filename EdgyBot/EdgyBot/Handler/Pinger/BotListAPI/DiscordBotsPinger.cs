@@ -17,7 +17,7 @@ namespace EdgyCore.Handler.Pinger
 
             try { helper.postDataDiscordBots(dict); } catch (Exception e)
             {
-                await _lib.EdgyLog(Discord.LogSeverity.Error, "Failed to post data to Bots For Discord:\n" + e.Message);
+                await _lib.EdgyLog(Discord.LogSeverity.Error, "Failed to post data to Discord Bots:\n" + e.Message);
             }
         }
     }

@@ -118,7 +118,8 @@ namespace EdgyCore
             {
                 EmbedFooterBuilder footer = new EmbedFooterBuilder
                 {
-                    Text = DateTime.Now.ToUniversalTime().ToString() + "|" + "EdgyBot"
+                    //GMT +2
+                    Text = DateTime.Now.AddHours(2).ToShortTimeString() + " | " + "EdgyBot Embed"
                 };
                 eb.Footer = footer;
             }
