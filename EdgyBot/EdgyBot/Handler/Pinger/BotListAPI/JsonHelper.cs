@@ -71,7 +71,7 @@ namespace EdgyCore.Handler.Pinger
                 return true;
             } catch (Exception e)
             {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "Bots For Discord API", e.Message);
+                LogMessage msg = new LogMessage(LogSeverity.Error, "Discord Bots API", e.Message);
                 new LibEdgyBot().Log(msg);
             }
 
