@@ -17,9 +17,13 @@ namespace EdgyBot.Modules.Categories
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task PurgeCmd (int input) 
         {
-            if (input > 100)
-                await ReplyAsync("You can't delete more than 100 messages at once.");
+            int original = input;
 
+            if (input > 100) {
+                await ReplyAsync("You can't delete more than 100 messages at once.");
+                return;
+            }
+            
             var messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
             try 
             {
@@ -29,12 +33,12 @@ namespace EdgyBot.Modules.Categories
                     if (message == null)
                         continue;
                     input--;
-                    await Task.Delay(TimeSpan.FromSeconds(4.5));
+                    await Task.Delay(TimeSpan.FromSeconds(2.5));
                     await message.DeleteAsync();
                     await toDelete.ModifyAsync(x => x.Content = "Executing Purge. This may take a while. Messages to Delete: " + input);
                 }
                 await toDelete.DeleteAsync();
-                await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages :ok_hand:"));
+                await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
             } catch 
             {
                 Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
