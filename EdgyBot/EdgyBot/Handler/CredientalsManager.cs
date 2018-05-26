@@ -5,6 +5,7 @@ namespace EdgyBot.Handler
 {
     public class CredientalsManager
     {
+        #region Environment Variables
         private string tokenEnv = "EdgyBot_Token";
         private string dblTokenEnv = "EdgyBot_DblToken";
         private string dbTokenEnv = "EdgyBot_DbToken";
@@ -16,14 +17,13 @@ namespace EdgyBot.Handler
         public string invLinkEnv = "EdgyBot_InvLink";
         public string accIDEnv = "EdgyBot_AccID";
         public string ownerIDEnv = "EdgyBot_OwnerID";
+        #endregion
 
         public Credentials Read(bool firstTime)
         {
             if (firstTime)
-            {
                 ConsoleHelper();
-            }
-
+            
             return ReadVariables();
         }
 
