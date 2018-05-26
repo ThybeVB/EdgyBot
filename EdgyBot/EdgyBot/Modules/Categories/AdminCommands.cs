@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
-using System.Linq;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -22,13 +23,17 @@ namespace EdgyBot.Modules.Categories
             var messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
             try 
             {
+                var toDelete = await ReplyAsync("Started Purge. This may take a while. Deleting " + input + " messages.");
                 foreach (var message in messages) 
                 {
                     if (message == null)
                         continue;
-
+                    input--;
+                    await Task.Delay(TimeSpan.FromSeconds(4.5));
                     await message.DeleteAsync();
+                    await toDelete.ModifyAsync(x => x.Content = "Executing Purge. This may take a while. Messages to Delete: " + input);
                 }
+                await toDelete.DeleteAsync();
                 await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages :ok_hand:"));
             } catch 
             {
