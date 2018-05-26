@@ -13,7 +13,7 @@ namespace EdgyCore
 
         public static Credentials Credientals;
 
-        public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Info });
+        public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         private async Task StartAsync ()
@@ -21,7 +21,6 @@ namespace EdgyCore
             Credientals = _lib.GetCredientals();
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
-            await _lib.EdgyLog(LogSeverity.Info, "Connecting to Servers...");
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
 
