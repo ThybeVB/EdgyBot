@@ -27,7 +27,7 @@ namespace EdgyCore.Handler
             _prefix = _lib.GetPrefix();
 
             commandService = new CommandService();
-            await commandService.AddModulesAsync(Assembly.GetEntryAssembly());
+            await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);
 
             new HelpCommand(commandService);
 
