@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Random Commands"), Summary("Commands that have different output every time.")]
     public class RandomCommands : ModuleBase<SocketCommandContext>

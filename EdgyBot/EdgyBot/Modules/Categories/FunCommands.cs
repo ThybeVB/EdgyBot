@@ -5,8 +5,9 @@ using System.Text;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Fun Commands"), Summary("Commands used for FUNUNUNUN")]
     public class FunCommands : ModuleBase<SocketCommandContext>

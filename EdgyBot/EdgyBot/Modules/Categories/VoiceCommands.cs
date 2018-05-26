@@ -3,7 +3,7 @@ using EdgyCore.Services;
 using Discord;
 using Discord.Commands;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<SocketCommandContext>

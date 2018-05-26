@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Info Commands"), Summary("Commands providing information about a certain thingyyyy")]
     public class InfoCommands : ModuleBase<SocketCommandContext>
@@ -132,7 +133,7 @@ namespace EdgyCore.Modules.Categories
             eb.AddField("Library", "Discord.Net");
             eb.AddField("Library Version", "2.0.0-beta-00880");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
-            eb.AddField("Total Users", Handler.EventHandler.MemberCount);
+            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _lib.GetOwnerDiscordName());
 

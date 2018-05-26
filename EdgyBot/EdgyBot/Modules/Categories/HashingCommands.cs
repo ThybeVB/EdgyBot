@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Hashing Commands"), Summary("Hash Commands centered for Developers")]
     public class HashingCommands : ModuleBase<SocketCommandContext>

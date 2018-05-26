@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using ImageSharp;
 using Discord;
 using Discord.Commands;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     public class ImageCommands : ModuleBase<SocketCommandContext>
     {

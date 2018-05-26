@@ -2,8 +2,9 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using EdgyCore;
 
-namespace EdgyCore.Modules.Categories
+namespace EdgyBot.Modules.Categories
 {
     [Name("Admin Commands"), Summary("Administrative Commands")]
     public class AdminCommands : ModuleBase<SocketCommandContext>

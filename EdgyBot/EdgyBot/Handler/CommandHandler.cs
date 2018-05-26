@@ -6,7 +6,7 @@ using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using EdgyCore.Services;
-using EdgyCore.Modules;
+using EdgyBot.Modules;
 
 namespace EdgyCore.Handler
 {

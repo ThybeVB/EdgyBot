@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyCore;
 
-namespace EdgyCore.Modules
+namespace EdgyBot.Modules
 {
     public class HelpCommand : ModuleBase<SocketCommandContext>
     {
