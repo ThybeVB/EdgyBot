@@ -3,6 +3,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
+using System.Linq;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -10,6 +11,31 @@ namespace EdgyBot.Modules.Categories
     public class AdminCommands : ModuleBase<SocketCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
+        [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from the channel (Provide a number on how much messages to delete)")]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
+        public async Task PurgeCmd (int input) 
+        {
+            if (input > 100)
+                await ReplyAsync("You can't delete more than 100 messages at once.");
+
+            var messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
+            try 
+            {
+                foreach (var message in messages) 
+                {
+                    if (message == null)
+                        continue;
+
+                    await message.DeleteAsync();
+                }
+                await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages :ok_hand:"));
+            } catch 
+            {
+                Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
+                await ReplyAsync("", embed: err);
+            }
+        }
 
         [Command("setstatus")][RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
