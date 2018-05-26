@@ -1,8 +1,6 @@
-﻿using Discord;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DiscordBotsList.Api;
-using EdgyCore;
-using Microsoft.Extensions.DependencyInjection;
+using Discord;
 
 namespace EdgyCore.Handler.Pinger
 {

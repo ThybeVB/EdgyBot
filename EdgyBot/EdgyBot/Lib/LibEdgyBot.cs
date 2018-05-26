@@ -1,15 +1,13 @@
-﻿using Discord;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Discord.Commands;
-using System.Text;
 using System.Security.Cryptography;
 using System.Linq;
-using Discord.WebSocket;
+using System.Text;
 using System.Net;
-using EdgyCore.Handler;
-using YoutubeExtractor;
 using EdgyBot.Handler;
+using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
 
 namespace EdgyCore
 {

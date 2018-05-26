@@ -1,9 +1,9 @@
-﻿using Discord.Commands;
-using System;
-using System.Net;
+﻿using System;
 using System.Threading.Tasks;
-using ImageSharp;
+using System.Net;
 using Discord;
+using Discord.Commands;
+using ImageSharp;
 
 namespace EdgyCore
 {

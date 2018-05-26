@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using System.Text;
-using System;
-using System.Linq;
 
 namespace EdgyCore.Modules.Categories
 {

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
+using ImageSharp;
 using Discord;
 using Discord.Commands;
-using System.Linq;
-using ImageSharp;
-using System.IO;
 
 namespace EdgyCore.Modules.Categories
 {

@@ -2,7 +2,6 @@
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore.Modules.Categories
 {

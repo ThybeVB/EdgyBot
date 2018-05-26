@@ -1,5 +1,5 @@
-﻿using EdgyCore;
-using System;
+﻿using System;
+using EdgyCore;
 
 namespace EdgyBot.Handler
 {

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Discord.WebSocket;
+﻿using System;
+using System.Threading.Tasks;
 using Discord;
-using System;
+using Discord.WebSocket;
 using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore.Handler

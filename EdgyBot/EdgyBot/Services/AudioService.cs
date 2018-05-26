@@ -1,12 +1,12 @@
-﻿using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
 using System.Net;
-using System.Threading.Tasks;
+using YoutubeExtractor;
 using Discord;
 using Discord.Audio;
-using YoutubeExtractor;
 
 namespace EdgyCore.Services
 {

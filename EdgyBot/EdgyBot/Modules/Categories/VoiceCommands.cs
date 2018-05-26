@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
+using EdgyCore.Services;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Services;
 
 namespace EdgyCore.Modules.Categories
 {
