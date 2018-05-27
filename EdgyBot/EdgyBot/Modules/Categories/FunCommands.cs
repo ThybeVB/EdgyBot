@@ -127,9 +127,6 @@ namespace EdgyBot.Modules.Categories
         [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
-            await ReplyAsync("The Acronym Command is being reworked, Use **e!help** to view the other commands.");
-            return;
-
             //Stage 1
             IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In a few seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
             string acroLetters = _lib.GetRandomLetters(6);
@@ -144,6 +141,7 @@ namespace EdgyBot.Modules.Categories
             //Stage 3
             await msg2.DeleteAsync();
             var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
+            messages = messages.Where(x => x.Content.StartsWith("*"));
             //Get Message Count
             int messageCount = messages.Count(m => m.Content.StartsWith("*"));
             int winnerNum = new Random().Next(-1, messageCount + 1);
@@ -154,7 +152,7 @@ namespace EdgyBot.Modules.Categories
                 if (winnerNum == otherShit)
                 {
                     if (message.Author.IsBot) continue;
-                    await msg.ModifyAsync(x => x.Content = $"{message.Author.Mention} has won the the acronym {message.Content}");
+                    await msg.ModifyAsync(x => x.Content = $"{message.Author.Mention} has won the the acronym with '{message.Content}'");
                     return;
                 }
                 otherShit++;
