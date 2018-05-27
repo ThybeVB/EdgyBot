@@ -129,7 +129,7 @@ namespace EdgyBot.Modules.Categories
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
-            eb.AddField("Username", "EdgyBot");
+            eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun");
             eb.AddField("Library", "Discord.Net");
             eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)");
             eb.AddField("Server Count", Context.Client.Guilds.Count);

@@ -49,39 +49,16 @@ namespace EdgyBot.Modules.Categories
         [Command("setstatus")][RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
-            if (Context.User.Id == _lib.GetOwnerID())
+            if (input == "default")
             {
-                if (input == "default")
-                {
-                    await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
-                    await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
-                    return;
-                }
-                await Context.Client.SetGameAsync(input);
-                await ReplyAsync("Changed Status.");
-            }
-            else
-            {
-                await ReplyAsync("No Permissions.");
-            }
-        }
-        [Command("lookup"), RequireOwner]
-        public async Task LookupCmd (ulong guildID)
-        {
-            SocketGuild guild;
+                await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
+                await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 
-            try { Context.Client.GetGuild(guildID); } catch
-            {
-                await ReplyAsync("Could not find Guild " + guildID.ToString());
                 return;
             }
-            guild = Context.Client.GetGuild(guildID);
-            await ReplyAsync(guild.Name);
+            await Context.Client.SetGameAsync(input);
+            await ReplyAsync("Changed Status.");
         }
-
-        /*
-         * EdgyBot Administratory Commands
-        */
         [Command("kick")][Name("kick")][Summary("Kicks a user from the guild")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task KickCmd (IGuildUser usr, [Remainder]string reason = null)
@@ -124,20 +101,5 @@ namespace EdgyBot.Modules.Categories
             }
             await ReplyAsync("", embed: e);
         }
-       // VV postponed 
-       //[Command("bancommand", RunMode = RunMode.Async)][Name("bancommand")][Summary("This will ban a command from your server. Be sure to spell the command right!")]
-       //public async Task BlacklistCmd ([Remainder]string commandStr)
-       //{
-       //    Embed e = null;
-       //    try
-       //    {
-       //        _database.BanCommand(System.Convert.ToString(Context.Guild.Id), commandStr);
-       //        e = _lib.CreateEmbedWithText("Success", "This command has been blacklisted!");
-       //    } catch
-       //    {
-       //        e = _lib.CreateEmbedWithError("Error", "Error while Blacklisting this command. Did you spell it correctly?");
-       //    }
-       //    await ReplyAsync("", embed: e);
-       //}
     }
 }

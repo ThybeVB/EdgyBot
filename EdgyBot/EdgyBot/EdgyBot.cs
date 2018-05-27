@@ -24,7 +24,7 @@ namespace EdgyCore
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
 
-            await Task.Delay(Timeout.Infinite);
+            await Task.Delay(-1);
         }
     }
 }
