@@ -18,8 +18,9 @@ namespace EdgyBot.Modules.Categories
         {
             DateTime startTime = EdgyCore.Handler.EventHandler.StartTime;
             TimeSpan delta = DateTime.UtcNow - startTime;
+            string time = $"{delta.Days}:{delta.Hours}:{delta.Minutes}:{delta.Seconds}";
 
-            await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot Uptime", $"{delta.ToString()} (Last Restart)"));
+            await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot Uptime", $"{time} (Last Restart)"));
         }
 
         [Command("channelinfo")]
