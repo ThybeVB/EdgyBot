@@ -17,6 +17,7 @@ namespace EdgyCore.Handler
 
         public static int MemberCount;
         public static int ServerCount;
+        public static DateTime StartTime = DateTime.UtcNow;
         public static SocketUser OwnerUser;
 
         public EventHandler(DiscordSocketClient client)

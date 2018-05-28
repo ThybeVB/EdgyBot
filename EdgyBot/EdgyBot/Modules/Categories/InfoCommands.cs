@@ -12,6 +12,16 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
+        [Command("uptime"), Alias("up")]
+        [Name("uptime"), Summary("Gives you the uptime of EdgyBot")]
+        public async Task UptimeCmd () 
+        {
+            DateTime startTime = EdgyCore.Handler.EventHandler.StartTime;
+            TimeSpan delta = DateTime.UtcNow - startTime;
+
+            await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot Uptime", $"{delta.ToString()} (Last Restart)"));
+        }
+
         [Command("channelinfo")]
         [Name("channelinfo")]
         [Summary("Gives you info about the channel you are in.")]
