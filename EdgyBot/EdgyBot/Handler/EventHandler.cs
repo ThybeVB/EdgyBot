@@ -44,7 +44,7 @@ namespace EdgyCore.Handler
             ServerCount = _client.Guilds.Count;
             MemberCount = CalculateMemberCount();
 
-            await RefreshBot(true);
+            await RefreshBotAsync(true);
         }
 
         private Task Client_UserUpdated(SocketGuildUser arg)
@@ -60,13 +60,13 @@ namespace EdgyCore.Handler
         {
             await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
             ServerCount = _client.Guilds.Count;
-            await RefreshBot();
+            await RefreshBotAsync();
         }
 
         private async Task Client_LeftGuild(SocketGuild guild)
         {
             ServerCount = _client.Guilds.Count;
-            await RefreshBot();
+            await RefreshBotAsync();
         }
 
         private int CalculateMemberCount()
@@ -81,7 +81,7 @@ namespace EdgyCore.Handler
             return result;
         }
 
-        private async Task RefreshBot(bool startup = false)
+        private async Task RefreshBotAsync(bool startup = false)
         {
             string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
             await _client.SetGameAsync(gameStatus);

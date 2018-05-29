@@ -125,6 +125,13 @@ namespace EdgyCore
             return eb;
         }
 
+        public TimeSpan CalculateUptime() 
+        {
+            DateTime startTime  = EdgyCore.Handler.EventHandler.StartTime;
+            TimeSpan currentTime = startTime - DateTime.UtcNow;
+            return currentTime;
+        }
+
         /// <summary>
         /// Encodes a string to Base 64
         /// </summary>
