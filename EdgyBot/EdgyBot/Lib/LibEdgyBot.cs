@@ -130,7 +130,7 @@ namespace EdgyCore
             DateTime startTime  = EdgyCore.Handler.EventHandler.StartTime;
             TimeSpan currentTime = startTime - DateTime.UtcNow;
 
-            string result = (startTime - currentTime).ToLongTimeString();
+            var result = currentTime.ToString().TrimStart('-');
 
             return result;
         }
