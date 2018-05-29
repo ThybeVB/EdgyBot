@@ -125,11 +125,14 @@ namespace EdgyCore
             return eb;
         }
 
-        public TimeSpan CalculateUptime() 
+        public string CalculateUptimeString () 
         {
             DateTime startTime  = EdgyCore.Handler.EventHandler.StartTime;
             TimeSpan currentTime = startTime - DateTime.UtcNow;
-            return currentTime;
+
+            string result = (startTime - currentTime).ToLongTimeString();
+
+            return result;
         }
 
         /// <summary>

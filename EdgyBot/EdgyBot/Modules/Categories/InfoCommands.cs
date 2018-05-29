@@ -12,16 +12,6 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("uptime"), Alias("up")]
-        [Name("uptime"), Summary("Gives you the uptime of EdgyBot")]
-        public async Task UptimeCmd () 
-        {
-            TimeSpan delta = _lib.CalculateUptime();
-            string time = $"{delta.Days}:{delta.Hours}:{delta.Minutes}:{delta.Seconds}";
-
-            await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot Uptime", $"{time} (Last Restart)"));
-        }
-
         [Command("channelinfo")]
         [Name("channelinfo")]
         [Summary("Gives you info about the channel you are in.")]
@@ -139,14 +129,14 @@ namespace EdgyBot.Modules.Categories
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
-            
+
             eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun");
             eb.AddField("Library", "Discord.Net");
             eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)");
             eb.AddField("Server Count", Context.Client.Guilds.Count);
             eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount);
             eb.AddField("Status", Context.Client.Activity.Name);
-            eb.AddField("Uptime", _lib.CalculateUptime());
+            eb.AddField("Uptime", _lib.CalculateUptimeString());
             eb.AddField("Developer", _lib.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());
