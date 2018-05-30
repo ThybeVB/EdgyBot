@@ -129,7 +129,7 @@ namespace EdgyCore
         {
             StringBuilder sb = new StringBuilder();
             foreach (GuildPermission permission in perms.ToList()) {
-                sb.Append("``" + permission.ToString() + "``");
+                sb.Append(" ``" + permission.ToString() + "`` ");
             }
             return sb.ToString();
         }
