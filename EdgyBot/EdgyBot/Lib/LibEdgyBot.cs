@@ -125,12 +125,21 @@ namespace EdgyCore
             return eb;
         }
 
+        public string GetPermissionsString (GuildPermissions perms) 
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (GuildPermission permission in perms.ToList()) {
+                sb.Append("``" + permission.ToString() + "``");
+            }
+            return sb.ToString();
+        }
+
         public string CalculateUptimeString () 
         {
             DateTime startTime  = EdgyCore.Handler.EventHandler.StartTime;
             TimeSpan currentTime = startTime - DateTime.UtcNow;
 
-            var result = currentTime.ToString().TrimStart('-');
+            string result = currentTime.ToString().TrimStart('-');
 
             return result;
         }
@@ -214,19 +223,19 @@ namespace EdgyCore
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        public bool IsEnglishLetter(char c)
+        public bool IsEnglishLetter (char c)
         {
             return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
         }
 
-        public string GetPrefix()
+        public string GetPrefix ()
         {
             string prefix = EdgyBot.Credientals.prefix;
             if (string.IsNullOrEmpty(prefix)) return "e!";
             return prefix;
         }
 
-        public string GetGJP()
+        public string GetGJP ()
         {
             string gjp = EdgyBot.Credientals.GJP;
             if (string.IsNullOrEmpty(gjp)) return null;
@@ -239,7 +248,7 @@ namespace EdgyCore
             return clientID;
         }
 
-        public string GetGDAccID()
+        public string GetGDAccID ()
         {
             string accID = EdgyBot.Credientals.accID;
             if (string.IsNullOrEmpty(accID)) return null;

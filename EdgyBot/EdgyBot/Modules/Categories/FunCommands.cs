@@ -174,8 +174,8 @@ namespace EdgyBot.Modules.Categories
             }
             string text = usr.Username + ", you just got stabbed by " + Context.User.Username + "!";
             string imgUrl = "https://media.giphy.com/media/xUySTCy0JHxUxw4fao/giphy.gif";
-            Embed e = _lib.CreateEmbedWithImage("Stab", text, imgUrl);
-
+            
+            Embed e = _lib.CreateEmbedWithImage("Stab Command", text, imgUrl);
             await ReplyAsync("", embed: e);
         }
     }

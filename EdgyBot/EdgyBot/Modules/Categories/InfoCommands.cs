@@ -38,6 +38,7 @@ namespace EdgyBot.Modules.Categories
             if (usr == null) usr = (IGuildUser)Context.Message.Author;
             SocketGuildUser guildUserMnt = (SocketGuildUser)usr;
 
+            #region UserInfo
             string username = usr.Username;         
             string nickname = guildUserMnt.Nickname;
             string discriminator = usr.Discriminator;
@@ -46,35 +47,32 @@ namespace EdgyBot.Modules.Categories
             string status = usr.Status.ToString();
             string pfpUrl = usr.GetAvatarUrl();
             string playing = usr.Activity?.Name;
+            string joinedAt = usr.JoinedAt.ToString();
             string createdOn = usr.CreatedAt.ToUniversalTime().ToString();
+            GuildPermissions perms = usr.GuildPermissions;
+            #endregion
 
             eb.ThumbnailUrl = pfpUrl;
-            eb.AddField("Username", username);
+            eb.AddField("Username", username, true);
             if (string.IsNullOrEmpty(nickname))
-            {
-                eb.AddField("Nickname", "None");
-            }
+                eb.AddField("Nickname", "None", true);
             else
-            {
-                eb.AddField("Nickname", nickname);
-            }
-            eb.AddField("Discriminator (tag)", discriminator);
-            eb.AddField("Status", status);
-            eb.AddField("Created At", createdOn);
+                eb.AddField("Nickname", nickname, true);
+            
+            eb.AddField("Discriminator (tag)", discriminator, true);
+            eb.AddField("Status", status, true);
+            eb.AddField("Joined At", joinedAt, true);
+            eb.AddField("Registered At", createdOn, true);
             if (string.IsNullOrEmpty(playing))
-            {
-                eb.AddField("Playing", "None");
-            }
+                eb.AddField("Playing", "None", true);
             else
-            {
-                eb.AddField("Playing", playing);
-            }
-            eb.AddField("User ID", userID);
-            eb.AddField("Is Bot", isBot.ToString());
+                eb.AddField("Playing", playing, true);
 
-            Embed e = eb.Build();
-            await ReplyAsync("", embed: e);
+            eb.AddField("User ID", userID, true);
+            eb.AddField("Is Bot", isBot.ToString(), true);
+            eb.AddField("Permissions", _lib.GetPermissionsString(perms));
 
+            await ReplyAsync("", embed: eb.Build());
         }
 
         [Command("serverinfo")]
