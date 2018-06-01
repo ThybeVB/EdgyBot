@@ -11,11 +11,34 @@ namespace EdgyCore.Handler.Pinger
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 
-        private string urlToPost = "";
+        private string urlInput = "";
 
         public JsonHelper (string url)
         {
-            urlToPost = url;
+            urlInput = url;
+        }
+
+        public string getRandomMemeImgFlip ()
+        {
+            byte[] resByte;
+            string resString;
+
+            try
+            {
+                WebClient webClient = new WebClient();
+
+                resByte = webClient.DownloadData(urlInput);
+                resString = Encoding.Default.GetString(resByte);
+
+                webClient.Dispose();
+
+                return resString;
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "Imgflip GET", e.Message);
+                new LibEdgyBot().Log(msg);
+            }
+            return "API Seems to be down.";
         }
 
         public bool postDataBotsForDiscord (Dictionary<string, object> dictData)
@@ -30,7 +53,7 @@ namespace EdgyCore.Handler.Pinger
                 webClient.Headers.Add("content-type", "application/json");
                 webClient.Headers.Add("Authorization", EdgyBot.Credientals.bfdToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
-                resByte = webClient.UploadData(urlToPost, "post", reqString);
+                resByte = webClient.UploadData(urlInput, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
                 webClient.Dispose();
 
@@ -60,7 +83,7 @@ namespace EdgyCore.Handler.Pinger
                 webClient.Headers.Add("content-type", "application/json");
                 webClient.Headers.Add("Authorization", EdgyBot.Credientals.dbToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
-                resByte = webClient.UploadData(urlToPost, "post", reqString);
+                resByte = webClient.UploadData(urlInput, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
 
                 LogMessage log = new LogMessage(LogSeverity.Info, "Discord Bots API", "Success");

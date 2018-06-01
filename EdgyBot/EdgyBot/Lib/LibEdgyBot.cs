@@ -8,6 +8,8 @@ using EdgyBot.Handler;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace EdgyCore
 {
@@ -19,6 +21,7 @@ namespace EdgyCore
         public readonly Color LightBlue = new Color(0x0cc6d3);
         private readonly Color moneyGreen = new Color(0x85bb65);
         private WebClient client = new WebClient();
+        private Random random = new Random();
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
@@ -142,6 +145,18 @@ namespace EdgyCore
             string result = currentTime.ToString().TrimStart('-');
 
             return result;
+        }
+
+        public object GetRandomMemeData(string json)
+        {
+            JObject jObject = JObject.Parse(json);
+            JToken memeArray = jObject["data"]["memes"];
+            string randomStr = random.Next(0, memeArray.Count()).ToString();
+
+            string memeArrayUrl = (string)memeArray.SelectToken("[" + randomStr + "].url");
+            string name = (string)memeArray.SelectToken("[" + randomStr + "].name");
+
+            return memeArrayUrl + "," + name;
         }
 
         /// <summary>
