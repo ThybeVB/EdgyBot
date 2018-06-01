@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
@@ -11,7 +10,8 @@ namespace EdgyBot.Modules.Categories
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("meme", RunMode = RunMode.Async), Alias("randommeme", "randommem", "memes")]
+        [Command("randommeme", RunMode = RunMode.Async), Alias("meme", "randommem", "memes")]
+        [Name("randommeme"), Summary("Gets a random meme from Imgflip.")]
         public async Task RandomMemeCmd ()
         {
             JsonHelper jsonHelper = new JsonHelper("https://api.imgflip.com/get_memes");
@@ -24,6 +24,10 @@ namespace EdgyBot.Modules.Categories
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             eb.Title = imgParams[1];
             eb.ImageUrl = imgParams[0];
+            eb.Footer = new EmbedFooterBuilder
+            {
+                Text = "Memes may be bad, depends on Imgflip's users"
+            };
 
             await ReplyAsync("", embed: eb.Build());
         }
