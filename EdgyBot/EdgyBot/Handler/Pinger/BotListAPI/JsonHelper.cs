@@ -10,7 +10,6 @@ namespace EdgyCore.Handler.Pinger
     public class JsonHelper
     {
         private LibEdgyBot _lib = new LibEdgyBot();
-        WebClient webClient = new WebClient();
 
         private string urlInput = "";
 
@@ -26,6 +25,8 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
+                WebClient webClient = new WebClient();
+
                 resByte = webClient.DownloadData(urlInput);
                 resString = Encoding.Default.GetString(resByte);
 
@@ -47,6 +48,8 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
+                WebClient webClient = new WebClient();
+
                 resByte = webClient.DownloadData(urlInput);
                 resString = Encoding.Default.GetString(resByte);
 
@@ -70,6 +73,8 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
+                WebClient webClient = new WebClient();
+
                 webClient.Headers.Add("content-type", "application/json");
                 webClient.Headers.Add("Authorization", EdgyBot.Credientals.bfdToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
@@ -99,6 +104,8 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
+                WebClient webClient = new WebClient();
+
                 webClient.Headers.Add("content-type", "application/json");
                 webClient.Headers.Add("Authorization", EdgyBot.Credientals.dbToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));

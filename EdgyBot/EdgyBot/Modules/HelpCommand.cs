@@ -19,7 +19,6 @@ namespace EdgyBot.Modules
         [Command("help", RunMode = RunMode.Async)]
         public async Task HelpCmd ()
         {
-
             EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
             initEmbed.AddField("EdgyBot", "Help Command. Thanks for using EdgyBot!");
             initEmbed.AddField("Bot Prefix", _lib.GetPrefix());
