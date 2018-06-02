@@ -132,12 +132,12 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Library", "Discord.Net", true);
             eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)", true);
             eb.AddField("Server Count", Context.Client.Guilds.Count, true);
+            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
-            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
-            eb.AddField("Status", Context.Client.Activity.Name, true);
-            eb.AddField("Uptime", _lib.CalculateUptimeString(), true);
-            eb.AddField("Developer", _lib.GetOwnerDiscordName(), true);
+            eb.AddField("Status", Context.Client.Activity.Name);
+            eb.AddField("Uptime", _lib.CalculateUptimeString());
+            eb.AddField("Developer", _lib.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());
         }
