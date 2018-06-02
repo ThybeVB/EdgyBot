@@ -10,6 +10,7 @@ namespace EdgyCore.Handler.Pinger
     public class JsonHelper
     {
         private LibEdgyBot _lib = new LibEdgyBot();
+        WebClient webClient = new WebClient();
 
         private string urlInput = "";
 
@@ -25,8 +26,6 @@ namespace EdgyCore.Handler.Pinger
 
             try
             {
-                WebClient webClient = new WebClient();
-
                 resByte = webClient.DownloadData(urlInput);
                 resString = Encoding.Default.GetString(resByte);
 
@@ -38,12 +37,33 @@ namespace EdgyCore.Handler.Pinger
                 LogMessage msg = new LogMessage(LogSeverity.Error, "Imgflip GET", e.Message);
                 new LibEdgyBot().Log(msg);
             }
-            return "API Seems to be down.";
+            return "API Error";
+        }
+
+        public string getRandomDogAPI()
+        {
+            byte[] resByte;
+            string resString;
+
+            try
+            {
+                resByte = webClient.DownloadData(urlInput);
+                resString = Encoding.Default.GetString(resByte);
+
+                webClient.Dispose();
+
+                return resString;
+
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "DogCEO GET", e.Message);
+                new LibEdgyBot().Log(msg);
+            }
+            return "API Error";
         }
 
         public bool postDataBotsForDiscord (Dictionary<string, object> dictData)
         {
-            WebClient webClient = new WebClient();
             byte[] resByte;
             string resString;
             byte[] reqString;
@@ -73,7 +93,6 @@ namespace EdgyCore.Handler.Pinger
 
         public bool postDataDiscordBots (Dictionary<string, object> dictData)
         {
-            WebClient webClient = new WebClient();
             byte[] resByte;
             string resString;
             byte[] reqString;

@@ -20,6 +20,7 @@ namespace EdgyCore
     {
         public readonly Color LightBlue = new Color(0x0cc6d3);
         private readonly Color moneyGreen = new Color(0x85bb65);
+
         private WebClient client = new WebClient();
         private Random random = new Random();
 
@@ -147,7 +148,7 @@ namespace EdgyCore
             return result;
         }
 
-        public object GetRandomMemeData(string json)
+        public string GetRandomMemeData(string json)
         {
             JObject jObject = JObject.Parse(json);
             JToken memeArray = jObject["data"]["memes"];
@@ -157,6 +158,13 @@ namespace EdgyCore
             string name = (string)memeArray.SelectToken("[" + randomStr + "].name");
 
             return memeArrayUrl + "," + name;
+        }
+
+        public string GetRandomDogData(string json)
+        {
+            JObject jObject = JObject.Parse(json);
+            string imgUrl = (string)jObject.SelectToken("message");
+            return imgUrl;
         }
 
         /// <summary>
