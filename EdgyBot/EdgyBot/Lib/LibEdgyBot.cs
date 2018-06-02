@@ -9,7 +9,6 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace EdgyCore
 {

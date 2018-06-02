@@ -34,5 +34,24 @@ namespace EdgyBot.Modules.Categories
             img.Dispose();
             File.Delete(filePath + fileName);
         }
+
+        [Command("greyscale", RunMode = RunMode.Async), Alias("grey", "grayscale")]
+        [Name("greyscale"), Summary("Greyscales an image.")]
+        public async Task GreyscaleCmd (IUser usr = null)
+        {
+            string fileName = "yo.png";
+
+            Attachment image = Context.Message.Attachments.FirstOrDefault();
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
+
+            Image<Rgba32> img = imgLib.OpenImage(fileName);
+            img.Grayscale();
+            img.Save(filePath + fileName);
+
+            await Context.Channel.SendFileAsync(filePath + fileName);
+
+            img.Dispose();
+            File.Delete(filePath + fileName);
+        }
     }
 }
