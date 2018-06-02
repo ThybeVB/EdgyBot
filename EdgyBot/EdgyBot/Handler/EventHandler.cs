@@ -32,7 +32,7 @@ namespace EdgyCore.Handler
             _client.ShardReady += ShardReady;      
             _client.JoinedGuild += Client_JoinedGuild;
             _client.LeftGuild += Client_LeftGuild;
-            _client.Disconnected += Client_Disconnected;
+            _client.ShardDisconnected += Client_Disconnected;
             _client.UserJoined += Client_UserUpdated;
             _client.UserLeft += Client_UserUpdated;
         }
@@ -52,7 +52,7 @@ namespace EdgyCore.Handler
             return Task.CompletedTask;
         }
 
-        private async Task Client_Disconnected(Exception exception)
+        private async Task Client_Disconnected(Exception exception, DiscordSocketClient client)
            => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
         private async Task Client_JoinedGuild(SocketGuild guild)
