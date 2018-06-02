@@ -25,7 +25,7 @@ namespace EdgyCore
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
-            //await new CommandHandler().InitializeAsync(Client);
+            await new CommandHandler().InitializeAsync(Client);
             await Task.Delay(-1);
         }
     }

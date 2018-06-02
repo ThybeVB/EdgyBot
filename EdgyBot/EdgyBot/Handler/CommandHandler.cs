@@ -14,12 +14,12 @@ namespace EdgyCore.Handler
     {
         private string _prefix;
 
-        private DiscordSocketClient _client;
+        private DiscordShardedClient _client;
         private IServiceProvider _service;
         private CommandService commandService;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public async Task InitializeAsync(DiscordSocketClient client)
+        public async Task InitializeAsync(DiscordShardedClient client)
         {
             _client = client;
 
@@ -45,7 +45,7 @@ namespace EdgyCore.Handler
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null) return;
-            SocketCommandContext context = new SocketCommandContext(_client, msg);
+            ShardedCommandContext context = new ShardedCommandContext(_client, msg);
 
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
