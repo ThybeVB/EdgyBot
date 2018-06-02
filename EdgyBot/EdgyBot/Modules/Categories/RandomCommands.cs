@@ -7,7 +7,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Random Commands"), Summary("Commands that have different output every time.")]
-    public class RandomCommands : ModuleBase<SocketCommandContext>
+    public class RandomCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

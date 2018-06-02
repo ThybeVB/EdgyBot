@@ -8,7 +8,7 @@ using EdgyCore;
 
 namespace EdgyBot.Modules.Categories
 {
-    public class ImageCommands : ModuleBase<SocketCommandContext>
+    public class ImageCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly string filePath = "C:/EdgyBot/DownloadedImages/";
 

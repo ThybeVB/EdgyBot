@@ -53,13 +53,13 @@ namespace EdgyBot.Handler
             Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Client ID");
-            Environment.SetEnvironmentVariable(prefixEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable(clientIDEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Invite Link (Can be generated via Client ID)");
             Environment.SetEnvironmentVariable(invLinkEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Geometry Dash Account ID");
-            Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable(accIDEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("Owner ID");
             Environment.SetEnvironmentVariable(ownerIDEnv, Console.ReadLine(), EnvironmentVariableTarget.User);

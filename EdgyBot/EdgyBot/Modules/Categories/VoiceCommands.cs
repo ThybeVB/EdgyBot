@@ -6,7 +6,7 @@ using Discord.Commands;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
-    public class VoiceCommands : ModuleBase<SocketCommandContext>
+    public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly AudioService _service;
 

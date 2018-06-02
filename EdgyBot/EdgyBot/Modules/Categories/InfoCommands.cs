@@ -8,7 +8,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Info Commands"), Summary("Commands providing information about a certain thingyyyy")]
-    public class InfoCommands : ModuleBase<SocketCommandContext>
+    public class InfoCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
@@ -128,11 +128,13 @@ namespace EdgyBot.Modules.Categories
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
 
-            eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun");
-            eb.AddField("Library", "Discord.Net");
-            eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)");
-            eb.AddField("Server Count", Context.Client.Guilds.Count);
-            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount);
+            eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun", true);
+            eb.AddField("Library", "Discord.Net", true);
+            eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)", true);
+            eb.AddField("Server Count", Context.Client.Guilds.Count, true);
+            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
+            eb.AddField("Total Shards", Context.Client.Shards.Count, true);
+            eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Uptime", _lib.CalculateUptimeString());
             eb.AddField("Developer", _lib.GetOwnerDiscordName());

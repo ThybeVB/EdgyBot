@@ -8,7 +8,7 @@ namespace EdgyCore.Handler
 {
     public class EventHandler
     {
-        private readonly DiscordSocketClient _client;
+        private readonly DiscordShardedClient _client;
 
         private LibEdgyBot _lib = new LibEdgyBot();
         private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
@@ -20,7 +20,7 @@ namespace EdgyCore.Handler
         public static DateTime StartTime = DateTime.UtcNow;
         public static SocketUser OwnerUser;
 
-        public EventHandler(DiscordSocketClient client)
+        public EventHandler(DiscordShardedClient client)
         {
             _client = client;
             InitEvents();
@@ -29,16 +29,15 @@ namespace EdgyCore.Handler
         private void InitEvents()
         {
             _client.Log += _lib.Log;
-
-            _client.Ready += Ready;
-            _client.JoinedGuild += Client_JoinedGuild;
-            _client.LeftGuild += Client_LeftGuild;
-            _client.Disconnected += Client_Disconnected;
+            _client.ShardReady += ShardReady;      
+            _client.JoinedGuild += JoinedGuild;
+            _client.LeftGuild += LeftGuild;
+            _client.ShardDisconnected += Client_Disconnected;
             _client.UserJoined += Client_UserUpdated;
             _client.UserLeft += Client_UserUpdated;
         }
 
-        public async Task Ready()
+        public async Task ShardReady(DiscordSocketClient client)
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
             ServerCount = _client.Guilds.Count;
@@ -53,17 +52,18 @@ namespace EdgyCore.Handler
             return Task.CompletedTask;
         }
 
-        private async Task Client_Disconnected(Exception exception)
+        private async Task Client_Disconnected(Exception exception, DiscordSocketClient client)
            => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
-        private async Task Client_JoinedGuild(SocketGuild guild)
+        private async Task JoinedGuild(SocketGuild guild)
         {
             await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
             ServerCount = _client.Guilds.Count;
+
             await RefreshBotAsync();
         }
 
-        private async Task Client_LeftGuild(SocketGuild guild)
+        private async Task LeftGuild(SocketGuild guild)
         {
             ServerCount = _client.Guilds.Count;
             await RefreshBotAsync();
