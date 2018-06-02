@@ -22,11 +22,10 @@ namespace EdgyCore
         private async Task StartAsync ()
         {
             Credientals = _lib.GetCredientals();
-            //new EventHandler(Client);
+            new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
             //await new CommandHandler().InitializeAsync(Client);
-
             await Task.Delay(-1);
         }
     }

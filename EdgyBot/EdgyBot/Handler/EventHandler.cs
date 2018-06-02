@@ -8,7 +8,7 @@ namespace EdgyCore.Handler
 {
     public class EventHandler
     {
-        private readonly DiscordSocketClient _client;
+        private readonly DiscordShardedClient _client;
 
         private LibEdgyBot _lib = new LibEdgyBot();
         private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
@@ -20,7 +20,7 @@ namespace EdgyCore.Handler
         public static DateTime StartTime = DateTime.UtcNow;
         public static SocketUser OwnerUser;
 
-        public EventHandler(DiscordSocketClient client)
+        public EventHandler(DiscordShardedClient client)
         {
             _client = client;
             InitEvents();
@@ -29,8 +29,7 @@ namespace EdgyCore.Handler
         private void InitEvents()
         {
             _client.Log += _lib.Log;
-
-            _client.Ready += Ready;
+            _client.ShardReady += ShardReady;      
             _client.JoinedGuild += Client_JoinedGuild;
             _client.LeftGuild += Client_LeftGuild;
             _client.Disconnected += Client_Disconnected;
@@ -38,7 +37,7 @@ namespace EdgyCore.Handler
             _client.UserLeft += Client_UserUpdated;
         }
 
-        public async Task Ready()
+        public async Task ShardReady(DiscordSocketClient client)
         {
             OwnerUser = _client.GetUser(_lib.GetOwnerID());
             ServerCount = _client.Guilds.Count;
