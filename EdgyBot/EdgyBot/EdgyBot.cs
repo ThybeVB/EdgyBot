@@ -16,12 +16,13 @@ namespace EdgyCore
         {
             LogLevel = LogSeverity.Verbose
         });
-        //public readonly DiscordSocketClient Client = new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
+
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         private async Task StartAsync ()
         {
             Credientals = _lib.GetCredientals();
+
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();

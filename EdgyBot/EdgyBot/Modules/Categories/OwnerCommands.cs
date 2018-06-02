@@ -4,7 +4,7 @@ using Discord.Commands;
 
 namespace EdgyBot.Modules.Categories
 {
-    public class OwnerCommands : ModuleBase<SocketCommandContext>
+    public class OwnerCommands : ModuleBase<ShardedCommandContext>
     {
         [Command("setstatus"), RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)

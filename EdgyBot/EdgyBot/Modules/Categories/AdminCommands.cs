@@ -9,7 +9,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Admin Commands"), Summary("Administrative Commands")]
-    public class AdminCommands : ModuleBase<SocketCommandContext>
+    public class AdminCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

@@ -8,7 +8,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Info Commands"), Summary("Commands providing information about a certain thingyyyy")]
-    public class InfoCommands : ModuleBase<SocketCommandContext>
+    public class InfoCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

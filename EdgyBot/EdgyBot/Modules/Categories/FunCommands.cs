@@ -10,7 +10,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Fun Commands"), Summary("Commands used for FUNUNUNUN")]
-    public class FunCommands : ModuleBase<SocketCommandContext>
+    public class FunCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

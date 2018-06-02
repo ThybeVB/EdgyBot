@@ -6,7 +6,7 @@ using EdgyCore;
 
 namespace EdgyBot.Modules
 {
-    public class HelpCommand : ModuleBase<SocketCommandContext>
+    public class HelpCommand : ModuleBase<ShardedCommandContext>
     {
         private readonly CommandService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();

@@ -8,7 +8,7 @@ using EdgyCore.Handler.Pinger;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Meme Commands"), Summary("Meme'y Commands. Pictures mainly.")]
-    public class MemeCommands : ModuleBase<SocketCommandContext>
+    public class MemeCommands : ModuleBase<ShardedCommandContext>
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 

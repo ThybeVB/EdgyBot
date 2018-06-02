@@ -7,7 +7,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Miscellanious Commands"), Summary("Commands that don't fit in any other categories.")]
-    public class MiscCommands : ModuleBase<SocketCommandContext>
+    public class MiscCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

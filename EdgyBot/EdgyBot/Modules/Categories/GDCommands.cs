@@ -6,7 +6,7 @@ using EdgyCore;
 namespace EdgyBot.Modules.Categories
 {
     [Name("Geometry Dash Commands"), Summary("Commands related to Geometry Dash")]
-    public class GDCommands : ModuleBase<SocketCommandContext>
+    public class GDCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly GDLib _gdLib = new GDLib();
