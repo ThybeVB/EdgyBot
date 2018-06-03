@@ -53,5 +53,23 @@ namespace EdgyBot.Modules.Categories
             img.Dispose();
             File.Delete(filePath + fileName);
         }
+
+        [Command("blur")]
+        public async Task BlurCmd (IUser usr = null)
+        {
+            string fileName = "blur.png";
+
+            Attachment image = Context.Message.Attachments.FirstOrDefault();
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
+
+            Image<Rgba32> img = imgLib.OpenImage(fileName);
+            img.GaussianBlur(3);
+
+            img.Save(filePath + fileName);
+            await Context.Channel.SendFileAsync(filePath + fileName);
+
+            img.Dispose();
+            File.Delete(filePath + fileName);
+        }
     }
 }

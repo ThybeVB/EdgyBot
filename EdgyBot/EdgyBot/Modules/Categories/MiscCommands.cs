@@ -39,6 +39,7 @@ namespace EdgyBot.Modules.Categories
         [Command("e")]
         public async Task ECmd ()
         {
+            //This is just a fun little inside joke, That's why it's only meant for one server.
             if (Context.Guild.Id != 424929039237775361)
                 return;
 
@@ -82,8 +83,11 @@ namespace EdgyBot.Modules.Categories
         public async Task SupportCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.AddField("Discord Bot List", "Upvoting EdgyBot on the Discord Bot List helps EdgyBot get into more servers for even more fun.");
-            eb.AddField("Bot List Link", "https://discordbots.org/bot/373163613390897163");
+            eb.AddField("Discord Bot Lists", "Upvoting EdgyBot on the Discord Bot List helps EdgyBot get into more servers for even more fun.");
+            eb.AddField("DBL", "https://discordbots.org/bot/373163613390897163");
+            eb.AddField("Discord Bots", "https://bots.discord.pw/bots/373163613390897163");
+            eb.AddField("BFD", "");
+
             eb.AddField("Moneys!11!", "Having a concurrent earning of a bit under 10$, I can keep EdgyBot running 24/7");
             eb.AddField("Support Link", "https://www.paypal.me/monstahhh");          
             eb.WithFooter(new EmbedFooterBuilder{Text = "Thanks for taking your time to even look at this command. People like you keep EdgyBot running."});
