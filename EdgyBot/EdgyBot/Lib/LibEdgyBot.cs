@@ -15,7 +15,7 @@ namespace EdgyCore
     /// <summary>
     /// The Main Library for used for EdgyBot, Depends on some discord stuff and other stuff.
     /// </summary>
-    public class LibEdgyBot : ModuleBase<SocketCommandContext>
+    public class LibEdgyBot : ModuleBase<ShardedCommandContext>
     {
         public readonly Color LightBlue = new Color(0x0cc6d3);
         private readonly Color moneyGreen = new Color(0x85bb65);
