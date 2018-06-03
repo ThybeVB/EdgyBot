@@ -93,6 +93,7 @@ namespace EdgyBot.Modules.Categories
             string roleCount = Context.Guild.Roles.Count.ToString();
             string categoriesCount = Context.Guild.CategoryChannels.Count.ToString();
             string channelCount = Context.Guild.Channels.Count.ToString();
+            int shard = Context.Client.GetShardIdFor(Context.Guild);
             #endregion
 
             eb.ThumbnailUrl = serverGuildIconUrl;
@@ -104,6 +105,12 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Category Count", categoriesCount);
             eb.AddField("Channel Count", channelCount);
             eb.AddField("Created At", createdAt);
+
+            eb.WithFooter(new EmbedFooterBuilder
+            {
+                IconUrl = Context.Guild.IconUrl,
+                Text = $"{Context.Guild.Name} in Shard {Context.Client.GetShardIdFor(Context.Guild)}"
+            });
 
             await ReplyAsync("", embed: eb.Build());
         }
