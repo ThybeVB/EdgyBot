@@ -8,6 +8,7 @@ using EdgyCore;
 
 namespace EdgyBot.Modules.Categories
 {
+    [Name("Image Commands"), Summary("Commands for manipulating images.")]
     public class ImageCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly string filePath = "C:/EdgyBot/DownloadedImages/";
@@ -54,7 +55,8 @@ namespace EdgyBot.Modules.Categories
             File.Delete(filePath + fileName);
         }
 
-        [Command("blur")]
+        [Command("blur", RunMode = RunMode.Async)]
+        [Name("blur"), Summary("Blurs an image.")]
         public async Task BlurCmd (IUser usr = null)
         {
             string fileName = "blur.png";
@@ -63,7 +65,7 @@ namespace EdgyBot.Modules.Categories
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.GaussianBlur(3);
+            img.GaussianBlur(5.75f);
 
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
