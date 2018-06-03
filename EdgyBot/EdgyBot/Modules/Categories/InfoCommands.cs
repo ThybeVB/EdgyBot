@@ -138,7 +138,7 @@ namespace EdgyBot.Modules.Categories
 
             eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun", true);
             eb.AddField("Library", "Discord.Net", true);
-            eb.AddField("Library Version", "2.0.0-beta2-00951 (API v6)", true);
+            eb.AddField("Library Version", DiscordConfig.Version + " " + DiscordConfig.APIVersion, true);
             eb.AddField("Server Count", Context.Client.Guilds.Count, true);
             eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
