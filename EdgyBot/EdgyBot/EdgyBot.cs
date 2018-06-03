@@ -18,7 +18,6 @@ namespace EdgyCore
             LogLevel = LogSeverity.Verbose
         });
 
-
         private async Task StartAsync ()
         {
             Credientals = _lib.GetCredientals();
@@ -26,6 +25,7 @@ namespace EdgyCore
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
+
             await Task.Delay(-1);
         }
     }

@@ -129,7 +129,8 @@ namespace EdgyBot.Modules.Categories
 
         }
 
-        [Command("info")][Name("info")][Summary("Gives you info about the Bot")]
+        [Command("info"), Alias("botinfo")]
+        [Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
