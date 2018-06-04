@@ -40,7 +40,9 @@ namespace EdgyCore.Handler
 
         public async Task ShardReady(DiscordSocketClient client)
         {
-            OwnerUser = _client.GetUser(_lib.GetOwnerID());
+            if (OwnerUser == null)
+                OwnerUser = _client.GetUser(_lib.GetOwnerID());
+
             ServerCount = _client.Guilds.Count;
             MemberCount = CalculateMemberCount();
 
@@ -84,15 +86,16 @@ namespace EdgyCore.Handler
 
         private async Task RefreshBotAsync(bool startup = false)
         {
-            string gameStatus = "e!help | EdgyBot for " + _client.Guilds.Count + " servers!";
+            string gameStatus = "e!help | EdgyBot for " + ServerCount + " servers!";
             await _client.SetGameAsync(gameStatus);
+
             if (startup) {
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
             await _bfdPinger.PostServerCountAsync();
             await _dbPinger.PostServerCountAsync();
-            await dblPinger.UpdateStats(_client.Guilds.Count);
+            await dblPinger.UpdateDBLStatsAsync(ServerCount);
         }
     }
 }
