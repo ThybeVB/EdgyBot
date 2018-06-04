@@ -5,7 +5,8 @@ using Discord.Commands;
 
 namespace EdgyBot.Modules.Categories
 {
-    [Name("Voice Commands"), Summary("Music Commands!")]
+    //Disabling Voice Commands for now, doesn't even worek.
+    //[Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly AudioService _service;
