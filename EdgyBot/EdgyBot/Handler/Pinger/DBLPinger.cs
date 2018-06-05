@@ -18,7 +18,7 @@ namespace EdgyCore.Handler.Pinger
             dblApi = new AuthDiscordBotListApi(_lib.GetBotId(), dblToken);
         }
 
-        public async Task UpdateStats (int serverCount)
+        public async Task UpdateDBLStatsAsync (int serverCount)
         {
             try
             {

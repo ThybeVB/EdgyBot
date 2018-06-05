@@ -28,8 +28,8 @@ namespace EdgyBot.Modules.Categories
             await _service.LeaveAudio(Context.Guild);
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
-        [Summary("Plays a video from YouTube"), RequireOwner]
         [Command("play", RunMode = RunMode.Async)]
+        [RequireOwner]
         public async Task PlayCmd ([Remainder]string query)
         {
             string link = await _service.FetchVideoUrl(query);
