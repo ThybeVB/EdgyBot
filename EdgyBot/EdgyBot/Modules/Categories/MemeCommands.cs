@@ -42,23 +42,27 @@ namespace EdgyBot.Modules.Categories
 
         [Command("randommeme", RunMode = RunMode.Async), Alias("meme", "randommem", "memes")]
         [Name("randommeme"), Summary("Gets a random meme from Imgflip.")]
-        public async Task RandomMemeCmd ()
+        public async Task RandomMemeCmd (string param = null)
         {
-            JsonHelper jsonHelper = new JsonHelper("https://api.imgflip.com/get_memes");
-            string get = jsonHelper.getRandomMemeImgFlip();
+            if (param != "--show") {
+                JsonHelper jsonHelper = new JsonHelper("https://api.imgflip.com/get_memes");
+                string get = jsonHelper.getRandomMemeImgFlip();
 
-            string imglink = _lib.GetRandomMemeData(get);
-            string[] imgParams = imglink.Split(',');
+                string imglink = _lib.GetRandomMemeData(get);
+                string[] imgParams = imglink.Split(',');
 
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.Title = imgParams[1];
-            eb.ImageUrl = imgParams[0];
-            eb.Footer = new EmbedFooterBuilder
-            {
-                Text = "Memes may be bad, depends on Imgflip's API"
-            };
+                EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+                eb.Title = imgParams[1];
+                eb.ImageUrl = imgParams[0];
+                eb.Footer = new EmbedFooterBuilder
+                {
+                    Text = "Memes may be bad, depends on Imgflip's API"
+                };
 
-            await ReplyAsync("", embed: eb.Build());
+                await ReplyAsync("", embed: eb.Build());
+            } else {
+                await ReplyAsync("The Meme Command is being replaced with a better one, But if you wish to view the old one, add ``--show`` to your e!meme.");
+            }
         }
     }
 }

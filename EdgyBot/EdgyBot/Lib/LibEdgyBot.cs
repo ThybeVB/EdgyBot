@@ -229,7 +229,12 @@ namespace EdgyCore
 
         public string GetToken()
         {
-            return EdgyBot.Credientals.token;
+            string token = EdgyBot.Credientals.token;
+            if (string.IsNullOrEmpty(token)) 
+            {
+                throw new System.ArgumentNullException("EdgyBot Token", "EdgyBot Token is invalid or not set.");
+            }
+            return token;
         }
 
         public string GetRandomLetters(int size)
@@ -248,6 +253,7 @@ namespace EdgyCore
         public string GetPrefix ()
         {
             string prefix = EdgyBot.Credientals.prefix;
+
             if (string.IsNullOrEmpty(prefix)) return "e!";
             return prefix;
         }
@@ -268,7 +274,10 @@ namespace EdgyCore
         public string GetGDAccID ()
         {
             string accID = EdgyBot.Credientals.accID;
-            if (string.IsNullOrEmpty(accID)) return null;
+            if (string.IsNullOrEmpty(accID)) {
+                Log(new LogMessage(LogSeverity.Error, "EdgyBot", "GD Account ID Error"));
+                return null;
+            }
             return EdgyBot.Credientals.accID;
         }
 

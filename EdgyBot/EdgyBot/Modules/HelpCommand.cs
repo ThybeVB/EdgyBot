@@ -40,7 +40,7 @@ namespace EdgyBot.Modules
                         continue;
                     eb.AddField(command.Name, command.Summary);
                 }
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                await Task.Delay(TimeSpan.FromSeconds(1.25));
                 await Context.User.SendMessageAsync("", embed: eb.Build());
             }
         }
