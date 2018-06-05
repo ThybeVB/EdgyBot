@@ -13,7 +13,7 @@ namespace EdgyCore.Handler.Pinger
         public async Task PostServerCountAsync (int serverCount)
         {
             var dict = new Dictionary<string, object>();
-            dict.Add("server_count", _lib.GetServerCount());
+            dict.Add("server_count", serverCount);
 
             try { helper.postDataDiscordBots(dict); } catch (Exception e)
             {

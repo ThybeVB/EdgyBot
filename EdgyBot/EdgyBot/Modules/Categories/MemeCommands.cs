@@ -44,7 +44,7 @@ namespace EdgyBot.Modules.Categories
         [Name("randommeme"), Summary("Gets a random meme from Imgflip.")]
         public async Task RandomMemeCmd (string param = null)
         {
-            if (param != "--show") {
+            if (param == "--show") {
                 JsonHelper jsonHelper = new JsonHelper("https://api.imgflip.com/get_memes");
                 string get = jsonHelper.getRandomMemeImgFlip();
 
