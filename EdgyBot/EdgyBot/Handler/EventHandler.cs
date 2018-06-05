@@ -33,7 +33,7 @@ namespace EdgyCore.Handler
             _client.ShardReady += ShardReady;      
             _client.JoinedGuild += JoinedGuild;
             _client.LeftGuild += LeftGuild;
-            _client.ShardDisconnected += Disconnected;
+            _client.ShardDisconnected += ShardDisconnected;
             _client.UserJoined += UserUpdated;
             _client.UserLeft += UserUpdated;
         }
@@ -55,13 +55,14 @@ namespace EdgyCore.Handler
             return Task.CompletedTask;
         }
 
-        private async Task Disconnected(Exception exception, DiscordSocketClient client)
-           => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
+        private async Task ShardDisconnected(Exception exception, DiscordSocketClient client)
+           => await _lib.EdgyLog(LogSeverity.Critical, $"AN EDGYBOT SHARD HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
         private async Task JoinedGuild(SocketGuild guild)
         {
-            await guild.DefaultChannel.SendMessageAsync($"AYO Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
+            await guild.DefaultChannel.SendMessageAsync($"Ayyy Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
             ServerCount = _client.Guilds.Count;
+            MemberCount = CalculateMemberCount();
 
             await RefreshBotAsync();
         }
@@ -93,8 +94,8 @@ namespace EdgyCore.Handler
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
-            await _bfdPinger.PostServerCountAsync();
-            await _dbPinger.PostServerCountAsync();
+            await _bfdPinger.PostServerCountAsync(ServerCount);
+            await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
         }
     }

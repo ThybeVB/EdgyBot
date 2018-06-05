@@ -10,7 +10,7 @@ namespace EdgyCore.Handler.Pinger
         private JsonHelper helper = new JsonHelper("https://bots.discord.pw/api/bots/" + EdgyBot.Credientals.clientID + "/stats");
         private LibEdgyBot _lib = new LibEdgyBot();
 
-        public async Task PostServerCountAsync ()
+        public async Task PostServerCountAsync (int serverCount)
         {
             var dict = new Dictionary<string, object>();
             dict.Add("server_count", _lib.GetServerCount());
