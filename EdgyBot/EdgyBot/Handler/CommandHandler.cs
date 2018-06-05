@@ -44,16 +44,12 @@ namespace EdgyCore.Handler
         private async Task HandleCommandAsync(SocketMessage s)
         {
             SocketUserMessage msg = (SocketUserMessage)s;
-            if (msg == null) return;
+            if (msg == null || msg.Author.IsBot) return;
             ShardedCommandContext context = new ShardedCommandContext(_client, msg);
 
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
-
-                if (msg.Author.IsBot) return;
-                if (msg.Content == _prefix) return;
-
                 IResult result = await commandService.ExecuteAsync(context, argPos, _service);             
 
                 if (!result.IsSuccess)

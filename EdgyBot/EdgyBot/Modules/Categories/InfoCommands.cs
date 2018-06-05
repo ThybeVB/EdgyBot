@@ -144,7 +144,7 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
             eb.AddField("Status", Context.Client.Activity.Name);
-            eb.AddField("Uptime", _lib.CalculateUptimeString());
+            eb.AddField("Uptime", _lib.GetUpTime());
             eb.AddField("Developer", _lib.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());

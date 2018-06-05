@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
@@ -135,16 +136,6 @@ namespace EdgyCore
                 sb.Append(" ``" + permission.ToString() + "`` ");
             }
             return sb.ToString();
-        }
-
-        public string CalculateUptimeString () 
-        {
-            DateTime startTime  = EdgyCore.Handler.EventHandler.StartTime;
-            TimeSpan currentTime = startTime - DateTime.UtcNow;
-
-            string result = currentTime.ToString().TrimStart('-');
-
-            return result;
         }
 
         public string GetRandomMemeData(string json)
@@ -295,6 +286,12 @@ namespace EdgyCore
         public string GetProfilePicUrl()
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
+        }
+
+        public string GetUpTime () 
+        {
+            string re = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
+            return re;
         }
 
         /// <summary>
