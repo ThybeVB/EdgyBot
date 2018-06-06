@@ -7,6 +7,7 @@ using Discord.WebSocket;
 using Discord.Commands;
 using EdgyCore.Services;
 using EdgyBot.Modules;
+using EdgyCore.Lib;
 
 namespace EdgyCore.Handler
 {
@@ -17,6 +18,8 @@ namespace EdgyCore.Handler
         private DiscordShardedClient _client;
         private IServiceProvider _service;
         private CommandService commandService;
+
+        private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         public async Task InitializeAsync(DiscordShardedClient client)
@@ -24,7 +27,7 @@ namespace EdgyCore.Handler
             _client = client;
 
             _service = ConfigureServices();
-            _prefix = _lib.GetPrefix();
+            _prefix = _coreLib.GetPrefix();
 
             commandService = new CommandService();
             await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);

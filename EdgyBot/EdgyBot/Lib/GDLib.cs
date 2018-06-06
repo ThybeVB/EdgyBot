@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
+using EdgyCore.Lib;
 
 namespace EdgyCore
 {
     public class GDLib
     {
         private readonly HttpClient _client = new HttpClient();
-        private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyCore _lib = new LibEdgyCore();
 
         /// <summary>
         /// Gets the first Geometry Dash user based on their username.

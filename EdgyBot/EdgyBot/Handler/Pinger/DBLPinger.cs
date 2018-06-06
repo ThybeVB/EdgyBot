@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using Discord;
+using EdgyCore.Lib;
 
 namespace EdgyCore.Handler.Pinger
 {
     public class DBLPinger
     {
-        private LibEdgyBot _lib = new LibEdgyBot();
+        private LibEdgyCore _lib = new LibEdgyCore();
+        private LibEdgyBot lib = new LibEdgyBot();
+
         private AuthDiscordBotListApi dblApi;
 
         public DBLPinger ()
@@ -26,7 +29,7 @@ namespace EdgyCore.Handler.Pinger
                 await self.UpdateStatsAsync(serverCount);
             } catch
             {
-                await _lib.EdgyLog(LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
+                await lib.EdgyLog(LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
             }
         }
     }
