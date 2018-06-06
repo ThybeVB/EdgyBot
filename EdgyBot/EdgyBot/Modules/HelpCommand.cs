@@ -3,13 +3,16 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
+using EdgyCore.Lib;
 
 namespace EdgyBot.Modules
 {
     public class HelpCommand : ModuleBase<ShardedCommandContext>
     {
         private readonly CommandService _service;
+
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyCore _core = new LibEdgyCore();
 
         public HelpCommand(CommandService service)
         {
@@ -21,7 +24,7 @@ namespace EdgyBot.Modules
         {
             EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
             initEmbed.AddField("EdgyBot", "Help Command. Thanks for using EdgyBot!");
-            initEmbed.AddField("Bot Prefix", _lib.GetPrefix());
+            initEmbed.AddField("Bot Prefix", _core.GetPrefix());
             await Context.User.SendMessageAsync("", embed: initEmbed.Build());
 
             await Context.Message.AddReactionAsync(new Emoji("📫"));

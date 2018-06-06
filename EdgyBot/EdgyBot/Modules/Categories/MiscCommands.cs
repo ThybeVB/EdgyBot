@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
 using EdgyCore;
+using EdgyCore.Lib;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -10,11 +11,12 @@ namespace EdgyBot.Modules.Categories
     public class MiscCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private LibEdgyCore _core = new LibEdgyCore();
 
         [Command("invite")][Name("invite")][Summary("Gives the Invite Link for EdgyBot.")]
         public async Task InviteCmd ()
         {
-            Embed e = _lib.CreateEmbedWithText("Invite Link", _lib.GetInviteLink() + "\nThanks for inviting EdgyBot! :joy:");
+            Embed e = _lib.CreateEmbedWithText("Invite Link", _core.GetInviteLink() + "\nThanks for inviting EdgyBot! :joy:");
             await ReplyAsync("", embed: e);
         }
 

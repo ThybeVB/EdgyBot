@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using EdgyCore.Handler.Pinger;
+using EdgyCore.Lib;
 
 namespace EdgyCore.Handler
 {
@@ -10,7 +11,9 @@ namespace EdgyCore.Handler
     {
         private readonly DiscordShardedClient _client;
 
+        private LibEdgyCore _coreLib = new LibEdgyCore();
         private LibEdgyBot _lib = new LibEdgyBot();
+
         private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
         private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
         private static DBLPinger dblPinger = new DBLPinger();
@@ -40,7 +43,7 @@ namespace EdgyCore.Handler
         public async Task ShardReady(DiscordSocketClient client)
         {
             if (OwnerUser == null)
-                OwnerUser = _client.GetUser(_lib.GetOwnerID());
+                OwnerUser = _client.GetUser(_coreLib.GetOwnerID());
 
             ServerCount = _client.Guilds.Count;
             MemberCount = CalculateMemberCount();

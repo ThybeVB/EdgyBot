@@ -4,6 +4,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
+using EdgyCore.Lib;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -11,6 +12,7 @@ namespace EdgyBot.Modules.Categories
     public class InfoCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyCore _core = new LibEdgyCore();
 
         [Command("channelinfo")]
         [Name("channelinfo")]
@@ -145,7 +147,7 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Uptime", _lib.GetUpTime());
-            eb.AddField("Developer", _lib.GetOwnerDiscordName());
+            eb.AddField("Developer", _core.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());
         }
