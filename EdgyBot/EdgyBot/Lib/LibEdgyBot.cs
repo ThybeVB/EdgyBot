@@ -209,9 +209,9 @@ namespace EdgyCore
             return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
         }
 
-        public string GetUpTime () 
+        public string GetUptime () 
         {
-            string re = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
+            string re = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\:hh\:mm\:ss");
             return re;
         }
 
