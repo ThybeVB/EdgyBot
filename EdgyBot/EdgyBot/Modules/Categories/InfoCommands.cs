@@ -136,10 +136,10 @@ namespace EdgyBot.Modules.Categories
         public async Task UptimeCmd () 
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.AddField("Uptime", _lib.GetUptime());
+            eb.AddField("Uptime", $":timer: {_lib.GetUptime()}");
             eb.WithFooter(new EmbedFooterBuilder 
             {
-                Text = $"Current Time: {DateTime.UtcNow}, Shard {Context.Client.GetShardIdFor(Context.Guild)}"
+                Text = $"Current Time: {DateTime.UtcNow.ToShortTimeString()}, Shard {Context.Client.GetShardIdFor(Context.Guild)}"
             });
             
             await ReplyAsync("", embed: eb.Build());
