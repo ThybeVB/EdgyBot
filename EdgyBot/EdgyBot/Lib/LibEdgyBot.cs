@@ -211,8 +211,9 @@ namespace EdgyCore
 
         public string GetUptime () 
         {
-            string re = (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\:hh\:mm\:ss");
-            return re;
+            TimeSpan startTime = DateTime.Now - Process.GetCurrentProcess().StartTime;
+            string formatted = startTime.ToString(@"dd\:hh\:mm\:ss");
+            return formatted;
         }
 
         /// <summary>

@@ -131,6 +131,20 @@ namespace EdgyBot.Modules.Categories
 
         }
 
+        [Command("uptime"), Alias("time", "up")]
+        [Name("uptime"), Summary("Shows how long the bot has been running since the last restart.")]
+        public async Task UptimeCmd () 
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("Uptime", _lib.GetUptime());
+            eb.WithFooter(new EmbedFooterBuilder 
+            {
+                Text = $"Current Time: {DateTime.UtcNow}, Shard {Context.Client.GetShardIdFor(Context.Guild)}"
+            });
+            
+            await ReplyAsync("", embed: eb.Build());
+        }
+
         [Command("info"), Alias("botinfo")]
         [Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
