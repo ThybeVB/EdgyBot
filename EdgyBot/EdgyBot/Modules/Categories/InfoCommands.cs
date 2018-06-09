@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Linq;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
 using EdgyCore.Lib;
+
 
 namespace EdgyBot.Modules.Categories
 {
@@ -22,16 +24,18 @@ namespace EdgyBot.Modules.Categories
             if (channel == null)
                 channel = Context.Channel;
        
-            EmbedBuilder e = _lib.SetupEmbedWithDefaults();
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            var users = await channel.GetUsersAsync().FlattenAsync();
 
-            e.AddField("Channel Name", channel.Name);
-            e.AddField("Channel ID", channel.Id.ToString());
-            e.AddField("Created", channel.CreatedAt.ToString());
+            eb.AddField("Channel Name", channel.Name);
+            eb.AddField("Users In Channel", users.Count());
+            eb.AddField("Channel ID", channel.Id.ToString());
+            eb.AddField("Created", channel.CreatedAt.ToString());
 
-            await ReplyAsync("", embed: e.Build());
+            await ReplyAsync("", embed: eb.Build());
         }
 
-        [Command("userinfo")]
+        [Command("userinfo"), Alias("whois")]
         [Name("userinfo")]
         [Summary("Mention an user or leave it empty for a description on the user.")]
         public async Task UserInfoCmd(IGuildUser usr = null)
@@ -145,7 +149,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: eb.Build());
         }
 
-        [Command("info"), Alias("botinfo")]
+        [Command("info"), Alias("botinfo", "me")]
         [Name("info")][Summary("Gives you info about the Bot")]
         public async Task BotInfoCmd ()
         {

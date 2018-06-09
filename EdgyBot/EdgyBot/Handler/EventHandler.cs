@@ -26,11 +26,7 @@ namespace EdgyCore.Handler
         public EventHandler(DiscordShardedClient client)
         {
             _client = client;
-            InitEvents();
-        }
-
-        private void InitEvents()
-        {
+            
             _client.Log += _lib.Log;
             _client.ShardReady += ShardReady;      
             _client.JoinedGuild += JoinedGuild;
@@ -39,6 +35,7 @@ namespace EdgyCore.Handler
             _client.UserJoined += UserUpdated;
             _client.UserLeft += UserUpdated;
         }
+
 
         public async Task ShardReady(DiscordSocketClient client)
         {
