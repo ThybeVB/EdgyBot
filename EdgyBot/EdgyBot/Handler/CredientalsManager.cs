@@ -1,7 +1,7 @@
 ﻿using System;
 using EdgyCore;
 
-namespace EdgyBot.Handler
+namespace EdgyCore.Handler
 {
     public class CredientalsManager
     {

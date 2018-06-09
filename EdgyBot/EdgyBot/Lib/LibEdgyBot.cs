@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
 using System.Net;
-using EdgyBot.Handler;
+using EdgyCore.Handler;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -41,20 +41,6 @@ namespace EdgyCore
             eb.Color = LightBlue;
             eb.AddField(title, text);
             return eb.Build();
-        }
-
-        public Credentials GetCredientals ()
-        {
-            CredientalsManager manager = new CredientalsManager();
-
-            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup", EnvironmentVariableTarget.User);
-            if (string.IsNullOrEmpty(isSetup) || isSetup == "y")
-            {
-                return manager.Read(true);
-            } else
-            {
-                return manager.Read(false);
-            }
         }
 
         /// <summary>
@@ -120,8 +106,7 @@ namespace EdgyCore
             {
                 EmbedFooterBuilder footer = new EmbedFooterBuilder
                 {
-                    //GMT +2
-                    Text = DateTime.Now.AddHours(2).ToShortTimeString() + " | " + "EdgyBot Embed"
+                    Text = DateTime.UtcNow.ToShortTimeString() + " | " + "EdgyBot Embed"
                 };
                 eb.Footer = footer;
             }
@@ -212,7 +197,7 @@ namespace EdgyCore
         public string GetUptime () 
         {
             TimeSpan startTime = DateTime.Now - Process.GetCurrentProcess().StartTime;
-            string formatted = startTime.ToString(@"dd\:hh\:mm\:ss");
+            string formatted = startTime.ToString(@"dd\dhh\hmm\mss") + "s";
             return formatted;
         }
 

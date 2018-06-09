@@ -2,12 +2,27 @@
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using EdgyCore.Handler;
 
 namespace EdgyCore.Lib
 {
     public class LibEdgyCore : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
+        public Credentials GetCredientals ()
+        {
+            CredientalsManager manager = new CredientalsManager();
+
+            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup", EnvironmentVariableTarget.User);
+            if (string.IsNullOrEmpty(isSetup) || isSetup == "y")
+            {
+                return manager.Read(true);
+            } else
+            {
+                return manager.Read(false);
+            }
+        }
 
         public ulong GetBotId()
         {

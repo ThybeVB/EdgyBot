@@ -2,6 +2,7 @@
 using Discord;
 using Discord.WebSocket;
 using EdgyCore.Handler;
+using EdgyCore.Lib;
 
 namespace EdgyCore
 {
@@ -12,6 +13,7 @@ namespace EdgyCore
 
         public static Credentials Credientals;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyCore _core = new LibEdgyCore();
 
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
@@ -20,7 +22,7 @@ namespace EdgyCore
 
         private async Task StartAsync ()
         {
-            Credientals = _lib.GetCredientals();
+            Credientals = _core.GetCredientals();
             new EventHandler(Client);
             await Client.LoginAsync(TokenType.Bot, Credientals.token);
             await Client.StartAsync();
