@@ -37,8 +37,8 @@ namespace EdgyCore.Handler.Pinger
             {
                 LogMessage msg = new LogMessage(LogSeverity.Error, "Imgflip GET", e.Message);
                 new LibEdgyBot().Log(msg);
+                return msg.ToString();
             }
-            return "API Error";
         }
 
         public string getRandomDogAPI()
@@ -61,8 +61,8 @@ namespace EdgyCore.Handler.Pinger
             {
                 LogMessage msg = new LogMessage(LogSeverity.Error, "DogCEO GET", e.Message);
                 new LibEdgyBot().Log(msg);
+                return msg.ToString();
             }
-            return "API Error";
         }
 
         public bool postDataBotsForDiscord (Dictionary<string, object> dictData)
