@@ -37,10 +37,10 @@ namespace EdgyBot.Modules.Categories
                 default:
                     await msg.ModifyAsync(x => x.Content = Context.Message.Author.Mention + " has won!");
                     break;
-                case 1:
+                case 0:
                     await msg.ModifyAsync(x => x.Content = Context.Message.Author.Mention + " has won!");
                     break;
-                case 2:
+                case 1:
                     await msg.ModifyAsync(x => x.Content = usr.Mention + " has won!");
                     break;
             }

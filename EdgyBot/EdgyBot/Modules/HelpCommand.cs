@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Text;
 using Discord;
@@ -95,7 +96,7 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: eb.Build());
         }
 
-        private string GetAliasString (System.Collections.Generic.IReadOnlyList<string> str) 
+        private string GetAliasString (IReadOnlyList<string> str) 
         {
             StringBuilder sb = new StringBuilder();
 
