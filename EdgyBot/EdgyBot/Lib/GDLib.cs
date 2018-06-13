@@ -89,60 +89,6 @@ namespace EdgyCore
 
             return acc;
         }
-        
-        
-        
-        
-        
-        /// <summary>
-        /// Gets the first Geometry Dash user based on their username.
-        /// </summary>
-        /// <param name="strInput"></param>
-        /// <returns></returns>
-        public async Task<string> GetGJUsers(string strInput)
-        {
-            var gjUsersDict = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"str", strInput},
-                {"total", "0"},
-                {"page", "0"},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
-            HttpResponseMessage gjUsersResponse = await _client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
-            string responseString = await gjUsersResponse.Content.ReadAsStringAsync();
-            string[] accountStuff = responseString.Split(':');
-            string targetAccountID = accountStuff[21];
-
-            return targetAccountID;
-        }
-
-        /// <summary>
-        /// Gets an users info from the Geometry Dash Database.
-        /// </summary>
-        /// <param name="inputStr"></param>
-        /// <returns></returns>
-        public async Task<string[]> getGJUserInfo(string inputStr)
-        {
-            var getUserValues = new Dictionary<string, string>
-            {
-                {"gameVersion", "21"},
-                {"binaryVersion", "35"},
-                {"gdw", "0"},
-                {"accountID", _lib.GetGDAccID()},
-                {"gjp", _lib.GetGJP()},
-                {"targetAccountID", inputStr},
-                {"secret", "Wmfd2893gb7"}
-            };
-            FormUrlEncodedContent getUserContent = new FormUrlEncodedContent(getUserValues);
-            HttpResponseMessage getUserResponse = await _client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
-            string getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
-            string[] finalResult = getUserResponseString.Split(':');
-            return finalResult;
-        }
 
         /// <summary>
         /// Gets Scores from the Geometry Dash Leaderboards
