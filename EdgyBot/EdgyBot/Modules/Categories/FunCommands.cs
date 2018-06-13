@@ -14,7 +14,8 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("duel", RunMode = RunMode.Async)][Name("duel")][Summary("Duels a user")]
+        [Command("duel", RunMode = RunMode.Async)]
+        [Name("duel"), Summary("Duels a user")]
         public async Task DuelCmd (SocketGuildUser usr = null)
         {
             Random rand = new Random();
@@ -46,7 +47,8 @@ namespace EdgyBot.Modules.Categories
             }
         }
 
-        [Command("clap")][Name("clap")][Summary("Puts your message into claps")]
+        [Command("clap")]
+        [Name("clap"), Summary("Puts your message into claps")]
         public async Task ClapCmd ([Remainder]string input)
         {
             char[] characters = input.ToCharArray();
@@ -62,7 +64,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("vertical")][Name("vertical")][Summary("Converts your message to a vertical one")]
+        [Command("vertical")]
+        [Name("vertical"), Summary("Converts your message to a vertical one")]
         public async Task VerticalCmd([Remainder]string msg)
         {
             StringBuilder sb = new StringBuilder();
@@ -76,7 +79,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("bigletter")][Name("bigletter")][Summary("Converts your message to Big Letters")]
+        [Command("bigletter")]
+        [Name("bigletter"), Summary("Converts your message to Big Letters")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
             msg = msg.ToLower();
@@ -95,7 +99,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("stop")][Name("stop")][Summary("Tells somebody to **STOP**")]
+        [Command("stop")]
+        [Name("stop"), Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
@@ -103,7 +108,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: a);
         }
 
-        [Command("jeff")][Name("jeff")][Summary("Jeff's somebody.")]
+        [Command("jeff")]
+        [Name("jeff"), Summary("Jeff's somebody.")]
         public async Task JeffCmd(IGuildUser user)
         {
             if (user.Id == Context.User.Id)
@@ -124,7 +130,8 @@ namespace EdgyBot.Modules.Categories
 
         }
 
-        [Command("acronym", RunMode = RunMode.Async)][Name("acronym")][Summary("A game of acronym!")]
+        [Command("acronym", RunMode = RunMode.Async)]
+        [Name("acronym"), Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
             //Stage 1
@@ -159,7 +166,8 @@ namespace EdgyBot.Modules.Categories
             }
         }
 
-        [Command("stab")][Name("stab")][Summary("Stabs an user.")]
+        [Command("stab")]
+        [Name("stab"), Summary("Stabs an user.")]
         public async Task StabCmd(SocketUser usr)
         {
             if (usr.Id == Context.User.Id)
