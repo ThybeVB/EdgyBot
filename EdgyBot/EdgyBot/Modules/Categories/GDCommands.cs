@@ -17,9 +17,8 @@ namespace EdgyBot.Modules.Categories
         [Command("profile")] [Name("profile")] [Summary("Gives you a profile from Geometry Dash")]
         public async Task GDProfileCmd ([Remainder]string strInput = null)
         {
-            if (strInput == "--new") {
                 
-                GDAccount[] accounts = await _gdLib.GetGJUsersAsync("Monstahhh");
+                GDAccount[] accounts = await _gdLib.GetGJUsersAsync(strInput);
                 GDAccount account = accounts[0];
                 
                 EmbedBuilder builder = _lib.SetupEmbedWithDefaults();
@@ -46,36 +45,6 @@ namespace EdgyBot.Modules.Categories
                 builder.Footer = embedFooterBuilder;
 
                 await ReplyAsync("", embed: builder.Build());
-
-                return;
-            }
-
-            string accID = await _gdLib.GetGJUsers(strInput);
-            string[] finalResult = await _gdLib.getGJUserInfo(accID);
-
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(false);
-            string gdpicurl = gdThumbPic;
-            eb.ThumbnailUrl = gdpicurl;
-
-            eb.AddField("Username", finalResult[1], true);
-            eb.AddField("Stars", finalResult[13], true);
-            eb.AddField("Diamonds", finalResult[15], true);
-            eb.AddField("User Coins", finalResult[7], true);
-            eb.AddField("Coins", finalResult[5], true);
-            eb.AddField("Demons", finalResult[17], true);
-            eb.AddField("Creator Points", finalResult[19], true);
-
-            if (!string.IsNullOrEmpty(finalResult[27])) eb.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + finalResult[27] + ")", true); else eb.AddField("YouTube", "None", true);
-            if (!string.IsNullOrEmpty(finalResult[55])) eb.AddField("Twitch", $"[{finalResult[55]}](https://twitch.tv/" + finalResult[55] + ")", true); else eb.AddField("Twitch", "None", true);
-            if (!string.IsNullOrEmpty(finalResult[53])) eb.AddField("Twitter", $"[@{finalResult[53]}](https://www.twitter.com/@" + finalResult[53] + ")", true); else eb.AddField("Twitter", "None", true);
-            EmbedFooterBuilder footer = new EmbedFooterBuilder
-            {
-                Text = $"User ID: {finalResult[3]}, Account ID: {accID}",
-                IconUrl = gdpicurl
-            };
-            eb.Footer = footer;
-
-            await ReplyAsync("", embed: eb.Build());
         }
 
         [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
