@@ -15,7 +15,7 @@ namespace EdgyBot.Modules.Categories
 
         [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from the channel (Provide a number on how much messages to delete)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task PurgeCmd (int input) 
+        public async Task PurgeCmd (int input, string args = null) 
         {
             int original = input;
 
@@ -23,27 +23,43 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("You can't delete more than 100 messages at once.");
                 return;
             }
-            
             var messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
-            try 
-            {
-                var toDelete = await ReplyAsync("Started Purge. This may take a while. Deleting " + input + " messages.");
-                foreach (var message in messages) 
+            
+            if (args == "--slow") {
+                try 
                 {
-                    if (message == null)
-                        continue;
-                    input--;
-                    await Task.Delay(TimeSpan.FromSeconds(2.5));
-                    await message.DeleteAsync();
-                    await toDelete.ModifyAsync(x => x.Content = "Executing Purge. This may take a while. Messages to Delete: " + input);
+                    var toDelete = await ReplyAsync("Started Purge. This may take a while. Deleting " + input + " messages.");
+                    foreach (var message in messages) 
+                    {
+                        if (message == null)
+                            continue;
+
+                        input--;
+                        await Task.Delay(TimeSpan.FromSeconds(2.5));
+                        await message.DeleteAsync();
+                        await toDelete.ModifyAsync(x => x.Content = "Executing Purge. This may take a while. Messages to Delete: " + input);
+                    }
+                    await toDelete.DeleteAsync();
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
+                } catch 
+                {
+                    Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
+                    await ReplyAsync("", embed: err);
                 }
-                await toDelete.DeleteAsync();
-                await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
-            } catch 
+            } else 
             {
-                Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
-                await ReplyAsync("", embed: err);
+                try 
+                {
+                    ITextChannel channel = Context.Channel as ITextChannel;
+                    await channel.DeleteMessagesAsync(messages);
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
+                } catch 
+                {
+                    Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
+                    await ReplyAsync("", embed: err);
+                }
             }
+            
         }
 
         [Command("setstatus")][RequireOwner]
