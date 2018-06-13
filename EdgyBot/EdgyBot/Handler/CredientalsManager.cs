@@ -1,5 +1,6 @@
 ﻿using System;
 using EdgyCore;
+using EdgyCore.Common;
 
 namespace EdgyCore.Handler
 {

@@ -1,4 +1,4 @@
-﻿namespace EdgyCore
+﻿namespace EdgyCore.Common
 {
     public class Credentials
     {

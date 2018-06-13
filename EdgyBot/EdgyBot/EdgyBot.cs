@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using EdgyCore.Common;
 using EdgyCore.Handler;
 using EdgyCore.Lib;
 
