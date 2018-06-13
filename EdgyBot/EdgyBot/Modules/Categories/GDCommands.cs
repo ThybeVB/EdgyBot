@@ -2,6 +2,7 @@
 using Discord;
 using Discord.Commands;
 using EdgyCore;
+using EdgyCore.Common;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -16,6 +17,39 @@ namespace EdgyBot.Modules.Categories
         [Command("profile")] [Name("profile")] [Summary("Gives you a profile from Geometry Dash")]
         public async Task GDProfileCmd ([Remainder]string strInput = null)
         {
+            if (strInput == "--new") {
+                
+                GDAccount[] accounts = await _gdLib.GetGJUsersAsync("Monstahhh");
+                GDAccount account = accounts[0];
+                
+                EmbedBuilder builder = _lib.SetupEmbedWithDefaults();
+                string gdLogoUrl = gdThumbPic;
+                builder.ThumbnailUrl = gdLogoUrl;
+
+                builder.AddField("Username", account.username, true);
+                builder.AddField("Stars", account.stars, true);
+                builder.AddField("Diamonds", account.diamonds, true);
+                builder.AddField("User Coins", account.userCoins, true);
+                builder.AddField("Coins", account.coins, true);
+                builder.AddField("Demons", account.demons, true);
+                builder.AddField("Creator Points", account.creatorPoints, true);
+
+                if (!string.IsNullOrEmpty(account.youtubeUrl)) builder.AddField("YouTube", "[YouTube](https://www.youtube.com/channel/" + account.youtubeUrl + ")", true); else builder.AddField("YouTube", "None", true);
+                if (!string.IsNullOrEmpty(account.twitchUrl)) builder.AddField("Twitch", $"[{account.twitchUrl}](https://twitch.tv/" + account.twitchUrl + ")", true); else builder.AddField("Twitch", "None", true);
+                if (!string.IsNullOrEmpty(account.twitterUrl)) builder.AddField("Twitter", $"[@{account.twitterUrl}](https://www.twitter.com/@" + account.twitterUrl + ")", true); else builder.AddField("Twitter", "None", true);
+
+                EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+                {
+                    Text = $"User ID: {account.userID}, Account ID: {account.accountID}",
+                    IconUrl = gdLogoUrl
+                };
+                builder.Footer = embedFooterBuilder;
+
+                await ReplyAsync("", embed: builder.Build());
+
+                return;
+            }
+
             string accID = await _gdLib.GetGJUsers(strInput);
             string[] finalResult = await _gdLib.getGJUserInfo(accID);
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
+using EdgyCore.Common;
 using EdgyCore.Lib;
 
 namespace EdgyCore
@@ -10,6 +11,89 @@ namespace EdgyCore
         private readonly HttpClient _client = new HttpClient();
         private readonly LibEdgyCore _lib = new LibEdgyCore();
 
+        
+        public async Task<GDAccount[]> GetGJUsersAsync (string strInput) 
+        {
+
+            var gjUsersDict = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"str", strInput},
+                {"total", "0"},
+                {"page", "0"},
+                {"secret", "Wmfd2893gb7"}
+            };
+
+            FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
+            HttpResponseMessage gjUsersResponse = await _client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
+            string responseString = await gjUsersResponse.Content.ReadAsStringAsync();
+            string[] accountStrings = responseString.Split('|');
+
+            int arrayLength = 0;
+            GDAccount[] accounts = new GDAccount[10];
+            foreach (string str in accountStrings) 
+            {
+                if (string.IsNullOrEmpty(str))
+                    continue;
+                
+                string[] accountInfo = str.Split(':');
+
+                GDAccount acc = new GDAccount();
+                acc.accountID = accountInfo[21];
+                acc.userID = accountInfo[3];
+
+                acc.username = accountInfo[1];
+                acc.stars = accountInfo[13];
+                acc.diamonds = accountInfo[15];
+                acc.userCoins = accountInfo[7];
+                acc.coins = accountInfo[5];
+                acc.demons = accountInfo[17];
+                acc.creatorPoints = accountInfo[19];
+
+                GDAccount userInfo = await getGJUserInfoAsync(accountInfo[21]);
+
+                acc.youtubeUrl = userInfo.youtubeUrl;
+                acc.twitterUrl = userInfo.twitterUrl;
+                acc.twitchUrl = userInfo.twitchUrl;
+
+                accounts[arrayLength] = acc;
+                arrayLength++;
+            }
+
+            return accounts;
+        }
+
+        public async Task<GDAccount> getGJUserInfoAsync (string accID) 
+        {
+             var getUserValues = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", _lib.GetGDAccID()},
+                {"gjp", _lib.GetGJP()},
+                {"targetAccountID", accID},
+                {"secret", "Wmfd2893gb7"}
+            };
+            FormUrlEncodedContent getUserContent = new FormUrlEncodedContent(getUserValues);
+            HttpResponseMessage getUserResponse = await _client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
+            string getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
+            string[] finalResult = getUserResponseString.Split(':');
+
+            GDAccount acc = new GDAccount();
+            acc.youtubeUrl = finalResult[27];
+            acc.twitterUrl = finalResult[53];
+            acc.twitchUrl = finalResult[55];
+
+            return acc;
+        }
+        
+        
+        
+        
+        
         /// <summary>
         /// Gets the first Geometry Dash user based on their username.
         /// </summary>
