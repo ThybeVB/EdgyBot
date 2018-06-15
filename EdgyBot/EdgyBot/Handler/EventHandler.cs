@@ -9,7 +9,7 @@ namespace EdgyCore.Handler
 {
     public class EventHandler
     {
-        private readonly DiscordShardedClient _client;
+        private DiscordShardedClient _client;
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
         private LibEdgyBot _lib = new LibEdgyBot();
@@ -27,8 +27,7 @@ namespace EdgyCore.Handler
         {
             _client = client;
             
-            _client.Log += _lib.Log;
-            _client.ShardReady += ShardReady;      
+            _client.Log += _lib.Log;  
             _client.JoinedGuild += JoinedGuild;
             _client.LeftGuild += LeftGuild;
             _client.ShardDisconnected += ShardDisconnected;
@@ -36,15 +35,14 @@ namespace EdgyCore.Handler
             _client.UserLeft += UserUpdated;
         }
 
-
-        public async Task ShardReady(DiscordSocketClient client)
+        public async Task SetupBot()
         {
             if (OwnerUser == null)
                 OwnerUser = _client.GetUser(_coreLib.GetOwnerID());
-
+            
             ServerCount = _client.Guilds.Count;
             MemberCount = CalculateMemberCount();
-
+            
             await RefreshBotAsync(true);
         }
 
@@ -55,7 +53,7 @@ namespace EdgyCore.Handler
         }
 
         private async Task ShardDisconnected(Exception exception, DiscordSocketClient client)
-           => await _lib.EdgyLog(LogSeverity.Critical, $"AN EDGYBOT SHARD HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
+           => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT SHARD HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
         private async Task JoinedGuild(SocketGuild guild)
         {
