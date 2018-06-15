@@ -20,7 +20,7 @@ namespace EdgyBot.Modules.Categories
         {
             GDAccount[] accounts = await _gdLib.GetGJUsersAsync(strInput);
             if (accounts == null) {
-                await ReplyAsync("No Users Found with this username.");
+                await ReplyAsync("", embed: _lib.CreateEmbedWithError("Geometry Dash Commands Error", ":x: Could not find a user with this username."));
                 return;
             }
             GDAccount account = accounts[0];
