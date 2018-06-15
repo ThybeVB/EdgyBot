@@ -4,7 +4,7 @@ using System.Net.Http;
 using EdgyCore.Common;
 using EdgyCore.Lib;
 
-namespace EdgyCore
+namespace EdgyCore.Lib
 {
     public class GDLib
     {
@@ -13,7 +13,6 @@ namespace EdgyCore
 
         private readonly string gjSecret = "Wmfd2893gb7";
 
-        
         public async Task<GDAccount[]> GetGJUsersAsync (string strInput) 
         {
 
@@ -69,10 +68,39 @@ namespace EdgyCore
             return accounts;
         }
 
+        public async Task<GJComment> GetMostRecentComment (string accID)
+        {
+            var mostLikedCommentValues = new Dictionary<string, string>
+            {
+                {"gameVersion", "21"},
+                {"binaryVersion", "35"},
+                {"gdw", "0"},
+                {"accountID", _lib.GetGDAccID()},
+                {"page", "0"},
+                {"total", "0"},
+                {"secret", gjSecret}
+            };
+
+            FormUrlEncodedContent content = new FormUrlEncodedContent(mostLikedCommentValues);
+            HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJAccountComments20.php", content);
+            string responseString = await response.Content.ReadAsStringAsync();
+            string[] mem = responseString.Split('|');
+            string single = mem[0];
+            string[] contents = single.Split('~');
+
+            GJComment comment = new GJComment
+            {
+                comment = mem[2],
+                likes = mem[4]
+            };
+
+            return comment;
+        }
+
         public async Task<GDAccount> getGJUserInfoAsync (string accID) 
         {
              var getUserValues = new Dictionary<string, string>
-            {
+             {
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
