@@ -32,7 +32,7 @@ namespace EdgyCore
             await new CommandHandler().InitializeAsync(Client);
 
             /* A very hacky and cheap way to do it, i know. */
-            await Task.Delay(System.TimeSpan.FromMinutes(1.5));
+            await Task.Delay(System.TimeSpan.FromMinutes(1));
             await handler.SetupBot();
 
             await Task.Delay(-1);

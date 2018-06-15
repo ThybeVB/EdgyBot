@@ -59,14 +59,20 @@ namespace EdgyCore.Handler
                 {
                     if (result.Error != CommandError.UnknownCommand)
                     {
-                        if (result.Error != CommandError.BadArgCount)
+                        if (result.Error != CommandError.Exception)
                         {
-                            await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                            await context.Channel.SendMessageAsync(result.ErrorReason);
-                        }
-                        else
+                            if (result.Error != CommandError.BadArgCount)
+                            {
+                                await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                                await context.Channel.SendMessageAsync(result.ErrorReason);
+                            }
+                            else
+                            {
+                                await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
+                            }
+                        } else
                         {
-                            await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
+                            await context.Channel.SendMessageAsync("**Internal Error**: Either the bot is still starting, or there is an actual problem. Please use e!bugreport if you think this is an actual problem.");
                         }
                     }
                     else
