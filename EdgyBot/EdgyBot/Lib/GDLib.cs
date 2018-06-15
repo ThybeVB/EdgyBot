@@ -31,6 +31,9 @@ namespace EdgyCore.Lib
             FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
             HttpResponseMessage gjUsersResponse = await _client.PostAsync("http://boomlings.com/database/getGJUsers20.php", gjUsersContent);
             string responseString = await gjUsersResponse.Content.ReadAsStringAsync();
+            if (responseString == "-1")
+                return null;
+
             string[] accountStrings = responseString.Split('|');
 
             int arrayLength = 0;

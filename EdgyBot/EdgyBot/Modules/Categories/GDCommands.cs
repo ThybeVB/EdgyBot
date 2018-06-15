@@ -19,6 +19,10 @@ namespace EdgyBot.Modules.Categories
         public async Task GDProfileCmd ([Remainder]string strInput = null)
         {
             GDAccount[] accounts = await _gdLib.GetGJUsersAsync(strInput);
+            if (accounts == null) {
+                await ReplyAsync("No Users Found with this username.");
+                return;
+            }
             GDAccount account = accounts[0];
             
             EmbedBuilder builder = _lib.SetupEmbedWithDefaults();
