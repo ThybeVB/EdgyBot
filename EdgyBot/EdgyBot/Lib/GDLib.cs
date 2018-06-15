@@ -40,23 +40,25 @@ namespace EdgyCore
                 
                 string[] accountInfo = str.Split(':');
 
-                GDAccount acc = new GDAccount();
-                acc.accountID = accountInfo[21];
-                acc.userID = accountInfo[3];
-
-                acc.username = accountInfo[1];
-                acc.stars = accountInfo[13];
-                acc.diamonds = accountInfo[15];
-                acc.userCoins = accountInfo[7];
-                acc.coins = accountInfo[5];
-                acc.demons = accountInfo[17];
-                acc.creatorPoints = accountInfo[19];
-
                 GDAccount userInfo = await getGJUserInfoAsync(accountInfo[21]);
 
-                acc.youtubeUrl = userInfo.youtubeUrl;
-                acc.twitterUrl = userInfo.twitterUrl;
-                acc.twitchUrl = userInfo.twitchUrl;
+                GDAccount acc = new GDAccount
+                {
+                    accountID = accountInfo[21],
+                    userID = accountInfo[3],
+                    username = accountInfo[1],
+
+                    stars = userInfo.stars,
+                    diamonds = userInfo.diamonds,
+                    userCoins = userInfo.userCoins,
+                    coins = userInfo.coins,
+                    demons = userInfo.demons,
+                    creatorPoints = userInfo.creatorPoints,
+
+                    youtubeUrl = userInfo.youtubeUrl,
+                    twitterUrl = userInfo.twitterUrl,
+                    twitchUrl = userInfo.twitchUrl
+                };
 
                 accounts[arrayLength] = acc;
                 arrayLength++;
@@ -86,6 +88,13 @@ namespace EdgyCore
             acc.youtubeUrl = finalResult[27];
             acc.twitterUrl = finalResult[53];
             acc.twitchUrl = finalResult[55];
+
+            acc.stars = finalResult[13];
+            acc.diamonds = finalResult[15];
+            acc.userCoins = finalResult[7];
+            acc.coins = finalResult[5];
+            acc.demons = finalResult[17];
+            acc.creatorPoints = finalResult[19];
 
             return acc;
         }
