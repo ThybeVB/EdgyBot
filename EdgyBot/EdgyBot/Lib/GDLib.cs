@@ -76,7 +76,7 @@ namespace EdgyCore.Lib
                 {"gameVersion", "21"},
                 {"binaryVersion", "35"},
                 {"gdw", "0"},
-                {"accountID", _coreLib.GetGDAccID()},
+                {"accountID", accID},
                 {"page", "0"},
                 {"total", "0"},
                 {"secret", gjSecret}
@@ -89,7 +89,7 @@ namespace EdgyCore.Lib
             string single = mem[0];
             string[] contents = single.Split('~');
 
-            string decoded = _lib.DecodeB64(contents[2]);
+            string decoded = _lib.DecodeB64(contents[1]);
 
             GJComment comment = new GJComment
             {
