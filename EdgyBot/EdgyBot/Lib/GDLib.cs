@@ -11,6 +11,8 @@ namespace EdgyCore
         private readonly HttpClient _client = new HttpClient();
         private readonly LibEdgyCore _lib = new LibEdgyCore();
 
+        private readonly string gjSecret = "Wmfd2893gb7";
+
         
         public async Task<GDAccount[]> GetGJUsersAsync (string strInput) 
         {
@@ -23,7 +25,7 @@ namespace EdgyCore
                 {"str", strInput},
                 {"total", "0"},
                 {"page", "0"},
-                {"secret", "Wmfd2893gb7"}
+                {"secret", gjSecret}
             };
 
             FormUrlEncodedContent gjUsersContent = new FormUrlEncodedContent(gjUsersDict);
@@ -77,7 +79,7 @@ namespace EdgyCore
                 {"accountID", _lib.GetGDAccID()},
                 {"gjp", _lib.GetGJP()},
                 {"targetAccountID", accID},
-                {"secret", "Wmfd2893gb7"}
+                {"secret", gjSecret}
             };
             FormUrlEncodedContent getUserContent = new FormUrlEncodedContent(getUserValues);
             HttpResponseMessage getUserResponse = await _client.PostAsync("http://boomlings.com/database/getGJUserInfo20.php", getUserContent);
@@ -110,7 +112,7 @@ namespace EdgyCore
                 {"gjp", _lib.GetGJP()},
                 {"type", type},
                 {"count", count.ToString()},
-                {"secret", "Wmfd2893gb7"}
+                {"secret", gjSecret}
             };
             FormUrlEncodedContent getScoresContent = new FormUrlEncodedContent(top10ReqDict);
             HttpResponseMessage getScoresResponse = await _client.PostAsync("http://boomlings.com/database/getGJScores20.php", getScoresContent);
@@ -128,7 +130,7 @@ namespace EdgyCore
                 {"gdw", "0"},
                 {"page", "0"},
                 {"total", "0"},
-                {"secret", "Wmfd2893gb7"},
+                {"secret", gjSecret},
                 {"mode", "1"},
                 {"levelID", levelID},
                 {"count", "10"}
@@ -161,7 +163,7 @@ namespace EdgyCore
                 {"coins", "0"},
                 {"epic", "0"},
                 {"demonFilter", "1"},
-                {"secret", "Wmfd2893gb7"}
+                {"secret", gjSecret}
             };
             FormUrlEncodedContent encodedContent = new FormUrlEncodedContent(gjLevelsDict);
             HttpResponseMessage responseMessage = await _client.PostAsync("http://boomlings.com/database/getGJLevels21.php", encodedContent);
@@ -191,7 +193,7 @@ namespace EdgyCore
                 {"coins", "0"},
                 {"epic", "0"},
                 {"demonFilter", "1"},
-                {"secret", "Wmfd2893gb7"}
+                {"secret", gjSecret}
             };
             FormUrlEncodedContent encodedContent = new FormUrlEncodedContent(gjLevelsDict);
             HttpResponseMessage responseMessage = await _client.PostAsync("http://boomlings.com/database/getGJLevels21.php", encodedContent);
