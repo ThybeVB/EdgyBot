@@ -89,12 +89,12 @@ namespace EdgyCore.Lib
             string single = mem[0];
             string[] contents = single.Split('~');
 
-            string decoded = _lib.DecodeB64(mem[2]);
+            string decoded = _lib.DecodeB64(contents[2]);
 
             GJComment comment = new GJComment
             {
                 comment = decoded,
-                likes = mem[3]
+                likes = contents[3]
             };
 
             return comment;
