@@ -99,12 +99,6 @@ namespace EdgyCore
             return acc;
         }
 
-        /// <summary>
-        /// Gets Scores from the Geometry Dash Leaderboards
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
         public async Task<string[]> getGJScores20(string type, int count)
         {
             var top10ReqDict = new Dictionary<string, string>
@@ -125,11 +119,6 @@ namespace EdgyCore
             return users;
         }
 
-        /// <summary>
-        /// Gets the top comments of a level.
-        /// </summary>
-        /// <param name="levelID"></param>
-        /// <returns></returns>
         public async Task<string[]> getGJComments21(string levelID)
         {
             var gjCommentsDict = new Dictionary<string, string>
@@ -151,11 +140,6 @@ namespace EdgyCore
             return messages;
         }
 
-        /// <summary>
-        /// Gets an array of levels found in getGJLevels21.php
-        /// </summary>
-        /// <param name="strInput"></param>
-        /// <returns></returns>
         public async Task<string[]> getGJLevels21(string strInput)
         {
             var gjLevelsDict = new Dictionary<string, string>
@@ -186,11 +170,6 @@ namespace EdgyCore
             return levels;
         }
 
-        /// <summary>
-        /// Gets the first level found in getGJLevels21.php
-        /// </summary>
-        /// <param name="strInput"></param>
-        /// <returns></returns>
         public async Task<string> getGJLevel21(string strInput)
         {
             var gjLevelsDict = new Dictionary<string, string>
