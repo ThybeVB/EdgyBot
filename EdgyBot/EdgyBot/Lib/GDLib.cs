@@ -69,7 +69,7 @@ namespace EdgyCore.Lib
             return accounts;
         }
 
-        public async Task<GJComment> GetMostRecentComment (string accID)
+        public async Task<GJComment> GetMostRecentComment(string accID)
         {
             var mostLikedCommentValues = new Dictionary<string, string>
             {
@@ -85,11 +85,21 @@ namespace EdgyCore.Lib
             FormUrlEncodedContent content = new FormUrlEncodedContent(mostLikedCommentValues);
             HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJAccountComments20.php", content);
             string responseString = await response.Content.ReadAsStringAsync();
+
+            /* This seems to be returned when the user is banned or disabled. */
+            if (responseString == "#0:0:10")
+                return null;
+
             string[] mem = responseString.Split('|');
             string single = mem[0];
             string[] contents = single.Split('~');
 
-            string decoded = _lib.DecodeB64(contents[1]);
+            string decoded;
+            try {
+                decoded = _lib.DecodeB64(contents[1]);
+            } catch {
+                return null;
+            }
 
             GJComment comment = new GJComment
             {
@@ -117,17 +127,19 @@ namespace EdgyCore.Lib
             string getUserResponseString = await getUserResponse.Content.ReadAsStringAsync();
             string[] finalResult = getUserResponseString.Split(':');
 
-            GDAccount acc = new GDAccount();
-            acc.youtubeUrl = finalResult[27];
-            acc.twitterUrl = finalResult[53];
-            acc.twitchUrl = finalResult[55];
+            GDAccount acc = new GDAccount
+            {
+                youtubeUrl = finalResult[27],
+                twitterUrl = finalResult[53],
+                twitchUrl = finalResult[55],
 
-            acc.stars = finalResult[13];
-            acc.diamonds = finalResult[15];
-            acc.userCoins = finalResult[7];
-            acc.coins = finalResult[5];
-            acc.demons = finalResult[17];
-            acc.creatorPoints = finalResult[19];
+                stars = finalResult[13],
+                diamonds = finalResult[15],
+                userCoins = finalResult[7],
+                coins = finalResult[5],
+                demons = finalResult[17],
+                creatorPoints = finalResult[19]
+            };
 
             return acc;
         }

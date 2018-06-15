@@ -38,7 +38,8 @@ namespace EdgyBot.Modules.Categories
             if (!string.IsNullOrEmpty(account.twitterUrl)) builder.AddField("Twitter", $"[@{account.twitterUrl}](https://www.twitter.com/@" + account.twitterUrl + ")", true); else builder.AddField("Twitter", "None", true);
 
             GJComment comment = await _gdLib.GetMostRecentComment(account.accountID);
-            builder.AddField("Most Recent Account Comment", comment.comment + " | " + comment.likes + " likes");
+            if (comment != null)
+                builder.AddField("Most Recent Account Comment", comment.comment + " | " + comment.likes + " likes");
             
             EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
             {
