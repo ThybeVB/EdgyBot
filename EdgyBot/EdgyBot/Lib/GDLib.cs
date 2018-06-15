@@ -71,6 +71,9 @@ namespace EdgyCore.Lib
 
         public async Task<GJComment> GetMostRecentComment(string accID)
         {
+            if (string.IsNullOrEmpty(accID))
+                return null;
+
             var mostLikedCommentValues = new Dictionary<string, string>
             {
                 {"gameVersion", "21"},
@@ -85,6 +88,9 @@ namespace EdgyCore.Lib
             FormUrlEncodedContent content = new FormUrlEncodedContent(mostLikedCommentValues);
             HttpResponseMessage response = await _client.PostAsync("http://boomlings.com/database/getGJAccountComments20.php", content);
             string responseString = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrEmpty(responseString))
+                return null;
 
             /* This seems to be returned when the user is banned or disabled. */
             if (responseString == "#0:0:10")
