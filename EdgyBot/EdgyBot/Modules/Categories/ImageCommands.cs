@@ -73,5 +73,23 @@ namespace EdgyBot.Modules.Categories
             img.Dispose();
             File.Delete(filePath + fileName);
         }
+
+        [Command("sharpen")]
+        public async Task SharpenCmd (IUser usr = null)
+        {
+            string fileName = "sharpen.png";
+
+            Attachment image = Context.Message.Attachments.FirstOrDefault();
+            await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
+
+            Image<Rgba32> img = imgLib.OpenImage(fileName);
+            img.GaussianSharpen(6);
+
+            img.Save(filePath + fileName);
+            await Context.Channel.SendFileAsync(filePath + fileName);
+
+            img.Dispose();
+            File.Delete(filePath + fileName);
+        }
     }
 }
