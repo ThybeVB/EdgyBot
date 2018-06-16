@@ -29,11 +29,10 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
         [Command("play", RunMode = RunMode.Async)]
-        [RequireOwner]
         public async Task PlayCmd ([Remainder]string link)
         {
-            await ReplyAsync("init");
             await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
+            await Context.Message.AddReactionAsync(new Emoji("👍"));
         }
     }
 }
