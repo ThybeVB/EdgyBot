@@ -15,13 +15,6 @@ namespace EdgyBot.Modules.Categories
         {
             _service = service;
         }
-
-        [Command("join", RunMode = RunMode.Async)]
-        public async Task JoinCmd ()
-        {
-            await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
-            await ReplyAsync($"Joined Voice on {Context.Guild.Id}");
-        }
         [Command("leave", RunMode = RunMode.Async)]
         public async Task LeaveCmd ()
         {
@@ -31,8 +24,11 @@ namespace EdgyBot.Modules.Categories
         [Command("play", RunMode = RunMode.Async)]
         public async Task PlayCmd ([Remainder]string link)
         {
-            await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
+            await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
+            await ReplyAsync($"Joined Voice on {Context.Guild.Id}");
+
             await Context.Message.AddReactionAsync(new Emoji("👍"));
+            await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
         }
     }
 }
