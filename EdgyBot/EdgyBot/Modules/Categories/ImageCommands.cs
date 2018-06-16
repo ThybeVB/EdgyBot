@@ -74,7 +74,8 @@ namespace EdgyBot.Modules.Categories
             File.Delete(filePath + fileName);
         }
 
-        [Command("sharpen")]
+        [Command("sharpen", RunMode = RunMode.Async), Alias("sharp", "sp")]
+        [Name("sharpen"), Summary("Sharpens an image.")]
         public async Task SharpenCmd (IUser usr = null)
         {
             string fileName = "sharpen.png";
