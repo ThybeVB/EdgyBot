@@ -7,6 +7,8 @@ using System.Net;
 using YoutubeExtractor;
 using Discord;
 using Discord.Audio;
+using Discord.WebSocket;
+using System;
 
 namespace EdgyCore.Services
 {
@@ -38,33 +40,13 @@ namespace EdgyCore.Services
             }
         }
 
-        public async Task<string> FetchVideoUrl(string query)
+        public async Task StopAudio(SocketGuild guild)
         {
-            string ytUrl = "";
-
-            try
+            IAudioClient client;
+            if (ConnectedChannels.TryRemove(guild.Id, out client))
             {
-                using (WebClient hui = new WebClient())
-                    ytUrl = await hui.DownloadStringTaskAsync("https://www.youtube.com/results?search_query=" + query);
-            } catch (System.Exception e)
-            {
-                System.Console.WriteLine(e.Message);
+                await client.StopAsync();
             }
-
-            string removedShitOne = ytUrl.Remove(0, ytUrl.IndexOf("yt-simple-endpoint style-scope ytd-video-renderer"));
-            string finalLink = removedShitOne.Substring(removedShitOne.IndexOf("href") + 2, removedShitOne.IndexOf("\" title="));
-
-            return "https://youtube.com" + finalLink;
-        }
-        
-        public async Task DownloadYoutubeVideo(string url)
-        {
-            var resolver = await Task.Run(() => DownloadUrlResolver.GetDownloadUrls(url));
-            foreach (var cyka in resolver)
-                DownloadUrlResolver.DecryptDownloadUrl(cyka);
-
-            var pidor = new VideoDownloader(resolver.ElementAt(0), filePath + resolver.First().Title + "." + resolver.First().AudioExtension);
-            await Task.Run(() => pidor.Execute());
         }
 
         public async Task LeaveAudio(IGuild guild)

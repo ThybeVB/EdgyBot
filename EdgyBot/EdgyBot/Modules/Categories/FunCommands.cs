@@ -99,8 +99,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("stop")]
-        [Name("stop"), Summary("Tells somebody to **STOP**")]
+        //[Command("stop")]
+        //[Name("stop"), Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";

@@ -21,11 +21,16 @@ namespace EdgyBot.Modules.Categories
             await _service.LeaveAudio(Context.Guild);
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
+        [Command("stop")]
+        public async Task StopCmd ()
+        {
+            await _service.StopAudio(Context.Guild);
+            await Context.Message.AddReactionAsync(new Emoji("👍"));
+        }
         [Command("play", RunMode = RunMode.Async)]
         public async Task PlayCmd ([Remainder]string link)
         {
             await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
-            await ReplyAsync($"Joined Voice on {Context.Guild.Id}");
 
             await Context.Message.AddReactionAsync(new Emoji("👍"));
             await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
