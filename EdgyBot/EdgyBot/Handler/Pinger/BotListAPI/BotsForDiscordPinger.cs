@@ -6,7 +6,7 @@ namespace EdgyCore.Handler.Pinger
 {
     public class BotsForDiscordPinger
     {
-        JsonHelper helper = new JsonHelper("https://botsfordiscord.com/api/v1/bots/" + EdgyBot.Credientals.clientID);
+        JsonHelper helper = new JsonHelper("https://botsfordiscord.com/api/v1/bots/" + EdgyBot.Credentials.clientID);
         LibEdgyBot lib = new LibEdgyBot();
 
         public async Task PostServerCountAsync (int serverCount)

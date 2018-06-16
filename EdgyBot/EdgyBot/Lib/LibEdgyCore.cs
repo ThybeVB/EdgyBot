@@ -11,7 +11,7 @@ namespace EdgyCore.Lib
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public Credentials GetCredientals ()
+        public Credentials GetCredentials ()
         {
             CredientalsManager manager = new CredientalsManager();
 
@@ -27,19 +27,19 @@ namespace EdgyCore.Lib
 
         public ulong GetBotId()
         {
-            return EdgyBot.Credientals.clientID;
+            return EdgyBot.Credentials.clientID;
         }
 
         public string GetDBLToken()
         {
-            string dblToken = EdgyBot.Credientals.dblToken;
+            string dblToken = EdgyBot.Credentials.dblToken;
             if (string.IsNullOrEmpty(dblToken)) return null;
             return dblToken;
         }
 
         public string GetInviteLink()
         {
-            string invLink = EdgyBot.Credientals.invLink;
+            string invLink = EdgyBot.Credentials.invLink;
             if (string.IsNullOrEmpty(invLink))
             {
                 string clientID = GetClientID().ToString();
@@ -50,7 +50,7 @@ namespace EdgyCore.Lib
 
         public string GetToken()
         {
-            string token = EdgyBot.Credientals.token;
+            string token = EdgyBot.Credentials.token;
             if (string.IsNullOrEmpty(token))
             {
                 throw new ArgumentNullException("EdgyBot Token", "EdgyBot Token is invalid or not set.");
@@ -60,7 +60,7 @@ namespace EdgyCore.Lib
 
         public string GetPrefix()
         {
-            string prefix = EdgyBot.Credientals.prefix;
+            string prefix = EdgyBot.Credentials.prefix;
 
             if (string.IsNullOrEmpty(prefix)) return "e!";
             return prefix;
@@ -68,26 +68,26 @@ namespace EdgyCore.Lib
 
         public string GetGJP()
         {
-            string gjp = EdgyBot.Credientals.GJP;
+            string gjp = EdgyBot.Credentials.GJP;
             if (string.IsNullOrEmpty(gjp)) return null;
             return gjp;
         }
 
         public ulong GetClientID()
         {
-            ulong clientID = EdgyBot.Credientals.clientID;
+            ulong clientID = EdgyBot.Credentials.clientID;
             return clientID;
         }
 
         public string GetGDAccID()
         {
-            string accID = EdgyBot.Credientals.accID;
+            string accID = EdgyBot.Credentials.accID;
             if (string.IsNullOrEmpty(accID))
             {
                 _lib.Log(new LogMessage(LogSeverity.Error, "EdgyBot", "GD Account ID Error"));
                 return null;
             }
-            return EdgyBot.Credientals.accID;
+            return EdgyBot.Credentials.accID;
         }
 
         public string GetOwnerDiscordName()
@@ -99,7 +99,7 @@ namespace EdgyCore.Lib
 
         public ulong GetOwnerID()
         {
-            return EdgyBot.Credientals.ownerID;
+            return EdgyBot.Credentials.ownerID;
         }
         public string GetProfilePicUrl()
         {

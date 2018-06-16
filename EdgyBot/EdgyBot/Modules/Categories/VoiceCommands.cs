@@ -5,8 +5,7 @@ using Discord.Commands;
 
 namespace EdgyBot.Modules.Categories
 {
-    //Disabling Voice Commands for now, doesn't even worek.
-    //[Name("Voice Commands"), Summary("Music Commands!")]
+    [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly AudioService _service;
@@ -15,6 +14,7 @@ namespace EdgyBot.Modules.Categories
         {
             _service = service;
         }
+
         [Command("leave", RunMode = RunMode.Async)]
         public async Task LeaveCmd ()
         {

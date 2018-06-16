@@ -13,7 +13,7 @@ namespace EdgyCore
             => new EdgyBot().StartAsync().GetAwaiter().GetResult();
 
 
-        public static Credentials Credientals;
+        public static Credentials Credentials;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly LibEdgyCore _core = new LibEdgyCore();
 
@@ -25,9 +25,9 @@ namespace EdgyCore
 
         private async Task StartAsync ()
         {
-            Credientals = _core.GetCredientals();
-            var handler = new EventHandler(Client);
-            await Client.LoginAsync(TokenType.Bot, Credientals.token);
+            Credentials = _core.GetCredentials();
+            EventHandler handler = new EventHandler(Client);
+            await Client.LoginAsync(TokenType.Bot, Credentials.token);
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
 

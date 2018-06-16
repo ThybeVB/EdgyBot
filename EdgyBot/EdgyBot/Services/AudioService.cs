@@ -4,18 +4,14 @@ using System.Linq;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
-using YoutubeExtractor;
 using Discord;
 using Discord.Audio;
 using Discord.WebSocket;
-using System;
 
 namespace EdgyCore.Services
 {
     public class AudioService
     {
-        private readonly string filePath = "C:/EdgyBot/DownloadedSounds/";
-
         private LibEdgyBot _lib = new LibEdgyBot();
 
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
@@ -91,7 +87,7 @@ namespace EdgyCore.Services
             if (ConnectedChannels.TryGetValue(guild.Id, out client))
             {
                 string url = GetAudioUrl(path);
-                var ffmpeg = CreateStream(url);
+                Process ffmpeg = CreateStream(url);
                 await _lib.EdgyLog(LogSeverity.Verbose, $"Starting playback of {path} in {guild.Name}");
                 var output = ffmpeg.StandardOutput.BaseStream;
                 var audioStream = client.CreatePCMStream(AudioApplication.Music);

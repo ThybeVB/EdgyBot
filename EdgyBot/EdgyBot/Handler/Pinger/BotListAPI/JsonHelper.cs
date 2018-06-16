@@ -76,7 +76,7 @@ namespace EdgyCore.Handler.Pinger
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add("content-type", "application/json");
-                webClient.Headers.Add("Authorization", EdgyBot.Credientals.bfdToken);
+                webClient.Headers.Add("Authorization", EdgyBot.Credentials.bfdToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(urlInput, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
@@ -107,7 +107,7 @@ namespace EdgyCore.Handler.Pinger
                 WebClient webClient = new WebClient();
 
                 webClient.Headers.Add("content-type", "application/json");
-                webClient.Headers.Add("Authorization", EdgyBot.Credientals.dbToken);
+                webClient.Headers.Add("Authorization", EdgyBot.Credentials.dbToken);
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
                 resByte = webClient.UploadData(urlInput, "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
