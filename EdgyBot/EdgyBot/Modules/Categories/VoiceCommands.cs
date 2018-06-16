@@ -30,11 +30,10 @@ namespace EdgyBot.Modules.Categories
         }
         [Command("play", RunMode = RunMode.Async)]
         [RequireOwner]
-        public async Task PlayCmd ([Remainder]string query)
+        public async Task PlayCmd ([Remainder]string link)
         {
-            string link = await _service.FetchVideoUrl(query);
-            await ReplyAsync(link);
-            //await _service.SendAudioAsync(Context.Guild, Context.Channel, filePath + songName);
+            await ReplyAsync("init");
+            await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
         }
     }
 }

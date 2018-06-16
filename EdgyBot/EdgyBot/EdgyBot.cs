@@ -31,7 +31,7 @@ namespace EdgyCore
             await Client.StartAsync();
             await new CommandHandler().InitializeAsync(Client);
 
-            /* A very hacky and cheap way to do it, i know. */
+            /* A very hacky and cheap way to do it, i know. I only want to run this function after the bot has loaded all shards, so it isn't broken. */
             await Task.Delay(System.TimeSpan.FromMinutes(1));
             await handler.SetupBot();
 

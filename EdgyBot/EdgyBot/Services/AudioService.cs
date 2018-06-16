@@ -79,16 +79,16 @@ namespace EdgyCore.Services
 
         public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
         {
-            if (!File.Exists(path))
-            {
-                await channel.SendMessageAsync("File does not exist.");
-                return;
-            }
+           if (!File.Exists(path))
+           {
+               await channel.SendMessageAsync("File does not exist.");
+               return;
+           }
 
             IAudioClient client;
             if (ConnectedChannels.TryGetValue(guild.Id, out client))
             {
-                //await Log(LogSeverity.Debug, $"Starting playback of {path} in {guild.Name}");
+                await _lib.EdgyLog(LogSeverity.Verbose, $"Starting playback of {path} in {guild.Name}");
                 using (var ffmpeg = CreateStream(path))
                 using (var stream = client.CreatePCMStream(AudioApplication.Music))
                 {
@@ -97,6 +97,24 @@ namespace EdgyCore.Services
                 }
             }
 
+            await LeaveAudio(guild);
+        }
+
+        public async Task SendYTAudioAsync (IGuild guild, IMessageChannel channel, string path)
+        {
+            IAudioClient client;
+            if (ConnectedChannels.TryGetValue(guild.Id, out client))
+            {
+                string url = GetAudioUrl(path);
+                var ffmpeg = CreateStream(url);
+                await _lib.EdgyLog(LogSeverity.Verbose, $"Starting playback of {path} in {guild.Name}");
+                var output = ffmpeg.StandardOutput.BaseStream;
+                var audioStream = client.CreatePCMStream(AudioApplication.Music);
+                await output.CopyToAsync(audioStream);
+
+                await audioStream.FlushAsync();
+                ffmpeg.WaitForExit();
+            }
             await LeaveAudio(guild);
         }
 
@@ -109,6 +127,17 @@ namespace EdgyCore.Services
                 UseShellExecute = false,
                 RedirectStandardOutput = true
             });
+        }
+
+        public string GetAudioUrl(string url)
+        {
+            return Process.Start(new ProcessStartInfo()
+            {
+                FileName = @"youtube-dl.exe",
+                Arguments = $" -x -g \"{url}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            }).StandardOutput.ReadLine();
         }
     }
 }
