@@ -21,7 +21,8 @@ namespace EdgyBot.Modules.Categories
             await _service.LeaveAudio(Context.Guild);
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
-        [Command("stop")]
+        [Command("stop", RunMode = RunMode.Async), Alias("stopaudio")]
+        [Name("stop"), Summary("Stops the currently playing Audio.")]
         public async Task StopCmd ()
         {
             await _service.StopAudio(Context.Guild);
