@@ -5,11 +5,9 @@ using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
 using System.Net;
-using EdgyCore.Handler;
+using Newtonsoft.Json.Linq;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
-using Newtonsoft.Json.Linq;
 
 namespace EdgyCore
 {

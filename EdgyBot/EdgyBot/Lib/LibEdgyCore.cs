@@ -1,5 +1,9 @@
-﻿using EdgyCore.Common;
+﻿using System;
+using EdgyCore.Common;
 using EdgyCore.Handler;
+using Discord.Commands;
+using Discord;
+using Discord.WebSocket;
 
 namespace EdgyCore.Lib
 {
