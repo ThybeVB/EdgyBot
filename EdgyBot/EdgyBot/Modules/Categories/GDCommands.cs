@@ -41,7 +41,7 @@ namespace EdgyBot.Modules.Categories
             if (!string.IsNullOrEmpty(account.twitchUrl)) builder.AddField("Twitch", $"[{account.twitchUrl}](https://twitch.tv/" + account.twitchUrl + ")", true); else builder.AddField("Twitch", "None", true);
             if (!string.IsNullOrEmpty(account.twitterUrl)) builder.AddField("Twitter", $"[@{account.twitterUrl}](https://www.twitter.com/@" + account.twitterUrl + ")", true); else builder.AddField("Twitter", "None", true);
 
-            GJComment comment = await _gdLib.GetMostRecentComment(account.accountID);
+            GDComment comment = await _gdLib.GetMostRecentComment(account.accountID);
             if (comment != null)
                 builder.AddField("Most Recent Account Comment", comment.comment + " | " + comment.likes + " likes");
             

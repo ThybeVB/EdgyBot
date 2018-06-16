@@ -1,6 +1,6 @@
 ﻿namespace EdgyCore.Lib
 {
-    public class GJComment
+    public class GDComment
     {
         public string comment { get; set; }
         public string likes { get; set; }

@@ -72,7 +72,7 @@ namespace EdgyCore.Lib
             return accounts;
         }
 
-        public async Task<GJComment> GetMostRecentComment(string accID)
+        public async Task<GDComment> GetMostRecentComment(string accID)
         {
             if (string.IsNullOrEmpty(accID))
                 return null;
@@ -110,7 +110,7 @@ namespace EdgyCore.Lib
                 return null;
             }
 
-            GJComment comment = new GJComment
+            GDComment comment = new GDComment
             {
                 comment = decoded,
                 likes = contents[3]
