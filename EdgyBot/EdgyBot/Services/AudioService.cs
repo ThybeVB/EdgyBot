@@ -46,6 +46,7 @@ namespace EdgyCore.Services
             if (ConnectedChannels.TryRemove(guild.Id, out client))
             {
                 await client.StopAsync();
+                client.Dispose();
             }
         }
 
@@ -56,6 +57,7 @@ namespace EdgyCore.Services
             {
                 await client.StopAsync();
                 await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}.");
+                client.Dispose();
             }
         }
 
@@ -80,6 +82,7 @@ namespace EdgyCore.Services
             }
 
             await LeaveAudio(guild);
+            client.Dispose();
         }
 
         public async Task SendYTAudioAsync (IGuild guild, IMessageChannel channel, string path)
@@ -98,6 +101,7 @@ namespace EdgyCore.Services
                 ffmpeg.WaitForExit();
             }
             await LeaveAudio(guild);
+            client.Dispose();
         }
 
         private Process CreateStream(string path)
