@@ -60,6 +60,7 @@ namespace EdgyBot.Modules.Categories
 
             eb.ThumbnailUrl = pfpUrl;
             eb.AddField("Username", username, true);
+
             if (string.IsNullOrEmpty(nickname))
                 eb.AddField("Nickname", "None", true);
             else
@@ -69,6 +70,7 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Status", status, true);
             eb.AddField("Joined At", joinedAt, true);
             eb.AddField("Registered At", createdOn, true);
+
             if (string.IsNullOrEmpty(playing))
                 eb.AddField("Playing", "None", true);
             else

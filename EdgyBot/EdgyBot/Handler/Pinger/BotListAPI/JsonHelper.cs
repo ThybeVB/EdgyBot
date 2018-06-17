@@ -65,6 +65,33 @@ namespace EdgyCore.Handler.Pinger
             }
         }
 
+        public void postDataSpaceList(Dictionary<string, object> dictData)
+        {
+            byte[] resByte;
+            string resString;
+            byte[] reqString;
+
+            try
+            {
+                WebClient webClient = new WebClient();
+
+                webClient.Headers.Add("content-type", "application/json");
+                webClient.Headers.Add("Authorization", EdgyBot.Credentials.blsToken);
+                reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
+                resByte = webClient.UploadData(urlInput, "post", reqString);
+                resString = Encoding.Default.GetString(resByte);
+                webClient.Dispose();
+
+                LogMessage log = new LogMessage(LogSeverity.Info, "BLSP API", "Success");
+                _lib.Log(log);
+
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "BLSP API", e.Message);
+                new LibEdgyBot().Log(msg);
+            }
+        }
+
         public bool postDataBotsForDiscord (Dictionary<string, object> dictData)
         {
             byte[] resByte;
