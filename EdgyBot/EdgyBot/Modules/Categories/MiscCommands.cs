@@ -88,7 +88,8 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Discord Bot Lists", "Upvoting EdgyBot on the Discord Bot List helps EdgyBot get into more servers for even more fun.");
             eb.AddField("DBL", "https://discordbots.org/bot/373163613390897163");
             eb.AddField("Discord Bots", "https://bots.discord.pw/bots/373163613390897163");
-            eb.AddField("BFD", "");
+            eb.AddField("BFD", "https://botsfordiscord.com/bot/373163613390897163");
+            eb.AddField("botlist.space", "https://botlist.space/view/373163613390897163");
 
             eb.AddField("Moneys!11!", "Having a concurrent earning of a bit under 10$, I can keep EdgyBot running 24/7");
             eb.AddField("Support Link", "https://www.paypal.me/monstahhh");          

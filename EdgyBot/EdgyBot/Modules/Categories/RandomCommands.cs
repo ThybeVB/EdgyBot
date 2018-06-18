@@ -32,9 +32,10 @@ namespace EdgyBot.Modules.Categories
         {
             if (input == null)
             {
-                await ReplyAsync("Please enter a message!\nDon't Forget to use **Quotation Marks**!");
+                await ReplyAsync("Please enter a message!");
                 return;
             }
+            
             #region Flip
             char[] chararray = input.ToCharArray();
             Array.Reverse(chararray);
@@ -45,6 +46,7 @@ namespace EdgyBot.Modules.Categories
             }
             input = reverseTxt;
             #endregion
+
             await ReplyAsync("", embed: _lib.CreateEmbedWithText("Reversed Text", input));
         }
 
@@ -52,8 +54,7 @@ namespace EdgyBot.Modules.Categories
         public async Task FlipCoinCmd()
         {
             Random random = new Random();
-            EmbedBuilder a = new EmbedBuilder();
-            Embed e = a.Build();
+            Embed e = null;
             switch (random.Next(1, 3))
             {
                 default:

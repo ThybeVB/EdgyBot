@@ -79,7 +79,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("bigletter")]
+        [Command("bigletter"), Alias("big")]
         [Name("bigletter"), Summary("Converts your message to Big Letters")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
@@ -99,8 +99,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        //[Command("stop")]
-        //[Name("stop"), Summary("Tells somebody to **STOP**")]
+        [Command("juststop")]
+        [Name("juststop"), Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
@@ -134,6 +134,9 @@ namespace EdgyBot.Modules.Categories
         [Name("acronym"), Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
+            await ReplyAsync("The Acronym Command is currently not working. While the command gets rewritten, check out the other commands!");
+            return;
+
             //Stage 1
             IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In a few seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
             string acroLetters = _lib.GetRandomLetters(6);
