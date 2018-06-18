@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Discord;
@@ -13,53 +14,34 @@ namespace EdgyBot.Modules.Categories
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from the channel (Provide a number on how much messages to delete)")]
+        [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from said channel (Provide a number on how much messages to delete)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task PurgeCmd (int input, string args = null) 
         {
             int original = input;
 
             if (input > 100) {
-                await ReplyAsync("You can't delete more than 100 messages at once.");
+                await ReplyAsync("You can not delete more than 100 messages at once.");
                 return;
             }
-            var messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
             
-            if (args == "--slow") {
-                try 
-                {
-                    var toDelete = await ReplyAsync("Started Purge. This may take a while. Deleting " + input + " messages.");
-                    foreach (var message in messages) 
-                    {
-                        if (message == null)
-                            continue;
-
-                        input--;
-                        await Task.Delay(TimeSpan.FromSeconds(2.5));
-                        await message.DeleteAsync();
-                        await toDelete.ModifyAsync(x => x.Content = "Executing Purge. This may take a while. Messages to Delete: " + input);
-                    }
-                    await toDelete.DeleteAsync();
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
-                } catch 
-                {
-                    Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
-                    await ReplyAsync("", embed: err);
-                }
-            } else 
+            try 
             {
-                try 
-                {
-                    ITextChannel channel = Context.Channel as ITextChannel;
+                IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
+
+                ITextChannel channel = Context.Channel as ITextChannel;
+                IGuildUser b = Context.Client.CurrentUser as IGuildUser;
+                ChannelPermissions c = b.GetPermissions(Context.Channel as IGuildChannel);
+
+                if (c.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
-                } catch 
-                {
-                    Embed err = _lib.CreateEmbedWithError("Purge Error", "Bot does not have permission to delete messages.");
-                    await ReplyAsync("", embed: err);
                 }
+            } catch (Exception e)
+            {
+                Embed err = _lib.CreateEmbedWithError("Purge Error", $"**Error**: {e.Message}");
+                await ReplyAsync("", embed: err);
             }
-            
         }
 
         [Command("setstatus")][RequireOwner]
