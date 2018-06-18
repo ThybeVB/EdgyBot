@@ -16,12 +16,15 @@ namespace EdgyBot.Modules.Categories
 
         [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from said channel (Provide a number on how much messages to delete)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task PurgeCmd (int input, string args = null) 
+        public async Task PurgeCmd (int input) 
         {
-            int original = input;
 
             if (input > 100) {
                 await ReplyAsync("You can not delete more than 100 messages at once.");
+                return;
+            }
+            if (input <= 0) {
+                await ReplyAsync("What? No.");
                 return;
             }
 
@@ -29,13 +32,12 @@ namespace EdgyBot.Modules.Categories
             {
                 IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
 
-                ITextChannel channel = Context.Channel as ITextChannel;
-                IGuildUser b = Context.Client.CurrentUser as IGuildUser;
-                ChannelPermissions c = b.GetPermissions(Context.Channel as IGuildChannel);
+                ITextChannel channel = (ITextChannel)Context.Channel;
+                ChannelPermissions channelPermissions = Context.Guild.CurrentUser.GetPermissions(channel);
 
-                if (c.ManageMessages) {
+                if (channelPermissions.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages :ok_hand:"));
                 } else {
                     await ReplyAsync("", embed: _lib.CreateEmbedWithError("Purge Error", "I don't seem to have permissions to delete messages.\nTo Delete messages, i must have the **Manage Messages** permission."));
                 }
