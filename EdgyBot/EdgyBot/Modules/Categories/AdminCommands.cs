@@ -24,7 +24,7 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("You can not delete more than 100 messages at once.");
                 return;
             }
-            
+
             try 
             {
                 IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
@@ -36,7 +36,10 @@ namespace EdgyBot.Modules.Categories
                 if (c.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + original + " messages :ok_hand:"));
+                } else {
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithError("Purge Error", "I don't seem to have permissions to delete messages.\nTo Delete messages, i must have the **Manage Messages** permission."));
                 }
+
             } catch (Exception e)
             {
                 Embed err = _lib.CreateEmbedWithError("Purge Error", $"**Error**: {e.Message}");
