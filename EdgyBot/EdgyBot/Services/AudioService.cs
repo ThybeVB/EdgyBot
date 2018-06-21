@@ -59,6 +59,7 @@ namespace EdgyCore.Services
                 } else
                 {
                     await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}, Exit Code: {exitCode}");
+                    client.Dispose();
                 }
             }
         }
