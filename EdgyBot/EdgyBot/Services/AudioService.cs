@@ -46,14 +46,20 @@ namespace EdgyCore.Services
             }
         }
 
-        public async Task LeaveAudio(IGuild guild)
+        public async Task LeaveAudio(IGuild guild, int exitCode = 0)
         {
             IAudioClient client;
             if (ConnectedChannels.TryRemove(guild.Id, out client))
             {
                 await client.StopAsync();
-                await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}.");
-                client.Dispose();
+                if (exitCode == 0)
+                {
+                    await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}.");
+                    client.Dispose();
+                } else
+                {
+                    await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}, Exit Code: {exitCode}");
+                }
             }
         }
 
@@ -69,14 +75,18 @@ namespace EdgyCore.Services
             if (ConnectedChannels.TryGetValue(guild.Id, out client))
             {
                 await _lib.EdgyLog(LogSeverity.Verbose, $"Starting playback of {path} in {guild.Name}");
-                using (var ffmpeg = CreateStream(path))
-                using (var stream = client.CreatePCMStream(AudioApplication.Music))
+                using (Process ffmpeg = CreateStream(path))
+                using (AudioOutStream stream = client.CreatePCMStream(AudioApplication.Music))
                 {
-                    try { await ffmpeg.StandardOutput.BaseStream.CopyToAsync(stream); }
-                    finally { await stream.FlushAsync(); }
+                    try
+                    {
+                        await ffmpeg.StandardOutput.BaseStream.CopyToAsync(stream);
+                    } finally
+                    {
+                        await stream.FlushAsync();
+                    }
                 }
             }
-
             await LeaveAudio(guild);
             client.Dispose();
         }
@@ -84,6 +94,7 @@ namespace EdgyCore.Services
         public async Task SendYTAudioAsync (IGuild guild, IMessageChannel channel, string path)
         {
             IAudioClient client;
+            int exitCode = 0;
             if (ConnectedChannels.TryGetValue(guild.Id, out client))
             {
                 string url = GetAudioUrl(path);
@@ -95,8 +106,9 @@ namespace EdgyCore.Services
 
                 await audioStream.FlushAsync();
                 ffmpeg.WaitForExit();
+                exitCode = ffmpeg.ExitCode;
             }
-            await LeaveAudio(guild);
+            await LeaveAudio(guild, exitCode);
             client.Dispose();
         }
 
