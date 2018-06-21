@@ -20,7 +20,7 @@ namespace EdgyCore
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
             LogLevel = LogSeverity.Verbose,
-            TotalShards = 1
+            TotalShards = 2
         });
 
         private async Task StartAsync ()
