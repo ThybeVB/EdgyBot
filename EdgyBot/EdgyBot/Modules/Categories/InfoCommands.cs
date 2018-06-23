@@ -10,7 +10,7 @@ using EdgyCore.Lib;
 
 namespace EdgyBot.Modules.Categories
 {
-    [Name("Info Commands"), Summary("Commands providing information about a certain thingyyyy")]
+    [Name("Info Commands"), Summary("Commands providing information about a certain thingy")]
     public class InfoCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
@@ -18,7 +18,7 @@ namespace EdgyBot.Modules.Categories
 
         [Command("channelinfo")]
         [Name("channelinfo")]
-        [Summary("Gives you info about the channel you are in.")]
+        [Summary("Gives you info about the channel you are in")]
         public async Task ChannelInfoCmd (IChannel channel = null)
         {
             if (channel == null)
@@ -37,7 +37,7 @@ namespace EdgyBot.Modules.Categories
 
         [Command("userinfo"), Alias("whois")]
         [Name("userinfo")]
-        [Summary("Mention an user or leave it empty for a description on the user.")]
+        [Summary("Mention an user or leave it empty for a description on the user")]
         public async Task UserInfoCmd(IGuildUser usr = null)
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
@@ -86,7 +86,7 @@ namespace EdgyBot.Modules.Categories
         [Command("serverinfo")]
         [Name("serverinfo")]
         [Alias("guildinfo")]
-        [Summary("Gives you info about the server you are in.")]
+        [Summary("Gives you info about the server you are in")]
         public async Task ServerInfoCmd()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
@@ -125,7 +125,7 @@ namespace EdgyBot.Modules.Categories
 
         [Command("ping")]
         [Name("ping")]
-        [Summary("Checks EdgyBot's speed to the server.")]
+        [Summary("Checks the latency to the Discord API Gateway Server")]
         public async Task PingCmd()
         {
             EmbedFooterBuilder fb = new EmbedFooterBuilder
@@ -138,7 +138,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("uptime"), Alias("time", "up")]
-        [Name("uptime"), Summary("Shows how long the bot has been running since the last restart.")]
+        [Name("uptime"), Summary("Shows how long the bot has been running since the last restart")]
         public async Task UptimeCmd () 
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
@@ -152,7 +152,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("info"), Alias("botinfo", "me")]
-        [Name("info")][Summary("Gives you info about the Bot")]
+        [Name("info")][Summary("Info about EdgyBot")]
         public async Task BotInfoCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);

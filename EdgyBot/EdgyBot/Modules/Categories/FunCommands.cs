@@ -15,7 +15,7 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("duel", RunMode = RunMode.Async)]
-        [Name("duel"), Summary("Duels a user")]
+        [Name("duel"), Summary("Challenges a user to a duel!")]
         public async Task DuelCmd (SocketGuildUser usr = null)
         {
             Random rand = new Random();
@@ -48,7 +48,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("clap")]
-        [Name("clap"), Summary("Puts your message into claps")]
+        [Name("clap"), Summary("Puts your sentence into claps")]
         public async Task ClapCmd ([Remainder]string input)
         {
             char[] characters = input.ToCharArray();

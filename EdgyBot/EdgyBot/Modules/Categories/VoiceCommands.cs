@@ -21,6 +21,7 @@ namespace EdgyBot.Modules.Categories
             await _service.LeaveAudio(Context.Guild);
             await ReplyAsync($"Left Voice on {Context.Guild.Id}");
         }
+
         [Command("stop", RunMode = RunMode.Async), Alias("stopaudio")]
         [Name("stop"), Summary("Stops the currently playing Audio.")]
         public async Task StopCmd ()
@@ -28,13 +29,18 @@ namespace EdgyBot.Modules.Categories
             await _service.StopAudio(Context.Guild);
             await Context.Message.AddReactionAsync(new Emoji("👍"));
         }
+
         [Command("play", RunMode = RunMode.Async)]
+        [Name("play"), Summary("Lets you play a video from YouTube. Some other sites work too.")]
         public async Task PlayCmd ([Remainder]string link)
         {
-            await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
-
             await Context.Message.AddReactionAsync(new Emoji("👍"));
-            await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
+            try {
+                await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
+                await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
+            } catch (System.Exception e) {
+                await ReplyAsync("**Error:** " + e.Message);
+            }
         }
     }
 }

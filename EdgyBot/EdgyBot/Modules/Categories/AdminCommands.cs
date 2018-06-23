@@ -37,7 +37,7 @@ namespace EdgyBot.Modules.Categories
 
                 if (channelPermissions.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages :ok_hand:"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages! :ok_hand:"));
                 } else {
                     await ReplyAsync("", embed: _lib.CreateEmbedWithError("Purge Error", "I don't seem to have permissions to delete messages.\nTo Delete messages, i must have the **Manage Messages** permission."));
                 }
