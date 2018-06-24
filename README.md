@@ -17,7 +17,7 @@ The handy and all around fun bot that can be used for any kind of server!
 * Random Commands
 
 EdgyBot is being developed for more categories, Image Commands as the newest addition.
-We are also working on the Audio Categories, which should come soon. (You can find these in the repository)
+We are also working on the Audio Categories, which is new, and is due to improvement.
 
 ## Running
 
