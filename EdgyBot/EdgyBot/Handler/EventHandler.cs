@@ -11,6 +11,11 @@ namespace EdgyCore.Handler
     {
         private DiscordShardedClient _client;
 
+        private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
+        private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
+        private static DBLPinger dblPinger = new DBLPinger();
+        private BotListSpacePinger blspPinger = new BotListSpacePinger();
+
         private LibEdgyCore _coreLib = new LibEdgyCore();
         private LibEdgyBot _lib = new LibEdgyBot();
         public static int MemberCount;
@@ -87,7 +92,10 @@ namespace EdgyCore.Handler
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
-            await _coreLib.UpdateBotLists(ServerCount);
+            await _bfdPinger.PostServerCountAsync(ServerCount);
+            await _dbPinger.PostServerCountAsync(ServerCount);
+            await dblPinger.UpdateDBLStatsAsync(ServerCount);
+            await blspPinger.PostServerCountAsync(ServerCount);
         }
     }
 }
