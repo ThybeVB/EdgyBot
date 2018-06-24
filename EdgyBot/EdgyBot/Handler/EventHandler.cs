@@ -13,12 +13,6 @@ namespace EdgyCore.Handler
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
         private LibEdgyBot _lib = new LibEdgyBot();
-
-        private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
-        private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
-        private static DBLPinger dblPinger = new DBLPinger();
-        private BotListSpacePinger blspPinger = new BotListSpacePinger();
-
         public static int MemberCount;
         public static int ServerCount;
         
@@ -54,7 +48,7 @@ namespace EdgyCore.Handler
         }
 
         private async Task ShardDisconnected(Exception exception, DiscordSocketClient client)
-           => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT SHARD HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
+           => await _lib.EdgyLog(LogSeverity.Critical, $"EDGYBOT SHARD {client.ShardId} HAS SHUT DOWN WITH AN EXCEPTION, \n{exception.Source}: {exception.Message}\n{exception.StackTrace}");
 
         private async Task JoinedGuild(SocketGuild guild)
         {
@@ -73,14 +67,15 @@ namespace EdgyCore.Handler
 
         private int CalculateMemberCount()
         {
-            int result = 0;
+            int users = 0;
             foreach (SocketGuild guild in _client.Guilds)
             {
                 if (guild == null)
                     continue;
-                result = result + guild.MemberCount;
+                    
+                users = users + guild.MemberCount;
             }
-            return result;
+            return users;
         }
 
         private async Task RefreshBotAsync(bool startup = false)
@@ -92,10 +87,7 @@ namespace EdgyCore.Handler
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
-            await _bfdPinger.PostServerCountAsync(ServerCount);
-            await _dbPinger.PostServerCountAsync(ServerCount);
-            await dblPinger.UpdateDBLStatsAsync(ServerCount);
-            await blspPinger.PostServerCountAsync(ServerCount);
+            await _coreLib.UpdateBotLists(ServerCount);
         }
     }
 }

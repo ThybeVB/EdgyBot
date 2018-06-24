@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Threading.Tasks;
 using EdgyCore.Common;
 using EdgyCore.Handler;
 using Discord.Commands;
 using Discord;
 using Discord.WebSocket;
+using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore.Lib
 {
     public class LibEdgyCore : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
+        private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
+        private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
+        private static DBLPinger dblPinger = new DBLPinger();
+        private BotListSpacePinger blspPinger = new BotListSpacePinger();
 
         public Credentials GetCredentials ()
         {
@@ -104,6 +111,14 @@ namespace EdgyCore.Lib
         public string GetProfilePicUrl()
         {
             return Context.Client.CurrentUser.GetAvatarUrl();
+        }
+
+        public async Task UpdateBotLists (int serverCount) 
+        {
+            await _bfdPinger.PostServerCountAsync(serverCount);
+            await _dbPinger.PostServerCountAsync(serverCount);
+            await dblPinger.UpdateDBLStatsAsync(serverCount);
+            await blspPinger.PostServerCountAsync(serverCount);
         }
     }
 }
