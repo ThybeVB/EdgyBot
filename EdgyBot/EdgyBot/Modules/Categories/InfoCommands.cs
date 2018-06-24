@@ -6,7 +6,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
 using EdgyCore.Lib;
-
+using System.Globalization;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -165,9 +165,8 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
+            eb.AddField("Uptime", _lib.GetUptime());
             eb.AddField("Status", Context.Client.Activity.Name);
-            eb.AddField("Uptime", _lib.GetUptime(), true);
-            eb.AddField("Memory Usage (RAM)", GC.GetTotalMemory(false) + "MiB", true);
             eb.AddField("Developer", _core.GetOwnerDiscordName());
 
             await ReplyAsync("", embed: eb.Build());
