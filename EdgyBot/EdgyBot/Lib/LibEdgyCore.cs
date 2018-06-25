@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Threading.Tasks;
 using EdgyCore.Common;
 using EdgyCore.Handler;
-using Discord.Commands;
 using Discord;
 using Discord.WebSocket;
-using EdgyCore.Handler.Pinger;
+using Discord.Commands;
 
 namespace EdgyCore.Lib
 {
     public class LibEdgyCore : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-
-        
 
         public Credentials GetCredentials ()
         {

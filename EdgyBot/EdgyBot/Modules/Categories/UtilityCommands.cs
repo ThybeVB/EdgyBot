@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using Discord.WebSocket;
 using EdgyCore;
 
 namespace EdgyBot.Modules.Categories
 {
-    [Name("Admin Commands"), Summary("Administrative Commands")]
-    public class AdminCommands : ModuleBase<ShardedCommandContext>
+    [Name("Utility Commands"), Summary("Utility Commands... What else can i say?")]
+    public class UtilityCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

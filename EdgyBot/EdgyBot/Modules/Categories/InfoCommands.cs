@@ -6,7 +6,6 @@ using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
 using EdgyCore.Lib;
-using System.Globalization;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -133,8 +132,8 @@ namespace EdgyBot.Modules.Categories
                 Text = $"Response Time: {Context.Client.Latency.ToString()}ms | {DateTime.Now.ToUniversalTime()} GMT"
             };
             Embed e = _lib.CreateEmbedWithText("Ping", "Pong! :ping_pong:", fb);
-            await ReplyAsync("", embed: e);
 
+            await ReplyAsync("", embed: e);
         }
 
         [Command("uptime"), Alias("time", "up")]
@@ -151,7 +150,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: eb.Build());
         }
 
-        [Command("info"), Alias("botinfo", "me")]
+        [Command("info"), Alias("botinfo", "me", "stats")]
         [Name("info")][Summary("Info about EdgyBot")]
         public async Task BotInfoCmd ()
         {
