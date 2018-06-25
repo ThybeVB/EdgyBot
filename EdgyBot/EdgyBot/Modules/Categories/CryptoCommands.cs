@@ -5,8 +5,8 @@ using EdgyCore;
 
 namespace EdgyBot.Modules.Categories
 {
-    [Name("Hashing Commands"), Summary("Hash Commands centered for Developers")]
-    public class HashingCommands : ModuleBase<ShardedCommandContext>
+    [Name("Crypto Commands"), Summary("Encryption commands centered for Developers")]
+    public class CryptoCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

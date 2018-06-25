@@ -48,7 +48,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("clap")]
-        [Name("clap"), Summary("Puts your sentence into claps")]
+        [Name("clap"), Summary("Converts your sentence into claps")]
         public async Task ClapCmd ([Remainder]string input)
         {
             char[] characters = input.ToCharArray();
@@ -79,8 +79,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("bigletter"), Alias("big")]
-        [Name("bigletter"), Summary("Converts your message to Big Letters")]
+        [Command("bigletter"), Alias("big", "emojify")]
+        [Name("bigletter"), Summary("Converts your message to Emoji's")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
             msg = msg.ToLower();
@@ -99,7 +99,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync(sb.ToString());
         }
 
-        [Command("juststop")]
+        [Command("juststop"), Alias("stopit", "timetostop")]
         [Name("juststop"), Summary("Tells somebody to **STOP**")]
         public async Task StopCmd(IGuildUser usr)
         {
@@ -109,15 +109,14 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("jeff")]
-        [Name("jeff"), Summary("Jeff's somebody.")]
+        [Name("jeff"), Summary("Jeff's somebody. Yeah.")]
         public async Task JeffCmd(IGuildUser user)
         {
             if (user.Id == Context.User.Id)
             {
                 await ReplyAsync("You can't jeff yourself :joy:");
                 return;
-            }
-            else if (user.Id == Context.Client.CurrentUser.Id)
+            } else if (user.Id == Context.Client.CurrentUser.Id)
             {
                 await ReplyAsync("You can't just jeff me like that.");
                 return;
@@ -170,7 +169,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("stab")]
-        [Name("stab"), Summary("Stabs an user.")]
+        [Name("stab"), Summary("Lets you stab a user")]
         public async Task StabCmd(SocketUser usr)
         {
             if (usr.Id == Context.User.Id)

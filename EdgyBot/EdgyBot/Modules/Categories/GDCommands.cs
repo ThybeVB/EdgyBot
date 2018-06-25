@@ -15,7 +15,8 @@ namespace EdgyBot.Modules.Categories
 
         private string gdThumbPic = "https://lh5.ggpht.com/gSJ1oQ4a5pxvNHEktd21Gh36QbtZMMx5vqFZfe47VDs1fzCEeMCyThqOfg3DsTisYCo=w300";
 
-        [Command("profile")] [Name("profile")] [Summary("Gives you a profile from Geometry Dash")]
+        [Command("profile", RunMode = RunMode.Async)]
+        [Name("profile")] [Summary("Searches Geometry Dash's users for the user you entered.")]
         public async Task GDProfileCmd ([Remainder]string strInput = null)
         {
             GDAccount[] accounts = await _gdLib.GetGJUsersAsync(strInput);
@@ -55,7 +56,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: builder.Build());
         }
 
-        [Command("top10players")][Name("top10players")][Summary("Gives the current Top 10 players in Geometry Dash")]
+        [Command("top10players")]
+        [Name("top10players")][Summary("Gives the current Top 10 Players in Geometry Dash")]
         public async Task GDTop10Cmd()
         {
             string[] users = await _gdLib.getGJScores20("top", 10);
@@ -80,7 +82,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
 
-        [Command("topplayers")][Name("topplayers")][Summary("Same thing as top10players, but it is based on your number")]
+        [Command("topplayers")]
+        [Name("topplayers")][Summary("Same thing as top10players, but it is based on the number you enter")]
         public async Task GDTopPlayersCmd(int count)
         {
             string countStr = count.ToString();
@@ -115,7 +118,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
 
-        [Command("top10creators")][Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash")]
+        [Command("top10creators")]
+        [Name("top10creators")][Summary("Gives the current Top 10 Creators in Geometry Dash based on their Creator Points")]
         public async Task GDTop10CreatorsCmd()
         {
             string[] users = await _gdLib.getGJScores20("creators", 10);
@@ -139,7 +143,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
 
-        [Command("topcreators")][Name("topcreators")][Summary("Same thing as top10creators, but it is based on your number.")]
+        [Command("topcreators")]
+        [Name("topcreators")][Summary("Same thing as top10creators, but it is based on the number you entered")]
         public async Task GDTopCreatorsCmd(int count)
         {
             if (count > 25)
@@ -174,7 +179,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: e.Build());
         }
 
-        [Command("topcomments", RunMode = RunMode.Async)][Name("topcomments")][Summary("Shows the most liked comments on a Geometry Dash Level")]
+        [Command("topcomments", RunMode = RunMode.Async)]
+        [Name("topcomments")][Summary("Shows the most liked comments on your Geometry Dash Level")]
         public async Task GDTopLevelCommentsCmd ([Remainder]string str = null)
         {
             if (str == null)
