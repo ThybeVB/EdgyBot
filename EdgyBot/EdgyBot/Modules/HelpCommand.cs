@@ -7,10 +7,11 @@ using Discord;
 using Discord.Commands;
 using EdgyCore;
 using EdgyCore.Lib;
+using Discord.Addons.Interactive;
 
 namespace EdgyBot.Modules
 {
-    public class HelpCommand : ModuleBase<ShardedCommandContext>
+    public class HelpCommand : InteractiveBase<ShardedCommandContext>
     {
         private readonly CommandService _service;
 
@@ -20,6 +21,13 @@ namespace EdgyBot.Modules
         public HelpCommand(CommandService service)
         {
             _service = service;
+        }
+
+        [Command("pgtest")]
+        public async Task PaginatedTest ()
+        {
+            var pages = new[] {"venom", "is", "gay"};
+            await PagedReplyAsync(pages);
         }
 
         [Command("help", RunMode = RunMode.Async)]

@@ -9,7 +9,7 @@ namespace Discord.Addons.Interactive
         public string Content { get; set; } = "";
 
         public EmbedAuthorBuilder Author { get; set; } = null;
-        public Color Color { get; set; } = Color.Default;
+        public Color Color { get; set; } = Color.Blue;
         public string Title { get; set; } = "";
 
         public PaginatedAppearanceOptions Options { get; set; } = PaginatedAppearanceOptions.Default;
