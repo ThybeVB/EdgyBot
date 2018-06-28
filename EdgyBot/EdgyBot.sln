@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord.Addons.Interactive", "Discord.Addons.Interactive\Discord.Addons.Interactive.csproj", "{266E3693-0971-4772-874C-DF38CCD952B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,12 @@ Global
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.EdgyBot|Any CPU.Build.0 = EdgyBot|Any CPU
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.EdgyBot|Any CPU.ActiveCfg = Debug|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.EdgyBot|Any CPU.Build.0 = Debug|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266E3693-0971-4772-874C-DF38CCD952B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

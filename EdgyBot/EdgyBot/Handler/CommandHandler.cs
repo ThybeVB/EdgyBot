@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using Discord.Addons.Interactive;
 using EdgyCore.Services;
 using EdgyBot.Modules;
 using EdgyCore.Lib;
@@ -40,6 +41,7 @@ namespace EdgyCore.Handler
         {
             return new ServiceCollection()
                 .AddSingleton(new AudioService())
+                .AddSingleton(new InteractiveService(_client))
                 .BuildServiceProvider();
         }
 
