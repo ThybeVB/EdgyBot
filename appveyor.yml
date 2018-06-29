@@ -12,8 +12,8 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Display minimal restore text
-  - cmd: dotnet restore ./EdgyBot/EdgyBot/EdgyBot.csproj --verbosity m --configfile ../EdgyBot/.nuget/nuget.config
-  - cmd: dotnet restore ./EdgyBot/Discord.Addons.Interactive/Discord.Addons.Interactive.csproj --verbosity m --configfile ../EdgyBot/.nuget/nuget.config
+  - cmd: dotnet restore ./EdgyBot/EdgyBot/EdgyBot.csproj --verbosity m --configfile ./EdgyBot/.nuget/nuget.config
+  - cmd: dotnet restore ./EdgyBot/Discord.Addons.Interactive/Discord.Addons.Interactive.csproj --verbosity m --configfile ./EdgyBot/.nuget/nuget.config
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
   - cmd: dotnet publish ./EdgyBot/EdgyBot/EdgyBot.csproj
