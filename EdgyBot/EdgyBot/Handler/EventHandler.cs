@@ -20,19 +20,33 @@ namespace EdgyCore.Handler
         private LibEdgyBot _lib = new LibEdgyBot();
         public static int MemberCount;
         public static int ServerCount;
+
+        private int _shardsConnected = 0;
         
         public static SocketUser OwnerUser;
 
         public EventHandler(DiscordShardedClient client)
         {
             _client = client;
-            
-            _client.Log += _lib.Log;  
+
+            _client.Log += _lib.Log;
+            _client.ShardReady += ShardReady;
             _client.JoinedGuild += JoinedGuild;
             _client.LeftGuild += LeftGuild;
             _client.ShardDisconnected += ShardDisconnected;
             _client.UserJoined += UserUpdated;
             _client.UserLeft += UserUpdated;
+        }
+
+        private async Task ShardReady (DiscordSocketClient client)
+        {
+            _shardsConnected++;
+
+            if (_shardsConnected == _client.Shards.Count)
+            {
+                await SetupBot();
+                await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected! ({_client.Shards.Count})");
+            }  
         }
 
         public async Task SetupBot()
