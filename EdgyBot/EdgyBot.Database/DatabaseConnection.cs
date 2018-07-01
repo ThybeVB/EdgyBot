@@ -6,7 +6,9 @@ namespace EdgyBot.Database
 {
     public class DatabaseConnection
     {
+        SQLProcessor sql;
         private SqliteConnection _connObj;
+        public static Connection connection;
 
         private string _dbFileName = "";
         private string _fullDir = "C:/EdgyBot/Database/";
@@ -25,7 +27,7 @@ namespace EdgyBot.Database
             SqliteConnection connection = new SqliteConnection("" +
             new SqliteConnectionStringBuilder
             {
-                DataSource = _dbFileName
+                DataSource = _fullDir + _dbFileName
             });
 
             if (connection != null)
@@ -48,6 +50,10 @@ namespace EdgyBot.Database
                     connectionObject = _connObj,
                     isOpened = true
                 };
+                DatabaseConnection.connection = connection;
+
+                sql = new SQLProcessor(connection);
+
                 return true;
 
             } catch (Exception exception)
@@ -68,6 +74,11 @@ namespace EdgyBot.Database
             }
 
             return Task.CompletedTask;
+        }
+
+        public Connection getConnObj ()
+        {
+            return DatabaseConnection.connection;
         }
     }
 }

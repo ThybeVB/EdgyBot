@@ -21,14 +21,19 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("Changed Status.");
         }
 
-        [Command("execquery")]
+        [Command("prefix")]
         [RequireOwner]
         public async Task ExecQueryCmd ()
         {
             DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
             await connection.ConnectAsync();
+
             if (await connection.OpenConnection())
             {
+                Guild guild = new Guild(Context.Guild.Id, connection.getConnObj());
+                await guild.ChangePrefix("eb!");
+
+                await ReplyAsync("45");
                 return;
             }
 
