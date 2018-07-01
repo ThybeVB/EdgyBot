@@ -63,7 +63,7 @@ namespace EdgyBot.Modules.Categories
                     Guild guild = new Guild(Context.Guild.Id);
                     await guild.ChangePrefix(newPrefix);
 
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to {newPrefix}"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to '{newPrefix}'"));
                 }
                 catch (Exception e)
                 {

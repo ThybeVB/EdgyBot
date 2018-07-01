@@ -19,20 +19,19 @@ namespace EdgyBot.Database
             if (_connection == null)
                 throw new InvalidOperationException("Connection NULL");
 
-            var clone = _connection;
+            if (_connection.connectionObject.State == ConnectionState.Closed)
+                _connection.connectionObject.Open();
 
-            if (clone.connectionObject.State == ConnectionState.Closed)
-                clone.connectionObject.Open();
-
-            using (SqliteTransaction transaction = clone.connectionObject.BeginTransaction())
+            using (SqliteTransaction transaction = _connection.connectionObject.BeginTransaction())
             {
-                SqliteCommand command = clone.connectionObject.CreateCommand();
+                SqliteCommand command = _connection.connectionObject.CreateCommand();
                 command.Transaction = transaction;
                 command.CommandText = query;
 
                 await command.ExecuteNonQueryAsync();
 
                 transaction.Commit();
+                _connection.connectionObject.Close();
                 transaction.Dispose();
             }
         }
