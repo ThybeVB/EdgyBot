@@ -58,27 +58,25 @@ namespace EdgyCore.Handler
 
                 if (!result.IsSuccess)
                 {
-                    if (result.Error != CommandError.UnknownCommand)
+                    switch (result.Error)
                     {
-                        if (result.Error != CommandError.Exception)
-                        {
-                            if (result.Error != CommandError.BadArgCount)
-                            {
-                                await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
-                                await context.Channel.SendMessageAsync(result.ErrorReason);
-                            }
-                            else
-                            {
-                                await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
-                            }
-                        } else
-                        {
-                            await context.Channel.SendMessageAsync("**Internal Error**: Either the bot is still starting, or there is an actual problem. Please use e!bugreport if you think this is an actual problem.");
-                        }
-                    }
-                    else
-                    {
-                        await _lib.EdgyLog(LogSeverity.Verbose, $"Unknown Command Executed, '{msg.Content}'");
+                        case CommandError.BadArgCount:
+                            await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
+                            break;
+                        case CommandError.UnknownCommand:
+                            await _lib.EdgyLog(LogSeverity.Verbose, $"Unknown Command Executed, '{msg.Content}'");
+                            break;
+                        case CommandError.Exception:
+                            await context.Channel.SendMessageAsync("**Internal Error**: Please use e!bugreport if you think this is an actual problem.");
+                            break;
+                        case CommandError.UnmetPrecondition:
+                            await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                             await context.Channel.SendMessageAsync(result.ErrorReason);
+                            break;
+                        case CommandError.ParseFailed:
+                            await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);
+                            await context.Channel.SendMessageAsync(result.ErrorReason);
+                            break;
                     }
                 }
             }
