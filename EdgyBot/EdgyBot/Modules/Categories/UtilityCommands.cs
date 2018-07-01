@@ -48,7 +48,9 @@ namespace EdgyBot.Modules.Categories
             }
         }
 
-        [Command("setprefix"), RequireOwner]
+        [Command("setprefix")]
+        [Name("setprefix"), Summary("Sets the prefix used for the server.")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task SetPrefixCmd(string newPrefix)
         {
             DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");

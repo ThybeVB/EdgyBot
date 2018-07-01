@@ -28,6 +28,34 @@ namespace EdgyBot.Database
             }
         }
 
+        public async Task<string> GetPrefix (ulong guildID)
+        {
+            if (connection.connectionObject.State == ConnectionState.Closed)
+                connection.connectionObject.Open();
+
+            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
+            {
+                var selectCommand = connection.connectionObject.CreateCommand();
+                selectCommand.Transaction = transaction;
+                selectCommand.CommandText = $"SELECT prefix FROM guildprefix WHERE guildID={guildID}";
+                var reader = selectCommand.ExecuteReader();
+                string prefix = "";
+                while (reader.Read())
+                {
+                    prefix = reader.GetString(0);
+                }
+
+                transaction.Commit();
+                connection.connectionObject.Close();
+                transaction.Dispose();
+
+                if (string.IsNullOrEmpty(prefix))
+                    return "e!";
+
+                return prefix;
+            }
+        }
+
         private async Task InsertGuildPrefix(ulong guildId, string newPrefix)
         {
             SQLProcessor sql = new SQLProcessor(connection);
@@ -48,7 +76,7 @@ namespace EdgyBot.Database
             {
                 var selectCommand = connection.connectionObject.CreateCommand();
                 selectCommand.Transaction = transaction;
-                selectCommand.CommandText = "SELECT guildID FROM guildprefix";
+                selectCommand.CommandText = $"SELECT guildID FROM guildprefix WHERE guildID={guildID}";
                 var reader = selectCommand.ExecuteReader();
                 string msg = "";
                 while (reader.Read())
@@ -57,6 +85,7 @@ namespace EdgyBot.Database
                 }
 
                 transaction.Commit();
+                connection.connectionObject.Close();
                 transaction.Dispose();
 
                 bool x = false;

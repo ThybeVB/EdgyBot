@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
@@ -19,6 +20,9 @@ namespace EdgyBot.Database
                 throw new InvalidOperationException("Connection NULL");
 
             var clone = _connection;
+
+            if (clone.connectionObject.State == ConnectionState.Closed)
+                clone.connectionObject.Open();
 
             using (SqliteTransaction transaction = clone.connectionObject.BeginTransaction())
             {

@@ -9,6 +9,7 @@ using Discord.Addons.Interactive;
 using EdgyCore.Services;
 using EdgyBot.Modules;
 using EdgyCore.Lib;
+using EdgyBot.Database;
 
 namespace EdgyCore.Handler
 {
@@ -19,6 +20,7 @@ namespace EdgyCore.Handler
         private DiscordShardedClient _client;
         private IServiceProvider _service;
         private CommandService commandService;
+        private DatabaseConnection databaseConnection = new DatabaseConnection("EdgyBot.db");
 
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
@@ -26,9 +28,12 @@ namespace EdgyCore.Handler
         public async Task InitializeAsync(DiscordShardedClient client)
         {
             _client = client;
-
             _service = ConfigureServices();
             _prefix = _coreLib.GetPrefix();
+
+            await databaseConnection.ConnectAsync();
+            await databaseConnection.OpenConnection();
+
             commandService = new CommandService();
             await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);
 
@@ -50,6 +55,9 @@ namespace EdgyCore.Handler
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null || msg.Author.IsBot) return;
             ShardedCommandContext context = new ShardedCommandContext(_client, msg);
+
+            Guild guild = new Guild(context.Guild.Id);
+            _prefix = await guild.GetPrefix(context.Guild.Id);
 
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
