@@ -16,11 +16,12 @@ namespace EdgyBot.Modules.Categories
         [Command("invite")][Name("invite")][Summary("Gives the Invite Link for EdgyBot.")]
         public async Task InviteCmd ()
         {
-            Embed e = _lib.CreateEmbedWithText("Invite Link", _core.GetInviteLink() + "\nThanks for inviting EdgyBot! :joy:");
+            Embed e = _lib.CreateEmbedWithText("Invite Link", _core.GetInviteLink() + "\nThanks for inviting EdgyBot! :smile:");
             await ReplyAsync("", embed: e);
         }
 
-        [Command("source")][Alias("sourcecode", "github")][Name("source")][Summary("Links the Source Code of EdgyBot")]
+        [Command("source"), Alias("sourcecode", "github")]
+        [Name("source")][Summary("Links the Source Code of EdgyBot")]
         public async Task SourceCmd ()
             => await ReplyAsync("", embed: _lib.CreateEmbedWithText("Source Code", "https://github.com/MonstahGames/EdgyBot \nIf you have a GitHub account, be sure to :star: the Repository!"));
         
