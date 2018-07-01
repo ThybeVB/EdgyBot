@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
+using EdgyBot.Database;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -45,6 +46,32 @@ namespace EdgyBot.Modules.Categories
                 Embed err = _lib.CreateEmbedWithError("Purge Error", $"**Error**: {e.Message}");
                 await ReplyAsync("", embed: err);
             }
+        }
+
+        [Command("setprefix"), RequireOwner]
+        public async Task SetPrefixCmd(string newPrefix)
+        {
+            DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
+            await connection.ConnectAsync();
+
+            if (await connection.OpenConnection())
+            {
+                try
+                {
+                    Guild guild = new Guild(Context.Guild.Id);
+                    await guild.ChangePrefix(newPrefix);
+
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to {newPrefix}"));
+                }
+                catch (Exception e)
+                {
+                    await ReplyAsync("Could not change the server prefix. Error: " + e.Message);
+                }
+
+                return;
+            }
+
+            await ReplyAsync("Could not open a connection to the Database.");
         }
 
         [Command("setstatus")][RequireOwner]

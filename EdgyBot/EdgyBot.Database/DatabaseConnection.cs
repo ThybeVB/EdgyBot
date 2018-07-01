@@ -6,7 +6,7 @@ namespace EdgyBot.Database
 {
     public class DatabaseConnection
     {
-        SQLProcessor sql;
+        private SQLProcessor sql;
         private SqliteConnection _connObj;
         public static Connection connection;
 
@@ -43,12 +43,9 @@ namespace EdgyBot.Database
 
             try
             {
-                await _connObj.OpenAsync();
-
                 Connection connection = new Connection
                 {
                     connectionObject = _connObj,
-                    isOpened = true
                 };
                 DatabaseConnection.connection = connection;
 
