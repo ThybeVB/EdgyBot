@@ -34,8 +34,11 @@ namespace EdgyBot.Database
             return Task.CompletedTask;
         }
 
-        public async Task<Connection> OpenConnection ()
+        public async Task<bool> OpenConnection ()
         {
+            if (_connObj == null)
+                throw new InvalidOperationException("Cannot open connection before connecting to the Database. Please use the ConnectAsync function first.");
+
             try
             {
                 await _connObj.OpenAsync();
@@ -45,12 +48,23 @@ namespace EdgyBot.Database
                     connectionObject = _connObj,
                     isOpened = true
                 };
-                return connection;
+                return true;
 
             } catch (Exception exception)
             {
+                return false;
                 throw exception;
             }
+        }
+
+        public Task CloseConnection ()
+        {
+            if (_connObj == null)
+                throw new InvalidOperationException("You are not connected to a database.");
+
+            _connObj.Close();
+
+            return Task.CompletedTask;
         }
     }
 }

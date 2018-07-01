@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Discord.Commands;
+using EdgyBot.Database;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -24,7 +25,14 @@ namespace EdgyBot.Modules.Categories
         [RequireOwner]
         public async Task ExecQueryCmd ()
         {
+            DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
+            await connection.ConnectAsync();
+            if (await connection.OpenConnection())
+            {
+                return;
+            }
 
+            await ReplyAsync("Could not open a conenction to the Database.");
         }
     }
 }

@@ -4,7 +4,7 @@ namespace EdgyBot.Database
 {
     public class Connection
     {
-        public SqliteConnection connectionObject { get; set; }
-        public bool isOpened { get; set; }
+        public SqliteConnection connectionObject { get; internal set; }
+        public bool isOpened { get; internal set; }
     }
 }
