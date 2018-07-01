@@ -30,7 +30,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Discord.Addons.Interactive\Discord.Addons.Interactive.csproj" />
-	<PackageReference Include="..\EdgyBot.Database\EdgyBot.Database.csproj" />
+	<ProjectReference Include="..\EdgyBot.Database\EdgyBot.Database.csproj" />
   </ItemGroup>
 
 </Project>
