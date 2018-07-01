@@ -8,8 +8,8 @@ namespace EdgyBot.Database
     {
         private SqliteConnection _connObj;
 
-        string _dbFileName = "";
-        string _fullDir = "C:/EdgyBot/Database/";
+        private string _dbFileName = "";
+        private string _fullDir = "C:/EdgyBot/Database/";
 
         public DatabaseConnection (string dbFileName, string fullDir = "")
         {
@@ -62,7 +62,10 @@ namespace EdgyBot.Database
             if (_connObj == null)
                 throw new InvalidOperationException("You are not connected to a database.");
 
-            _connObj.Close();
+            try { _connObj.Close(); } catch (Exception e)
+            {
+                throw e;
+            }
 
             return Task.CompletedTask;
         }
