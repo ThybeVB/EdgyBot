@@ -13,7 +13,7 @@ before_build:
   
   - cmd: dotnet restore ./EdgyBot/EdgyBot/EdgyBot.csproj --verbosity m --configfile ./EdgyBot/.nuget/nuget.config
   - cmd: dotnet restore ./EdgyBot/Discord.Addons.Interactive/Discord.Addons.Interactive.csproj --verbosity m --configfile ./EdgyBot/.nuget/nuget.config
-  - cmd: dotnet restore ./EdgyBot/EdgyBot.Database/EdgyBot.Database.csproj --verbosity m --configfile ./EdgyBot/.nuget/nuget.config
+  - cmd: dotnet restore ./EdgyBot/EdgyBot.Database/EdgyBot.Database.csproj --verbosity m
 build_script:
 
   - cmd: dotnet publish ./EdgyBot/EdgyBot/EdgyBot.csproj

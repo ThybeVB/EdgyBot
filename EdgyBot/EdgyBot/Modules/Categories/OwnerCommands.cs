@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Discord.Commands;
+using 
 
 namespace EdgyBot.Modules.Categories
 {
@@ -18,6 +19,13 @@ namespace EdgyBot.Modules.Categories
             }
             await Context.Client.SetGameAsync(input);
             await ReplyAsync("Changed Status.");
+        }
+
+        [Command("execquery")]
+        [RequireOwner]
+        public async Task ExecQueryCmd ()
+        {
+
         }
     }
 }
