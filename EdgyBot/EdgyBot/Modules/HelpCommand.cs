@@ -31,7 +31,7 @@ namespace EdgyBot.Modules
             await PagedReplyAsync(pages);
         }
 
-        [Command("help", RunMode = RunMode.Async)]
+        [Command("help", RunMode = RunMode.Async), Alias("commands")]
         public async Task HelpCmd ()
         {
             EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
