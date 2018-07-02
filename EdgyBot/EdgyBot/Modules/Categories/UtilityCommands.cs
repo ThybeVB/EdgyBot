@@ -51,7 +51,7 @@ namespace EdgyBot.Modules.Categories
         [Command("setprefix")]
         [Name("setprefix"), Summary("Sets the prefix used for the server.")]
         [RequireUserPermission(GuildPermission.Administrator)]
-        public async Task SetPrefixCmd(string newPrefix)
+        public async Task SetPrefixCmd([Remainder]string newPrefix)
         {
             DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
             await connection.ConnectAsync();
@@ -63,7 +63,7 @@ namespace EdgyBot.Modules.Categories
                     Guild guild = new Guild(Context.Guild.Id);
                     await guild.ChangePrefix(newPrefix);
 
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to '{newPrefix}'"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to ``{newPrefix}``"));
                 }
                 catch (Exception e)
                 {
