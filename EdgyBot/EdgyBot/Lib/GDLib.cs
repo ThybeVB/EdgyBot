@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Net.Http;
 using EdgyCore.Common;
-using EdgyCore.Lib;
 
 namespace EdgyCore.Lib
 {

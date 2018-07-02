@@ -8,7 +8,6 @@ using Discord.Commands;
 using EdgyCore;
 using EdgyCore.Lib;
 using Discord.Addons.Interactive;
-using EdgyBot.Database;
 
 namespace EdgyBot.Modules
 {

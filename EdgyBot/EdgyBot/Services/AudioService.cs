@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.IO;
 using System.Diagnostics;
-using System.Net;
 using Discord;
 using Discord.Audio;
 using Discord.WebSocket;
