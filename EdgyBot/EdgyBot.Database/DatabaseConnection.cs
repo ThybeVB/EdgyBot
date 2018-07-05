@@ -75,7 +75,7 @@ namespace EdgyBot.Database
 
         public Connection getConnObj ()
         {
-            return DatabaseConnection.connection;
+            return connection;
         }
     }
 }
