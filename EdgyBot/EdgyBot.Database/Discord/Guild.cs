@@ -7,7 +7,6 @@ namespace EdgyBot.Database
 {
     public class Guild
     {
-        private Connection connection = DatabaseConnection.connection;
         private ulong _guildId;
 
         public Guild (ulong guildId)
@@ -17,7 +16,7 @@ namespace EdgyBot.Database
 
         public async Task ChangePrefix (string prefix)
         {
-            SQLProcessor processor = new SQLProcessor(connection);
+            SQLProcessor processor = new SQLProcessor(DatabaseConnection.connection);
 
             if (CheckIfRegisteredAsync(_guildId))
             {
@@ -30,6 +29,8 @@ namespace EdgyBot.Database
 
         public async Task<string> GetPrefix (ulong guildID)
         {
+            var connection = DatabaseConnection.connection;
+
             if (connection.connectionObject.State == ConnectionState.Closed)
                 connection.connectionObject.Open();
 
@@ -58,18 +59,20 @@ namespace EdgyBot.Database
 
         private async Task InsertGuildPrefix(ulong guildId, string newPrefix)
         {
-            SQLProcessor sql = new SQLProcessor(connection);
+            SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
             await sql.ExecuteQueryAsync($"INSERT INTO guildprefix (guildID, prefix) VALUES ({guildId}, '{newPrefix}')");
         }
 
         private async Task UpdateGuildPrefix(ulong guildId, string newPrefix)
         {
-            SQLProcessor sql = new SQLProcessor(connection);
+            SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
             await sql.ExecuteQueryAsync($"UPDATE guildprefix SET prefix='{newPrefix}' WHERE guildID={guildId}");
         }
 
         private bool CheckIfRegisteredAsync(ulong guildID)
         {
+            var connection = DatabaseConnection.connection;
+
             SQLProcessor processor = new SQLProcessor(connection);
             connection.connectionObject.Open();
             using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
