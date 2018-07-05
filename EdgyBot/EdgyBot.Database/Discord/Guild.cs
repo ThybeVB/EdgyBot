@@ -8,23 +8,23 @@ namespace EdgyBot.Database
     public class Guild
     {
         private Connection connection = DatabaseConnection.connection;
-        private ulong guildId;
+        private ulong _guildId;
 
         public Guild (ulong guildId)
         {
-            this.guildId = guildId;
+            _guildId = guildId;
         }
 
         public async Task ChangePrefix (string prefix)
         {
             SQLProcessor processor = new SQLProcessor(connection);
 
-            if (CheckIfRegisteredAsync(guildId))
+            if (CheckIfRegisteredAsync(_guildId))
             {
-                await UpdateGuildPrefix(guildId, prefix);
+                await UpdateGuildPrefix(_guildId, prefix);
             } else
             {
-                await InsertGuildPrefix(guildId, prefix);
+                await InsertGuildPrefix(_guildId, prefix);
             }
         }
 
