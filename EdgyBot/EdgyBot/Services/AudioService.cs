@@ -10,7 +10,7 @@ namespace EdgyCore.Services
 {
     public class AudioService
     {
-        private LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
