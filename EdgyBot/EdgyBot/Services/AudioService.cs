@@ -126,7 +126,7 @@ namespace EdgyCore.Services
         {
             return Process.Start(new ProcessStartInfo()
             {
-                FileName = @"youtube-dl.exe",
+                FileName = "youtube-dl.exe",
                 Arguments = $" -x -g \"{url}\"",
                 UseShellExecute = false,
                 RedirectStandardOutput = true
