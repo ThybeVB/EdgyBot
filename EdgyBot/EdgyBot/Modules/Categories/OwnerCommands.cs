@@ -28,7 +28,7 @@ namespace EdgyBot.Modules.Categories
         [RequireOwner]
         public async Task ExecQueryCmd ([Remainder]string query)
         {
-            DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
+            DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
             if (await connection.OpenConnection())

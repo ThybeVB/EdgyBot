@@ -13,9 +13,13 @@ namespace EdgyBot.Database
         private string _dbFileName = "";
         private string _fullDir = "C:/EdgyBot/Database/";
 
-        public DatabaseConnection (string dbFileName, string fullDir = "")
+        public DatabaseConnection (string dbFileName  = "", string fullDir = "")
         {
-            _dbFileName = dbFileName;
+            if (!string.IsNullOrEmpty(dbFileName)) {
+                _dbFileName = dbFileName;
+            } else {
+                _dbFileName = "EdgyBot.db";
+            }
 
             if (!string.IsNullOrEmpty(fullDir))
                 _fullDir = fullDir;

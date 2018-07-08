@@ -20,7 +20,7 @@ namespace EdgyCore.Handler
         private DiscordShardedClient _client;
         private IServiceProvider _service;
         private CommandService commandService;
-        private DatabaseConnection databaseConnection = new DatabaseConnection("EdgyBot.db");
+        private DatabaseConnection databaseConnection = new DatabaseConnection();
 
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
