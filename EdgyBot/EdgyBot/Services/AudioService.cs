@@ -11,7 +11,6 @@ namespace EdgyCore.Services
     public class AudioService
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-
         private readonly ConcurrentDictionary<ulong, IAudioClient> ConnectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
 
         public async Task JoinAudio(IGuild guild, IVoiceChannel target)
@@ -52,7 +51,7 @@ namespace EdgyCore.Services
                 await client.StopAsync();
                 if (exitCode == 0)
                 {
-                    await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id}.");
+                    await _lib.EdgyLog(LogSeverity.Info, $"Disconnected from voice on {guild.Id} successfully.");
                     client.Dispose();
                 } else
                 {
@@ -60,34 +59,6 @@ namespace EdgyCore.Services
                     client.Dispose();
                 }
             }
-        }
-
-        public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
-        {
-           if (!File.Exists(path))
-           {
-               await channel.SendMessageAsync("File does not exist.");
-               return;
-           }
-
-            IAudioClient client;
-            if (ConnectedChannels.TryGetValue(guild.Id, out client))
-            {
-                await _lib.EdgyLog(LogSeverity.Verbose, $"Starting playback of {path} in {guild.Name}");
-                using (Process ffmpeg = CreateStream(path))
-                using (AudioOutStream stream = client.CreatePCMStream(AudioApplication.Music))
-                {
-                    try
-                    {
-                        await ffmpeg.StandardOutput.BaseStream.CopyToAsync(stream);
-                    } finally
-                    {
-                        await stream.FlushAsync();
-                    }
-                }
-            }
-            await LeaveAudio(guild);
-            client.Dispose();
         }
 
         public async Task SendYTAudioAsync (IGuild guild, IMessageChannel channel, string path)

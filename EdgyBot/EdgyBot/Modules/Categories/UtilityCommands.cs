@@ -8,7 +8,7 @@ using EdgyBot.Database;
 
 namespace EdgyBot.Modules.Categories
 {
-    [Name("Utility Commands"), Summary("Utility Commands... What else can i say?")]
+    [Name("Utility Commands"), Summary("Commands that help manage the server!")]
     public class UtilityCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
@@ -76,19 +76,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("Could not open a connection to the Database.");
         }
 
-        [Command("setstatus")][RequireOwner]
-        public async Task SetStatusCmd([Remainder]string input = null)
-        {
-            if (input == "default")
-            {
-                await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
-                await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 
-                return;
-            }
-            await Context.Client.SetGameAsync(input);
-            await ReplyAsync("Changed Status.");
-        }
         [Command("kick")][Name("kick")][Summary("Kicks a user from the guild")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         public async Task KickCmd (IGuildUser usr, [Remainder]string reason = null)
