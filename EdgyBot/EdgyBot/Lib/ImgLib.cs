@@ -24,8 +24,7 @@ namespace EdgyCore
         {
             if (usr != null)
             {
-                string usrAvUrl = usr.GetAvatarUrl();
-                await DownloadAsync(new Uri(usrAvUrl), fileName);
+                await DownloadAsync(new Uri(usr.GetAvatarUrl()), fileName);
                 return;
             }
 

@@ -10,15 +10,13 @@ namespace EdgyBot.Database
         private SqliteConnection _connObj;
         public static Connection connection;
 
-        private string _dbFileName = "";
+        private string _dbFileName = "EdgyBot.db";
         private string _fullDir = "C:/EdgyBot/Database/";
 
         public DatabaseConnection (string dbFileName  = "", string fullDir = "")
         {
             if (!string.IsNullOrEmpty(dbFileName)) {
                 _dbFileName = dbFileName;
-            } else {
-                _dbFileName = "EdgyBot.db";
             }
 
             if (!string.IsNullOrEmpty(fullDir))

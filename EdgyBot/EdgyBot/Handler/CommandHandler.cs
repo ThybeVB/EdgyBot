@@ -15,7 +15,7 @@ namespace EdgyCore.Handler
 {
     public class CommandHandler
     {
-        private string _prefix;
+        private string _prefix = "e!";
 
         private DiscordShardedClient _client;
         private IServiceProvider _service;
@@ -54,6 +54,7 @@ namespace EdgyCore.Handler
         {
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null || msg.Author.IsBot) return;
+
             ShardedCommandContext context = new ShardedCommandContext(_client, msg);
 
             Guild guild = new Guild(context.Guild.Id);
