@@ -3,25 +3,51 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using EdgyBot.Database;
 using EdgyCore;
+using Discord.Addons.Interactive;
+using Discord.WebSocket;
+using Discord;
+using System.Text;
 
 namespace EdgyBot.Modules.Categories
 {
-    public class OwnerCommands : ModuleBase<ShardedCommandContext>
+    public class OwnerCommands : InteractiveBase<ShardedCommandContext>
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("setstatus"), RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
-            if (input == "default")
-            {
+            if (input == "default") {
                 await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
                 await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 
                 return;
             }
+
             await Context.Client.SetGameAsync(input);
             await ReplyAsync("Changed Status.");
+        }
+
+        [Command("listservers", RunMode = RunMode.Async)]
+        public async Task ListServersCmd ()
+        {
+            await ReplyAsync("Are you sure you want to do this?");
+            SocketMessage a = await NextMessageAsync();
+
+            if (a.Content != "yes" || a.Content != "y")
+                return;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (IGuild guild in Context.Client.Guilds)
+            {
+                if (guild == null)
+                    continue;
+
+                sb.Append(guild.Name + ",");
+            }
+            string[] pages = sb.ToString().Split(',');
+
+            await PagedReplyAsync(pages);
         }
 
         [Command("execquery")]
