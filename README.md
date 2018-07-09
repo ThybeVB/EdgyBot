@@ -13,9 +13,10 @@ The handy and all around fun bot that can be used for any kind of server!
 * Fun Commands
 * GD Commands (Geometry Dash Commands)
 * Info Commands
-* Music Commands (W.I.P)
+* Music Commands
 * Image Commands
 * Hashing Commands
+* Utility Commands
 * Random Commands
 
 EdgyBot is being developed for more categories, Image Commands as the newest addition.
