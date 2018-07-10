@@ -29,14 +29,14 @@ namespace EdgyBot.Modules.Categories
 
             try 
             {
-                IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(input).FlattenAsync();
+                IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(input + 1).FlattenAsync();
 
                 ITextChannel channel = (ITextChannel)Context.Channel;
                 ChannelPermissions channelPermissions = Context.Guild.CurrentUser.GetPermissions(channel);
 
                 if (channelPermissions.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + input + " messages! :ok_hand:"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + (input + 1) + " messages! :ok_hand:"));
                 } else {
                     await ReplyAsync("", embed: _lib.CreateEmbedWithError("Purge Error", "I don't seem to have permissions to delete messages.\nTo Delete messages, i must have the **Manage Messages** permission."));
                 }
