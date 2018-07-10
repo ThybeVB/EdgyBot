@@ -14,7 +14,7 @@ namespace EdgyCore.Handler.Pinger
             var dict = new Dictionary<string, object>();
             dict.Add("guilds", serverCount);
 
-            try { helper.postDataSpaceList(dict); }
+            try { helper.postListcord(dict); }
             catch (Exception e)
             {
                 await _lib.EdgyLog(Discord.LogSeverity.Error, "Failed to post data to Listcord:\n" + e.Message);
