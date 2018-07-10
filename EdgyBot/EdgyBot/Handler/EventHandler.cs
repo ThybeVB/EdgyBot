@@ -15,6 +15,7 @@ namespace EdgyCore.Handler
         private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
         private static DBLPinger dblPinger = new DBLPinger();
         private BotListSpacePinger blspPinger = new BotListSpacePinger();
+        private ListcordPinger listcordPinger = new ListcordPinger();
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
         private LibEdgyBot _lib = new LibEdgyBot();
@@ -110,6 +111,7 @@ namespace EdgyCore.Handler
             await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
             await blspPinger.PostServerCountAsync(ServerCount);
+            await listcordPinger.PostServerCountAsync(ServerCount);
         }
     }
 }
