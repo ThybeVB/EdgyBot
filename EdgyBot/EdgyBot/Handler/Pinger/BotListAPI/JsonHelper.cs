@@ -46,6 +46,28 @@ namespace EdgyCore.Handler.Pinger
             }
         }
 
+        public string getRandomShibeUrl ()
+        {
+            byte[] resByte;
+            string resString;
+
+            try
+            {
+                WebClient client = new WebClient();
+                resByte = client.DownloadData(urlInput);
+                resString = Encoding.Default.GetString(resByte);
+                client.Dispose();
+
+                return resString;
+
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "Shibe GET", e.Message);
+                new LibEdgyBot().Log(msg);
+                return msg.ToString();
+            }
+        }
+
         public string getRandomMemeImgFlip ()
         {
             byte[] resByte;

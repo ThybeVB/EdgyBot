@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
 using EdgyCore.Handler.Pinger;
+using Newtonsoft.Json.Linq;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -36,6 +38,23 @@ namespace EdgyBot.Modules.Categories
                 Text = "All Pictures are taken from https://dog.ceo/dog-api/"
             };
             eb.ImageUrl = imgUrl;
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
+        [Command("shiba", RunMode = RunMode.Async), Alias("shibe", "shib", "randomshiba", "randomshibe")]
+        public async Task ShibaCmd ()
+        {
+            JsonHelper helper = new JsonHelper("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false");
+            string get = helper.getRandomShibeUrl();
+            string[] quoteSplit = get.Split('"');
+
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.WithImageUrl(quoteSplit[1]);
+            eb.WithFooter(new EmbedFooterBuilder
+            {
+                Text = "Shibe API: http://shibe.online/"
+            });
 
             await ReplyAsync("", embed: eb.Build());
         }
