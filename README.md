@@ -4,7 +4,7 @@
 [![Discord Bots](https://discordbots.org/api/widget/servers/373163613390897163.svg)](https://discordbots.org/bot/373163613390897163)
 [![Build status](https://ci.appveyor.com/api/projects/status/3vrij7icnol81fk1?svg=true)](https://ci.appveyor.com/project/MonstahGames/edgybot)
 
-[Bots For Discord](https://botsfordiscord.com/api/v1/bots/373163613390897163/embed?theme=dark)
+[![Bots For Discord(https://botsfordiscord.com/api/v1/bots/373163613390897163/embed?theme=dark)]
 
 The handy and all around fun bot that can be used for any kind of server!
 
