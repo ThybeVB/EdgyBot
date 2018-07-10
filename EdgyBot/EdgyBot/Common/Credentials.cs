@@ -7,6 +7,7 @@
         public string dbToken { get; set; }
         public string bfdToken { get; set; }
         public string blsToken { get; set; }
+        public string listcordToken { get; set; }
         public string GJP { get; set; }
 
         public string prefix { get; set; }
