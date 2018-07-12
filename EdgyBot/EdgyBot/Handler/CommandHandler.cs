@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Discord;
+using System.Linq;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Addons.Interactive;
@@ -60,6 +61,9 @@ namespace EdgyCore.Handler
             Guild guild = new Guild(context.Guild.Id);
             _prefix = await guild.GetPrefix(context.Guild.Id);
 
+            if (await guild.CommandDisabled(msg.Content.Substring(_prefix.ToCharArray().Count())))
+                return;
+            
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {

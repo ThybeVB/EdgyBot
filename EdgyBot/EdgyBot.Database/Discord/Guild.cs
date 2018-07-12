@@ -60,11 +60,17 @@ namespace EdgyBot.Database
         public async Task EnableCommand(ulong guildID, string cmdName)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
-            await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE ()");
+            await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE guildID={guildID} and command='{cmdName}'");
+        }
+
+        public async Task<bool> CommandDisabled(string rawCommand)
+        {
+            
         }
 
         public async Task DisableCommand(ulong guildID, string cmdName)
         {
+            //Check if already in list (to-do)
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
             await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");
         }
