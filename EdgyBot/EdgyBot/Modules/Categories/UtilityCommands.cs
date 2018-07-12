@@ -15,6 +15,7 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("enablecommand", RunMode = RunMode.Async)]
+        [RequireUserPermission(GuildPermission.ManageGuild)]
         [Name("enablecommand"), Summary("Enables a command that was previously disabled in the Guild/Server")]
         public async Task EnableCommandCmd ([Remainder]string query)
         {
@@ -47,6 +48,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("disablecommand", RunMode = RunMode.Async)]
+        [RequireUserPermission(GuildPermission.ManageGuild)]
         [Name("disablecommand"), Summary("Disables a command from being used in the Guild/Server")]
         public async Task DisableCommandCmd ([Remainder]string query)
         {
