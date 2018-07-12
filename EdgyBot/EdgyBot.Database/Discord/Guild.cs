@@ -57,14 +57,16 @@ namespace EdgyBot.Database
             }
         }
 
-        public Task EnableCommand(string name)
+        public async Task EnableCommand(ulong guildID, string cmdName)
         {
-            throw new NotImplementedException();
+            SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
+            await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE ()");
         }
 
-        public Task DisableCommand(string name)
+        public async Task DisableCommand(ulong guildID, string cmdName)
         {
-            throw new NotImplementedException();
+            SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
+            await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");
         }
 
         private async Task InsertGuildPrefix(ulong guildId, string newPrefix)

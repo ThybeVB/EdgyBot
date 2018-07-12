@@ -33,7 +33,7 @@ namespace EdgyBot.Modules.Categories
                 try
                 {
                     Guild guild = new Guild(Context.Guild.Id);
-                    await guild.EnableCommand(cmd.Name);
+                    await guild.EnableCommand(Context.Guild.Id, cmd.Name);
 
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully enabled command ``{cmd.Name}``"));
                 }
@@ -53,15 +53,13 @@ namespace EdgyBot.Modules.Categories
         public async Task DisableCommandCmd ([Remainder]string query)
         {
             CommandInfo cmd = HelpCommand._service.Commands.FirstOrDefault(x => x.Name == query);
-            #region
             if (cmd == null) {
-                await ReplyAsync("This is not a valid command!\n*It is possible that you entered the alias for a command with a different name. Please check the help command to see the official command name.");
+                await ReplyAsync("This is not a valid command!\n*It is possible that you entered the alias for a command with a different name. Please check the help command to see the official command name.*    ");
                 return;
             } else if (cmd.Name == "disablecommand") {
                 await ReplyAsync("You can not disable this command.");
                 return;
             }
-            #endregion
 
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
@@ -71,7 +69,7 @@ namespace EdgyBot.Modules.Categories
                 try
                 {
                     Guild guild = new Guild(Context.Guild.Id);
-                    await guild.DisableCommand(cmd.Name);
+                    await guild.DisableCommand(Context.Guild.Id, cmd.Name);
 
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully disabled command ``{cmd.Name}``"));
                 }
