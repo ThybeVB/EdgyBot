@@ -13,7 +13,7 @@ namespace EdgyBot.Modules
 {
     public class HelpCommand : InteractiveBase<ShardedCommandContext>
     {
-        private readonly CommandService _service;
+        public static CommandService _service;
         private string _prefix = "";
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly LibEdgyCore _core = new LibEdgyCore();

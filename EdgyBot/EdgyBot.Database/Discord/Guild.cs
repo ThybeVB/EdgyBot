@@ -57,6 +57,16 @@ namespace EdgyBot.Database
             }
         }
 
+        public Task EnableCommand(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DisableCommand(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task InsertGuildPrefix(ulong guildId, string newPrefix)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);

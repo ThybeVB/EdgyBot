@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
+using System.Linq;
 using EdgyBot.Database;
 
 namespace EdgyBot.Modules.Categories
@@ -12,6 +13,104 @@ namespace EdgyBot.Modules.Categories
     public class UtilityCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
+        [Command("enablecommand", RunMode = RunMode.Async)]
+        [Name("enablecommand"), Summary("Enables a command that was previously disabled in the Guild/Server")]
+        public async Task EnableCommandCmd ([Remainder]string query)
+        {
+            CommandInfo cmd = HelpCommand._service.Commands.FirstOrDefault(x => x.Name == query);
+            if (cmd == null) {
+                await ReplyAsync("I could not find this command! Please make sure you spelled the command correctly.");
+                return;
+            }
+
+            DatabaseConnection connection = new DatabaseConnection();
+            await connection.ConnectAsync();
+
+            if (await connection.OpenConnection())
+            {
+                try
+                {
+                    Guild guild = new Guild(Context.Guild.Id);
+                    await guild.EnableCommand(cmd.Name);
+
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully enabled command ``{cmd.Name}``"));
+                }
+                catch (Exception e)
+                {
+                    await ReplyAsync("Could not enable this command. Error: " + e.Message);
+                }
+                return;
+            }
+
+            await ReplyAsync("Could not open a connection to the Database.");
+        }
+
+        [Command("disablecommand", RunMode = RunMode.Async)]
+        [Name("disablecommand"), Summary("Disables a command from being used in the Guild/Server")]
+        public async Task DisableCommandCmd ([Remainder]string query)
+        {
+            CommandInfo cmd = HelpCommand._service.Commands.FirstOrDefault(x => x.Name == query);
+            #region
+            if (cmd == null) {
+                await ReplyAsync("This is not a valid command!\n*It is possible that you entered the alias for a command with a different name. Please check the help command to see the official command name.");
+                return;
+            } else if (cmd.Name == "disablecommand") {
+                await ReplyAsync("You can not disable this command.");
+                return;
+            }
+            #endregion
+
+            DatabaseConnection connection = new DatabaseConnection();
+            await connection.ConnectAsync();
+
+            if (await connection.OpenConnection())
+            {
+                try
+                {
+                    Guild guild = new Guild(Context.Guild.Id);
+                    await guild.DisableCommand(cmd.Name);
+
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully disabled command ``{cmd.Name}``"));
+                }
+                catch (Exception e)
+                {
+                    await ReplyAsync("Could not disable this command. Error: " + e.Message);
+                }
+
+                return;
+            }
+
+            await ReplyAsync("Could not open a connection to the Database.");
+        }
+
+        [Command("setprefix")]
+        [Name("setprefix"), Summary("Sets the prefix used for the server.")]
+        [RequireUserPermission(GuildPermission.Administrator)]
+        public async Task SetPrefixCmd([Remainder]string newPrefix)
+        {
+            DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
+            await connection.ConnectAsync();
+
+            if (await connection.OpenConnection())
+            {
+                try
+                {
+                    Guild guild = new Guild(Context.Guild.Id);
+                    await guild.ChangePrefix(newPrefix);
+
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to ``{newPrefix}``"));
+                }
+                catch (Exception e)
+                {
+                    await ReplyAsync("Could not change the server prefix. Error: " + e.Message);
+                }
+
+                return;
+            }
+
+            await ReplyAsync("Could not open a connection to the Database.");
+        }
 
         [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from said channel (Provide a number on how much messages to delete)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
@@ -47,35 +146,6 @@ namespace EdgyBot.Modules.Categories
                 await ReplyAsync("", embed: err);
             }
         }
-
-        [Command("setprefix")]
-        [Name("setprefix"), Summary("Sets the prefix used for the server.")]
-        [RequireUserPermission(GuildPermission.Administrator)]
-        public async Task SetPrefixCmd([Remainder]string newPrefix)
-        {
-            DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
-            await connection.ConnectAsync();
-
-            if (await connection.OpenConnection())
-            {
-                try
-                {
-                    Guild guild = new Guild(Context.Guild.Id);
-                    await guild.ChangePrefix(newPrefix);
-
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to ``{newPrefix}``"));
-                }
-                catch (Exception e)
-                {
-                    await ReplyAsync("Could not change the server prefix. Error: " + e.Message);
-                }
-
-                return;
-            }
-
-            await ReplyAsync("Could not open a connection to the Database.");
-        }
-
 
         [Command("kick")][Name("kick")][Summary("Kicks a user from the guild")]
         [RequireUserPermission(GuildPermission.KickMembers)]
