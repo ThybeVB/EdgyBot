@@ -63,9 +63,51 @@ namespace EdgyBot.Database
             await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE guildID={guildID} and command='{cmdName}'");
         }
 
-        public async Task<bool> CommandDisabled(string rawCommand)
+        public async Task<bool> CommandDisabled(ulong guildID, string rawCommand)
         {
-            
+            Connection connection = DatabaseConnection.connection;
+
+            SQLProcessor processor = new SQLProcessor(connection);
+            connection.connectionObject.Open();
+            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
+            {
+                SqliteCommand selectCommand = connection.connectionObject.CreateCommand();
+                selectCommand.Transaction = transaction;
+                selectCommand.CommandText = $"SELECT command FROM blacklistedcommands WHERE guildID={guildID}";
+
+                var reader = selectCommand.ExecuteReader();
+                int attempt = 0;
+                bool exists = false;
+                while (reader.Read())
+                {
+                    string value = reader.GetString(attempt);
+                    if (!string.IsNullOrEmpty(value)) {
+                        if (value == rawCommand)
+                        {
+                            exists = true;
+                            transaction.Commit();
+                            connection.connectionObject.Close();
+                            transaction.Dispose();
+
+                            return exists;
+                        }
+                        exists = false;
+                        transaction.Commit();
+                        connection.connectionObject.Close();
+                        transaction.Dispose();
+                        return exists;
+                    } else
+                    {
+                        attempt++;
+                    }
+                }
+
+                transaction.Commit();
+                connection.connectionObject.Close();
+                transaction.Dispose();
+
+                return exists;
+            }
         }
 
         public async Task DisableCommand(ulong guildID, string cmdName)
