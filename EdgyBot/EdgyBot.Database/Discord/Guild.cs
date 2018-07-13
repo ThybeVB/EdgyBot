@@ -112,8 +112,10 @@ namespace EdgyBot.Database
 
         public async Task DisableCommand(ulong guildID, string cmdName)
         {
-            //Check if already in list (to-do)
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
+            if (await CommandDisabled(guildID, cmdName))
+                return;
+            
             await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");
         }
 
