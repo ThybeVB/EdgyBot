@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using EdgyCore.Lib;
+using EdgyCore;
 
 namespace EdgyBot.Database
 {
@@ -12,6 +14,7 @@ namespace EdgyBot.Database
 
         private string _dbFileName = "EdgyBot.db";
         private string _fullDir = "C:/EdgyBot/Database/";
+        public static string _defaultPrefix = "";
 
         public DatabaseConnection (string dbFileName  = "", string fullDir = "")
         {
@@ -31,6 +34,8 @@ namespace EdgyBot.Database
             {
                 DataSource = _fullDir + _dbFileName
             });
+
+            _defaultPrefix = new LibEdgyCore().GetPrefix();
 
             if (connection != null)
                 _connObj = connection;

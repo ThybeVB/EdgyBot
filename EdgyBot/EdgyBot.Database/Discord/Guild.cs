@@ -50,8 +50,9 @@ namespace EdgyBot.Database
                 connection.connectionObject.Close();
                 transaction.Dispose();
 
+                //Get prefix from Credentials (to-do)
                 if (string.IsNullOrEmpty(prefix))
-                    return "e!";
+                    return DatabaseConnection._defaultPrefix;
 
                 return prefix;
             }
