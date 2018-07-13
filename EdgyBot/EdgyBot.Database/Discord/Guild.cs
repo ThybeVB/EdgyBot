@@ -52,7 +52,7 @@ namespace EdgyBot.Database
 
                 //Get prefix from Credentials (to-do)
                 if (string.IsNullOrEmpty(prefix))
-                    return DatabaseConnection._defaultPrefix;
+                    return "e!";
 
                 return prefix;
             }
