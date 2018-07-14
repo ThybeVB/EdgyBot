@@ -17,7 +17,7 @@ The handy and all around fun bot that can be used for any kind of server!
 * Info Commands
 * Music Commands
 * Image Commands
-* Hashing Commands
+* Crypto Commands
 * Utility Commands
 * Random Commands
 

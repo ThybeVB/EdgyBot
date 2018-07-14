@@ -11,12 +11,21 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("sha512")]
-        [Name("sha512")]
-        [Summary("Encrypts a message to SHA512")]
-        public async Task HashSHA512Cmd([Remainder]string input)
+        [Name("sha512"), Summary("Encrypts a message to SHA512")]
+        public async Task Shas512Cmd([Remainder]string input)
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             eb.AddField("Encrypted SHA512 String", _lib.GetSHA512String(input));
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
+        [Command("sha256")]
+        [Name("sha256"), Summary("Encrypts a message to SHA256")]
+        public async Task Sha256Cmd ([Remainder]string input)
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.AddField("Encrypted SHA256 String", _lib.GetSHA256String(input));
 
             await ReplyAsync("", embed: eb.Build());
         }

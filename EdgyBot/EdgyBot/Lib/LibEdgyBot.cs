@@ -8,6 +8,7 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using Discord;
 using Discord.Commands;
+using System.Collections.Generic;
 
 namespace EdgyCore
 {
@@ -164,19 +165,36 @@ namespace EdgyCore
             return decodedMessage;
         }
 
-        private byte[] GetHash(string inputString)
+        
+
+        public string GetSHA512String(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetSHA512Hash(inputString))
+                sb.Append(b.ToString("x2"));
+
+            return sb.ToString();
+        }
+
+        public string GetSHA256String (string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetSHA256Hash(inputString))
+                sb.Append(b.ToString("x2"));
+
+            return sb.ToString();
+        }
+
+        private byte[] GetSHA512Hash(string inputString)
         {
             HashAlgorithm algorithm = SHA512.Create();
             return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
 
-        public string GetSHA512String(string inputString)
+        private byte[] GetSHA256Hash(string inputString)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in GetHash(inputString))
-                sb.Append(b.ToString("x2"));
-
-            return sb.ToString();
+            HashAlgorithm algorithm = SHA256.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
         }
 
         public string GetRandomLetters(int size)
