@@ -1,5 +1,5 @@
 ﻿using System;
-using EdgyCore.Common;
+using EdgyCore.Models;
 using EdgyCore.Handler;
 using Discord;
 using Discord.WebSocket;

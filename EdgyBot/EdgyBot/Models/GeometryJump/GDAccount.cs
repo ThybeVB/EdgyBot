@@ -1,4 +1,4 @@
-namespace EdgyCore.Common 
+namespace EdgyCore.Models
 {
     public class GDAccount 
     {

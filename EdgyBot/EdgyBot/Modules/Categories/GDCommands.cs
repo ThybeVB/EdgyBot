@@ -3,7 +3,7 @@ using Discord;
 using Discord.Commands;
 using EdgyCore.Lib;
 using EdgyCore;
-using EdgyCore.Common;
+using EdgyCore.Models;
 
 namespace EdgyBot.Modules.Categories
 {

@@ -1,4 +1,4 @@
-﻿namespace EdgyCore.Lib
+﻿namespace EdgyCore.Models
 {
     public class GDComment
     {
