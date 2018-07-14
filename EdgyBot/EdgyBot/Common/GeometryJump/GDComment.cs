@@ -2,7 +2,7 @@
 {
     public class GDComment
     {
-        public string comment { get; set; }
-        public string likes { get; set; }
+        public string comment { get; internal set; }
+        public string likes { get; internal set; }
     }
 }

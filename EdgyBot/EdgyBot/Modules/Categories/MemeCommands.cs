@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore;
 using EdgyCore.Handler.Pinger;
-using Newtonsoft.Json.Linq;
 
 namespace EdgyBot.Modules.Categories
 {

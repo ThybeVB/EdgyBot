@@ -2,20 +2,20 @@ namespace EdgyCore.Common
 {
     public class GDAccount 
     {
-        public string accountID { get; set; }
+        public string accountID { get; internal set; }
         public string userID { get; set; }
 
-        public string username { get; set; }
-        public string stars { get; set; }
-        public string diamonds { get; set; }
-        public string userCoins { get; set; }
-        public string coins { get; set; }
-        public string demons { get; set; }
-        public string creatorPoints { get; set; }
+        public string username { get; internal set; }
+        public string stars { get; internal set; }
+        public string diamonds { get; internal set; }
+        public string userCoins { get; internal set; }
+        public string coins { get; internal set; }
+        public string demons { get; internal set; }
+        public string creatorPoints { get; internal set; }
 
-        public string youtubeUrl { get; set; }
-        public string twitterUrl { get; set; }
-        public string twitchUrl { get; set; }
+        public string youtubeUrl { get; internal set; }
+        public string twitterUrl { get; internal set; }
+        public string twitchUrl { get; internal set; }
 
     }
 }

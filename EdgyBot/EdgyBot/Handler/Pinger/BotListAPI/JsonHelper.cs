@@ -41,7 +41,7 @@ namespace EdgyCore.Handler.Pinger
             }
             catch (Exception e)
             {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "BLSP API", e.Message);
+                LogMessage msg = new LogMessage(LogSeverity.Error, "Listcord API", e.Message);
                 new LibEdgyBot().Log(msg);
             }
         }
