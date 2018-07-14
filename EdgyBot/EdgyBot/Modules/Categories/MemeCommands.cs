@@ -43,6 +43,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("shiba", RunMode = RunMode.Async), Alias("shibe", "shib", "randomshiba", "randomshibe")]
+        [Name("shibe"), Summary("Gives you a picture of a shiba")]
         public async Task ShibaCmd ()
         {
             JsonHelper helper = new JsonHelper("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false");

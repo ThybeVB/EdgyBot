@@ -17,7 +17,7 @@ namespace EdgyBot.Database
         public async Task ExecuteQueryAsync (string query)
         {
             if (_connection == null)
-                throw new InvalidOperationException("Connection NULL");
+                throw new InvalidOperationException("_connection == null");
 
             if (_connection.connectionObject.State == ConnectionState.Closed)
                 _connection.connectionObject.Open();
