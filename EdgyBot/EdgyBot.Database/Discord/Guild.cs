@@ -14,6 +14,11 @@ namespace EdgyBot.Database
             _guildId = guildId;
         }
 
+        public async Task<string[]> GetDisabledCommands () 
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task ChangePrefix (string prefix)
         {
             SQLProcessor processor = new SQLProcessor(DatabaseConnection.connection);
@@ -27,7 +32,7 @@ namespace EdgyBot.Database
             }
         }
 
-        public async Task<string> GetPrefix (ulong guildID)
+        public async Task<string> GetPrefix ()
         {
             var connection = DatabaseConnection.connection;
 
@@ -38,7 +43,7 @@ namespace EdgyBot.Database
             {
                 var selectCommand = connection.connectionObject.CreateCommand();
                 selectCommand.Transaction = transaction;
-                selectCommand.CommandText = $"SELECT prefix FROM guildprefix WHERE guildID={guildID}";
+                selectCommand.CommandText = $"SELECT prefix FROM guildprefix WHERE guildID={_guildId}";
                 var reader = selectCommand.ExecuteReader();
                 string prefix = "";
                 while (reader.Read())

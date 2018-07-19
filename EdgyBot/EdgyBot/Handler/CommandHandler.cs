@@ -59,13 +59,14 @@ namespace EdgyCore.Handler
             ShardedCommandContext context = new ShardedCommandContext(_client, msg);
 
             Guild guild = new Guild(context.Guild.Id);
-            _prefix = await guild.GetPrefix(context.Guild.Id);
+            _prefix = await guild.GetPrefix();
 
             int argPos = 0;
             if (msg.HasStringPrefix(_prefix, ref argPos) || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 string rawCmd = msg.Content.Substring(_prefix.ToCharArray().Count());
-                if (await guild.CommandDisabled(context.Guild.Id, rawCmd))
+                string firstArg = rawCmd.Split(' ')[0];
+                if (await guild.CommandDisabled(context.Guild.Id, firstArg))
                     return;
 
                 IResult result = await commandService.ExecuteAsync(context, argPos, _service);             

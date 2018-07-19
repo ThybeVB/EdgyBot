@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -45,6 +46,34 @@ namespace EdgyBot.Modules.Categories
             }
 
             await ReplyAsync("Could not open a connection to the Database.");
+        }
+
+        [Command("disabledcommands", RunMode = RunMode.Async)]
+        //[Name("disabledcommands"), Summary("The disabled commands for the guild")]
+        public async Task DisabledCommandsCmd () 
+        {
+            DatabaseConnection connection = new DatabaseConnection();
+            await connection.ConnectAsync();
+
+            if (await connection.OpenConnection()) 
+            {
+                try {
+                    Guild guild = new Guild(Context.Guild.Id);
+                    string[] split  = await guild.GetDisabledCommands();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("```");
+                    foreach (string entry in split) {
+                        sb.Append($"{entry}\n");
+                    }
+                    sb.Append("```");
+
+                    await ReplyAsync(sb.ToString());
+                    
+                } catch (Exception e) {
+                    await ReplyAsync("Error: " + e.Message);
+                }
+            }
         }
 
         [Command("disablecommand", RunMode = RunMode.Async)]
