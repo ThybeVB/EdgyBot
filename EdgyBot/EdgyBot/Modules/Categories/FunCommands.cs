@@ -130,7 +130,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("acronym", RunMode = RunMode.Async)]
-        [Name("acronym"), Summary("A game of acronym!")]
+        //[Name("acronym"), Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
             await ReplyAsync("The Acronym Command is currently not working. While the command gets rewritten, check out the other commands!");

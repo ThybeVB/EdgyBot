@@ -18,29 +18,32 @@ namespace EdgyBot.Database
         {
             int fields = GetDisabledCommandsInt();
             string[] commands = new string[fields];
-            for (int x = 0; x < fields; fields++) 
+            for (int fieldLocal = 0; fieldLocal < fields; fields++) 
             {
-                commands[x] = GetCommandForField(x);
-                x++;
+                commands[fieldLocal] = GetCommandForField(fieldLocal);
+                fieldLocal++;
             }
             return commands;
         }
 
         private int GetDisabledCommandsInt () 
         {
-            return 0;
+            Connection connection = DatabaseConnection.connection;
+
+            throw new NotImplementedException();
         }
 
         private string GetCommandForField (int field) 
         {
-            return "";
+            Connection connection = DatabaseConnection.connection;
+
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> CommandDisabled(ulong guildID, string rawCommand)
+        public bool CommandDisabled(ulong guildID, string rawCommand)
         {
             Connection connection = DatabaseConnection.connection;
 
-            SQLProcessor processor = new SQLProcessor(connection);
             connection.connectionObject.Open();
             using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
             {
@@ -96,7 +99,7 @@ namespace EdgyBot.Database
             }
         }
 
-        public async Task<string> GetPrefix ()
+        public string GetPrefix ()
         {
             var connection = DatabaseConnection.connection;
 
@@ -136,7 +139,7 @@ namespace EdgyBot.Database
         public async Task DisableCommand(ulong guildID, string cmdName)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
-            if (await CommandDisabled(guildID, cmdName))
+            if (CommandDisabled(guildID, cmdName))
                 return;
             
             await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");

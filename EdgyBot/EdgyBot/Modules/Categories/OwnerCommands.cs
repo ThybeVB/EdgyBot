@@ -57,7 +57,7 @@ namespace EdgyBot.Modules.Categories
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
-            if (await connection.OpenConnection())
+            if (connection.OpenConnection())
             {
                 try
                 {
