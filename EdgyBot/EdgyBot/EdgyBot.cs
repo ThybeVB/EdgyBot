@@ -13,7 +13,6 @@ namespace EdgyCore
             => new EdgyBot().StartAsync().GetAwaiter().GetResult();
 
         public static Credentials Credentials;
-        private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly LibEdgyCore _core = new LibEdgyCore();
 
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig

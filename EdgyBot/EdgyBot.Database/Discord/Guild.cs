@@ -16,7 +16,71 @@ namespace EdgyBot.Database
 
         public async Task<string[]> GetDisabledCommands () 
         {
-            throw new NotImplementedException();
+            int fields = GetDisabledCommandsInt();
+            string[] commands = new string[fields];
+            for (int x = 0; x < fields; fields++) 
+            {
+                commands[x] = GetCommandForField(x);
+                x++;
+            }
+            return commands;
+        }
+
+        private int GetDisabledCommandsInt () 
+        {
+            return 0;
+        }
+
+        private string GetCommandForField (int field) 
+        {
+            return "";
+        }
+
+        public async Task<bool> CommandDisabled(ulong guildID, string rawCommand)
+        {
+            Connection connection = DatabaseConnection.connection;
+
+            SQLProcessor processor = new SQLProcessor(connection);
+            connection.connectionObject.Open();
+            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
+            {
+                SqliteCommand selectCommand = connection.connectionObject.CreateCommand();
+                selectCommand.Transaction = transaction;
+                selectCommand.CommandText = $"SELECT command FROM blacklistedcommands WHERE guildID={guildID}";
+
+                var reader = selectCommand.ExecuteReader();
+                int attempt = 0;
+                bool exists = false;
+                while (reader.Read())
+                {
+                    string value = reader.GetString(attempt);
+                    if (!string.IsNullOrEmpty(value)) {
+                        if (value == rawCommand)
+                        {
+                            exists = true;
+                            transaction.Commit();
+                            connection.connectionObject.Close();
+                            transaction.Dispose();
+
+                            return exists;
+                        }
+                        exists = false;
+                        transaction.Commit();
+                        connection.connectionObject.Close();
+                        transaction.Dispose();
+                        return exists;
+                    } else
+                    {
+                        attempt++;
+                    }
+                }
+
+                transaction.Commit();
+                connection.connectionObject.Close();
+                transaction.Dispose();
+
+                return exists;
+            }
         }
 
         public async Task ChangePrefix (string prefix)
@@ -67,53 +131,6 @@ namespace EdgyBot.Database
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
             await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE guildID={guildID} and command='{cmdName}'");
-        }
-
-        public async Task<bool> CommandDisabled(ulong guildID, string rawCommand)
-        {
-            Connection connection = DatabaseConnection.connection;
-
-            SQLProcessor processor = new SQLProcessor(connection);
-            connection.connectionObject.Open();
-            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
-            {
-                SqliteCommand selectCommand = connection.connectionObject.CreateCommand();
-                selectCommand.Transaction = transaction;
-                selectCommand.CommandText = $"SELECT command FROM blacklistedcommands WHERE guildID={guildID}";
-
-                var reader = selectCommand.ExecuteReader();
-                int attempt = 0;
-                bool exists = false;
-                while (reader.Read())
-                {
-                    string value = reader.GetString(attempt);
-                    if (!string.IsNullOrEmpty(value)) {
-                        if (value == rawCommand)
-                        {
-                            exists = true;
-                            transaction.Commit();
-                            connection.connectionObject.Close();
-                            transaction.Dispose();
-
-                            return exists;
-                        }
-                        exists = false;
-                        transaction.Commit();
-                        connection.connectionObject.Close();
-                        transaction.Dispose();
-                        return exists;
-                    } else
-                    {
-                        attempt++;
-                    }
-                }
-
-                transaction.Commit();
-                connection.connectionObject.Close();
-                transaction.Dispose();
-
-                return exists;
-            }
         }
 
         public async Task DisableCommand(ulong guildID, string cmdName)
