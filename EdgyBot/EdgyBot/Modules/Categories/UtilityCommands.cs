@@ -29,7 +29,7 @@ namespace EdgyBot.Modules.Categories
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
-            if (await connection.OpenConnection())
+            if (connection.OpenConnection())
             {
                 try
                 {
@@ -55,7 +55,7 @@ namespace EdgyBot.Modules.Categories
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
-            if (await connection.OpenConnection()) 
+            if (connection.OpenConnection()) 
             {
                 try {
                     Guild guild = new Guild(Context.Guild.Id);
@@ -93,7 +93,7 @@ namespace EdgyBot.Modules.Categories
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
-            if (await connection.OpenConnection())
+            if (connection.OpenConnection())
             {
                 try
                 {
@@ -121,7 +121,7 @@ namespace EdgyBot.Modules.Categories
             DatabaseConnection connection = new DatabaseConnection("EdgyBot.db");
             await connection.ConnectAsync();
 
-            if (await connection.OpenConnection())
+            if (connection.OpenConnection())
             {
                 try
                 {

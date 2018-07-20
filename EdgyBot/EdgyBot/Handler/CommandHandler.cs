@@ -33,7 +33,7 @@ namespace EdgyCore.Handler
             _prefix = _coreLib.GetPrefix();
 
             await databaseConnection.ConnectAsync();
-            await databaseConnection.OpenConnection();
+            databaseConnection.OpenConnection();
 
             commandService = new CommandService();
             await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);
