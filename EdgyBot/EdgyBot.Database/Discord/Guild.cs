@@ -124,7 +124,7 @@ namespace EdgyBot.Database
 
                 //Get prefix from Credentials (to-do)
                 if (string.IsNullOrEmpty(prefix))
-                    return "e!";
+                    return Environment.GetEnvironmentVariable("EdgyBot_Prefix", EnvironmentVariableTarget.User);
 
                 return prefix;
             }
