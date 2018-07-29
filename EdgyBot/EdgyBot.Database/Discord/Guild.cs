@@ -40,7 +40,7 @@ namespace EdgyBot.Database
             throw new NotImplementedException();
         }
 
-        public bool CommandDisabled(ulong guildID, string rawCommand)
+        public bool CommandDisabled(string rawCommand)
         {
             Connection connection = DatabaseConnection.connection;
 
@@ -49,7 +49,7 @@ namespace EdgyBot.Database
             {
                 SqliteCommand selectCommand = connection.connectionObject.CreateCommand();
                 selectCommand.Transaction = transaction;
-                selectCommand.CommandText = $"SELECT command FROM blacklistedcommands WHERE guildID={guildID}";
+                selectCommand.CommandText = $"SELECT command FROM blacklistedcommands WHERE guildID={_guildId}";
 
                 var reader = selectCommand.ExecuteReader();
                 int attempt = 0;
@@ -139,7 +139,7 @@ namespace EdgyBot.Database
         public async Task DisableCommand(ulong guildID, string cmdName)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
-            if (CommandDisabled(guildID, cmdName))
+            if (CommandDisabled(cmdName))
                 return;
             
             await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");
