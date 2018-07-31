@@ -49,7 +49,9 @@ namespace EdgyBot.Modules.Categories
             string[] quoteSplit = get.Split('"');
 
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.WithImageUrl(quoteSplit[1]);
+            if (quoteSplit[1] != "")
+                eb.WithImageUrl(quoteSplit[1]);
+
             eb.WithFooter(new EmbedFooterBuilder
             {
                 Text = "Shibe API: http://shibe.online/"

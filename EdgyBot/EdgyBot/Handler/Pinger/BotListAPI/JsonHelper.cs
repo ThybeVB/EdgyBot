@@ -7,6 +7,14 @@ using Discord;
 
 namespace EdgyCore.Handler.Pinger
 {
+    public enum Botlist
+    {
+        DBL,
+        DISCORDBOTS,
+        LISTCORD,
+        BFD
+    }
+
     public class JsonHelper
     {
         private LibEdgyBot _lib = new LibEdgyBot();
@@ -16,6 +24,33 @@ namespace EdgyCore.Handler.Pinger
         public JsonHelper (string url)
         {
             urlInput = url;
+        }
+
+        public void postBotlist(Dictionary<string, object> dictData, Botlist botlist)
+        {
+            byte[] resByte;
+            string resString;
+            byte[] reqString;
+            
+            try
+            {
+                WebClient webClient = new WebClient();
+
+                webClient.Headers.Add("content-type", "application/json");
+                webClient.Headers.Add("Authorization", _lib.GetListToken(botlist));
+                reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
+                resByte = webClient.UploadData(urlInput, "post", reqString);
+                resString = Encoding.Default.GetString(resByte);
+                webClient.Dispose();
+
+                LogMessage log = new LogMessage(LogSeverity.Info, $"{botlist.ToString()} API", "Success");
+                _lib.Log(log);
+
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, $"{botlist.ToString()} POST", e.Message);
+                new LibEdgyBot().Log(msg);
+            }
         }
 
         public void postListcord(Dictionary<string, object> dictData)

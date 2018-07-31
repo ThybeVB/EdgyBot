@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Discord;
 using Discord.Commands;
 using System.Collections.Generic;
+using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore
 {
@@ -22,6 +23,11 @@ namespace EdgyCore
 
         private WebClient client = new WebClient();
         private Random random = new Random();
+
+        internal string GetListToken(Botlist botlist)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
