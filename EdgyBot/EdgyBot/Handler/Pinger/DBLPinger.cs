@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using Discord;
 using EdgyCore.Lib;
@@ -27,9 +28,9 @@ namespace EdgyCore.Handler.Pinger
             {
                 IDblSelfBot self = await dblApi.GetMeAsync();
                 await self.UpdateStatsAsync(serverCount);
-            } catch
+            } catch (Exception e)
             {
-                await lib.EdgyLog(LogSeverity.Warning, "DBL Token Empty, skipping DBL Refresh");
+                await lib.EdgyLog(LogSeverity.Error, e.Message);
             }
         }
     }

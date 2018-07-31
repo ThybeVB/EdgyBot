@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Net;
-using Newtonsoft.Json.Linq;
 using Discord;
 using Discord.Commands;
-using System.Collections.Generic;
+using EdgyCore.Handler.Pinger;
 
 namespace EdgyCore
 {
@@ -22,6 +22,22 @@ namespace EdgyCore
 
         private WebClient client = new WebClient();
         private Random random = new Random();
+
+        public string GetListToken(Botlist botlist)
+        {
+            switch (botlist)
+            {
+                case Botlist.BFD:
+                    return EdgyBot.Credentials.bfdToken;
+                case Botlist.DISCORDBOTS:
+                    return EdgyBot.Credentials.dbToken;
+                case Botlist.LISTCORD:
+                    return EdgyBot.Credentials.listcordToken;
+                case Botlist.LISTSPACE:
+                    return EdgyBot.Credentials.blsToken;
+            }
+            return null;
+        }
 
         /// <summary>
         /// Creates an Embed with defaults and a field.
