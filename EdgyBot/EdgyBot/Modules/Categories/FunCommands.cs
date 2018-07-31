@@ -133,22 +133,21 @@ namespace EdgyBot.Modules.Categories
         //[Name("acronym"), Summary("A game of acronym!")]
         public async Task AcronymCmd ()
         {
-            await ReplyAsync("The Acronym Command is currently not working. While the command gets rewritten, check out the other commands!");
-            return;
-
+            #region Preparation
             //Stage 1
-            IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In a few seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
+            IUserMessage msg = await Context.Channel.SendMessageAsync("Welcome to the Acronym Game! In 10 seconds i will give 6 letters for you to make an acronym (You can do this with multiple people!)");
             string acroLetters = _lib.GetRandomLetters(6);
-            await Task.Delay(TimeSpan.FromSeconds(7.5));
+            await Task.Delay(TimeSpan.FromSeconds(10));
 
             //Stage 2
-            await msg.ModifyAsync(x => x.Content = $":timer: *You have 1 minute to make an acronym with the following!* **{acroLetters}** *(Only 10 submissions allowed)*");
+            await msg.ModifyAsync(x => x.Content = $":timer: *You have 1 minute to make an acronym with the following letters!* **{acroLetters}** *(Only 10 submissions will be included)*");
             await Task.Delay(TimeSpan.FromSeconds(5));
-            IUserMessage msg2 = await Context.Channel.SendMessageAsync("To submit an acronym, send your message starting with '*'. After that, just write your acronym.");
+            IUserMessage msg2 = await Context.Channel.SendMessageAsync("To submit an acronym, send your message starting with '*'. After that, just write your acronym.\nhttps://cdn.discordapp.com/attachments/412350471584481291/473955216518021130/unknown.png");
             await Task.Delay(TimeSpan.FromMinutes(1));
+            await msg2.DeleteAsync();
+            #endregion
 
             //Stage 3
-            await msg2.DeleteAsync();
             var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
             messages = messages.Where(x => x.Content.StartsWith("*"));
             //Get Message Count
