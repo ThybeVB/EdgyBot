@@ -131,7 +131,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("acronym", RunMode = RunMode.Async)]
-        //[Name("acronym"), Summary("A game of acronym!")]
+        [Name("acronym"), Summary("A game of acronym!\nThis command has known to be buggy in the past, so if you find a bug in it please use e!bugreport.")]
         public async Task AcronymCmd ()
         {
             #region Preparation
