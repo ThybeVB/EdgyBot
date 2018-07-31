@@ -53,34 +53,6 @@ namespace EdgyCore.Handler.Pinger
             }
         }
 
-        public void postListcord(Dictionary<string, object> dictData)
-        {
-            byte[] resByte;
-            string resString;
-            byte[] reqString;
-
-            try
-            {
-                WebClient webClient = new WebClient();
-
-                webClient.Headers.Add("content-type", "application/json");
-                webClient.Headers.Add("Authorization", EdgyBot.Credentials.listcordToken);
-                reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented));
-                resByte = webClient.UploadData(urlInput, "post", reqString);
-                resString = Encoding.Default.GetString(resByte);
-                webClient.Dispose();
-
-                LogMessage log = new LogMessage(LogSeverity.Info, "Listcord API", "Success");
-                _lib.Log(log);
-
-            }
-            catch (Exception e)
-            {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "Listcord API", e.Message);
-                new LibEdgyBot().Log(msg);
-            }
-        }
-
         public string getRandomShibeUrl ()
         {
             byte[] resByte;
