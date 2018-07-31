@@ -6,6 +6,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using EdgyCore;
+using System.Collections;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -149,12 +150,13 @@ namespace EdgyBot.Modules.Categories
 
             //Stage 3
             var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
-            messages = messages.Where(x => x.Content.StartsWith("*"));
+            IMessage[] messagesObj = messages.Where(x => x.Content.StartsWith("*")).ToArray();
+
             //Get Message Count
-            int messageCount = messages.Count(m => m.Content.StartsWith("*"));
+            int messageCount = messagesObj.Count();
             int winnerNum = new Random().Next(-1, messageCount + 1);
             int otherShit = 0;
-            foreach (var message in messages)
+            foreach (var message in messagesObj)
             {
                 if (message == null) continue;
                 if (winnerNum == otherShit)
