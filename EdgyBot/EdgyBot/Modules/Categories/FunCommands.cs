@@ -163,6 +163,7 @@ namespace EdgyBot.Modules.Categories
                 {
                     if (message.Author.IsBot) continue;
                     await msg.ModifyAsync(x => x.Content = $"{message.Author.Mention} has won the the acronym with '{message.Content}'");
+                    await ReplyAsync("Game End! Before you start another game, please delete the previous submissions, as they would be included in the next game.");
                     return;
                 }
                 otherShit++;
