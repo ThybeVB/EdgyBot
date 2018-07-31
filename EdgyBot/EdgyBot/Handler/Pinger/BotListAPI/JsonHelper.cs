@@ -9,7 +9,7 @@ namespace EdgyCore.Handler.Pinger
 {
     public enum Botlist
     {
-        DBL,
+        LISTSPACE,
         DISCORDBOTS,
         LISTCORD,
         BFD
