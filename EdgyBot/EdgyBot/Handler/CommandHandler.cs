@@ -66,7 +66,7 @@ namespace EdgyCore.Handler
             {
                 string rawCmd = msg.Content.Substring(_prefix.ToCharArray().Count());
                 string firstArg = rawCmd.Split(' ')[0];
-                if (guild.CommandDisabled(context.Guild.Id, firstArg))
+                if (guild.CommandDisabled(firstArg))
                     return;
 
                 IResult result = await commandService.ExecuteAsync(context, argPos, _service);             
