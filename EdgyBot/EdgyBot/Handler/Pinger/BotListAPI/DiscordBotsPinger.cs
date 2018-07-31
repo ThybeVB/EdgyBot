@@ -15,7 +15,7 @@ namespace EdgyCore.Handler.Pinger
             var dict = new Dictionary<string, object>();
             dict.Add("server_count", serverCount);
 
-            try { helper.postDataDiscordBots(dict); } catch (Exception e)
+            try { helper.postBotlist(dict, Botlist.DISCORDBOTS); } catch (Exception e)
             {
                 await _lib.EdgyLog(Discord.LogSeverity.Error, "Failed to post data to Discord Bots:\n" + e.Message);
             }
