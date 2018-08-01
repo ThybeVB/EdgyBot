@@ -122,7 +122,6 @@ namespace EdgyBot.Database
                 connection.connectionObject.Close();
                 transaction.Dispose();
 
-                //Get prefix from Credentials (to-do)
                 if (string.IsNullOrEmpty(prefix))
                     return Environment.GetEnvironmentVariable("EdgyBot_Prefix", EnvironmentVariableTarget.User);
 
