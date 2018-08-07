@@ -26,18 +26,42 @@ namespace EdgyBot.Database
             return commands;
         }
 
-        private int GetDisabledCommandsInt () 
+        private string GetCommandForField(int field)
         {
             Connection connection = DatabaseConnection.connection;
 
             throw new NotImplementedException();
         }
 
-        private string GetCommandForField (int field) 
+        private int GetDisabledCommandsInt () 
         {
             Connection connection = DatabaseConnection.connection;
+            connection.connectionObject.Open();
+
+            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
+            {
+                SqliteCommand selectCmd = connection.connectionObject.CreateCommand();
+                selectCmd.Transaction = transaction;
+                selectCmd.CommandText = $"SELECT guildID FROM blacklistedcommands WHERE guildID={_guildId}";
+
+                var reader = selectCmd.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    //Reader stuff here
+
+                    transaction.Commit();
+                    connection.connectionObject.Close();
+                    transaction.Dispose();
+                }
+
+                transaction.Commit();
+                connection.connectionObject.Close();
+                transaction.Dispose();
+            }
 
             throw new NotImplementedException();
+
         }
 
         public bool CommandDisabled(string rawCommand)

@@ -39,13 +39,32 @@ namespace EdgyBot.Modules.Categories
 
             await ReplyAsync("", embed: eb.Build());
         }
+        [Command("cat", RunMode = RunMode.Async), Alias("neko")]
+        public async Task CatCmd()
+        {
+            JsonHelper helper = new JsonHelper("http://shibe.online/api/cats?count=1&urls=true&httpsUrls=false");
+            string get = helper.getJSONFromUrl();
+            string[] quoteSplit = get.Split('"');
+
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            if (quoteSplit[1] != "")
+                eb.WithImageUrl(quoteSplit[1]);
+
+            eb.WithFooter(new EmbedFooterBuilder
+            {
+                Text = "Cats API: http://shibe.online/"
+            });
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
 
         [Command("shiba", RunMode = RunMode.Async), Alias("shibe", "shib", "randomshiba", "randomshibe")]
         [Name("shibe"), Summary("Gives you a picture of a shiba")]
         public async Task ShibaCmd ()
         {
             JsonHelper helper = new JsonHelper("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false");
-            string get = helper.getRandomShibeUrl();
+            string get = helper.getJSONFromUrl();
             string[] quoteSplit = get.Split('"');
 
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
@@ -55,6 +74,25 @@ namespace EdgyBot.Modules.Categories
             eb.WithFooter(new EmbedFooterBuilder
             {
                 Text = "Shibe API: http://shibe.online/"
+            });
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
+        [Command("birb", RunMode = RunMode.Async), Alias("bird")]
+        public async Task BirdCmd ()
+        {
+            JsonHelper helper = new JsonHelper("http://shibe.online/api/birds?count=1&urls=true&httpsUrls=false");
+            string get = helper.getJSONFromUrl();
+            string[] quoteSplit = get.Split('"');
+
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            if (quoteSplit[1] != "")
+                eb.WithImageUrl(quoteSplit[1]);
+
+            eb.WithFooter(new EmbedFooterBuilder
+            {
+                Text = "Birds API: http://shibe.online/"
             });
 
             await ReplyAsync("", embed: eb.Build());

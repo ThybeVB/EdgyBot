@@ -53,7 +53,7 @@ namespace EdgyCore.Handler.Pinger
             }
         }
 
-        public string getRandomShibeUrl ()
+        public string getJSONFromUrl ()
         {
             byte[] resByte;
             string resString;
@@ -69,7 +69,7 @@ namespace EdgyCore.Handler.Pinger
 
             } catch (Exception e)
             {
-                LogMessage msg = new LogMessage(LogSeverity.Error, "Shibe GET", e.Message);
+                LogMessage msg = new LogMessage(LogSeverity.Error, "GET URL", e.Message);
                 new LibEdgyBot().Log(msg);
                 return msg.ToString();
             }
