@@ -92,7 +92,7 @@ namespace EdgyCore.Lib
 
         public string GetOwnerDiscordName()
         {
-            SocketUser ownerUser = Handler.EventHandler.OwnerUser;
+            SocketUser ownerUser = EdgyCore.Handler.EventHandler.OwnerUser;
             if (ownerUser == null) return "Undefined#0000";
             return $"{ownerUser.Username}#{ownerUser.Discriminator}";
         }

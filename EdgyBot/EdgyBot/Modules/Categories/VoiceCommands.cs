@@ -1,46 +1,55 @@
 ﻿using System.Threading.Tasks;
-using EdgyCore.Services;
 using Discord;
 using Discord.Commands;
+using SharpLink;
 
 namespace EdgyBot.Modules.Categories
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
-        private readonly AudioService _service;
+        private readonly LavalinkManager _lavaManager;
 
-        public VoiceCommands (AudioService service)
+        public VoiceCommands (LavalinkManager lavalinkManager)
         {
-            _service = service;
+            _lavaManager = lavalinkManager;
         }
 
-        [Command("leave", RunMode = RunMode.Async)]
-        public async Task LeaveCmd ()
+        [Command("youtube")]
+        public async Task LavalinkCmd ([Remainder]string query)
         {
-            await _service.LeaveAudio(Context.Guild);
-            await ReplyAsync($"Left Voice on {Context.Guild.Id}");
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+
+            LavalinkTrack track = await _lavaManager.GetTrackAsync($"ytsearch:{query}");
+            await player.PlayAsync(track);
         }
 
-        [Command("stop", RunMode = RunMode.Async), Alias("stopaudio")]
-        [Name("stop"), Summary("Stops the currently playing Audio.")]
-        public async Task StopCmd ()
+        [Command("pause")]
+        public async Task PauseCmd ()
         {
-            await _service.StopAudio(Context.Guild);
-            await Context.Message.AddReactionAsync(new Emoji("👍"));
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            await player.PauseAsync();
         }
 
-        [Command("play", RunMode = RunMode.Async)]
-        [Name("play"), Summary("Lets you play a video from YouTube. Some other sites work too.")]
-        public async Task PlayCmd ([Remainder]string link)
+        [Command("resume")]
+        public async Task ResumeCmd()
         {
-            await Context.Message.AddReactionAsync(new Emoji("👍"));
-            try {
-                await _service.JoinAudio(Context.Guild, (Context.User as IVoiceState).VoiceChannel);
-                await _service.SendYTAudioAsync(Context.Guild, Context.Channel, link);
-            } catch (System.Exception e) {
-                await ReplyAsync("**Error:** " + e.Message);
-            }
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            await player.ResumeAsync();
+        }
+
+        [Command("stop")]
+        public async Task StopCmd()
+        {
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            await player.StopAsync();
+        }
+
+        [Command("setvolume")]
+        public async Task SetVolumeCmd(uint volume)
+        {
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            await player.SetVolumeAsync(volume);
         }
     }
 }

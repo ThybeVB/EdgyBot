@@ -7,13 +7,14 @@ using System.Linq;
 using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Addons.Interactive;
-using EdgyCore.Services;
 using EdgyBot.Modules;
 using EdgyCore.Lib;
 using EdgyBot.Database;
+using SharpLink;
 
 namespace EdgyCore.Handler
 {
+
     public class CommandHandler
     {
         private string _prefix = "e!";
@@ -23,12 +24,16 @@ namespace EdgyCore.Handler
         private CommandService commandService;
         private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+        private LavalinkManager _manager;
+
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public async Task InitializeAsync(DiscordShardedClient client)
+        public async Task InitializeAsync(DiscordShardedClient client, LavalinkManager lavalink)
         {
             _client = client;
+            _manager = lavalink;
+
             _service = ConfigureServices();
             _prefix = _coreLib.GetPrefix();
 
@@ -46,9 +51,15 @@ namespace EdgyCore.Handler
         private IServiceProvider ConfigureServices ()
         {
             return new ServiceCollection()
-                .AddSingleton(new AudioService())
                 .AddSingleton(new InteractiveService(_client))
+                .AddSingleton(_manager)
                 .BuildServiceProvider();
+        }
+
+        private Task Log(LogMessage log)
+        {
+            Console.WriteLine(log.ToString());
+            return Task.CompletedTask;
         }
 
         private async Task HandleCommandAsync(SocketMessage s)

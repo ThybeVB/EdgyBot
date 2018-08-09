@@ -4,13 +4,14 @@ using Discord;
 using Discord.WebSocket;
 using EdgyCore.Handler.Pinger;
 using EdgyCore.Lib;
+using SharpLink;
 
 namespace EdgyCore.Handler
 {
     public class EventHandler
     {
-        private DiscordShardedClient _client;
-
+        private static DiscordShardedClient _client;
+        private LavalinkManager _lavaLink;
         private int _shardsConnected = 0;
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
@@ -26,9 +27,10 @@ namespace EdgyCore.Handler
         public static int ServerCount;
         public static SocketUser OwnerUser;
 
-        public EventHandler (DiscordShardedClient client)
+        public EventHandler(DiscordShardedClient client, LavalinkManager lavalink)
         {
             _client = client;
+            _lavaLink = lavalink;
 
             _client.Log += _lib.Log;
             _client.ShardReady += ShardReady;
@@ -39,6 +41,11 @@ namespace EdgyCore.Handler
             _client.UserLeft += UserUpdated;
         }
 
+        public LavalinkManager GetManager ()
+        {
+            return _lavaLink;
+        }
+
         private async Task ShardReady (DiscordSocketClient client)
         {
             _shardsConnected++;
@@ -46,6 +53,7 @@ namespace EdgyCore.Handler
             if (_shardsConnected == _client.Shards.Count)
             {
                 await SetupBot();
+                await _lavaLink.StartAsync();
                 await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected! ({_client.Shards.Count})");
             }  
         }
