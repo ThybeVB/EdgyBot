@@ -11,6 +11,8 @@
 *.userprefs
 
 #Custom
+application.yml
+Lavalink.jar
 desktop.ini
 
 # Build results
