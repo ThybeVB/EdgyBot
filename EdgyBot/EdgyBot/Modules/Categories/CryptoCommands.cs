@@ -43,7 +43,7 @@ namespace EdgyBot.Modules.Categories
 
         [Command("b64d")]
         [Name("b64d")]
-        [Summary("Decrypts a Base 64 Encoded message.")]
+        [Summary("Decodes a Base 64 Encoded message.")]
         public async Task B64DecodeCmd([Remainder]string input)
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
