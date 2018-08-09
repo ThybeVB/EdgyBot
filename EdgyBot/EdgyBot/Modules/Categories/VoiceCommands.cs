@@ -22,6 +22,8 @@ namespace EdgyBot.Modules.Categories
 
             LavalinkTrack track = await _lavaManager.GetTrackAsync($"ytsearch:{query}");
             await player.PlayAsync(track);
+
+            await _lavaManager.LeaveAsync(Context.Guild.Id);
         }
 
         [Command("pause")]
@@ -43,6 +45,7 @@ namespace EdgyBot.Modules.Categories
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
             await player.StopAsync();
+            await _lavaManager.LeaveAsync(Context.Guild.Id);
         }
 
         [Command("setvolume")]

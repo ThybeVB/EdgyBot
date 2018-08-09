@@ -34,9 +34,9 @@ namespace EdgyCore
                 WebSocketHost = "localhost",
                 WebSocketPort = 555,
                 Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
-                TotalShards = 1
+                TotalShards = 1,
+                LogSeverity = LogSeverity.Verbose
             });
-
 
             Credentials = _core.GetCredentials();
             Handler.EventHandler handler = new Handler.EventHandler(Client, _manager);

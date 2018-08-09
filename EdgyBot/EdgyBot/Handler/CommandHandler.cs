@@ -37,6 +37,8 @@ namespace EdgyCore.Handler
             _service = ConfigureServices();
             _prefix = _coreLib.GetPrefix();
 
+            _manager.Log += Log;
+
             await databaseConnection.ConnectAsync();
             databaseConnection.OpenConnection();
 
