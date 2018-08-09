@@ -32,9 +32,9 @@ namespace EdgyCore
                 RESTHost = "localhost",
                 RESTPort = 2333,
                 WebSocketHost = "localhost",
-                WebSocketPort = 555,
+                WebSocketPort = 1337,
                 Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
-                TotalShards = 1,
+                TotalShards = 2,
                 LogSeverity = LogSeverity.Verbose
             });
 

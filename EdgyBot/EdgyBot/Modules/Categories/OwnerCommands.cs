@@ -31,11 +31,7 @@ namespace EdgyBot.Modules.Categories
         [Command("listservers", RunMode = RunMode.Async)]
         public async Task ListServersCmd ()
         {
-            await ReplyAsync("Are you sure you want to do this?");
-            SocketMessage a = await NextMessageAsync();
-
-            if (a.Content != "yes" || a.Content != "y")
-                return;
+            await ReplyAsync("ok my dude");
 
             StringBuilder sb = new StringBuilder();
             foreach (IGuild guild in Context.Client.Guilds)
@@ -45,7 +41,7 @@ namespace EdgyBot.Modules.Categories
 
                 sb.Append(guild.Name + ",");
             }
-            string[] pages = sb.ToString().Split(',');
+            string[] pages = (sb.ToString()).Split(',');
 
             await PagedReplyAsync(pages);
         }

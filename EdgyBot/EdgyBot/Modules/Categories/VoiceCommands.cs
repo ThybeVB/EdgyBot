@@ -15,7 +15,7 @@ namespace EdgyBot.Modules.Categories
             _lavaManager = lavalinkManager;
         }
 
-        [Command("youtube")]
+        [Command("youtube", RunMode = RunMode.Async)]
         [Name("youtube"), Summary("Plays a song from YouTube")]
         public async Task LavalinkCmd ([Remainder]string query)
         {
@@ -50,7 +50,7 @@ namespace EdgyBot.Modules.Categories
             await _lavaManager.LeaveAsync(Context.Guild.Id);
         }
 
-        [Command("setvolume")]
+        [Command("setvolume"), Alias("volume")]
         [Name("setvolume"), Summary("Sets the volume of the music.")]
         public async Task SetVolumeCmd(uint volume)
         {
