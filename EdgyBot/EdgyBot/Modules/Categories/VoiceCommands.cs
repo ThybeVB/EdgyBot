@@ -16,17 +16,17 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("youtube")]
+        [Name("youtube"), Summary("Plays a song from YouTube")]
         public async Task LavalinkCmd ([Remainder]string query)
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
 
             LavalinkTrack track = await _lavaManager.GetTrackAsync($"ytsearch:{query}");
             await player.PlayAsync(track);
-
-            await _lavaManager.LeaveAsync(Context.Guild.Id);
         }
 
         [Command("pause")]
+        [Name("pause"), Summary("Pause the currently playing Audio")]
         public async Task PauseCmd ()
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
@@ -34,6 +34,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("resume")]
+        [Name("resume"), Summary("Resume the currently paused Audio")]
         public async Task ResumeCmd()
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
@@ -41,6 +42,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("stop")]
+        [Name("stop"), Summary("Stops the currently playing Audio")]
         public async Task StopCmd()
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
@@ -49,6 +51,7 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("setvolume")]
+        [Name("setvolume"), Summary("Sets the volume of the music.")]
         public async Task SetVolumeCmd(uint volume)
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
