@@ -22,16 +22,25 @@ namespace EdgyBot.Modules
             _service = service;
         }
 
-        [Command("pgtest")]
-        public async Task PaginatedTest ()
-        {
-            var pages = new[] {"page1", "page2", "page3" };
-            await PagedReplyAsync(pages);
-        }
+        //Yes, this happens. :(
+        [Command("help--text")]
+        public async Task HelpCmdAttached ()
+            => await HelpCmd("--text");
 
         [Command("help", RunMode = RunMode.Async), Alias("commands")]
-        public async Task HelpCmd ()
+        public async Task HelpCmd ([Remainder]string param = "")
         {
+            if (param != "--text")
+            {
+                EmbedBuilder eb = new EmbedBuilder();
+                eb.AddField("Text Version", "To get a text version of all the commands, please add --text to the command.\nExample: e!help --text");
+                eb.AddField("Web Version (Recommended)", "[EdgyBot Command List](http://edgybot.tk/commands.html)");
+                eb.WithColor(0x0cc6d3);
+
+                await ReplyAsync("", embed: eb.Build());
+                return;
+            }
+
             EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
             initEmbed.AddField("EdgyBot", "Help Command. Thanks for using EdgyBot!");
             initEmbed.AddField("Bot Prefix", _core.GetPrefix());

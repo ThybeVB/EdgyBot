@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Discord.Commands;
+using System;
 using Discord.WebSocket;
 
 namespace Discord.Addons.Interactive
