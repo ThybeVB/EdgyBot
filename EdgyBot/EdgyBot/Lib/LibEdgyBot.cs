@@ -262,8 +262,7 @@ namespace EdgyCore
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
             }
-            Console.WriteLine(DateTime.Now.ToShortTimeString() + " | " + message.Source + ": " + message.Message);
-            
+            Console.WriteLine(DateTime.Now.ToLongTimeString() + " " + message.Source + " " + message.Message);
             return Task.CompletedTask;
         }
 
