@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
+﻿using System;
+using System.Threading.Tasks;
 using EdgyCore.Models;
 using EdgyCore.Handler;
 using EdgyCore.Lib;
+using Discord;
+using Discord.WebSocket;
 using SharpLink;
-using System;
 
 namespace EdgyCore
 {

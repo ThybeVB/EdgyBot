@@ -45,23 +45,23 @@ namespace EdgyBot.Database
                 selectCmd.CommandText = $"SELECT guildID FROM blacklistedcommands WHERE guildID={_guildId}";
 
                 var reader = selectCmd.ExecuteReader();
+                int tries = 0;
+                int disabledCommands = 0;
                 while (reader.Read())
                 {
-
-                    //Reader stuff here
+                    //f
 
                     transaction.Commit();
                     connection.connectionObject.Close();
                     transaction.Dispose();
                 }
 
+                return disabledCommands;
+
                 transaction.Commit();
                 connection.connectionObject.Close();
                 transaction.Dispose();
             }
-
-            throw new NotImplementedException();
-
         }
 
         public bool CommandDisabled(string rawCommand)

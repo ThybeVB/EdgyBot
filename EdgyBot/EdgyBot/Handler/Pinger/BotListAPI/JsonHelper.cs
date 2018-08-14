@@ -26,6 +26,26 @@ namespace EdgyCore.Handler.Pinger
             urlInput = url;
         }
 
+        public string getMinecraftUser(string username)
+        {
+            byte[] resByte;
+            string resString;
+
+            try
+            {
+                WebClient client = new WebClient();
+                resByte = client.DownloadData(urlInput);
+                resString = Encoding.Default.GetString(resByte);
+                client.Dispose();
+                return resString;
+            } catch (Exception e)
+            {
+                LogMessage msg = new LogMessage(LogSeverity.Error, "GET REQ", e.Message);
+                new LibEdgyBot().Log(msg);
+                return null;
+            }
+        }
+
         public void postBotlist(Dictionary<string, object> dictData, Botlist botlist)
         {
             byte[] resByte;

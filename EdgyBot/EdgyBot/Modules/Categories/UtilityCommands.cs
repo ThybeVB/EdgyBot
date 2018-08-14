@@ -48,7 +48,7 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("Could not open a connection to the Database.");
         }
 
-        [Command("disabledcommands", RunMode = RunMode.Async)]
+        //[Command("disabledcommands", RunMode = RunMode.Async)]
         //[Name("disabledcommands"), Summary("The disabled commands for the guild")]
         public async Task DisabledCommandsCmd () 
         {
