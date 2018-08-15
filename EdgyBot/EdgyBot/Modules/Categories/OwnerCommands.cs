@@ -14,6 +14,19 @@ namespace EdgyBot.Modules.Categories
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 
+        [Command("ch"), Alias("checkup", "check", "status")]
+        public async Task CheckupCmd ()
+        {
+            StringBuilder sb = new StringBuilder();
+            int shardId = 0;
+            foreach (var b in Context.Client.Shards)
+            {
+                sb.Append($"Shard {shardId} [{b.Status.ToString().ToUpper()}]\n");
+                shardId++;
+            }
+            await ReplyAsync(sb.ToString());
+        }
+
         [Command("setstatus"), RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
