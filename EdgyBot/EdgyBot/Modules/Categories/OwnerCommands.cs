@@ -19,9 +19,9 @@ namespace EdgyBot.Modules.Categories
         {
             StringBuilder sb = new StringBuilder();
             int shardId = 0;
-            foreach (var b in Context.Client.Shards)
+            foreach (DiscordSocketClient b in Context.Client.Shards)
             {
-                sb.Append($"Shard {shardId} [{b.Status.ToString().ToUpper()}]\n");
+                sb.Append($"Shard {shardId} [{b.ConnectionState.ToString().ToUpper()}]\n");
                 shardId++;
             }
             await ReplyAsync(sb.ToString());

@@ -38,6 +38,8 @@ namespace EdgyBot.Modules
                 eb.WithColor(0x0cc6d3);
 
                 await ReplyAsync("", embed: eb.Build());
+                await ReplyAsync("Support Server: https://discord.gg/hF4CSDG");
+
                 return;
             }
 
