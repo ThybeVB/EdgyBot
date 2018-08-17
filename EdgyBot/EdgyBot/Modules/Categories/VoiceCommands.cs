@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -21,7 +22,8 @@ namespace EdgyBot.Modules.Categories
         public async Task SoundCloudCmd ([Remainder]string query)
         {
             LavalinkPlayer p = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
-            LavalinkTrack tr = await _lavaManager.GetTrackAsync($"scsearch:{query}");
+            LoadTracksResponse r = await _lavaManager.GetTracksAsync($"scsearch:{query}");
+            LavalinkTrack tr = r.Tracks.First();
 
             await p.PlayAsync(tr);
         }
@@ -31,9 +33,10 @@ namespace EdgyBot.Modules.Categories
         public async Task YouTubeCmd ([Remainder]string query)
         {
             LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            LoadTracksResponse r = await _lavaManager.GetTracksAsync($"ytsearch:{query}");
+            LavalinkTrack tr = r.Tracks.First();
 
-            LavalinkTrack track = await _lavaManager.GetTrackAsync($"ytsearch:{query}");
-            await player.PlayAsync(track);
+            await player.PlayAsync(tr);
         }
 
         [Command("pause")]
