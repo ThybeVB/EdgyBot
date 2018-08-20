@@ -14,7 +14,7 @@ namespace EdgyBot.Modules.Categories
     public class FunCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
-        private readonly string[] ballReplies = { "It is certain.", "Without a doubt.", "You may rely on it.", 
+        private string[] ballReplies = { "It is certain.", "Without a doubt.", "You may rely on it.", 
                                 "As I see it, yes.", "Yes.", "Better not tell you now.", "Concentrate and ask again.",
                                 "My reply is no.", "My sources say no", "Very doubtful." };
 
@@ -22,9 +22,11 @@ namespace EdgyBot.Modules.Categories
         public async Task EightBallCmd ([Remainder]string question) 
         {
             Random random = new Random();
-            int index = random.Next(ballReplies.Count() - 1, ballReplies.Count() + 1);
+            int index = random.Next(ballReplies.Count());
 
             string responseString = $":8ball: {Context.User.Mention}: {question}\nMy Response: {ballReplies[index]}";
+
+            await ReplyAsync(responseString);
         }
 
         [Command("duel", RunMode = RunMode.Async)]
