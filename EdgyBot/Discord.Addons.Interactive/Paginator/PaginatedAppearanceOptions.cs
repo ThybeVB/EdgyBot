@@ -18,10 +18,10 @@ namespace Discord.Addons.Interactive
         public string InformationText = "This is a paginator. React with the respective icons to change the page.";
 
         public JumpDisplayOptions JumpDisplayOptions = JumpDisplayOptions.WithManageMessages;
-        public bool DisplayInformationIcon = true;
+        public bool DisplayInformationIcon = false;
 
         public TimeSpan? Timeout = null;
-        public TimeSpan InfoTimeout = TimeSpan.FromSeconds(10);
+        public TimeSpan InfoTimeout = TimeSpan.FromSeconds(7.5);
     }
 
     public enum JumpDisplayOptions

@@ -14,11 +14,11 @@ namespace EdgyCore.Handler
         private string listcordTokenEnv = "EdgyBot_ListcordToken";
         private string GJPEnv = "EdgyBot_GJP";
 
-        public string prefixEnv = "EdgyBot_Prefix";
-        public string clientIDEnv = "EdgyBot_ClientID";
-        public string invLinkEnv = "EdgyBot_InvLink";
-        public string accIDEnv = "EdgyBot_AccID";
-        public string ownerIDEnv = "EdgyBot_OwnerID";
+        private string prefixEnv = "EdgyBot_Prefix";
+        private string clientIDEnv = "EdgyBot_ClientID";
+        private string invLinkEnv = "EdgyBot_InvLink";
+        private string accIDEnv = "EdgyBot_AccID";
+        private string ownerIDEnv = "EdgyBot_OwnerID";
         #endregion
 
         public Credentials Read(bool firstTime)

@@ -57,10 +57,6 @@ namespace EdgyBot.Database
                 }
 
                 return disabledCommands;
-
-                transaction.Commit();
-                connection.connectionObject.Close();
-                transaction.Dispose();
             }
         }
 

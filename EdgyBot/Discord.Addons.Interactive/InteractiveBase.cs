@@ -10,8 +10,7 @@ namespace Discord.Addons.Interactive
     {
     }
 
-    public class InteractiveBase<T> : ModuleBase<T>
-        where T : ShardedCommandContext
+    public class InteractiveBase<T> : ModuleBase<T> where T : ShardedCommandContext
     {
         public InteractiveService Interactive { get; set; }
 
