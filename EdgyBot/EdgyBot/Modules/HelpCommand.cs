@@ -98,13 +98,13 @@ namespace EdgyBot.Modules
             if (string.IsNullOrEmpty(aliasses)) {
                 eb.WithFooter(new EmbedFooterBuilder 
                 {
-                    Text = $"Command: {command.Name}, No Aliasses."
+                    Text = $"Command: {command.Name}, No Aliases."
                 });
             } else 
             {
                 eb.WithFooter(new EmbedFooterBuilder 
                 {
-                    Text = $"Command: {command.Name}, Aliasses: {aliasses}"
+                    Text = $"Command: {command.Name}, Aliases: {aliasses}"
                 });
             }
             #endregion
