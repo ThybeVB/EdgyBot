@@ -25,7 +25,7 @@ namespace EdgyBot.Database
             }
             return commands;
         }
-
+        
         private string GetCommandForField(int field)
         {
             Connection connection = DatabaseConnection.connection;

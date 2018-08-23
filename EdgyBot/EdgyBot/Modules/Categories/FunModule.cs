@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
 using Discord;
-using Discord.Commands;
 using Discord.WebSocket;
+using Discord.Commands;
 using EdgyCore;
-using System.Collections;
 
 namespace EdgyBot.Modules.Categories
 {
