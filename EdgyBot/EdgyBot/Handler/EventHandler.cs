@@ -117,6 +117,8 @@ namespace EdgyCore.Handler
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
             }
 
+            //publish shit to big boi edgybot api
+
             await _bfdPinger.PostServerCountAsync(ServerCount);
             await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
