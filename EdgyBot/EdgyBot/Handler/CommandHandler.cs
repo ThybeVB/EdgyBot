@@ -14,7 +14,6 @@ using SharpLink;
 
 namespace EdgyCore.Handler
 {
-
     public class CommandHandler
     {
         private string _prefix = "e!";
@@ -37,7 +36,7 @@ namespace EdgyCore.Handler
             _service = ConfigureServices();
             _prefix = _coreLib.GetPrefix();
 
-            _manager.Log += Log;
+            _manager.Log += _lib.Log;
 
             await databaseConnection.ConnectAsync();
             databaseConnection.OpenConnection();
@@ -56,12 +55,6 @@ namespace EdgyCore.Handler
                 .AddSingleton(new InteractiveService(_client))
                 .AddSingleton(_manager)
                 .BuildServiceProvider();
-        }
-
-        private Task Log(LogMessage log)
-        {
-            Console.WriteLine(log.ToString());
-            return Task.CompletedTask;
         }
 
         private async Task HandleCommandAsync(SocketMessage s)

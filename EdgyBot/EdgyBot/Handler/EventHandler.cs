@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
 using EdgyCore.Handler.Pinger;
 using EdgyCore.Lib;
+using Discord;
+using Discord.WebSocket;
 using SharpLink;
+using EdgyCore.Models;
 
 namespace EdgyCore.Handler
 {
@@ -22,6 +23,7 @@ namespace EdgyCore.Handler
         private static DBLPinger dblPinger = new DBLPinger();
         private BotListSpacePinger blspPinger = new BotListSpacePinger();
         private ListcordPinger listcordPinger = new ListcordPinger();
+        private EdgyAPI edgyApi = new EdgyAPI();
 
         public static int MemberCount;
         public static int ServerCount;
@@ -69,10 +71,10 @@ namespace EdgyCore.Handler
             await RefreshBotAsync(true);
         }
 
-        private Task UserUpdated (SocketGuildUser arg)
+        private async Task UserUpdated (SocketGuildUser arg)
         {
             MemberCount = CalculateMemberCount();
-            return Task.CompletedTask;
+            await RefreshBotAsync();
         }
 
         private async Task ShardDisconnected (Exception exception, DiscordSocketClient client)
@@ -115,15 +117,43 @@ namespace EdgyCore.Handler
 
             if (startup) {
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
-            }
+            } else
+            {
+                StatsModel stats = new StatsModel();
+                stats.shards = new Shard[_client.Shards.Count];
+                for (int x = 0; x != _client.Shards.Count; x++)
+                {
+                    int serverCount = _client.GetShard(x).Guilds.Count;
+                    int memCount = GetMembersForShard(x);
+                    Shard shard = new Shard
+                    {
+                        name = $"Shard {x}",
+                        server_count = serverCount,
+                        user_count = memCount
+                    };
+                    stats.shards[x] = shard;
+                }
 
-            //publish shit to big boi edgybot api
+                await edgyApi.PostStatsAsync(stats);
+            }
 
             await _bfdPinger.PostServerCountAsync(ServerCount);
             await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
             await blspPinger.PostServerCountAsync(ServerCount);
             await listcordPinger.PostServerCountAsync(ServerCount);
+        }
+
+        private int GetMembersForShard(int shardId)
+        {
+            int memCount = 0;
+
+            var shard = _client.GetShard(shardId);
+            foreach (SocketGuild guild in shard.Guilds)
+            {
+                memCount = memCount + guild.MemberCount;
+            }
+            return memCount;
         }
     }
 }
