@@ -22,7 +22,6 @@ namespace EdgyCore.Handler
         private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
         private static DBLPinger dblPinger = new DBLPinger();
         private BotListSpacePinger blspPinger = new BotListSpacePinger();
-        private ListcordPinger listcordPinger = new ListcordPinger();
         private EdgyAPI edgyApi = new EdgyAPI();
 
         public static int MemberCount;
@@ -74,7 +73,7 @@ namespace EdgyCore.Handler
         private async Task UserUpdated (SocketGuildUser arg)
         {
             MemberCount = CalculateMemberCount();
-            await RefreshBotAsync();
+            await RefreshBotAsync(false, true);
         }
 
         private async Task ShardDisconnected (Exception exception, DiscordSocketClient client)
@@ -110,7 +109,7 @@ namespace EdgyCore.Handler
             return users;
         }
 
-        private async Task RefreshBotAsync (bool startup = false)
+        private async Task RefreshBotAsync (bool startup = false, bool inGuild = false)
         {
             string gameStatus = "e!help | EdgyBot for " + ServerCount + " servers!";
             await _client.SetGameAsync(gameStatus);
@@ -137,11 +136,13 @@ namespace EdgyCore.Handler
                 await edgyApi.PostStatsAsync(stats);
             }
 
+            if (!inGuild)
+                return;
+
             await _bfdPinger.PostServerCountAsync(ServerCount);
             await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
             await blspPinger.PostServerCountAsync(ServerCount);
-            await listcordPinger.PostServerCountAsync(ServerCount);
         }
 
         private int GetMembersForShard(int shardId)

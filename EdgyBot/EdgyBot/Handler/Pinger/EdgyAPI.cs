@@ -25,12 +25,11 @@ namespace EdgyCore.Handler
                 webClient.Headers.Add("content-type", "application/json");
                 webClient.Headers.Add("Authorization", Environment.GetEnvironmentVariable("EdgyBot_ApiToken", EnvironmentVariableTarget.User));
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(stats, Formatting.Indented));
-                Console.WriteLine(reqString.ToString());
                 resByte = webClient.UploadData("http://localhost:3000/api/post_status", "post", reqString);
                 resString = Encoding.Default.GetString(resByte);
                 webClient.Dispose();
 
-                LogMessage log = new LogMessage(LogSeverity.Info, $"EDGYBOT API POST", "Success");
+                LogMessage log = new LogMessage(LogSeverity.Info, $"EDGYBOT API POST", resString);
                 await _lib.Log(log);
 
             } catch (Exception e)
