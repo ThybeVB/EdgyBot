@@ -136,7 +136,8 @@ namespace EdgyCore.Handler
                 await edgyApi.PostStatsAsync(stats);
             }
 
-            if (!inGuild)
+            /* The event happened in the Guild itself, so we do not need to post our server count. */
+            if (inGuild)
                 return;
 
             await _bfdPinger.PostServerCountAsync(ServerCount);

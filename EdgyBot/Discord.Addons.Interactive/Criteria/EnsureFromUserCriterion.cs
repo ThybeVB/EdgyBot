@@ -1,23 +1,29 @@
-﻿using System.ComponentModel;
-using System.Threading.Tasks;
-using Discord.Commands;
-
+﻿// ReSharper disable StyleCop.SA1600
+// ReSharper disable StyleCop.SA1614
 namespace Discord.Addons.Interactive
 {
-    public class EnsureFromUserCriterion : ICriterion<IMessage>
+    using System.Threading.Tasks;
+
+    using Discord.Commands;
+    using Discord.WebSocket;
+
+    public class EnsureFromUserCriterion : ICriterion<SocketMessage>
     {
-        private readonly ulong _id;
+        private readonly ulong id;
 
-        public EnsureFromUserCriterion(IUser user)
-            => _id = user.Id;
+        public EnsureFromUserCriterion(ulong id) => this.id = id;
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public EnsureFromUserCriterion(ulong id)
-            => _id = id;
-
-        public Task<bool> JudgeAsync(ShardedCommandContext sourceContext, IMessage parameter)
+        /// <summary>
+        /// Ensures the user is the author
+        /// </summary>
+        /// <param name="sourceContext"></param>
+        /// <param name="parameter"></param>
+        /// <returns>
+        /// True if user is author
+        /// </returns>
+        public Task<bool> JudgeAsync(SocketCommandContext sourceContext, SocketMessage parameter)
         {
-            bool ok = _id == parameter.Author.Id;
+            bool ok = id == parameter.Author.Id;
             return Task.FromResult(ok);
         }
     }

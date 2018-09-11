@@ -22,7 +22,13 @@ namespace EdgyBot.Modules
             _service = service;
         }
 
-        //Yes, this happens. :(
+        [Command("helpext")]
+        public async Task HelpExperimental ()
+        {
+
+             
+        }
+
         [Command("help--text")]
         public async Task HelpCmdAttached ()
             => await HelpCmd("--text");

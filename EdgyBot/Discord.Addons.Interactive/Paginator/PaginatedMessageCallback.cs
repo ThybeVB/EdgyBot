@@ -1,79 +1,178 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Discord.Commands;
-using Discord.WebSocket;
-
+﻿// ReSharper disable StyleCop.SA1503
 namespace Discord.Addons.Interactive
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Discord.Commands;
+    using Discord.Rest;
+    using Discord.WebSocket;
+
+    /// <summary>
+    /// The paginated message callback.
+    /// </summary>
     public class PaginatedMessageCallback : IReactionCallback
     {
-        public ShardedCommandContext Context { get; }
-        public InteractiveService Interactive { get; private set; }
-        public IUserMessage Message { get; private set; }
-
+        /// <summary>
+        /// The run mode.
+        /// </summary>
         public RunMode RunMode => RunMode.Sync;
-        public ICriterion<SocketReaction> Criterion => _criterion;
+
+        /// <summary>
+        /// The timeout.
+        /// </summary>
         public TimeSpan? Timeout => options.Timeout;
 
-        private readonly ICriterion<SocketReaction> _criterion;
-        private readonly PaginatedMessage _pager;
+        /// <summary>
+        /// The options.
+        /// </summary>
+        private PaginatedAppearanceOptions options => pager.Options;
 
-        private PaginatedAppearanceOptions options => _pager.Options;
+        /// <summary>
+        /// The page count.
+        /// </summary>
         private readonly int pages;
+
+        /// <summary>
+        /// The current page.
+        /// </summary>
         private int page = 1;
         
-
-        public PaginatedMessageCallback(InteractiveService interactive,
-            ShardedCommandContext sourceContext,
+        /// <summary>
+        /// The paginated message
+        /// </summary>
+        private readonly PaginatedMessage pager;
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaginatedMessageCallback"/> class.
+        /// </summary>
+        /// <param name="interactive">
+        /// The interactive.
+        /// </param>
+        /// <param name="sourceContext">
+        /// The source context.
+        /// </param>
+        /// <param name="pager">
+        /// The pager.
+        /// </param>
+        /// <param name="criterion">
+        /// The criterion.
+        /// </param>
+        public PaginatedMessageCallback(InteractiveService interactive, 
+            SocketCommandContext sourceContext,
             PaginatedMessage pager,
             ICriterion<SocketReaction> criterion = null)
         {
             Interactive = interactive;
             Context = sourceContext;
-            _criterion = criterion ?? new EmptyCriterion<SocketReaction>();
-            _pager = pager;
-            pages = _pager.Pages.Count();
+            Criterion = criterion ?? new EmptyCriterion<SocketReaction>();
+            this.pager = pager;
+            pages = this.pager.Pages.Count();
         }
 
-        public async Task DisplayAsync()
+        /// <summary>
+        /// Gets the command context.
+        /// </summary>
+        public SocketCommandContext Context { get; }
+
+        /// <summary>
+        /// Gets the interactive service.
+        /// </summary>
+        public InteractiveService Interactive { get; }
+        
+        /// <summary>
+        /// Gets the criterion.
+        /// </summary>
+        public ICriterion<SocketReaction> Criterion { get; }
+        
+        /// <summary>
+        /// Gets the message.
+        /// </summary>
+        public IUserMessage Message { get; private set; }
+
+        /// <summary>
+        /// The display async.
+        /// </summary>
+        /// <param name="reactionList">
+        /// The reactions.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task DisplayAsync(ReactionList reactionList)
         {
             var embed = BuildEmbed();
-            var message = await Context.Channel.SendMessageAsync(_pager.Content, embed: embed).ConfigureAwait(false);
+            var message = await Context.Channel.SendMessageAsync(pager.Content, embed: embed).ConfigureAwait(false);
             Message = message;
             Interactive.AddReactionCallback(message, this);
-            // Reactions take a while to add, don't wait for them
+
+            // reactionList take a while to add, don't wait for them
             _ = Task.Run(async () =>
             {
-                await message.AddReactionAsync(options.First);
-                await message.AddReactionAsync(options.Back);
-                await message.AddReactionAsync(options.Next);
-                await message.AddReactionAsync(options.Last);
+                if (reactionList.First) await message.AddReactionAsync(options.First);
+                if (reactionList.Backward) await message.AddReactionAsync(options.Back);
+                if (reactionList.Forward) await message.AddReactionAsync(options.Next);
+                if (reactionList.Last) await message.AddReactionAsync(options.Last);
 
-                var manageMessages = (Context.Channel is IGuildChannel guildChannel)
-                    ? (Context.User as IGuildUser).GetPermissions(guildChannel).ManageMessages
-                    : false;
 
-                if (options.JumpDisplayOptions == JumpDisplayOptions.Always
-                    || (options.JumpDisplayOptions == JumpDisplayOptions.WithManageMessages && manageMessages))
-                    await message.AddReactionAsync(options.Jump);
+                var manageMessages = Context.Channel is IGuildChannel guildChannel &&
+                                     (Context.User as IGuildUser).GetPermissions(guildChannel).ManageMessages;
 
-                await message.AddReactionAsync(options.Stop);
+                if (reactionList.Jump)
+                {
+                    if (options.JumpDisplayOptions == JumpDisplayOptions.Always || (options.JumpDisplayOptions == JumpDisplayOptions.WithManageMessages && manageMessages))
+                    {
+                        await message.AddReactionAsync(options.Jump);
+                    }
+                }
 
-                if (options.DisplayInformationIcon)
-                    await message.AddReactionAsync(options.Info);
+                if (reactionList.Trash)
+                {
+                    await message.AddReactionAsync(options.Stop);
+                }
+
+                if (reactionList.Info)
+                {
+                    if (options.DisplayInformationIcon) await message.AddReactionAsync(options.Info);
+                }
             });
-            // TODO: (Next major version) timeouts need to be handled at the service-level!
-            if (Timeout.HasValue && Timeout.Value != null)
+            if (Timeout.HasValue)
+            {
+                DisplayTimeout(message, Message);
+            }
+        }
+
+        /// <summary>
+        /// Ensures that display is removed on timeout
+        /// </summary>
+        /// <param name="m1">
+        /// The m 1.
+        /// </param>
+        /// <param name="m2">
+        /// The m 2.
+        /// </param>
+        public void DisplayTimeout(RestUserMessage m1, IUserMessage m2)
+        {
+            if (Timeout.HasValue)
             {
                 _ = Task.Delay(Timeout.Value).ContinueWith(_ =>
                 {
-                    Interactive.RemoveReactionCallback(message);
-                    _ = Message.DeleteAsync();
+                    Interactive.RemoveReactionCallback(m1);
+                    m2.DeleteAsync();
                 });
             }
         }
 
+        /// <summary>
+        /// Handles a reaction callback
+        /// </summary>
+        /// <param name="reaction">
+        /// The reaction.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
         public async Task<bool> HandleCallbackAsync(SocketReaction reaction)
         {
             var emote = reaction.Emote;
@@ -115,6 +214,7 @@ namespace Discord.Addons.Interactive
                         await Interactive.ReplyAndDeleteAsync(Context, options.Stop.Name);
                         return;
                     }
+
                     page = request;
                     _ = response.DeleteAsync().ConfigureAwait(false);
                     await RenderAsync().ConfigureAwait(false);
@@ -125,25 +225,62 @@ namespace Discord.Addons.Interactive
                 await Interactive.ReplyAndDeleteAsync(Context, options.InformationText, timeout: options.InfoTimeout);
                 return false;
             }
+
             _ = Message.RemoveReactionAsync(reaction.Emote, reaction.User.Value);
             await RenderAsync().ConfigureAwait(false);
             return false;
         }
-        
+
+        /// <summary>
+        /// The build embed.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Embed"/>.
+        /// </returns>
         protected Embed BuildEmbed()
         {
-            return new EmbedBuilder()
-                .WithAuthor(_pager.Author)
-                .WithColor(_pager.Color)
-                .WithDescription(_pager.Pages.ElementAt(page-1).ToString())
+            var current = pager.Pages.ElementAt(page - 1);
+
+            var builder = new EmbedBuilder
+            {
+                Author = current.Author ?? pager.Author,
+                Title = current.Title ?? pager.Title,
+                Url = current.Url ?? pager.Url,
+                Description = current.Description ?? pager.Description,
+                ImageUrl = current.ImageUrl ?? pager.ImageUrl,
+                Color = current.Color ?? pager.Color,
+                Fields = current.Fields ?? pager.Fields,
+                Footer = current.FooterOverride ?? pager.FooterOverride ?? new EmbedFooterBuilder
+                {
+                    Text = string.Format(options.FooterFormat, page, pages)
+                },
+                ThumbnailUrl = current.ThumbnailUrl ?? pager.ThumbnailUrl,
+                Timestamp = current.TimeStamp ?? pager.TimeStamp
+            };
+
+            /*var builder = new EmbedBuilder()
+                .WithAuthor(pager.Author)
+                .WithColor(pager.Color)
+                .WithDescription(pager.Pages.ElementAt(page - 1).Description)
+                .WithImageUrl(current.ImageUrl ?? pager.DefaultImageUrl)
+                .WithUrl(current.Url)
                 .WithFooter(f => f.Text = string.Format(options.FooterFormat, page, pages))
-                .WithTitle(_pager.Title)
-                .Build();
+                .WithTitle(current.Title ?? pager.Title);*/
+            builder.Fields = pager.Pages.ElementAt(page - 1).Fields;
+
+            return builder.Build();
         }
-        private async Task RenderAsync()
+
+        /// <summary>
+        /// Renders an embed page
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        private Task RenderAsync()
         {
             var embed = BuildEmbed();
-            await Message.ModifyAsync(m => m.Embed = embed).ConfigureAwait(false);
+            return Message.ModifyAsync(m => m.Embed = embed);
         }
     }
 }

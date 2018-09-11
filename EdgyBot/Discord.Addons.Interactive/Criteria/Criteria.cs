@@ -1,26 +1,56 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Discord.Commands;
-
+﻿// ReSharper disable StyleCop.SA1600
 namespace Discord.Addons.Interactive
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Discord.Commands;
+
     public class Criteria<T> : ICriterion<T>
     {
-        private List<ICriterion<T>> _critiera = new List<ICriterion<T>>();
+        /// <summary>
+        /// The criteria.
+        /// </summary>
+        private readonly List<ICriterion<T>> criteria = new List<ICriterion<T>>();
 
+        /// <summary>
+        /// adds a criterion
+        /// </summary>
+        /// <param name="criterion">
+        /// The criterion.
+        /// </param>
+        /// <returns>
+        /// The <see cref="criterion"/>.
+        /// </returns>
         public Criteria<T> AddCriterion(ICriterion<T> criterion)
         {
-            _critiera.Add(criterion);
+            criteria.Add(criterion);
             return this;
         }
 
-        public async Task<bool> JudgeAsync(ShardedCommandContext sourceContext, T parameter)
+        /// <summary>
+        /// The judge async.
+        /// </summary>
+        /// <param name="sourceContext">
+        /// The source context.
+        /// </param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        public async Task<bool> JudgeAsync(SocketCommandContext sourceContext, T parameter)
         {
-            foreach (var criterion in _critiera)
+            foreach (var criterion in criteria)
             {
                 var result = await criterion.JudgeAsync(sourceContext, parameter).ConfigureAwait(false);
-                if (!result) return false;
+                if (!result)
+                {
+                    return false;
+                }
             }
+
             return true;
         }
     }

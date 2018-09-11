@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Discord.Commands;
-using Discord.WebSocket;
-
-namespace Discord.Addons.Interactive
+﻿namespace Discord.Addons.Interactive
 {
-    public class InteractiveBase : InteractiveBase<ShardedCommandContext>
+    using System;
+    using System.Threading.Tasks;
+
+    using Discord.Commands;
+    using Discord.WebSocket;
+
+    /// <summary>
+    /// The interactive base.
+    /// </summary>
+    public class InteractiveBase : InteractiveBase<SocketCommandContext>
     {
     }
 
-    public class InteractiveBase<T> : ModuleBase<T> where T : ShardedCommandContext
+    /// <summary>
+    /// The interactive base.
+    /// </summary>
+    /// <typeparam name="T">
+    /// </typeparam>
+    public class InteractiveBase<T> : ModuleBase<T>
+        where T : SocketCommandContext
     {
+        /// <summary>
+        /// Gets or sets the interactive service.
+        /// </summary>
         public InteractiveService Interactive { get; set; }
 
         public Task<SocketMessage> NextMessageAsync(ICriterion<SocketMessage> criterion, TimeSpan? timeout = null)
@@ -22,32 +34,21 @@ namespace Discord.Addons.Interactive
         public Task<IUserMessage> ReplyAndDeleteAsync(string content, bool isTTS = false, Embed embed = null, TimeSpan? timeout = null, RequestOptions options = null)
             => Interactive.ReplyAndDeleteAsync(Context, content, isTTS, embed, timeout, options);
 
-        public Task<IUserMessage> PagedReplyEmbedAsync(Embed[] embeds, bool fromSourceUser = true)
-        {
-            PaginatedMessage pager = new PaginatedMessage
-            {
-                Pages = embeds
-            };
-            return PagedReplyAsync(pager, fromSourceUser);
-        }
+        public Task<IUserMessage> InlineReactionReplyAsync(ReactionCallbackData data, bool fromSourceUser = true)
+            => Interactive.SendMessageWithReactionCallbacksAsync(Context, data, fromSourceUser);
 
-        public Task<IUserMessage> PagedReplyAsync(IEnumerable<object> pages, bool fromSourceUser = true)
+        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, ReactionList Reactions = null, bool fromSourceUser = true)
         {
-            var pager = new PaginatedMessage
-            {
-                Pages = pages
-            };
-            return PagedReplyAsync(pager, fromSourceUser);
-        }
-        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, bool fromSourceUser = true)
-        {
+            if (Reactions == null)
+                Reactions = new ReactionList();
+
             var criterion = new Criteria<SocketReaction>();
             if (fromSourceUser)
                 criterion.AddCriterion(new EnsureReactionFromSourceUserCriterion());
-            return PagedReplyAsync(pager, criterion);
+            return PagedReplyAsync(pager, criterion, Reactions);
         }
-        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, ICriterion<SocketReaction> criterion)
-            => Interactive.SendPaginatedMessageAsync(Context, pager, criterion);
+        public Task<IUserMessage> PagedReplyAsync(PaginatedMessage pager, ICriterion<SocketReaction> criterion, ReactionList Reactions)
+            => Interactive.SendPaginatedMessageAsync(Context, pager, Reactions, criterion);
 
         public RuntimeResult Ok(string reason = null) => new OkResult(reason);
     }

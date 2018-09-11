@@ -7,6 +7,7 @@ using Discord.Addons.Interactive;
 using Discord.WebSocket;
 using Discord;
 using System.Text;
+using System.Collections.Generic;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -52,11 +53,25 @@ namespace EdgyBot.Modules.Categories
                 if (guild == null)
                     continue;
 
-                sb.Append(guild.Name + ",");
+                sb.Append(guild.Name + ':');
             }
-            string[] pages = (sb.ToString()).Split(',');
+            string[] pageStr = (sb.ToString()).Split(':');
 
-            await PagedReplyAsync(pages);
+            PaginatedMessage.Page[] pages = new PaginatedMessage.Page[pageStr.Length];
+            for (int x = 0; x < pageStr.Length; x++)
+            {
+                pages[x] = new PaginatedMessage.Page
+                {
+                    Description = pageStr[x]
+                };
+            }
+
+            var paging = new PaginatedMessage
+            {
+                Pages = pages
+            };
+
+            await PagedReplyAsync(paging);
         }
 
         [Command("execquery")]

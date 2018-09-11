@@ -4,9 +4,8 @@ namespace Discord.Addons.Interactive
     using System.Threading.Tasks;
 
     using Discord.Commands;
-    using Discord.WebSocket;
 
-    public class EnsureSourceUserCriterion : ICriterion<SocketMessage>
+    public interface ICriterion<in T>
     {
         /// <summary>
         /// The judge async.
@@ -20,10 +19,6 @@ namespace Discord.Addons.Interactive
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        public Task<bool> JudgeAsync(SocketCommandContext sourceContext, SocketMessage parameter)
-        {
-            var ok = sourceContext.User.Id == parameter.Author.Id;
-            return Task.FromResult(ok);
-        }
+        Task<bool> JudgeAsync(SocketCommandContext sourceContext, T parameter);
     }
 }
