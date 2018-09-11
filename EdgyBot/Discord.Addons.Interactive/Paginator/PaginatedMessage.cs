@@ -8,6 +8,16 @@
     /// </summary>
     public class PaginatedMessage
     {
+        public PaginatedMessage (IEnumerable<Page> pages, PaginatedAppearanceOptions options = null)
+        {
+            Pages = pages;
+
+            if (options == null)
+                options = PaginatedAppearanceOptions.Default;
+
+            Options = options;
+        }
+
         /// <summary>
         /// Gets or sets the pages.
         /// </summary>

@@ -66,12 +66,7 @@ namespace EdgyBot.Modules.Categories
                 };
             }
 
-            var paging = new PaginatedMessage
-            {
-                Pages = pages
-            };
-
-            await PagedReplyAsync(paging);
+            await PagedReplyAsync(new PaginatedMessage(pages));
         }
 
         [Command("execquery")]
