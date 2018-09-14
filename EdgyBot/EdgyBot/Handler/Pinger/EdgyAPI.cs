@@ -29,7 +29,7 @@ namespace EdgyCore.Handler
                 resString = Encoding.Default.GetString(resByte);
                 webClient.Dispose();
 
-                LogMessage log = new LogMessage(LogSeverity.Info, $"EDGYBOT API POST", resString);
+                LogMessage log = new LogMessage(LogSeverity.Debug, $"EDGYBOT API POST", resString);
                 await _lib.Log(log);
 
             } catch (Exception e)

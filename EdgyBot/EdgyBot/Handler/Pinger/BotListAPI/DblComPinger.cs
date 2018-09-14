@@ -13,7 +13,7 @@ namespace EdgyCore.Handler.Pinger
         {
             var dict = new Dictionary<string, object>();
             dict.Add("guilds", serverCount);
-            dict.Add("users", lib.GetMemberCount());
+            dict.Add("users", EventHandler.MemberCount);
 
             try { helper.postBotlist(dict, Botlist.DBLCOM); }
             catch (Exception e)
