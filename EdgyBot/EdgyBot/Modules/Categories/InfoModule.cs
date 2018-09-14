@@ -7,6 +7,7 @@ using Discord.WebSocket;
 using EdgyCore;
 using EdgyCore.Lib;
 using EdgyCore.Handler.Pinger;
+using System.Reflection;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -173,6 +174,7 @@ namespace EdgyBot.Modules.Categories
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
 
             eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun", true);
+            eb.AddField("Version", Assembly.GetExecutingAssembly().GetName().Version);
             eb.AddField("Library", "Discord.Net", true);
             eb.AddField("Library Version", $"{DiscordConfig.Version} (API v{DiscordConfig.APIVersion})", true);
             eb.AddField("Sites that make EdgyBot possible", "**https://listcord.com** **https://discordbots.org/bot/373163613390897163**");

@@ -11,7 +11,7 @@ namespace EdgyCore.Handler
         private string dbTokenEnv = "EdgyBot_DbToken";
         private string bfdTokenEnv = "EdgyBot_BfdToken";
         private string blsTokenEnv = "EdgyBot_BlsToken";
-        private string listcordTokenEnv = "EdgyBot_ListcordToken";
+        private string dblComTokenEnv = "EdgyBot_DblComToken";
         private string GJPEnv = "EdgyBot_GJP";
 
         private string prefixEnv = "EdgyBot_Prefix";
@@ -49,8 +49,8 @@ namespace EdgyCore.Handler
             Console.WriteLine("Discord Botlist Space Token");
             Environment.SetEnvironmentVariable(blsTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
-            Console.WriteLine("Listcord Token");
-            Environment.SetEnvironmentVariable(listcordTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
+            Console.WriteLine("DBL.COM Token");
+            Environment.SetEnvironmentVariable(dblComTokenEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
 
             Console.WriteLine("GJP");
             Environment.SetEnvironmentVariable(GJPEnv, Console.ReadLine(), EnvironmentVariableTarget.User);
@@ -91,7 +91,7 @@ namespace EdgyCore.Handler
                 dbToken = Environment.GetEnvironmentVariable(dbTokenEnv, EnvironmentVariableTarget.User),
                 bfdToken = Environment.GetEnvironmentVariable(bfdTokenEnv, EnvironmentVariableTarget.User),
                 blsToken = Environment.GetEnvironmentVariable(blsTokenEnv, EnvironmentVariableTarget.User),
-                listcordToken = Environment.GetEnvironmentVariable(listcordTokenEnv, EnvironmentVariableTarget.User),
+                dblComToken = Environment.GetEnvironmentVariable(dblComTokenEnv, EnvironmentVariableTarget.User),
                 GJP = Environment.GetEnvironmentVariable(GJPEnv, EnvironmentVariableTarget.User),
                 prefix = Environment.GetEnvironmentVariable(prefixEnv, EnvironmentVariableTarget.User),
                 clientID = clientID,

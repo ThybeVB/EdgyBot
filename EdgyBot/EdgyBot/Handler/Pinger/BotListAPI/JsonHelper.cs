@@ -11,8 +11,8 @@ namespace EdgyCore.Handler.Pinger
     {
         LISTSPACE,
         DISCORDBOTS,
-        LISTCORD,
-        BFD
+        BFD,
+        DBLCOM
     }
 
     public class JsonHelper

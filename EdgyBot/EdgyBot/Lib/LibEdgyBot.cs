@@ -9,6 +9,7 @@ using System.Net;
 using Discord;
 using Discord.Commands;
 using EdgyCore.Handler.Pinger;
+using Discord.WebSocket;
 
 namespace EdgyCore
 {
@@ -31,12 +32,25 @@ namespace EdgyCore
                     return EdgyBot.Credentials.bfdToken;
                 case Botlist.DISCORDBOTS:
                     return EdgyBot.Credentials.dbToken;
-                case Botlist.LISTCORD:
-                    return EdgyBot.Credentials.listcordToken;
                 case Botlist.LISTSPACE:
                     return EdgyBot.Credentials.blsToken;
+                case Botlist.DBLCOM:
+                    return EdgyBot.Credentials.dblComToken;
             }
             return null;
+        }
+
+        public int CalculateMemberCount()
+        {
+            int users = 0;
+            foreach (SocketGuild guild in Context.Client.Guilds)
+            {
+                if (guild == null)
+                    continue;
+
+                users = users + guild.MemberCount;
+            }
+            return users;
         }
 
         /// <summary>
@@ -244,7 +258,6 @@ namespace EdgyCore
             {
                 case LogSeverity.Critical:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    EdgyCore.Handler.EventHandler.OwnerUser.SendMessageAsync(message.ToString());
                     break;
                 case LogSeverity.Info:
                     Console.ForegroundColor = ConsoleColor.Gray;

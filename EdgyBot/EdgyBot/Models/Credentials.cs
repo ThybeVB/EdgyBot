@@ -7,7 +7,7 @@
         public string dbToken { get; internal set; }
         public string bfdToken { get; internal set; }
         public string blsToken { get; internal set; }
-        public string listcordToken { get; internal set; }
+        public string dblComToken { get; internal set; }
         public string GJP { get; internal set; }
 
         public string prefix { get; internal set; }

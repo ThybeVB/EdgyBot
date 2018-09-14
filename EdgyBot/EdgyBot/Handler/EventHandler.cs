@@ -21,6 +21,7 @@ namespace EdgyCore.Handler
         private DiscordBotsPinger _dbPinger = new DiscordBotsPinger();
         private BotsForDiscordPinger _bfdPinger = new BotsForDiscordPinger();
         private static DBLPinger dblPinger = new DBLPinger();
+        private DblComPinger dblComPinger = new DblComPinger();
         private BotListSpacePinger blspPinger = new BotListSpacePinger();
         private EdgyAPI edgyApi = new EdgyAPI();
 
@@ -65,14 +66,14 @@ namespace EdgyCore.Handler
                 OwnerUser = _client.GetUser(_coreLib.GetOwnerID());
             
             ServerCount = _client.Guilds.Count;
-            MemberCount = CalculateMemberCount();
+            MemberCount = _lib.CalculateMemberCount();
             
             await RefreshBotAsync(true);
         }
 
         private async Task UserUpdated (SocketGuildUser arg)
         {
-            MemberCount = CalculateMemberCount();
+            MemberCount = _lib.CalculateMemberCount();
             await RefreshBotAsync(false, true);
         }
 
@@ -83,7 +84,7 @@ namespace EdgyCore.Handler
         {
             await guild.DefaultChannel.SendMessageAsync($"Ayyy Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
             ServerCount = _client.Guilds.Count;
-            MemberCount = CalculateMemberCount();
+            MemberCount = _lib.CalculateMemberCount();
 
             await RefreshBotAsync();
         }
@@ -91,23 +92,12 @@ namespace EdgyCore.Handler
         private async Task LeftGuild (SocketGuild guild)
         {
             ServerCount = _client.Guilds.Count;
-            MemberCount = CalculateMemberCount();
+            MemberCount = _lib.CalculateMemberCount();
 
             await RefreshBotAsync();
         }
 
-        private int CalculateMemberCount ()
-        {
-            int users = 0;
-            foreach (SocketGuild guild in _client.Guilds)
-            {
-                if (guild == null)
-                    continue;
-                    
-                users = users + guild.MemberCount;
-            }
-            return users;
-        }
+        
 
         private async Task RefreshBotAsync (bool startup = false, bool inGuild = false)
         {
@@ -143,6 +133,7 @@ namespace EdgyCore.Handler
             await _bfdPinger.PostServerCountAsync(ServerCount);
             await _dbPinger.PostServerCountAsync(ServerCount);
             await dblPinger.UpdateDBLStatsAsync(ServerCount);
+            await dblComPinger.PostServerCountAsync(ServerCount);
             await blspPinger.PostServerCountAsync(ServerCount);
         }
 
