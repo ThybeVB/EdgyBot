@@ -35,7 +35,7 @@ namespace EdgyCore
                 case Botlist.LISTSPACE:
                     return EdgyBot.Credentials.blsToken;
                 case Botlist.DBLCOM:
-                    return EdgyBot.Credentials.dblComToken;
+                    return "Bot " + EdgyBot.Credentials.dblComToken;
             }
             return null;
         }
