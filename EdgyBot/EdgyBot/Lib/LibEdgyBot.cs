@@ -40,7 +40,7 @@ namespace EdgyCore
             return null;
         }
 
-        public int CalculateMemberCount()
+        public int GetMemberCount()
         {
             int users = 0;
             foreach (SocketGuild guild in Context.Client.Guilds)

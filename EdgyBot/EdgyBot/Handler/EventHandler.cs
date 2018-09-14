@@ -60,20 +60,34 @@ namespace EdgyCore.Handler
             }  
         }
 
+        private int CalculateMemberCount()
+        {
+            int users = 0;
+            foreach (SocketGuild guild in _client.Guilds)
+            {
+                if (guild == null)
+                    continue;
+
+                users = users + guild.MemberCount;
+            }
+            return users;
+        }
+
+
         public async Task SetupBot ()
         {
             if (OwnerUser == null)
                 OwnerUser = _client.GetUser(_coreLib.GetOwnerID());
             
             ServerCount = _client.Guilds.Count;
-            MemberCount = _lib.CalculateMemberCount();
+            MemberCount = CalculateMemberCount();
             
             await RefreshBotAsync(true);
         }
 
         private async Task UserUpdated (SocketGuildUser arg)
         {
-            MemberCount = _lib.CalculateMemberCount();
+            MemberCount = CalculateMemberCount();
             await RefreshBotAsync(false, true);
         }
 
@@ -84,7 +98,7 @@ namespace EdgyCore.Handler
         {
             await guild.DefaultChannel.SendMessageAsync($"Ayyy Thanks for inviting me! To see my commands, use e!help. Hope you enjoy them!");
             ServerCount = _client.Guilds.Count;
-            MemberCount = _lib.CalculateMemberCount();
+            MemberCount = CalculateMemberCount();
 
             await RefreshBotAsync();
         }
@@ -92,7 +106,7 @@ namespace EdgyCore.Handler
         private async Task LeftGuild (SocketGuild guild)
         {
             ServerCount = _client.Guilds.Count;
-            MemberCount = _lib.CalculateMemberCount();
+            MemberCount = CalculateMemberCount();
 
             await RefreshBotAsync();
         }
