@@ -41,7 +41,12 @@ namespace EdgyCore.Handler
             await databaseConnection.ConnectAsync();
             databaseConnection.OpenConnection();
 
-            commandService = new CommandService();
+            commandService = new CommandService(new CommandServiceConfig
+            {
+                LogLevel = LogSeverity.Verbose,
+                CaseSensitiveCommands = false,
+                IgnoreExtraArgs = true
+            });
             await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);
 
             new HelpCommand(commandService);

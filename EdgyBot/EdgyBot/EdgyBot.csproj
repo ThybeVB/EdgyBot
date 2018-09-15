@@ -5,14 +5,14 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;EdgyBot</Configurations>
     <Description>A general purpose bot ranging from fun commands to... not so fun</Description>
-    <Copyright>Thybe Van Beersel</Copyright>
-    <AssemblyVersion>1.1.24</AssemblyVersion>
-    <FileVersion>1.1.24</FileVersion>
+    <Copyright>Thybe Van Beersel 2017-2018</Copyright>
+    <AssemblyVersion>1.1.26</AssemblyVersion>
+    <FileVersion>1.1.26</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Discord.Addons.Interactive" Version="1.0.1" />
-    <PackageReference Include="Discord.Net" Version="2.0.0-beta2-00981" />
+    <PackageReference Include="Discord.Net" Version="2.0.0-beta2-00991" />
     <PackageReference Include="DiscordBotList.Core" Version="0.1.2" />
     <PackageReference Include="DiscordBotsList.Api" Version="1.1.0" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />

@@ -20,8 +20,8 @@ namespace EdgyCore
 
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
-            LogLevel = LogSeverity.Verbose,
-            MessageCacheSize = 100,
+            LogLevel = LogSeverity.Info,
+            MessageCacheSize = 50,
             TotalShards = 2
         });
 
