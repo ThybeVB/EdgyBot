@@ -170,7 +170,7 @@ namespace EdgyBot.Modules.Categories
         [Name("info"), Summary("Info about EdgyBot")]
         public async Task BotInfoCmd ()
         {
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, Context.User.Username);
             eb.WithThumbnailUrl("http://i0.kym-cdn.com/photos/images/original/001/256/183/9d5.png");
 
             eb.AddField("EdgyBot", "A multipurpose bot with a great variety of commands ranging from fun to well.. not so fun", true);
