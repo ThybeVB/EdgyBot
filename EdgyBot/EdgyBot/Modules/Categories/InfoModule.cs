@@ -166,8 +166,8 @@ namespace EdgyBot.Modules.Categories
             await ReplyAsync("", embed: eb.Build());
         }
 
-        [Command("info"), Alias("botinfo", "me", "stats")]
-        [Name("info")][Summary("Info about EdgyBot")]
+        [Command("info"), Alias("botinfo", "me", "stats", "about")]
+        [Name("info"), Summary("Info about EdgyBot")]
         public async Task BotInfoCmd ()
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
@@ -177,11 +177,10 @@ namespace EdgyBot.Modules.Categories
             eb.AddField("Version", Assembly.GetExecutingAssembly().GetName().Version);
             eb.AddField("Library", "Discord.Net", true);
             eb.AddField("Library Version", $"{DiscordConfig.Version} (API v{DiscordConfig.APIVersion})", true);
-            eb.AddField("Sites that make EdgyBot possible", "**https://listcord.com** **https://discordbots.org/bot/373163613390897163**");
             eb.AddField("Server Count", Context.Client.Guilds.Count, true);
             eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
-            eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
+            eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Uptime", _lib.GetUptime());
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _core.GetOwnerDiscordName());
