@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using SharpLink;
+using EdgyCore;
 
 namespace EdgyBot.Modules.Categories
 {
@@ -10,10 +11,29 @@ namespace EdgyBot.Modules.Categories
     public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LavalinkManager _lavaManager;
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
     
         public VoiceCommands (LavalinkManager lavalinkManager)
         {
             _lavaManager = lavalinkManager;
+            _lavaManager.TrackEnd += TrackEnd;
+        }
+
+        private async Task TrackEnd(LavalinkPlayer player, LavalinkTrack track, string str)
+        {
+            await _lavaManager.LeaveAsync(player.VoiceChannel.GuildId);
+        }
+
+        private Embed GetTrackInfoEmbed (LavalinkTrack track, IUser requester)
+        {
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, $"{requester.Username}#{requester.DiscriminatorValue}");
+
+            eb.WithTitle("Now Playing");
+            eb.AddField("Song Title", track.Title);
+            eb.AddField("Author", track.Author);
+            eb.AddField("Length", track.Length);
+
+            return eb.Build();
         }
     
         [Command("soundcloud", RunMode = RunMode.Async)]
@@ -25,6 +45,7 @@ namespace EdgyBot.Modules.Categories
             LavalinkTrack tr = r.Tracks.First();
     
             await p.PlayAsync(tr);
+            await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
         }
     
         [Command("youtube", RunMode = RunMode.Async), Alias("play")]
@@ -36,6 +57,7 @@ namespace EdgyBot.Modules.Categories
             LavalinkTrack tr = r.Tracks.First();
     
             await player.PlayAsync(tr);
+            await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
         }
     
         [Command("pause")]

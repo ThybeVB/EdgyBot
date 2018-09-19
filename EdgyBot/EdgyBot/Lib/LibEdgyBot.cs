@@ -14,7 +14,7 @@ using Discord.WebSocket;
 namespace EdgyCore
 {
     /// <summary>
-    /// The Main Library for used for EdgyBot, Depends on some discord stuff and other stuff.
+    /// The Main Library for used for EdgyBot
     /// </summary>
     public class LibEdgyBot : ModuleBase<ShardedCommandContext>
     {
@@ -128,14 +128,14 @@ namespace EdgyCore
         /// </summary>
         /// <param name="footerEnabled"></param>
         /// <returns></returns>
-        public EmbedBuilder SetupEmbedWithDefaults(bool footerEnabled = false)
+        public EmbedBuilder SetupEmbedWithDefaults(bool footerEnabled = false, string userReq = "")
         {
             EmbedBuilder eb = new EmbedBuilder();
             if (footerEnabled)
             {
                 EmbedFooterBuilder footer = new EmbedFooterBuilder
                 {
-                    Text = DateTime.UtcNow.ToShortTimeString() + " | " + "EdgyBot Embed"
+                    Text = DateTime.UtcNow.ToShortTimeString() + " | " + $"Requested by {userReq}"
                 };
                 eb.Footer = footer;
             }
