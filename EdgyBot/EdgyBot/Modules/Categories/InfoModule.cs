@@ -55,8 +55,8 @@ namespace EdgyBot.Modules.Categories
         [Summary("Mention an user or leave it empty for a description on the user")]
         public async Task UserInfoCmd(IGuildUser usr = null)
         {
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
             if (usr == null) usr = (IGuildUser)Context.Message.Author;
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, Context.Message.Author.Username);
             SocketGuildUser guildUserMnt = (SocketGuildUser)usr;
 
             #region UserInfo
@@ -104,7 +104,7 @@ namespace EdgyBot.Modules.Categories
         [Summary("Gives you info about the server you are in")]
         public async Task ServerInfoCmd()
         {
-            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true);
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, Context.User.Username);
 
             #region ServerInfo
             string name = Context.Guild.Name;
