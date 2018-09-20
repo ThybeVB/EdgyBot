@@ -56,7 +56,7 @@ namespace EdgyCore.Handler
             {
                 await SetupBot();
                 await _lavaLink.StartAsync();
-                await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected! ({_client.Shards.Count})");
+                await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected ({_client.Shards.Count})");
             }  
         }
 
@@ -111,12 +111,14 @@ namespace EdgyCore.Handler
             await RefreshBotAsync();
         }
 
-        
+        public static bool StatusIsCustom = false;
 
         private async Task RefreshBotAsync (bool startup = false, bool inGuild = false)
         {
             string gameStatus = "e!help | EdgyBot for " + ServerCount + " servers!";
-            await _client.SetGameAsync(gameStatus);
+
+            if (!StatusIsCustom)
+                await _client.SetGameAsync(gameStatus);
 
             if (startup) {
                 await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);

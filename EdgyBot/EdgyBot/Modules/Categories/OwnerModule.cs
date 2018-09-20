@@ -38,6 +38,7 @@ namespace EdgyBot.Modules.Categories
                 return;
             }
 
+            EdgyCore.Handler.EventHandler.StatusIsCustom = true;
             await Context.Client.SetGameAsync(input);
             await ReplyAsync("Changed Status.");
         }
