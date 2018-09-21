@@ -25,12 +25,30 @@ namespace EdgyBot.Modules
         [Command("helpext")]
         public async Task HelpExperimental ()
         {
+            var modulesAll = _service.Modules;
+            var commandModules = modulesAll.Where(x => !string.IsNullOrEmpty(x.Summary));
 
-             
+            PaginatedMessage.Page[] pages = new PaginatedMessage.Page[commandModules.Count()];
+            ModuleInfo[] modules = commandModules.ToArray();
+            for (int x = 0; x <= (modules.Count() - 1); x++)
+            {
+                pages[x] = new PaginatedMessage.Page
+                {
+                    Title = modules[x].Name,
+                    Description = modules[x].Summary,
+                    Color = Color.Blue
+                };
+            }
+
+            await PagedReplyAsync(new PaginatedMessage(pages));
         }
 
         [Command("help--text")]
-        public async Task HelpCmdAttached ()
+        public async Task HelpCmdAlt1 ()
+            => await HelpCmd("--text");
+
+        [Command("help text")]
+        public async Task HelpCmdAlt2()
             => await HelpCmd("--text");
 
         [Command("help", RunMode = RunMode.Async), Alias("commands")]

@@ -254,28 +254,44 @@ namespace EdgyCore
         /// <returns></returns>
         public Task Log(LogMessage message)
         {
-            switch (message.Severity)
+            var sev = message.Severity;
+            switch (sev)
             {
-                case LogSeverity.Critical:
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    break;
-                case LogSeverity.Info:
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    break;
                 case LogSeverity.Debug:
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
-                case LogSeverity.Error:
-                    Console.ForegroundColor = ConsoleColor.Red;
+                case LogSeverity.Info:
+                    Console.ForegroundColor = ConsoleColor.Green;
                     break;
                 case LogSeverity.Warning:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
-                case LogSeverity.Verbose:
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                case LogSeverity.Critical:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     break;
+                case LogSeverity.Verbose:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case LogSeverity.Error:
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            Console.WriteLine(DateTime.Now.ToLongTimeString() + " " + message.Source + " " + message.Message);
+
+            Console.Write($"[{DateTime.Now:dd-MM-yyyy HH:mm:ss}] [{sev,-8}]");
+            Console.ResetColor();
+            Console.WriteLine($" {message.Message}");
+            return Task.CompletedTask;
+        }
+
+        public Task LavalinkLog(LogMessage message)
+        {
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write($"[{DateTime.Now:dd-MM-yyyy HH:mm:ss}] [{"Lava",-8}]");
+            Console.ResetColor();
+            Console.WriteLine($" {message.Message}");
             return Task.CompletedTask;
         }
 
@@ -285,8 +301,16 @@ namespace EdgyCore
         /// <param name="severity"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public async Task EdgyLog(LogSeverity severity, string msg)
-            => await Log(new LogMessage(severity, "EdgyBot", msg));
+        public Task EdgyLog(LogSeverity severity, string msg)
+        {
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write($"[{DateTime.Now:dd-MM-yyyy HH:mm:ss}] [{"EdgyBot",-8}]");
+            Console.ResetColor();
+
+            Console.WriteLine($" {msg}");
+            return Task.CompletedTask;
+        }
         
     }
 }

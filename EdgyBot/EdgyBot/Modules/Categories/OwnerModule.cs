@@ -32,6 +32,7 @@ namespace EdgyBot.Modules.Categories
         public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (input == "default") {
+                EdgyCore.Handler.EventHandler.StatusIsCustom = false;
                 await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
                 await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 

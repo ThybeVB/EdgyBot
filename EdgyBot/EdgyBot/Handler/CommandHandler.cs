@@ -36,7 +36,7 @@ namespace EdgyCore.Handler
             _service = ConfigureServices();
             _prefix = _coreLib.GetPrefix();
 
-            _manager.Log += _lib.Log;
+            _manager.Log += _lib.LavalinkLog;
 
             await databaseConnection.ConnectAsync();
             databaseConnection.OpenConnection();
