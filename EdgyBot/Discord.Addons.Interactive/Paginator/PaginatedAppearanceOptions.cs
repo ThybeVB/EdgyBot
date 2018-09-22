@@ -27,11 +27,11 @@ namespace Discord.Addons.Interactive
         public string FooterFormat = "Page {0}/{1}";
         public string InformationText = "This is a paginator. React with the respective icons to change page.";
 
-        public JumpDisplayOptions JumpDisplayOptions = JumpDisplayOptions.WithManageMessages;
+        public JumpDisplayOptions JumpDisplayOptions = JumpDisplayOptions.Always;
         public bool DisplayInformationIcon = true;
 
         public TimeSpan? Timeout = null;
-        public TimeSpan InfoTimeout = TimeSpan.FromSeconds(30);
+        public TimeSpan InfoTimeout = TimeSpan.FromSeconds(15);
 
         public static PaginatedAppearanceOptions Default { get; set; } = new PaginatedAppearanceOptions();
     }

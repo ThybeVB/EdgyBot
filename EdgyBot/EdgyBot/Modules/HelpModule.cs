@@ -22,26 +22,7 @@ namespace EdgyBot.Modules
             _service = service;
         }
 
-        [Command("helpext")]
-        public async Task HelpExperimental ()
-        {
-            var modulesAll = _service.Modules;
-            var commandModules = modulesAll.Where(x => !string.IsNullOrEmpty(x.Summary));
-
-            PaginatedMessage.Page[] pages = new PaginatedMessage.Page[commandModules.Count()];
-            ModuleInfo[] modules = commandModules.ToArray();
-            for (int x = 0; x <= (modules.Count() - 1); x++)
-            {
-                pages[x] = new PaginatedMessage.Page
-                {
-                    Title = modules[x].Name,
-                    Description = modules[x].Summary,
-                    Color = Color.Blue
-                };
-            }
-
-            await PagedReplyAsync(new PaginatedMessage(pages));
-        }
+       
 
         [Command("help--text")]
         public async Task HelpCmdAlt1 ()
@@ -57,7 +38,7 @@ namespace EdgyBot.Modules
             if (param != "--text")
             {
                 EmbedBuilder eb = new EmbedBuilder();
-                eb.AddField("Text Version", "To get a text version of all the commands, please add --text to the command.\nExample: e!help --text");
+                eb.AddField("Text Version", "To get a text (paged) version of all the commands, please add --text to the command.\nExample: e!help --text");
                 eb.AddField("Web Version (Recommended)", "[EdgyBot Command List](http://edgybot.tk/commands.html)");
                 eb.WithColor(0x0cc6d3);
 
@@ -67,32 +48,43 @@ namespace EdgyBot.Modules
                 return;
             }
 
-            EmbedBuilder initEmbed = _lib.SetupEmbedWithDefaults();
-            initEmbed.AddField("EdgyBot", "Help Command. Thanks for using EdgyBot!");
-            initEmbed.AddField("Bot Prefix", _core.GetPrefix());
-            initEmbed.AddField("help", "Shows this message!");
-            initEmbed.AddField("command", "Gives info about a specific command.");
-            await Context.User.SendMessageAsync("", embed: initEmbed.Build());
+            var commandModules = _service.Modules.Where(x => !string.IsNullOrEmpty(x.Summary));
 
-            await Context.Message.AddReactionAsync(new Emoji("📫"));
-
-            foreach (ModuleInfo module in _service.Modules)
+            PaginatedMessage.Page[] pages = new PaginatedMessage.Page[commandModules.Count()];
+            ModuleInfo[] modules = commandModules.ToArray();
+            for (int x = 0; x <= (modules.Count() - 1); x++)
             {
-                if (module == null || string.IsNullOrEmpty(module.Name) || string.IsNullOrEmpty(module.Summary))
+                pages[x] = new PaginatedMessage.Page
+                {
+                    Title = modules[x].Name,
+                    Description = modules[x].Summary,
+                    Fields = GetFieldsForModule(modules[x]),
+                    Color = Color.Blue,
+                    ThumbnailUrl = "https://images-ext-2.discordapp.net/external/0A9ihJsopmMhAxVWOY4_kFEGwOxFgnAi0B1FTRSoQUU/%3Fsize%3D128/https/cdn.discordapp.com/avatars/373163613390897163/a6399df5d63b5fd8e42b446f75978407.png"
+                };
+            }
+
+            await PagedReplyAsync(new PaginatedMessage(pages));
+        }
+
+        private List<EmbedFieldBuilder> GetFieldsForModule(ModuleInfo module)
+        {
+            List<EmbedFieldBuilder> fields = new List<EmbedFieldBuilder>();
+            foreach (CommandInfo command in module.Commands)
+            {
+                if (command == null || command.Name == null || command.Summary == null)
                     continue;
 
-                EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-                eb.AddField(module.Name, module.Summary);
-
-                foreach (CommandInfo command in module.Commands)
+                EmbedFieldBuilder field = new EmbedFieldBuilder
                 {
-                    if (command == null || command.Name == null || command.Summary == null)
-                        continue;
-                    eb.AddField(command.Name, command.Summary);
-                }
-                await Task.Delay(TimeSpan.FromSeconds(1.25));
-                await Context.User.SendMessageAsync("", embed: eb.Build());
+                    Name = command.Name,
+                    Value = command.Summary
+                };
+
+                fields.Add(field);
             }
+
+            return fields;
         }
 
         [Command("command"), Alias("cmdinfo", "cmd", "cmdhelp")]
