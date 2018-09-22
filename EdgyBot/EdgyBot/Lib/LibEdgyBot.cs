@@ -254,7 +254,7 @@ namespace EdgyCore
         /// <returns></returns>
         public Task Log(LogMessage message)
         {
-            var sev = message.Severity;
+            LogSeverity sev = message.Severity;
             switch (sev)
             {
                 case LogSeverity.Debug:
