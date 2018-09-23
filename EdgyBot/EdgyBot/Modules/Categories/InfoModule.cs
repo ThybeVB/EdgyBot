@@ -17,20 +17,6 @@ namespace EdgyBot.Modules.Categories
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly LibEdgyCore _core = new LibEdgyCore();
 
-        [Command("minecraft")]
-        public async Task MinecraftCmd ([Remainder]string query = null)
-        {
-            if (string.IsNullOrEmpty(query)){
-                await ReplyAsync("You did not enter a username.");
-                return;
-            }
-
-            JsonHelper helper = new JsonHelper($"http://mcapi.de/api/user/{query}");
-            string jsonParsed = helper.getMinecraftUser(query);
-
-            await ReplyAsync(jsonParsed);
-        }
-
         [Command("channelinfo")]
         [Name("channelinfo")]
         [Summary("Gives you info about the channel you are in")]
