@@ -48,7 +48,7 @@ namespace EdgyBot.Modules
                 return;
             }
 
-            var commandModules = _service.Modules.Where(x => !string.IsNullOrEmpty(x.Summary));
+            IEnumerable<ModuleInfo> commandModules = _service.Modules.Where(x => !string.IsNullOrEmpty(x.Summary));
 
             PaginatedMessage.Page[] pages = new PaginatedMessage.Page[commandModules.Count()];
             ModuleInfo[] modules = commandModules.ToArray();
