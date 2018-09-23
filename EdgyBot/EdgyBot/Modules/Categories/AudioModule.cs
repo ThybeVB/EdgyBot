@@ -17,6 +17,12 @@ namespace EdgyBot.Modules.Categories
         {
             _lavaManager = lavalinkManager;
             _lavaManager.TrackEnd += TrackEnd;
+            _lavaManager.TrackStuck += TrackStuck;
+        }
+
+        private async Task TrackStuck(LavalinkPlayer player, LavalinkTrack track, long str)
+        {
+            await _lavaManager.LeaveAsync(player.VoiceChannel.GuildId);
         }
 
         private async Task TrackEnd(LavalinkPlayer player, LavalinkTrack track, string str)
