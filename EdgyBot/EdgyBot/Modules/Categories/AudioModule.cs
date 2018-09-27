@@ -16,14 +16,14 @@ namespace EdgyBot.Modules.Categories
         public VoiceCommands (LavalinkManager lavalinkManager)
         {
             _lavaManager = lavalinkManager;
+
             _lavaManager.TrackEnd += TrackEnd;
+            _lavaManager.TrackException += TrackEnd;
             _lavaManager.TrackStuck += TrackStuck;
         }
 
         private async Task TrackStuck(LavalinkPlayer player, LavalinkTrack track, long str)
-        {
-            await _lavaManager.LeaveAsync(player.VoiceChannel.GuildId);
-        }
+            => await TrackEnd(player, track, null);
 
         private async Task TrackEnd(LavalinkPlayer player, LavalinkTrack track, string str)
         {
@@ -62,6 +62,17 @@ namespace EdgyBot.Modules.Categories
             LoadTracksResponse r = await _lavaManager.GetTracksAsync($"ytsearch:{query}");
             LavalinkTrack tr = r.Tracks.First();
     
+            await player.PlayAsync(tr);
+            await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
+        }
+
+        [Command("httpplay")]
+        public async Task HttpPlay ([Remainder]string query)
+        {
+            LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
+            LoadTracksResponse r = await _lavaManager.GetTracksAsync($"ytsearch:{query}");
+            LavalinkTrack tr = r.Tracks.First();
+
             await player.PlayAsync(tr);
             await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
         }
