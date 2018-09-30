@@ -139,7 +139,8 @@ namespace EdgyCore.Handler
                     stats.shards[x] = shard;
                 }
 
-                await edgyApi.PostStatsAsync(stats);
+                /*Temporary! */
+                //await edgyApi.PostStatsAsync(stats);
             }
 
             /* The event happened in the Guild itself, so we do not need to post our server count. */
