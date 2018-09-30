@@ -18,7 +18,7 @@ namespace EdgyCore
     /// </summary>
     public class LibEdgyBot : ModuleBase<ShardedCommandContext>
     {
-        public readonly Color LightBlue = new Color(0x0cc6d3);
+        public readonly Color EdgyColor = new Color(0xca7f0d);
         private readonly Color moneyGreen = new Color(0x85bb65);
 
         private WebClient client = new WebClient();
@@ -67,7 +67,7 @@ namespace EdgyCore
             if (footer != null) 
                 eb.Footer = footer;
             
-            eb.Color = LightBlue;
+            eb.Color = EdgyColor;
             eb.AddField(title, text);
             return eb.Build();
         }
@@ -82,7 +82,7 @@ namespace EdgyCore
         {
             EmbedBuilder eb = new EmbedBuilder()
             {
-                Color = LightBlue,
+                Color = EdgyColor,
                 ImageUrl = imgUrl,
             };
             eb.AddField("EdgyBot", text);
@@ -100,7 +100,7 @@ namespace EdgyCore
         {
             EmbedBuilder eb = new EmbedBuilder
             {
-                Color = LightBlue,
+                Color = EdgyColor,
                 ImageUrl = imgUrl
             };
             eb.AddField(title, text);
@@ -139,7 +139,7 @@ namespace EdgyCore
                 };
                 eb.Footer = footer;
             }
-            eb.Color = LightBlue;
+            eb.Color = EdgyColor;
             return eb;
         }
 

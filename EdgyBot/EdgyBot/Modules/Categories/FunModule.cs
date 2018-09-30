@@ -185,6 +185,17 @@ namespace EdgyBot.Modules.Categories
             }
         }
 
+        [Command("bill")]
+        [Name("bill"), Summary("Be like bill. (yuor name)")]
+        public async Task BillCmd ([Remainder]string name = "Bill") 
+        {
+            string image = $"http://belikebill.azurewebsites.net/billgen-API.php?default=1&name={name}&sex=m";
+            EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
+            eb.ImageUrl = image;
+
+            await ReplyAsync("", embed: eb.Build());
+        }
+
         [Command("stab")]
         [Name("stab"), Summary("Lets you stab a user")]
         public async Task StabCmd(SocketUser usr)
