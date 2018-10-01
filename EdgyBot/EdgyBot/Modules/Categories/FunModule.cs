@@ -186,14 +186,28 @@ namespace EdgyBot.Modules.Categories
         }
 
         [Command("bill")]
-        [Name("bill"), Summary("Be like bill. (yuor name)")]
+        [Name("bill"), Summary("Be like bill. (your name)")]
         public async Task BillCmd ([Remainder]string name = "Bill") 
         {
-            string image = $"http://belikebill.azurewebsites.net/billgen-API.php?default=1&name={name}&sex=m";
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-            eb.ImageUrl = image;
+            eb.ImageUrl = $"http://belikebill.azurewebsites.net/billgen-API.php?default=1&name={urlLinkBill(name)}";
 
             await ReplyAsync("", embed: eb.Build());
+        }
+
+        private string urlLinkBill (string name) 
+        {
+            char[] nameChars = name.ToCharArray();
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in nameChars) {
+                if (c == ' ') {
+                    sb.Append("%20");
+                    continue;
+                }
+                sb.Append(c);
+            }
+
+            return sb.ToString();
         }
 
         [Command("stab")]
