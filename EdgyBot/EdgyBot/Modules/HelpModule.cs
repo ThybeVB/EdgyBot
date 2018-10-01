@@ -40,7 +40,7 @@ namespace EdgyBot.Modules
                 EmbedBuilder eb = new EmbedBuilder();
                 eb.AddField("Text Version", "To get a text (paged) version of all the commands, please add --text to the command.\nExample: e!help --text");
                 eb.AddField("Web Version (Recommended)", "[EdgyBot Command List](https://edgybot.tk/commands.html)");
-                eb.WithColor(0x0cc6d3);
+                eb.WithColor(0xca7f0d);
 
                 await ReplyAsync("", embed: eb.Build());
                 await ReplyAsync("Support Server: https://discord.gg/hF4CSDG");
