@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using System.Data;
 
 namespace EdgyBot.Database
 {
