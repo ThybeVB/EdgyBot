@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace EdgyBot.Database.Discord
+﻿namespace EdgyBot.Database
 {
     public class User
     {
