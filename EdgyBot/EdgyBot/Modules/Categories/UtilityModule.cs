@@ -6,7 +6,7 @@ using System.Linq;
 using Discord;
 using Discord.Commands;
 using EdgyBot.Database;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {

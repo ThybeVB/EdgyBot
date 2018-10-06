@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using Discord;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 
-namespace EdgyCore.Handler.API
+namespace EdgyBot.Core.Handler.API
 {
     public class DBLPinger
     {

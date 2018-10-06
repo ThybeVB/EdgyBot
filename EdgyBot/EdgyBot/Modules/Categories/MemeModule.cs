@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Lib;
-using EdgyCore.Handler.API;
+using EdgyBot.Core.Lib;
+using EdgyBot.Core.Handler.API;
 
 namespace EdgyBot.Modules
 {

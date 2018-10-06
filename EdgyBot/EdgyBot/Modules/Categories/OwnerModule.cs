@@ -6,7 +6,7 @@ using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Addons.Interactive;
 using EdgyBot.Database;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
@@ -31,14 +31,14 @@ namespace EdgyBot.Modules
         public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (input == "default") {
-                EdgyCore.Handler.EventHandler.StatusIsCustom = false;
+                EdgyBot.Core.Handler.EventHandler.StatusIsCustom = false;
                 await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
                 await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 
                 return;
             }
 
-            EdgyCore.Handler.EventHandler.StatusIsCustom = true;
+            EdgyBot.Core.Handler.EventHandler.StatusIsCustom = true;
             await Context.Client.SetGameAsync(input);
             await ReplyAsync("Changed Status.");
         }

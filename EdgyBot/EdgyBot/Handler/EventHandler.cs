@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EdgyCore.Handler.API;
-using EdgyCore.Lib;
+using EdgyBot.Core.Handler.API;
+using EdgyBot.Core.Lib;
 using Discord;
 using Discord.WebSocket;
 using SharpLink;
-using EdgyCore.Models;
+using EdgyBot.Core.Models;
 
-namespace EdgyCore.Handler
+namespace EdgyBot.Core.Handler
 {
     public class EventHandler
     {

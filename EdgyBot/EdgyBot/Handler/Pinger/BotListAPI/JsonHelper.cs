@@ -4,9 +4,9 @@ using System.Text;
 using System.Net;
 using Newtonsoft.Json;
 using Discord;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 
-namespace EdgyCore.Handler.API
+namespace EdgyBot.Core.Handler.API
 {
     public enum Botlist
     {

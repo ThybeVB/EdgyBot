@@ -4,7 +4,7 @@ using System.Linq;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 using System.Reflection;
 
 namespace EdgyBot.Modules
@@ -161,7 +161,7 @@ namespace EdgyBot.Modules
             eb.AddField("Version", Assembly.GetExecutingAssembly().GetName().Version);
             eb.AddField("Library", $"Discord.Net {DiscordConfig.Version}", true);
             eb.AddField("Server Count", Context.Client.Guilds.Count, true);
-            eb.AddField("Total Users", EdgyCore.Handler.EventHandler.MemberCount, true);
+            eb.AddField("Total Users", EdgyBot.Core.Handler.EventHandler.MemberCount, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
             eb.AddField("Uptime", _lib.GetUptime());

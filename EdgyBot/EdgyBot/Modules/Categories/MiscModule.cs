@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord;
-using EdgyCore;
-using EdgyCore.Lib;
+using EdgyBot.Core;
+using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
@@ -59,7 +59,7 @@ namespace EdgyBot.Modules
                 Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString()
             };
             eb.Footer = efb;
-            await EdgyCore.Handler.EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
+            await EdgyBot.Core.Handler.EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("Your message has been sent!");
         }
 
@@ -78,7 +78,7 @@ namespace EdgyBot.Modules
                 Text = Context.User.Username + $"#{Context.User.Discriminator}" + " in " + Context.Guild.Name + " at " + DateTime.Now.ToLongTimeString()
             };
             eb.Footer = efb;
-            await EdgyCore.Handler.EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
+            await EdgyBot.Core.Handler.EventHandler.OwnerUser.SendMessageAsync("", embed: eb.Build());
             await ReplyAsync("", embed: _lib.CreateEmbedWithText("Success", "Your Bug Report has been sent!"));
         }
 

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Lib;
-using EdgyCore;
-using EdgyCore.Models;
+using EdgyBot.Core.Lib;
+using EdgyBot.Core;
+using EdgyBot.Core.Models;
 
 namespace EdgyBot.Modules
 {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {

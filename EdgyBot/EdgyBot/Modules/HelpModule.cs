@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Text;
 using Discord;
 using Discord.Commands;
-using EdgyCore;
-using EdgyCore.Lib;
+using EdgyBot.Core;
+using EdgyBot.Core.Lib;
 using Discord.Addons.Interactive;
 
 namespace EdgyBot.Modules
@@ -21,8 +21,6 @@ namespace EdgyBot.Modules
         {
             _service = service;
         }
-
-       
 
         [Command("help--text")]
         public async Task HelpCmdAlt1 ()

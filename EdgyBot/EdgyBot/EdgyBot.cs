@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EdgyCore.Models;
-using EdgyCore.Handler;
-using EdgyCore.Lib;
+using EdgyBot.Core.Models;
+using EdgyBot.Core.Handler;
+using EdgyBot.Core.Lib;
 using Discord;
 using Discord.WebSocket;
 using SharpLink;
 
-namespace EdgyCore
+namespace EdgyBot.Core
 {
     public class EdgyBot
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
-using EdgyCore.Models;
+using EdgyBot.Core.Models;
 
-namespace EdgyCore.Lib
+namespace EdgyBot.Core.Lib
 {
     public class GDLib
     {

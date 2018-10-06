@@ -4,10 +4,10 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Discord;
-using EdgyCore.Models;
-using EdgyCore.Lib;
+using EdgyBot.Core.Models;
+using EdgyBot.Core.Lib;
 
-namespace EdgyCore.Handler.API
+namespace EdgyBot.Core.Handler.API
 {
     public class EdgyAPI 
     {

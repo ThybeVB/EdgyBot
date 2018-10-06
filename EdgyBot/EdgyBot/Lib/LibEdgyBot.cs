@@ -8,10 +8,10 @@ using System.Text;
 using System.Net;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Handler.API;
+using EdgyBot.Core.Handler.API;
 using Discord.WebSocket;
 
-namespace EdgyCore.Lib
+namespace EdgyBot.Core.Lib
 {
     /// <summary>
     /// The Main Library for used for EdgyBot

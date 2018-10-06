@@ -1,11 +1,11 @@
 ﻿using System;
-using EdgyCore.Models;
-using EdgyCore.Handler;
+using EdgyBot.Core.Models;
+using EdgyBot.Core.Handler;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 
-namespace EdgyCore.Lib
+namespace EdgyBot.Core.Lib
 {
     public class LibEdgyCore : ModuleBase<ShardedCommandContext>
     {

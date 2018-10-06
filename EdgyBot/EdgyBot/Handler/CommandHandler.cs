@@ -8,11 +8,11 @@ using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Addons.Interactive;
 using EdgyBot.Modules;
-using EdgyCore.Lib;
+using EdgyBot.Core.Lib;
 using EdgyBot.Database;
 using SharpLink;
 
-namespace EdgyCore.Handler
+namespace EdgyBot.Core.Handler
 {
     public class CommandHandler
     {
