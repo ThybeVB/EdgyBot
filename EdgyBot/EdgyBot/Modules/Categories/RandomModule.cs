@@ -4,7 +4,7 @@ using Discord;
 using Discord.Commands;
 using EdgyCore;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Random Commands"), Summary("Commands that have different output every time.")]
     public class RandomCommands : ModuleBase<ShardedCommandContext>

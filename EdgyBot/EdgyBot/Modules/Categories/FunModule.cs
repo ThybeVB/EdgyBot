@@ -8,7 +8,7 @@ using Discord.WebSocket;
 using Discord.Commands;
 using EdgyCore;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Fun Commands"), Summary("Commands used for FUNUNUNUN")]
     public class FunCommands : ModuleBase<ShardedCommandContext>

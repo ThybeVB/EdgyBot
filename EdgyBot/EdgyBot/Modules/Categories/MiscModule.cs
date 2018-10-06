@@ -5,7 +5,7 @@ using Discord;
 using EdgyCore;
 using EdgyCore.Lib;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Miscellanious Commands"), Summary("Commands that don't fit in any other categories.")]
     public class MiscCommands : ModuleBase<ShardedCommandContext>

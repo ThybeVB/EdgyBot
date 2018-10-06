@@ -6,7 +6,7 @@ using Discord;
 using Discord.Commands;
 using EdgyCore;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Image Commands"), Summary("Commands for manipulating images.")]
     public class ImageCommands : ModuleBase<ShardedCommandContext>

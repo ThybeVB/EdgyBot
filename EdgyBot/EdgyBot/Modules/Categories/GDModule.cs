@@ -5,7 +5,7 @@ using EdgyCore.Lib;
 using EdgyCore;
 using EdgyCore.Models;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Geometry Dash Commands"), Summary("Commands related to Geometry Dash")]
     public class GDCommands : ModuleBase<ShardedCommandContext>

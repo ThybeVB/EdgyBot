@@ -9,7 +9,7 @@ using Discord;
 using System.Text;
 using System.Collections.Generic;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     public class OwnerCommands : InteractiveBase<ShardedCommandContext>
     {

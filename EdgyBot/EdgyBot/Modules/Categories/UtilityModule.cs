@@ -8,7 +8,7 @@ using EdgyCore;
 using System.Linq;
 using EdgyBot.Database;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Utility Commands"), Summary("Commands that help manage the server!")]
     public class UtilityCommands : ModuleBase<ShardedCommandContext>

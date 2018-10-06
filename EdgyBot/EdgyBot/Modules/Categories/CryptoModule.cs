@@ -3,7 +3,7 @@ using Discord;
 using Discord.Commands;
 using EdgyCore;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Crypto Commands"), Summary("Encryption commands centered for Developers")]
     public class CryptoCommands : ModuleBase<ShardedCommandContext>

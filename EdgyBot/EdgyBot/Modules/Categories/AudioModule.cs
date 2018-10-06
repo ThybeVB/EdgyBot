@@ -5,7 +5,7 @@ using Discord.Commands;
 using SharpLink;
 using EdgyCore;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<ShardedCommandContext>

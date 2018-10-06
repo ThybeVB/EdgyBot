@@ -41,7 +41,7 @@ namespace EdgyBot.Database
         public bool OpenConnection ()
         {
             if (_connObj == null)
-                throw new InvalidOperationException("Cannot open connection before connecting to the Database. Please use the ConnectAsync function first.");
+                throw new InvalidOperationException();
 
             try
             {

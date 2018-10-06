@@ -5,7 +5,7 @@ using Discord.Commands;
 using EdgyCore;
 using EdgyCore.Handler.Pinger;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Meme Commands"), Summary("Meme'y Commands. Pictures mainly.")]
     public class MemeCommands : ModuleBase<ShardedCommandContext>

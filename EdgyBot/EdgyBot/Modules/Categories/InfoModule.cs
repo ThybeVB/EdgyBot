@@ -9,7 +9,7 @@ using EdgyCore.Lib;
 using EdgyCore.Handler.Pinger;
 using System.Reflection;
 
-namespace EdgyBot.Modules.Categories
+namespace EdgyBot.Modules
 {
     [Name("Info Commands"), Summary("Commands providing information about a certain thingy")]
     public class InfoCommands : ModuleBase<ShardedCommandContext>

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot", "EdgyBot\EdgyBot.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord.Addons.Interactive", "Discord.Addons.Interactive\Discord.Addons.Interactive.csproj", "{266E3693-0971-4772-874C-DF38CCD952B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgyBot.Database", "EdgyBot.Database\EdgyBot.Database.csproj", "{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot.Database", "EdgyBot.Database\EdgyBot.Database.csproj", "{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
