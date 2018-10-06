@@ -47,7 +47,7 @@ namespace EdgyBot.Core.Handler
                 CaseSensitiveCommands = false,
                 IgnoreExtraArgs = true
             });
-            await commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _service);
+            await commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), _service);
 
             new HelpCommand(commandService);
 

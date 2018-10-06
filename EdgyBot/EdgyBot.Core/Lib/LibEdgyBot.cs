@@ -29,13 +29,13 @@ namespace EdgyBot.Core.Lib
             switch (botlist)
             {
                 case Botlist.BFD:
-                    return EdgyBot.Credentials.bfdToken;
+                    return Bot.Credentials.bfdToken;
                 case Botlist.DISCORDBOTS:
-                    return EdgyBot.Credentials.dbToken;
+                    return Bot.Credentials.dbToken;
                 case Botlist.LISTSPACE:
-                    return EdgyBot.Credentials.blsToken;
+                    return Bot.Credentials.blsToken;
                 case Botlist.DBLCOM:
-                    return "Bot " + EdgyBot.Credentials.dblComToken;
+                    return "Bot " + Bot.Credentials.dblComToken;
             }
             return null;
         }

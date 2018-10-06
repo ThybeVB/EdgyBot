@@ -7,7 +7,7 @@ namespace EdgyBot.Core.Handler.API
 {
     public class DblComPinger
     {
-        JsonHelper helper = new JsonHelper($"https://discordbotlist.com/api/bots/{EdgyBot.Credentials.clientID}/stats");
+        JsonHelper helper = new JsonHelper($"https://discordbotlist.com/api/bots/{Bot.Credentials.clientID}/stats");
         LibEdgyBot lib = new LibEdgyBot();
 
         public async Task PostServerCountAsync(int serverCount)

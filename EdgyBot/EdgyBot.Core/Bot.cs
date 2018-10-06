@@ -9,10 +9,10 @@ using SharpLink;
 
 namespace EdgyBot.Core
 {
-    public class EdgyBot
+    public class Bot
     {
         private static void Main ()
-            => new EdgyBot().StartAsync().GetAwaiter().GetResult();
+            => new Bot().StartAsync().GetAwaiter().GetResult();
 
         public static Credentials Credentials;
         private readonly LibEdgyCore _core = new LibEdgyCore();
@@ -25,7 +25,7 @@ namespace EdgyBot.Core
             TotalShards = 2
         });
 
-        private async Task StartAsync ()
+        public async Task StartAsync ()
         {
             _manager = new LavalinkManager(Client, new LavalinkManagerConfig
             {

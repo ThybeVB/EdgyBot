@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -7,6 +8,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord.Addons.Interactive", "Discord.Addons.Interactive\Discord.Addons.Interactive.csproj", "{266E3693-0971-4772-874C-DF38CCD952B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot.Database", "EdgyBot.Database\EdgyBot.Database.csproj", "{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{A014CA88-DB89-4867-A007-44BE7CF7EAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +36,12 @@ Global
 		{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}.EdgyBot|Any CPU.Build.0 = Debug|Any CPU
 		{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.EdgyBot|Any CPU.ActiveCfg = Debug|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.EdgyBot|Any CPU.Build.0 = Debug|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

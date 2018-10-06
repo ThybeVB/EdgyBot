@@ -7,7 +7,7 @@ namespace EdgyBot.Core.Handler.API
 {
     public class BotListSpacePinger
     {
-        private JsonHelper helper = new JsonHelper("https://botlist.space/api/bots/" + EdgyBot.Credentials.clientID);
+        private JsonHelper helper = new JsonHelper("https://botlist.space/api/bots/" + Bot.Credentials.clientID);
         private LibEdgyBot _lib = new LibEdgyBot();
 
         public async Task PostServerCountAsync(int serverCount)
