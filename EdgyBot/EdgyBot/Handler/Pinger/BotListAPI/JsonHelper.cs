@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Discord;
 using EdgyCore.Lib;
 
-namespace EdgyCore.Handler.Pinger
+namespace EdgyCore.Handler.API
 {
     public enum Botlist
     {

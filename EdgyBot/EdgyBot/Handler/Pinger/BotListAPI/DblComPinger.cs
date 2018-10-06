@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using EdgyCore.Lib;
 
-namespace EdgyCore.Handler.Pinger
+namespace EdgyCore.Handler.API
 {
     public class DblComPinger
     {

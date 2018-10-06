@@ -7,7 +7,7 @@ using Discord;
 using EdgyCore.Models;
 using EdgyCore.Lib;
 
-namespace EdgyCore.Handler
+namespace EdgyCore.Handler.API
 {
     public class EdgyAPI 
     {
