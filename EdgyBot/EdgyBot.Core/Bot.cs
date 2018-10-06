@@ -38,7 +38,7 @@ namespace EdgyBot.Core
                 LogSeverity = LogSeverity.Verbose
             });
 
-            Credentials = _core.GetCredentials();
+            Credentials = new CredentialsManager().Read();
             Handler.EventHandler handler = new Handler.EventHandler(Client, _manager);
             await new CommandHandler().InitializeAsync(Client, handler.GetManager());
             await Client.LoginAsync(TokenType.Bot, Credentials.token);

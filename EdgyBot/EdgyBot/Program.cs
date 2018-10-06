@@ -2,9 +2,9 @@
 
 namespace EdgyBot
 {
-    class Program
+    public class Program
     {
-        private static void Main()
+        private static void Main ()
             => new Bot().StartAsync().GetAwaiter().GetResult();
     }
 }

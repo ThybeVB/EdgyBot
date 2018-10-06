@@ -11,20 +11,6 @@ namespace EdgyBot.Core.Lib
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public Credentials GetCredentials ()
-        {
-            CredientalsManager manager = new CredientalsManager();
-
-            string isSetup = Environment.GetEnvironmentVariable("EdgyBot_IsSetup", EnvironmentVariableTarget.User);
-            if (string.IsNullOrEmpty(isSetup) || isSetup == "y")
-            {
-                return manager.Read(true);
-            } else
-            {
-                return manager.Read(false);
-            }
-        }
-
         public ulong GetBotId()
         {
             return Bot.Credentials.clientID;

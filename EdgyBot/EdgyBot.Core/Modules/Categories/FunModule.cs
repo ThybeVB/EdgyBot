@@ -14,6 +14,7 @@ namespace EdgyBot.Modules
     public class FunCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+
         private string[] ballReplies = {"It is certain.", "It is decidedly so.", "Without a doubt.", "Yes - definitely.", 
             "You may rely on it.", "As I see it, yes.", "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.", 
             "Reply hazy, try again", "Ask again later.", "Cannot predict now.", "Concentrate and ask again.", 
@@ -28,6 +29,13 @@ namespace EdgyBot.Modules
 
             string responseString = $"{Context.User.Mention}: {question}\n:8ball:: {ballReplies[index]}";
             await ReplyAsync(responseString);
+        }
+
+        //[Command("translate")]
+        //[Name("translate"), Summary("Translates a line of text from one language to another.")]
+        public async Task TranslateCmd (string fromLang, string toLang, [Remainder]string query)
+        {
+
         }
 
         [Command("duel", RunMode = RunMode.Async)]
