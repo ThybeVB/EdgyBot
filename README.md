@@ -24,20 +24,6 @@ The handy and all around fun bot that can be used for any kind of server!
 EdgyBot is being developed for more categories, Image Commands as the newest addition.
 We are also working on the Audio Categories, which is new, and is due to improvement.
 
-## Running
-
-
-Step 1: Download the .NET Core SDK
-
-Step 2: Clone the Repository
-
-Step 3: Run the following command in the project root:
-
-```batch
-dotnet publish -c Release
-```
-Step 4: Run EdgyBot.dll with the following command:
-```batch
-dotnet EdgyBot.dll
-```
-Step 5: Follow the instructions in the Command Prompt. 
+## Self Hosting
+While EdgyBot could be a great reference for Discord.Net Bot Developers, it's not a great bot for self hosting.
+EdgyBot needs multiple Environment Variables and external connections to run.
