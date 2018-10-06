@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyCore.Lib;
-using EdgyCore.Handler.Pinger;
+using EdgyCore.Handler.API;
 
 namespace EdgyBot.Modules
 {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Net;
 using Discord;
 using Discord.Commands;
-using EdgyCore.Handler.Pinger;
+using EdgyCore.Handler.API;
 using Discord.WebSocket;
 
 namespace EdgyCore.Lib

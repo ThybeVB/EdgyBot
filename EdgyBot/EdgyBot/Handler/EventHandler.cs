@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EdgyCore.Handler.Pinger;
+using EdgyCore.Handler.API;
 using EdgyCore.Lib;
 using Discord;
 using Discord.WebSocket;

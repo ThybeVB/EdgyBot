@@ -4,9 +4,7 @@ using System.Linq;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using EdgyCore;
 using EdgyCore.Lib;
-using EdgyCore.Handler.Pinger;
 using System.Reflection;
 
 namespace EdgyBot.Modules
