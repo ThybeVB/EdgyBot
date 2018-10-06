@@ -164,6 +164,7 @@ namespace EdgyBot.Modules
             eb.AddField("Total Users", EdgyBot.Core.Handler.EventHandler.MemberCount, true);
             eb.AddField("Current Shard", Context.Client.GetShardIdFor(Context.Guild), true);
             eb.AddField("Total Shards", Context.Client.Shards.Count, true);
+            eb.AddField("Commands Ran (This Session)", Core.Handler.CommandHandler.CommandsRan);
             eb.AddField("Uptime", _lib.GetUptime());
             eb.AddField("Status", Context.Client.Activity.Name);
             eb.AddField("Developer", _core.GetOwnerDiscordName());

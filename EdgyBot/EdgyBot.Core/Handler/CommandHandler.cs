@@ -25,6 +25,8 @@ namespace EdgyBot.Core.Handler
 
         private LavalinkManager _manager;
 
+        public static int CommandsRan = 0;
+
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
@@ -80,6 +82,7 @@ namespace EdgyBot.Core.Handler
                 if (guild.CommandDisabled(firstArg))
                     return;
 
+                CommandsRan++;
                 IResult result = await commandService.ExecuteAsync(context, argPos, _service);             
 
                 if (!result.IsSuccess)
