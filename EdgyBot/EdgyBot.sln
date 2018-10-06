@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot.Core", "EdgyBot.Core\EdgyBot.Core.csproj", "{DECBC905-AEB6-4969-9C77-E08DF7CD7B8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord.Addons.Interactive", "Discord.Addons.Interactive\Discord.Addons.Interactive.csproj", "{266E3693-0971-4772-874C-DF38CCD952B0}"
 EndProject
