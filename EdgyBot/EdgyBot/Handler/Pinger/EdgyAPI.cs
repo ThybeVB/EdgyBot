@@ -2,9 +2,10 @@ using System;
 using System.Text;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Discord;
 using EdgyCore.Models;
-using Newtonsoft.Json;
+using EdgyCore.Lib;
 
 namespace EdgyCore.Handler
 {

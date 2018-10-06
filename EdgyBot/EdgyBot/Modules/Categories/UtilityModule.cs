@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 using Discord;
 using Discord.Commands;
-using EdgyCore;
-using System.Linq;
 using EdgyBot.Database;
+using EdgyCore.Lib;
 
 namespace EdgyBot.Modules
 {

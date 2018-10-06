@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using EdgyCore;
+using EdgyCore.Lib;
 using EdgyCore.Handler.Pinger;
 
 namespace EdgyBot.Modules

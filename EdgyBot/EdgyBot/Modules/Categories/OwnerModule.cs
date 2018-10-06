@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Discord.Commands;
-using EdgyBot.Database;
-using EdgyCore;
-using Discord.Addons.Interactive;
-using Discord.WebSocket;
-using Discord;
 using System.Text;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using Discord;
+using Discord.WebSocket;
+using Discord.Commands;
+using Discord.Addons.Interactive;
+using EdgyBot.Database;
+using EdgyCore.Lib;
 
 namespace EdgyBot.Modules
 {
