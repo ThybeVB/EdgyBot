@@ -11,7 +11,7 @@ using Discord.Commands;
 using EdgyCore.Handler.Pinger;
 using Discord.WebSocket;
 
-namespace EdgyCore
+namespace EdgyCore.Lib
 {
     /// <summary>
     /// The Main Library for used for EdgyBot

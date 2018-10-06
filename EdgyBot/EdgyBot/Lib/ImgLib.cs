@@ -5,7 +5,7 @@ using Discord;
 using Discord.Commands;
 using ImageSharp;
 
-namespace EdgyCore
+namespace EdgyCore.Lib
 {
     public class ImgLib
     {
