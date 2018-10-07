@@ -27,6 +27,7 @@ namespace EdgyBot.Core.Handler
 
         public static int MemberCount;
         public static int ServerCount;
+        public static StatsModel CurrentStats;
         public static SocketUser OwnerUser;
 
         public EventHandler(DiscordShardedClient client, LavalinkManager lavalink)
@@ -120,28 +121,27 @@ namespace EdgyBot.Core.Handler
             if (!StatusIsCustom)
                 await _client.SetGameAsync(gameStatus);
 
-            if (startup) {
-                await _lib.EdgyLog(LogSeverity.Info, "Set game to " + gameStatus);
-            } else
+            
+            StatsModel stats = new StatsModel();
+            stats.shards = new Shard[_client.Shards.Count];
+            for (int x = 0; x != _client.Shards.Count; x++)
             {
-                StatsModel stats = new StatsModel();
-                stats.shards = new Shard[_client.Shards.Count];
-                for (int x = 0; x != _client.Shards.Count; x++)
+                int serverCount = _client.GetShard(x).Guilds.Count;
+                int memCount = GetMembersForShard(x);
+                Shard shard = new Shard
                 {
-                    int serverCount = _client.GetShard(x).Guilds.Count;
-                    int memCount = GetMembersForShard(x);
-                    Shard shard = new Shard
-                    {
-                        name = $"Shard {x}",
-                        server_count = serverCount,
-                        user_count = memCount
-                    };
-                    stats.shards[x] = shard;
-                }
-
-                /*Temporary! */
-                //await edgyApi.PostStatsAsync(stats);
+                    name = $"Shard {x}",
+                    server_count = serverCount,
+                    user_count = memCount
+                };
+                stats.shards[x] = shard;
             }
+
+            CurrentStats = stats;
+
+            /*Temporary! */
+            //await edgyApi.PostStatsAsync(stats);
+            
 
             if (inGuild)
                 return;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Discord;
-using Discord.WebSocket;
 using Discord.Commands;
 using Discord.Addons.Interactive;
 using EdgyBot.Database;
@@ -12,33 +12,25 @@ namespace EdgyBot.Modules
 {
     public class OwnerCommands : InteractiveBase<ShardedCommandContext>
     {
-        private LibEdgyBot _lib = new LibEdgyBot();
+        private readonly LibEdgyBot _lib = new LibEdgyBot();
 
         [Command("ch"), Alias("checkup", "check", "status")]
         public async Task CheckupCmd ()
-        {
-            StringBuilder sb = new StringBuilder();
-            int shardId = 0;
-            foreach (DiscordSocketClient b in Context.Client.Shards)
-            {
-                sb.Append($"Shard {shardId} [{b.ConnectionState.ToString().ToUpper()}]\n");
-                shardId++;
-            }
-            await ReplyAsync(sb.ToString());
-        }
+            => await ReplyAsync($"```{JsonConvert.SerializeObject(Core.Handler.EventHandler.CurrentStats, Formatting.Indented)}```");
+        
 
         [Command("setstatus"), RequireOwner]
         public async Task SetStatusCmd([Remainder]string input = null)
         {
             if (input == "default") {
-                EdgyBot.Core.Handler.EventHandler.StatusIsCustom = false;
+                Core.Handler.EventHandler.StatusIsCustom = false;
                 await Context.Client.SetGameAsync("e!help | EdgyBot for " + Context.Client.Guilds.Count + " servers!");
                 await ReplyAsync("Changed Status. **Custom Param: " + input + "**");
 
                 return;
             }
 
-            EdgyBot.Core.Handler.EventHandler.StatusIsCustom = true;
+            Core.Handler.EventHandler.StatusIsCustom = true;
             await Context.Client.SetGameAsync(input);
             await ReplyAsync("Changed Status.");
         }
