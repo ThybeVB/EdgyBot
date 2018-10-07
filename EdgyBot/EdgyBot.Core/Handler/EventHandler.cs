@@ -43,7 +43,7 @@ namespace EdgyBot.Core.Handler
             _client.UserLeft += UserUpdated;
         }
 
-        public LavalinkManager GetManager ()
+        public LavalinkManager GetLavaManager ()
         {
             return _lavaLink;
         }
@@ -143,7 +143,6 @@ namespace EdgyBot.Core.Handler
                 //await edgyApi.PostStatsAsync(stats);
             }
 
-            /* The event happened in the Guild itself, so we do not need to post our server count. */
             if (inGuild)
                 return;
 

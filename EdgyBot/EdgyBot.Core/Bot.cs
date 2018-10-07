@@ -40,7 +40,7 @@ namespace EdgyBot.Core
 
             Credentials = new CredentialsManager().Read();
             Handler.EventHandler handler = new Handler.EventHandler(Client, _manager);
-            await new CommandHandler().InitializeAsync(Client, handler.GetManager());
+            await new CommandHandler().InitializeAsync(Client, handler.GetLavaManager());
             await Client.LoginAsync(TokenType.Bot, Credentials.token);
             await Client.StartAsync();
 
