@@ -35,5 +35,32 @@ namespace EdgyBot.Database
                 transaction.Dispose();
             }
         }
+
+        public string ReadAsync (string selectQuery)
+        {
+            var connection = DatabaseConnection.connection;
+
+            if (connection.connectionObject.State == ConnectionState.Closed)
+                connection.connectionObject.Open();
+
+            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
+            {
+                var selectCommand = connection.connectionObject.CreateCommand();
+                selectCommand.Transaction = transaction;
+                selectCommand.CommandText = selectQuery;
+                var reader = selectCommand.ExecuteReader();
+                string result = "";
+                while (reader.Read())
+                {
+                    result = reader.GetString(0);
+                }
+
+                transaction.Commit();
+                connection.connectionObject.Close();
+                transaction.Dispose();
+
+                return result;
+            }
+        }
     }
 }

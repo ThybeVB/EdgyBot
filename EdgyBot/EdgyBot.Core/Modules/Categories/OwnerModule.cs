@@ -72,21 +72,41 @@ namespace EdgyBot.Modules
 
         [Command("execquery")]
         [RequireOwner]
-        public async Task ExecQueryCmd ([Remainder]string query)
+        public async Task ExecQueryCmd (string type, [Remainder]string query)
         {
             DatabaseConnection connection = new DatabaseConnection();
             await connection.ConnectAsync();
 
             if (connection.OpenConnection())
             {
-                try
+                if (type == "regular")
                 {
-                    SQLProcessor sql = new SQLProcessor(connection.getConnObj());
-                    await sql.ExecuteQueryAsync(query);
-                }
-                catch (Exception e)
+                    try
+                    {
+                        SQLProcessor sql = new SQLProcessor(connection.getConnObj());
+                        await sql.ExecuteQueryAsync(query);
+                    }
+                    catch (Exception e)
+                    {
+                        await ReplyAsync("Error: " + e.Message);
+                    }
+                } else
                 {
-                    await ReplyAsync("Could not change the server prefix. Error: " + e.Message);
+                    if (type != "reader")
+                    {
+                        await ReplyAsync("Invalid Operation Type dumbfuck monstah . regular or reader");
+                        return;
+                    }
+
+                    try
+                    {
+                        SQLProcessor sql = new SQLProcessor(connection.getConnObj());
+                        string result = sql.ReadAsync(query);
+                        await ReplyAsync(result);
+                    } catch (Exception e)
+                    {
+                        await ReplyAsync("Error: " + e.Message);
+                    }
                 }
 
                 return;
