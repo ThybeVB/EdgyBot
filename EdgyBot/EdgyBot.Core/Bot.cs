@@ -22,7 +22,7 @@ namespace EdgyBot.Core
         {
             LogLevel = LogSeverity.Info,
             MessageCacheSize = 25,
-            TotalShards = 2
+            TotalShards = 3
         });
 
         public async Task StartAsync ()
@@ -34,7 +34,7 @@ namespace EdgyBot.Core
                 WebSocketHost = "localhost",
                 WebSocketPort = 1337,
                 Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
-                TotalShards = 2,
+                TotalShards = 3,
                 LogSeverity = LogSeverity.Verbose
             });
 
