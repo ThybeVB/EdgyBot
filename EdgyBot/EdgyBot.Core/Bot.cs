@@ -11,9 +11,7 @@ namespace EdgyBot.Core
 {
     public class Bot
     {
-        private static void Main ()
-            => new Bot().StartAsync().GetAwaiter().GetResult();
-
+        
         public static Credentials Credentials;
         private readonly LibEdgyCore _core = new LibEdgyCore();
         private LavalinkManager _manager;
