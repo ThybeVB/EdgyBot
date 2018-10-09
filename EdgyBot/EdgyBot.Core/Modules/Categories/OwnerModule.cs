@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 using Discord;
 using Discord.Commands;
 using Discord.Addons.Interactive;
-using EdgyBot.Database;
 using EdgyBot.Core.Lib;
+using EdgyBot.Database;
 
 namespace EdgyBot.Modules
 {
@@ -16,7 +16,7 @@ namespace EdgyBot.Modules
 
         [Command("ch"), Alias("checkup", "check", "status")]
         public async Task CheckupCmd ()
-            => await ReplyAsync($"```{JsonConvert.SerializeObject(Core.Handler.EventHandler.CurrentStats, Formatting.Indented)}```");
+            => await ReplyAsync($"```json\n{JsonConvert.SerializeObject(Core.Handler.EventHandler.CurrentStats, Formatting.Indented)}\n```");
         
 
         [Command("setstatus"), RequireOwner]
