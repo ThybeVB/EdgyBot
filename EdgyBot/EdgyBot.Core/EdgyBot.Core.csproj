@@ -6,11 +6,13 @@
     <Configurations>Debug;Release;EdgyBot</Configurations>
     <Description>A general purpose bot ranging from fun commands to... not so fun</Description>
     <Copyright>Thybe Van Beersel 2017-2018</Copyright>
-    <AssemblyVersion>1.2.0.5</AssemblyVersion>
-    <FileVersion>1.2.0.5</FileVersion>
+    <AssemblyVersion>1.2.0.6</AssemblyVersion>
+    <FileVersion>1.2.0.6</FileVersion>
     <StartupObject></StartupObject>
     <ApplicationIcon />
-    <NeutralLanguage></NeutralLanguage>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageProjectUrl>https://edgybot.tk</PackageProjectUrl>
+    <RepositoryUrl>https://www.github.com/MonstahGames/EdgyBot</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

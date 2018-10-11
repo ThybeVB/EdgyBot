@@ -11,7 +11,6 @@ namespace EdgyBot.Core
 {
     public class Bot
     {
-        
         public static Credentials Credentials;
         private readonly LibEdgyCore _core = new LibEdgyCore();
         private LavalinkManager _manager;

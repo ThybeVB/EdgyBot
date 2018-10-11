@@ -76,7 +76,7 @@
         /// <summary>
         /// Gets or sets the color.
         /// </summary>
-        public Color Color { get; set; } = Color.Default;
+        public Color Color { get; set; } = new Color(0xca7f0d);
 
         /// <summary>
         /// Gets or sets the options.
@@ -138,7 +138,7 @@
             /// <summary>
             /// Gets or sets the color.
             /// </summary>
-            public Color? Color { get; set; } = null;
+            public Color? Color { get; set; } = new Color(0xca7f0d);
         }
     }
 }

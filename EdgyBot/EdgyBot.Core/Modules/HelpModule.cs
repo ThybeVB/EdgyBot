@@ -27,7 +27,15 @@ namespace EdgyBot.Modules
             => await HelpCmd("--text");
 
         [Command("help text")]
-        public async Task HelpCmdAlt2()
+        public async Task HelpCmdAlt2 ()
+            => await HelpCmd("--text");
+
+        [Command(" help")]
+        public async Task HelpCmdAlt3 ()
+            => await HelpCmd();
+
+        [Command(" help --text")]
+        public async Task HelpCmdAlt4()
             => await HelpCmd("--text");
 
         [Command("help", RunMode = RunMode.Async), Alias("commands")]
@@ -57,7 +65,7 @@ namespace EdgyBot.Modules
                     Title = modules[x].Name,
                     Description = modules[x].Summary,
                     Fields = GetFieldsForModule(modules[x]),
-                    Color = Color.Blue,
+                    Color = new Color(0xca7f0d),
                     ThumbnailUrl = "https://images-ext-2.discordapp.net/external/0A9ihJsopmMhAxVWOY4_kFEGwOxFgnAi0B1FTRSoQUU/%3Fsize%3D128/https/cdn.discordapp.com/avatars/373163613390897163/a6399df5d63b5fd8e42b446f75978407.png"
                 };
             }
