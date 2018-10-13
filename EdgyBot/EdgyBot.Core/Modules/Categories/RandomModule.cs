@@ -6,12 +6,13 @@ using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
-    [Name("Random Commands"), Summary("Commands that have different output every time.")]
+    [Name("Random Commands"), Summary("Commands that have different output every time")]
     public class RandomCommands : ModuleBase<ShardedCommandContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        [Command("randomnum")][Name("randomnum")][Summary("Gives you a random number between your 2 numbers.")]
+        [Command("randomnum")]
+        [Name("randomnum")][Summary("Gives you a random number between your 2 numbers")]
         public async Task RandomNumCmd(int min, int max)
         {
             if (min >= max)
@@ -27,7 +28,8 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: e.Build());
         }
 
-        [Command("flip")][Name("flip")][Summary("Flips your message.")]
+        [Command("flip")]
+        [Name("flip"), Summary("Flips your message")]
         public async Task ReverseCmd([Remainder]string input = null)
         {
             if (input == null)
@@ -50,7 +52,8 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: _lib.CreateEmbedWithText("Reversed Text", input));
         }
 
-        [Command("flipcoin")][Name("flipcoin")][Summary("Flips a coin.")]
+        [Command("flipcoin")]
+        [Name("flipcoin"), Summary("Flips a coin")]
         public async Task FlipCoinCmd()
         {
             Random random = new Random();
@@ -70,7 +73,8 @@ namespace EdgyBot.Modules
             await ReplyAsync("", embed: e);
         }
 
-        [Command("chance")][Name("chance")][Summary("What chance do you have of x?")]
+        [Command("chance")]
+        [Name("chance"), Summary("What chance do you have of x?")]
         public async Task ChanceCmd([Remainder]string input)
         {
             Random rand = new Random();
