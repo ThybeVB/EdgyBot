@@ -31,12 +31,10 @@ namespace EdgyBot.Modules
         }
 
         [Command("randomnum")]
-        [Name("randomnum")]
-        [Summary("Gives you a random number between your 2 numbers")]
+        [Name("randomnum"), Summary("Gives you a random number between your 2 numbers")]
         public async Task RandomNumCmd(int min, int max)
         {
-            if (min >= max)
-            {
+            if (min >= max) {
                 await ReplyAsync("", embed: _lib.CreateEmbedWithText("EdgyBot", "Invalid number input."));
                 return;
             }
@@ -52,8 +50,7 @@ namespace EdgyBot.Modules
         [Name("flip"), Summary("Flips your message")]
         public async Task FlipCmd([Remainder]string input = null)
         {
-            if (input == null)
-            {
+            if (input == null) {
                 await ReplyAsync("Please enter a message!");
                 return;
             }
@@ -172,9 +169,8 @@ namespace EdgyBot.Modules
         [Name("bigletter"), Summary("Converts your message to Emoji's")]
         public async Task BigLetterCmd([Remainder]string msg)
         {
-            msg = msg.ToLower();
             StringBuilder sb = new StringBuilder();
-            char[] letters = msg.ToCharArray();
+            char[] letters = msg.ToLower().ToCharArray();
             foreach (char letter in letters)
             {
                 if (!_lib.IsEnglishLetter(letter)) continue;
@@ -194,6 +190,7 @@ namespace EdgyBot.Modules
         {
             string stopUrl = "https://i.imgur.com/1TdHj1y.gif";
             Embed a = _lib.CreateEmbedWithImage(usr.Mention, stopUrl);
+
             await ReplyAsync("", embed: a);
         }
 
@@ -239,8 +236,6 @@ namespace EdgyBot.Modules
             //Stage 3
             var messages = await Context.Channel.GetMessagesAsync(10).FlattenAsync();
             IMessage[] messagesObj = messages.Where(x => x.Content.StartsWith("*")).ToArray();
-
-            //Get Message Count
             int messageCount = messagesObj.Count();
             int winnerNum = new Random().Next(-1, messageCount + 1);
             int otherShit = 0;
