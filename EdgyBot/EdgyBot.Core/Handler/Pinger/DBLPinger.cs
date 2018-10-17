@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DiscordBotsList.Api;
 using Discord;
 using EdgyBot.Core.Lib;
+using DiscordBotsList.Api.Objects;
 
 namespace EdgyBot.Core.Handler.API
 {
