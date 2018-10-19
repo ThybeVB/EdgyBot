@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Text;
 using Discord;
 using Discord.Commands;
-using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using Discord.Addons.Interactive;
 
@@ -36,6 +35,10 @@ namespace EdgyBot.Modules
 
         [Command(" help --text")]
         public async Task HelpCmdAlt4()
+            => await HelpCmd("--text");
+
+        [Command("help -text")]
+        public async Task HelpCmdAlt5()
             => await HelpCmd("--text");
 
         [Command("help", RunMode = RunMode.Async), Alias("commands")]
