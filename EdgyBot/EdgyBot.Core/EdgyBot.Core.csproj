@@ -22,7 +22,6 @@
     <PackageReference Include="DiscordBotsList.Api" Version="1.3.0" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.2" />
-	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
 	<PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0-preview2-final" />
 	<PackageReference Include="SharpLink" Version="1.0.0-beta-0005" />
