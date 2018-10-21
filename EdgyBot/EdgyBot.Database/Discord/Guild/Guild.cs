@@ -5,7 +5,7 @@ namespace EdgyBot.Database
 {
     public class Guild
     {
-        private ulong _guildId;
+        private readonly ulong _guildId;
 
         private GuildData guildData = null;
 
