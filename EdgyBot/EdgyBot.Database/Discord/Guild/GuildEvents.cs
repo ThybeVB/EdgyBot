@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EdgyBot.Database.Discord
 {
-    class GuildEvents
+    public class GuildEvents
     {
     }
 }
