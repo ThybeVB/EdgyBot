@@ -34,7 +34,7 @@ namespace EdgyBot.Modules
                 try
                 {
                     Guild guild = new Guild(Context.Guild.Id);
-                    await guild.EnableCommand(Context.Guild.Id, cmd.Name);
+                    await guild.EnableCommand(cmd.Name);
 
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully enabled command ``{cmd.Name}``"));
                 }
@@ -50,31 +50,32 @@ namespace EdgyBot.Modules
 
         //[Command("disabledcommands", RunMode = RunMode.Async)]
         //[Name("disabledcommands"), Summary("The disabled commands for the guild")]
-        public async Task DisabledCommandsCmd () 
-        {
-            DatabaseConnection connection = new DatabaseConnection();
-            await connection.ConnectAsync();
-
-            if (connection.OpenConnection()) 
-            {
-                try {
-                    Guild guild = new Guild(Context.Guild.Id);
-                    string[] split  = await guild.GetDisabledCommands();
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("```");
-                    foreach (string entry in split) {
-                        sb.Append($"{entry}\n");
-                    }
-                    sb.Append("```");
-
-                    await ReplyAsync(sb.ToString());
-                    
-                } catch (Exception e) {
-                    await ReplyAsync("Error: " + e.Message);
-                }
-            }
-        }
+        //public async Task DisabledCommandsCmd () 
+        //{
+        //    DatabaseConnection connection = new DatabaseConnection();
+        //    await connection.ConnectAsync();
+        //
+        //    if (connection.OpenConnection()) 
+        //    {
+        //        try {
+        //            Guild guild = new Guild(Context.Guild.Id);
+        //            string[] split  = await guild.GetDisabledCommands();
+        //
+        //            StringBuilder sb = new StringBuilder();
+        //            sb.Append("```");
+        //            foreach (string entry in split) {
+        //                sb.Append($"{entry}\n");
+        //            }
+        //            sb.Append("```");
+        //
+        //            await ReplyAsync(sb.ToString());
+        //            
+        //        } catch (Exception e) {
+        //            await ReplyAsync("Error: " + e.Message);
+        //        }
+        //    }
+        //}
+        //Put on hold
 
         [Command("disablecommand", RunMode = RunMode.Async)]
         [RequireUserPermission(GuildPermission.ManageGuild)]
@@ -98,7 +99,7 @@ namespace EdgyBot.Modules
                 try
                 {
                     Guild guild = new Guild(Context.Guild.Id);
-                    await guild.DisableCommand(Context.Guild.Id, cmd.Name);
+                    await guild.DisableCommand(cmd.Name);
 
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully disabled command ``{cmd.Name}``"));
                 }

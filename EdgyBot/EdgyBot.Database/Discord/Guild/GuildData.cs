@@ -1,63 +1,17 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Data;
+using System.Threading.Tasks;
 
-namespace EdgyBot.Database
+namespace EdgyBot.Database.Discord
 {
-    public class Guild
+    public class GuildData
     {
-        private ulong _guildId;
+        private readonly ulong _guildId = 0;
 
-        public Guild (ulong guildId)
+        public GuildData (ulong guildId)
         {
             _guildId = guildId;
-        }
-
-        public async Task<string[]> GetDisabledCommands () 
-        {
-            int fields = GetDisabledCommandsInt();
-            string[] commands = new string[fields];
-            for (int fieldLocal = 0; fieldLocal < fields; fields++) 
-            {
-                commands[fieldLocal] = GetCommandForField(fieldLocal);
-                fieldLocal++;
-            }
-            return commands;
-        }
-        
-        private string GetCommandForField(int field)
-        {
-            Connection connection = DatabaseConnection.connection;
-
-            throw new NotImplementedException();
-        }
-
-        private int GetDisabledCommandsInt () 
-        {
-            Connection connection = DatabaseConnection.connection;
-            connection.connectionObject.Open();
-
-            using (SqliteTransaction transaction = connection.connectionObject.BeginTransaction())
-            {
-                SqliteCommand selectCmd = connection.connectionObject.CreateCommand();
-                selectCmd.Transaction = transaction;
-                selectCmd.CommandText = $"SELECT guildID FROM blacklistedcommands WHERE guildID={_guildId}";
-
-                var reader = selectCmd.ExecuteReader();
-                int tries = 0;
-                int disabledCommands = 0;
-                while (reader.Read())
-                {
-                    //f
-
-                    transaction.Commit();
-                    connection.connectionObject.Close();
-                    transaction.Dispose();
-                }
-
-                return disabledCommands;
-            }
         }
 
         public bool CommandDisabled(string rawCommand)
@@ -77,7 +31,8 @@ namespace EdgyBot.Database
                 while (reader.Read())
                 {
                     string value = reader.GetString(attempt);
-                    if (!string.IsNullOrEmpty(value)) {
+                    if (!string.IsNullOrEmpty(value))
+                    {
                         if (value == rawCommand)
                         {
                             exists = true;
@@ -92,7 +47,8 @@ namespace EdgyBot.Database
                         connection.connectionObject.Close();
                         transaction.Dispose();
                         return exists;
-                    } else
+                    }
+                    else
                     {
                         attempt++;
                     }
@@ -106,20 +62,21 @@ namespace EdgyBot.Database
             }
         }
 
-        public async Task ChangePrefix (string prefix)
+        public async Task ChangePrefix(string prefix)
         {
             SQLProcessor processor = new SQLProcessor(DatabaseConnection.connection);
 
             if (CheckIfRegisteredAsync(_guildId))
             {
                 await UpdateGuildPrefix(_guildId, prefix);
-            } else
+            }
+            else
             {
                 await InsertGuildPrefix(_guildId, prefix);
             }
         }
 
-        public string GetPrefix ()
+        public string GetPrefix()
         {
             var connection = DatabaseConnection.connection;
 
@@ -149,19 +106,19 @@ namespace EdgyBot.Database
             }
         }
 
-        public async Task EnableCommand(ulong guildID, string cmdName)
+        public async Task EnableCommand(string cmdName)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
-            await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE guildID={guildID} and command='{cmdName}'");
+            await sql.ExecuteQueryAsync($"DELETE FROM blacklistedcommands WHERE guildID={_guildId} and command='{cmdName}'");
         }
 
-        public async Task DisableCommand(ulong guildID, string cmdName)
+        public async Task DisableCommand(string cmdName)
         {
             SQLProcessor sql = new SQLProcessor(DatabaseConnection.connection);
             if (CommandDisabled(cmdName))
                 return;
-            
-            await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({guildID}, '{cmdName}')");
+
+            await sql.ExecuteQueryAsync($"INSERT INTO blacklistedcommands (guildID, command) VALUES ({_guildId}, '{cmdName}')");
         }
 
         private async Task InsertGuildPrefix(ulong guildId, string newPrefix)
@@ -206,7 +163,8 @@ namespace EdgyBot.Database
                     if (id == guildID)
                         x = true;
 
-                } catch
+                }
+                catch
                 {
                     x = false;
                 }

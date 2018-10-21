@@ -139,8 +139,7 @@ namespace EdgyBot.Core.Handler
 
             CurrentStats = stats;
 
-            /*Temporary! */
-            //await edgyApi.PostStatsAsync(stats);
+            await edgyApi.PostStatsAsync(stats);
             
 
             if (inGuild)
