@@ -147,7 +147,7 @@ namespace EdgyBot.Core.Handler
 
             await _bfdPinger.PostServerCountAsync(ServerCount);
             await _dbPinger.PostServerCountAsync(ServerCount);
-            await dblPinger.UpdateDBLStatsAsync(ServerCount);
+            await dblPinger.PostServerCountAsync(ServerCount, _client.Shards.Count);
             await dblComPinger.PostServerCountAsync(ServerCount);
             await blspPinger.PostServerCountAsync(ServerCount);
         }
