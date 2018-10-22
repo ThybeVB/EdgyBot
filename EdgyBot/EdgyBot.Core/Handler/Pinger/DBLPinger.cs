@@ -15,7 +15,6 @@ namespace EdgyBot.Core.Handler.API
         {
             var dict = new Dictionary<string, object>();
             dict.Add("server_count", serverCount);
-            dict.Add("shards", shardCount);
 
             try { helper.postBotlist(dict, Botlist.DBL); }
             catch (Exception e)

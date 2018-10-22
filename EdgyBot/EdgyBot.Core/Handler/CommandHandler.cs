@@ -39,7 +39,7 @@ namespace EdgyBot.Core.Handler
             _prefix = _coreLib.GetPrefix();
 
             await _lib.EdgyLog(LogSeverity.Info, $"EdgyBot v{Assembly.GetExecutingAssembly().GetName().Version}");
-            await _lib.EdgyLog(LogSeverity.Info, $"Loading EdgyBot with {_client.Shards.Count} Shard for {_client.Guilds.Count} Guilds.");
+            await _lib.EdgyLog(LogSeverity.Info, $"Loading EdgyBot with {_client.Shards.Count} Shards");
 
             _manager.Log += _lib.LavalinkLog;
 
