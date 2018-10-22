@@ -34,6 +34,8 @@ namespace EdgyBot.Core.Lib
                     return Bot.Credentials.dbToken;
                 case Botlist.LISTSPACE:
                     return Bot.Credentials.blsToken;
+                case Botlist.DBL:
+                    return Bot.Credentials.dblToken;
                 case Botlist.DBLCOM:
                     return "Bot " + Bot.Credentials.dblComToken;
             }

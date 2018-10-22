@@ -13,6 +13,7 @@ namespace EdgyBot.Core.Handler.API
         LISTSPACE,
         DISCORDBOTS,
         BFD,
+        DBL,
         DBLCOM
     }
 

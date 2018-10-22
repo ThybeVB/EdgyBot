@@ -1,37 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DiscordBotsList.Api;
 using Discord;
 using EdgyBot.Core.Lib;
-using DiscordBotsList.Api.Objects;
+using System.Collections.Generic;
 
 namespace EdgyBot.Core.Handler.API
 {
     public class DBLPinger
     {
-        private LibEdgyCore _lib = new LibEdgyCore();
-        private LibEdgyBot lib = new LibEdgyBot();
+        private JsonHelper helper = new JsonHelper("https://discordbots.org/api/bots/" + Bot.Credentials.clientID + "/stats");
+        private LibEdgyBot _lib = new LibEdgyBot();
 
-        private AuthDiscordBotListApi dblApi;
-
-        public DBLPinger ()
+        public async Task PostServerCountAsync(int serverCount, int shardCount)
         {
-            string dblToken = _lib.GetDBLToken();
-            if (string.IsNullOrEmpty(dblToken))
-                return;
-            
-            dblApi = new AuthDiscordBotListApi(_lib.GetBotId(), dblToken);
-        }
+            var dict = new Dictionary<string, object>();
+            dict.Add("server_count", serverCount);
+            dict.Add("shards", shardCount);
 
-        public async Task UpdateDBLStatsAsync (int serverCount)
-        {
-            try
+            try { helper.postBotlist(dict, Botlist.DBL); }
+            catch (Exception e)
             {
-                IDblSelfBot self = await dblApi.GetMeAsync();
-                await self.UpdateStatsAsync(serverCount);
-            } catch (Exception e)
-            {
-                await lib.EdgyLog(LogSeverity.Error, e.Message);
+                await _lib.EdgyLog(LogSeverity.Error, "Failed to post data to DBL:\n" + e.Message);
             }
         }
     }
