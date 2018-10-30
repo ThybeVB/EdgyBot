@@ -20,6 +20,10 @@ namespace EdgyBot.Modules
             _service = service;
         }
 
+        [Command("help ~~text")]
+        public async Task HelpCmdAlt0()
+            => await HelpCmd("--text");
+
         [Command("help--text")]
         public async Task HelpCmdAlt1 ()
             => await HelpCmd("--text");
