@@ -13,7 +13,6 @@ namespace EdgyBot.Core
     {
         public static Credentials Credentials;
         private readonly LibEdgyCore _core = new LibEdgyCore();
-        private LavalinkManager _manager;
 
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
@@ -24,19 +23,8 @@ namespace EdgyBot.Core
 
         public async Task StartAsync ()
         {
-            _manager = new LavalinkManager(Client, new LavalinkManagerConfig
-            {
-                RESTHost = "localhost",
-                RESTPort = 2333,
-                WebSocketHost = "localhost",
-                WebSocketPort = 1337,
-                Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
-                TotalShards = 3,
-                LogSeverity = LogSeverity.Verbose
-            });
-
             Credentials = new CredentialsManager().Read();
-            Handler.EventHandler handler = new Handler.EventHandler(Client, _manager);
+            Handler.EventHandler handler = new Handler.EventHandler(Client, new Victoria.Lavalink());
             await new CommandHandler().InitializeAsync(Client, handler.GetLavaManager());
             await Client.LoginAsync(TokenType.Bot, Credentials.token);
             await Client.StartAsync();

@@ -6,13 +6,14 @@ using Discord;
 using Discord.WebSocket;
 using SharpLink;
 using EdgyBot.Core.Models;
+using Victoria;
 
 namespace EdgyBot.Core.Handler
 {
     public class EventHandler
     {
         private static DiscordShardedClient _client;
-        private LavalinkManager _lavaLink;
+        private Lavalink _lavaLink;
         private int _shardsConnected = 0;
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
@@ -30,7 +31,7 @@ namespace EdgyBot.Core.Handler
         public static StatsModel CurrentStats;
         public static SocketUser OwnerUser;
 
-        public EventHandler(DiscordShardedClient client, LavalinkManager lavalink)
+        public EventHandler(DiscordShardedClient client, Lavalink lavalink)
         {
             _client = client;
             _lavaLink = lavalink;
@@ -44,7 +45,7 @@ namespace EdgyBot.Core.Handler
             _client.UserLeft += UserUpdated;
         }
 
-        public LavalinkManager GetLavaManager ()
+        public Lavalink GetLavaManager ()
         {
             return _lavaLink;
         }
@@ -56,8 +57,18 @@ namespace EdgyBot.Core.Handler
             if (_shardsConnected == _client.Shards.Count)
             {
                 await SetupBot();
-                await _lavaLink.StartAsync();
                 await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected ({_client.Shards.Count})");
+
+                LavaNode node = await _lavaLink.ConnectAsync(_client, new LavaConfig
+                {
+                    MaxTries = 5,
+                    Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
+                    Endpoint = new Endpoint
+                    {
+                        Port = 2333,
+                        Host = "localhost"
+                    }
+                });
             }  
         }
 

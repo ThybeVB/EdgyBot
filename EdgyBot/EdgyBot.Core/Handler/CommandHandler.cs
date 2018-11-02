@@ -11,6 +11,7 @@ using EdgyBot.Modules;
 using EdgyBot.Core.Lib;
 using EdgyBot.Database;
 using SharpLink;
+using Victoria;
 
 namespace EdgyBot.Core.Handler
 {
@@ -23,14 +24,14 @@ namespace EdgyBot.Core.Handler
         private CommandService commandService;
         private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-        private LavalinkManager _manager;
+        private Lavalink _manager;
 
         public static int CommandsRan = 0;
 
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 
-        public async Task InitializeAsync(DiscordShardedClient client, LavalinkManager lavalink)
+        public async Task InitializeAsync(DiscordShardedClient client, Lavalink lavalink)
         {
             _client = client;
             _manager = lavalink;
