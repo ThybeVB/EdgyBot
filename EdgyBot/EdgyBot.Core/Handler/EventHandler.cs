@@ -4,7 +4,6 @@ using EdgyBot.Core.Handler.API;
 using EdgyBot.Core.Lib;
 using Discord;
 using Discord.WebSocket;
-using SharpLink;
 using EdgyBot.Core.Models;
 using Victoria;
 using EdgyBot.Services;

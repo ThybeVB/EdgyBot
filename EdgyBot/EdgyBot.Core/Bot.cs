@@ -5,7 +5,6 @@ using EdgyBot.Core.Handler;
 using EdgyBot.Core.Lib;
 using Discord;
 using Discord.WebSocket;
-using SharpLink;
 
 namespace EdgyBot.Core
 {

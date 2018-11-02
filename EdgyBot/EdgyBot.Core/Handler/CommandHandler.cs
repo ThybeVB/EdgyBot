@@ -10,7 +10,6 @@ using Discord.Addons.Interactive;
 using EdgyBot.Modules;
 using EdgyBot.Core.Lib;
 using EdgyBot.Database;
-using SharpLink;
 using Victoria;
 using EdgyBot.Services;
 

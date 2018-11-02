@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using SharpLink;
 using EdgyBot.Core.Lib;
 using Victoria;
 using EdgyBot.Services;
@@ -22,7 +21,7 @@ namespace EdgyBot.Modules
             _service = service;
         }
 
-        private Embed GetTrackInfoEmbed (LavalinkTrack track, IUser requester)
+        private Embed GetTrackInfoEmbed (LavaTrack track, IUser requester)
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, $"{requester.Username}#{requester.DiscriminatorValue}");
 
@@ -95,17 +94,22 @@ namespace EdgyBot.Modules
             var player = node.GetPlayer(Context.Guild.Id);
             player.Stop();
             await player.VoiceChannel.DisconnectAsync();
-            //LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id);
-            //await player.StopAsync();
-            //await _lavaManager.LeaveAsync(Context.Guild.Id);
         }
 
         [Command("setvolume"), Alias("volume")]
         [Name("setvolume"), Summary("Sets the volume of the music.")]
-        public async Task SetVolumeCmd(uint volume)
+        public async Task SetVolumeCmd(int volume)
         {
-            //LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id);
-            //await player.SetVolumeAsync(volume);
+            LavaNode node = _service.GetNode();
+            var player = node.GetPlayer(Context.Guild.Id);
+            try
+            {
+                player.Volume(volume);
+                await ReplyAsync("Set Volume to " + volume + "%");
+            } catch
+            {
+                await ReplyAsync("Could not set volume to " + volume + "%");
+            }
         }
     }
 }
