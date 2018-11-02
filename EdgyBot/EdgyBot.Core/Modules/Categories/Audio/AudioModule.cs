@@ -5,7 +5,6 @@ using Discord.Commands;
 using EdgyBot.Core.Lib;
 using Victoria;
 using EdgyBot.Services;
-using System.Collections.Generic;
 using Victoria.Objects;
 
 namespace EdgyBot.Modules
@@ -29,6 +28,7 @@ namespace EdgyBot.Modules
             eb.AddField("Song Title", track.Title);
             eb.AddField("Author", track.Author);
             eb.AddField("Length", track.Length);
+            eb.AddField("URL", $"[{track.Title}]({track.Uri.ToString()})");
 
             return eb.Build();
         }
@@ -41,22 +41,26 @@ namespace EdgyBot.Modules
 
             var player = await node.JoinAsync((Context.User as IVoiceState).VoiceChannel, Context.Channel);
 
-            var search = await node.GetTracksAsync($"scsearch:{query}");
+            var search = await node.SearchSoundCloudAsync(query);
             var track = search.Tracks.FirstOrDefault();
 
             player.Play(track);
+            await ReplyAsync("", embed: GetTrackInfoEmbed(track, Context.User));
         }
-    
+
         [Command("youtube", RunMode = RunMode.Async), Alias("play")]
         [Name("youtube"), Summary("Plays a song from YouTube")]
         public async Task YouTubeCmd ([Remainder]string query)
         {
-            //LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id) ?? await _lavaManager.JoinAsync((Context.User as IVoiceState).VoiceChannel);
-            //LoadTracksResponse r = await _lavaManager.GetTracksAsync($"ytsearch:{query}");
-            //LavalinkTrack tr = r.Tracks.First();
-            //
-            //await player.PlayAsync(tr);
-            //await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
+            LavaNode node = _service.GetNode();
+
+            var player = await node.JoinAsync((Context.User as IVoiceState).VoiceChannel, Context.Channel);
+
+            var search = await node.SearchYouTubeAsync(query);
+            var track = search.Tracks.FirstOrDefault();
+
+            player.Play(track);
+            await ReplyAsync("", embed: GetTrackInfoEmbed(track, Context.User));
         }
 
         [Command("httpplay")]
@@ -68,22 +72,6 @@ namespace EdgyBot.Modules
             //
             //await player.PlayAsync(tr);
             //await ReplyAsync("", embed: GetTrackInfoEmbed(tr, Context.User));
-        }
-    
-        [Command("pause")]
-        [Name("pause"), Summary("Pause the currently playing Audio")]
-        public async Task PauseCmd ()
-        {
-            //LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id);
-            //await player.PauseAsync();
-        }
-    
-        [Command("resume")]
-        [Name("resume"), Summary("Resume the currently paused Audio")]
-        public async Task ResumeCmd()
-        {
-            //LavalinkPlayer player = _lavaManager.GetPlayer(Context.Guild.Id);
-            //await player.ResumeAsync();
         }
     
         [Command("stop")]
