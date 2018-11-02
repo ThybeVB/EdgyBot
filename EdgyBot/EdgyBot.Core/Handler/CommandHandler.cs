@@ -12,6 +12,7 @@ using EdgyBot.Core.Lib;
 using EdgyBot.Database;
 using SharpLink;
 using Victoria;
+using EdgyBot.Services;
 
 namespace EdgyBot.Core.Handler
 {
@@ -65,6 +66,7 @@ namespace EdgyBot.Core.Handler
             return new ServiceCollection()
                 .AddSingleton(new InteractiveService(_client))
                 .AddSingleton(_manager)
+                .AddSingleton(new AudioService(_manager))
                 .BuildServiceProvider();
         }
 

@@ -7,6 +7,7 @@ using Discord.WebSocket;
 using SharpLink;
 using EdgyBot.Core.Models;
 using Victoria;
+using EdgyBot.Services;
 
 namespace EdgyBot.Core.Handler
 {
@@ -30,11 +31,13 @@ namespace EdgyBot.Core.Handler
         public static int ServerCount;
         public static StatsModel CurrentStats;
         public static SocketUser OwnerUser;
+        public static LavaNode Node;
 
         public EventHandler(DiscordShardedClient client, Lavalink lavalink)
         {
             _client = client;
             _lavaLink = lavalink;
+            _lavaLink.Log += _lib.LavalinkLog;
 
             _client.Log += _lib.Log;
             _client.ShardReady += ShardReady;
@@ -65,10 +68,11 @@ namespace EdgyBot.Core.Handler
                     Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
                     Endpoint = new Endpoint
                     {
-                        Port = 2333,
-                        Host = "localhost"
+                        Port = 1337,
+                        Host = "127.0.0.1"
                     }
                 });
+                Node = node;
             }  
         }
 
