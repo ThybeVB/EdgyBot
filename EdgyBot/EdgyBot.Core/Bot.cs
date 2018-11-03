@@ -17,7 +17,7 @@ namespace EdgyBot.Core
         {
             LogLevel = LogSeverity.Info,
             MessageCacheSize = 25,
-            TotalShards = 1
+            TotalShards = 3
         });
 
         public async Task StartAsync ()
