@@ -20,29 +20,28 @@ namespace EdgyBot.Core.Handler
         private string _prefix = "e!";
 
         private DiscordShardedClient _client;
-        private IServiceProvider _service;
-        private CommandService commandService;
         private DatabaseConnection databaseConnection = new DatabaseConnection();
-
-        private Lavalink _manager;
 
         public static int CommandsRan = 0;
 
         private readonly LibEdgyCore _coreLib = new LibEdgyCore();
         private readonly LibEdgyBot _lib = new LibEdgyBot();
+        private IServiceProvider _provider;
+        private CommandService commandService;
 
-        public async Task InitializeAsync(DiscordShardedClient client, Lavalink lavalink)
+        public CommandHandler (CommandService service)
+        {
+            commandService = service;
+        }
+
+        public async Task InitializeAsync(DiscordShardedClient client, IServiceProvider provider)
         {
             _client = client;
-            _manager = lavalink;
-
-            _service = ConfigureServices();
+            _provider = provider;
             _prefix = _coreLib.GetPrefix();
 
             await _lib.EdgyLog(LogSeverity.Info, $"EdgyBot v{Assembly.GetExecutingAssembly().GetName().Version}");
             await _lib.EdgyLog(LogSeverity.Info, $"Loading EdgyBot with {_client.Shards.Count} Shards");
-
-            _manager.Log += _lib.LavalinkLog;
 
             await databaseConnection.ConnectAsync();
             databaseConnection.OpenConnection();
@@ -53,20 +52,11 @@ namespace EdgyBot.Core.Handler
                 CaseSensitiveCommands = false,
                 IgnoreExtraArgs = true
             });
-            await commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), _service);
+            await commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), provider);
 
             new HelpCommand(commandService);
 
             _client.MessageReceived += HandleCommandAsync;
-        }
-
-        private IServiceProvider ConfigureServices ()
-        {
-            return new ServiceCollection()
-                .AddSingleton(new InteractiveService(_client))
-                .AddSingleton(_manager)
-                .AddSingleton(new AudioService(_manager))
-                .BuildServiceProvider();
         }
 
         private async Task HandleCommandAsync(SocketMessage s)
@@ -88,7 +78,7 @@ namespace EdgyBot.Core.Handler
                     return;
 
                 CommandsRan++;
-                IResult result = await commandService.ExecuteAsync(context, argPos, _service);             
+                IResult result = await commandService.ExecuteAsync(context, argPos, _provider);             
 
                 if (!result.IsSuccess)
                 {

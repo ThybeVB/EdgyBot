@@ -10,7 +10,7 @@ using EdgyBot.Services;
 
 namespace EdgyBot.Core.Handler
 {
-    public class EventHandler
+    public class EventHandler : BaseService
     {
         private static DiscordShardedClient _client;
         private Lavalink _lavaLink;
@@ -71,7 +71,7 @@ namespace EdgyBot.Core.Handler
                         Host = "127.0.0.1"
                     }
                 });
-                Node = node;
+                Audio.Initialize(node);
             }  
         }
 
