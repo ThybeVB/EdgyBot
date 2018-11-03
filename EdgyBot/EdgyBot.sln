@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot.Database", "EdgyBot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{A014CA88-DB89-4867-A007-44BE7CF7EAFC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Victoria", "Victoria\Victoria.csproj", "{C77C2401-9824-4E98-A736-A91EA702D7C5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
