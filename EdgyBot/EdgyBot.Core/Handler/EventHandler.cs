@@ -4,15 +4,18 @@ using EdgyBot.Core.Handler.API;
 using EdgyBot.Core.Lib;
 using Discord;
 using Discord.WebSocket;
-using SharpLink;
 using EdgyBot.Core.Models;
+using Victoria;
+using EdgyBot.Services;
+using HyperEx;
 
 namespace EdgyBot.Core.Handler
 {
-    public class EventHandler
+    [Inject]
+    public class EventHandler : BaseService
     {
         private static DiscordShardedClient _client;
-        private LavalinkManager _lavaLink;
+        private Lavalink _lavaLink;
         private int _shardsConnected = 0;
 
         private LibEdgyCore _coreLib = new LibEdgyCore();
@@ -29,11 +32,13 @@ namespace EdgyBot.Core.Handler
         public static int ServerCount;
         public static StatsModel CurrentStats;
         public static SocketUser OwnerUser;
+        public static LavaNode Node;
 
-        public EventHandler(DiscordShardedClient client, LavalinkManager lavalink)
+        public EventHandler(DiscordShardedClient client, Lavalink lavalink)
         {
             _client = client;
             _lavaLink = lavalink;
+            _lavaLink.Log += _lib.LavalinkLog;
 
             _client.Log += _lib.Log;
             _client.ShardReady += ShardReady;
@@ -44,7 +49,7 @@ namespace EdgyBot.Core.Handler
             _client.UserLeft += UserUpdated;
         }
 
-        public LavalinkManager GetLavaManager ()
+        public Lavalink GetLavaManager ()
         {
             return _lavaLink;
         }
@@ -56,8 +61,21 @@ namespace EdgyBot.Core.Handler
             if (_shardsConnected == _client.Shards.Count)
             {
                 await SetupBot();
-                await _lavaLink.StartAsync();
                 await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected ({_client.Shards.Count})");
+
+                LavaNode node = await _lavaLink.ConnectAsync(_client, new LavaConfig
+                {
+                    MaxTries = 5,
+                    Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
+                    Endpoint = new Endpoint
+                    {
+                        Port = 1337,
+                        Host = "127.0.0.1"
+                    },
+                    Severity = LogSeverity.Verbose,
+                    BufferSize = 1024
+                });
+                Audio.Initialize(node);
             }  
         }
 
@@ -121,9 +139,10 @@ namespace EdgyBot.Core.Handler
             if (!StatusIsCustom)
                 await _client.SetGameAsync(gameStatus);
 
-            
-            StatsModel stats = new StatsModel();
-            stats.shards = new Shard[_client.Shards.Count];
+
+            StatsModel stats = new StatsModel {
+                shards = new Shard[_client.Shards.Count]
+            };
             for (int x = 0; x != _client.Shards.Count; x++)
             {
                 int serverCount = _client.GetShard(x).Guilds.Count;

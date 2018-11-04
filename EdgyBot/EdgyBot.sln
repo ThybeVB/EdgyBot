@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord.Addons.Interactive"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot.Database", "EdgyBot.Database\EdgyBot.Database.csproj", "{74FF33A6-A74D-4F94-91D5-DF86D107A2FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{A014CA88-DB89-4867-A007-44BE7CF7EAFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgyBot", "EdgyBot\EdgyBot.csproj", "{A014CA88-DB89-4867-A007-44BE7CF7EAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +42,12 @@ Global
 		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.EdgyBot|Any CPU.Build.0 = Debug|Any CPU
 		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A014CA88-DB89-4867-A007-44BE7CF7EAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.EdgyBot|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.EdgyBot|Any CPU.Build.0 = Debug|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77C2401-9824-4E98-A736-A91EA702D7C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,7 @@ build_script:
   - cmd: dotnet publish ./EdgyBot/EdgyBot/EdgyBot.csproj
   - cmd: dotnet publish ./EdgyBot/Discord.Addons.Interactive/Discord.Addons.Interactive.csproj
   - cmd: dotnet publish ./EdgyBot/EdgyBot.Database/EdgyBot.Database.csproj
+  
 after_build:
 
 artifacts:
