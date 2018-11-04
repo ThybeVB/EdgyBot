@@ -1,13 +1,11 @@
-﻿using Discord;
-using HyperEx;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HyperEx;
 using Victoria;
 using Victoria.Objects;
 using Victoria.Objects.Enums;
+using Discord;
 
 namespace EdgyBot.Services
 {
@@ -15,16 +13,13 @@ namespace EdgyBot.Services
     public sealed class AudioService : BaseService
     {
         private LavaNode _lavaNode;
-        private readonly ConcurrentDictionary<ulong, (LavaTrack Track, List<ulong> Votes)> _voteSkip;
 
-        public AudioService ()
-        {
-            _voteSkip = new ConcurrentDictionary<ulong, (LavaTrack Track, List<ulong> Votes)>();
-        }
+        public AudioService () {}
 
         public void Initialize(LavaNode node)
         {
             _lavaNode = node;
+
             node.Stuck += OnStuck;
             node.Finished += OnFinished;
             node.Exception += OnException;
@@ -33,22 +28,6 @@ namespace EdgyBot.Services
         public async Task<LavaTrack> PlayYouTubeAsync(ulong guildId, string query)
         {
             var search = await _lavaNode.SearchYouTubeAsync(query);
-
-            var track = search.Tracks.FirstOrDefault();
-            var player = _lavaNode.GetPlayer(guildId);
-            if (player.CurrentTrack != null)
-            {
-                player.Enqueue(track);
-                return track;
-            }
-
-            player.Play(track);
-            return track;
-        }
-
-        public async Task<LavaTrack> PlaySoundcloudAsync(ulong guildId, string query)
-        {
-            var search = await _lavaNode.SearchSoundCloudAsync(query);
 
             var track = search.Tracks.FirstOrDefault();
             var player = _lavaNode.GetPlayer(guildId);
@@ -86,40 +65,12 @@ namespace EdgyBot.Services
             return leave ? "Disconnected" : "I'm not connected!";
         }
 
-        public string Pause(ulong guildId)
-        {
-            var player = _lavaNode.GetPlayer(guildId);
-            try
-            {
-                player.Pause();
-                return $"**Paused:** {player.CurrentTrack.Title}";
-            }
-            catch
-            {
-                return "Not playing anything currently.";
-            }
-        }
-
-        public string Resume(ulong guildId)
-        {
-            var player = _lavaNode.GetPlayer(guildId);
-            try
-            {
-                player.Resume();
-                return $"**Resumed:** {player.CurrentTrack.Title}";
-            }
-            catch
-            {
-                return "Not playing anything currently.";
-            }
-        }
-
         public string DisplayQueue(ulong guildId)
         {
             var player = _lavaNode.GetPlayer(guildId);
             try
             {
-                return string.Join("\n", player.Queue[guildId].Select(x => $"=> {x.Title}")) ?? "Your queue is empty.";
+                return string.Join("\n", player.Queue.Select(x => $"=> {x.Title}")) ?? "Your queue is empty.";
             }
             catch
             {
@@ -182,27 +133,11 @@ namespace EdgyBot.Services
 
         public async Task<string> SkipAsync(ulong guildId, ulong userId)
         {
-            var player = _lavaNode.GetPlayer(guildId);
-            try
-            {
-                //var users = (await player.VoiceChannel.GetUsersAsync().FlattenAsync()).Count(x => !x.IsBot);
-                //if (!_voteSkip.ContainsKey(guildId))
-                //    _voteSkip.TryAdd(guildId, (player.CurrentTrack, new List<ulong>()));
-                //_voteSkip.TryGetValue(guildId, out
-                // var skipInfo);
-                //
-                //if (!skipInfo.Votes.Contains(userId)) skipInfo.Votes.Add(userId);
-                //var perc = (int)Math.Round((double)(100 * skipInfo.Votes.Count) / users);
-                //if (perc <= 50) return "More votes needed.";
-                //_voteSkip.TryUpdate(guildId, skipInfo, skipInfo);
-                player.Stop();
-                return $"**Skipped:** {player.CurrentTrack.Title}";
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine(e.Message);
-                return "Not playing anything currently.";
-            }
+            LavaPlayer player = _lavaNode.GetPlayer(guildId);
+            player.Skip();
+
+            return $"**Skipped:** {player.CurrentTrack.Title}";
+            
         }
 
         public async Task ConnectAsync(ulong guildId, IVoiceState state, IMessageChannel channel)
@@ -214,7 +149,8 @@ namespace EdgyBot.Services
             }
 
             var player = await _lavaNode.JoinAsync(state.VoiceChannel, channel);
-            player.Queue.TryAdd(guildId, new LinkedList<LavaTrack>());
+
+            //player.Queue.TryAdd(guildId, new LinkedList<LavaTrack>());
         }
 
         public async Task<string> DisconnectAsync(ulong guildId) => await _lavaNode.LeaveAsync(guildId) ? "Disconnected." : "Not connected to any voice channels.";
@@ -224,8 +160,7 @@ namespace EdgyBot.Services
             if (player == null)
                 return;
             player.Dequeue(track);
-            player.Queue.TryGetValue(player.Guild.Id, out
-             var queue);
+            var queue = player.Queue;
             var nextTrack = queue.Count == 0 ? null : queue.First?.Value ?? queue.First?.Next?.Value;
 
             if (nextTrack == null)
@@ -235,7 +170,6 @@ namespace EdgyBot.Services
             }
 
             player.Play(nextTrack);
-            //await player.TextChannel.SendMessageAsync($"**Now Playing:** {track.Title}");
         }
 
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
