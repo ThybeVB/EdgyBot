@@ -7,9 +7,11 @@ using Discord.WebSocket;
 using EdgyBot.Core.Models;
 using Victoria;
 using EdgyBot.Services;
+using HyperEx;
 
 namespace EdgyBot.Core.Handler
 {
+    [Inject]
     public class EventHandler : BaseService
     {
         private static DiscordShardedClient _client;
@@ -63,13 +65,15 @@ namespace EdgyBot.Core.Handler
 
                 LavaNode node = await _lavaLink.ConnectAsync(_client, new LavaConfig
                 {
-                    MaxTries = 1,
+                    MaxTries = 5,
                     Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
                     Endpoint = new Endpoint
                     {
                         Port = 1337,
                         Host = "127.0.0.1"
-                    }
+                    },
+                    Severity = LogSeverity.Verbose,
+                    BufferSize = 1024
                 });
                 Audio.Initialize(node);
             }  
@@ -135,9 +139,10 @@ namespace EdgyBot.Core.Handler
             if (!StatusIsCustom)
                 await _client.SetGameAsync(gameStatus);
 
-            
-            StatsModel stats = new StatsModel();
-            stats.shards = new Shard[_client.Shards.Count];
+
+            StatsModel stats = new StatsModel {
+                shards = new Shard[_client.Shards.Count]
+            };
             for (int x = 0; x != _client.Shards.Count; x++)
             {
                 int serverCount = _client.GetShard(x).Guilds.Count;

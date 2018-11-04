@@ -1,19 +1,17 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using EdgyBot.Core.Lib;
 using Victoria;
 using EdgyBot.Services;
 using Victoria.Objects;
-using System;
 
 namespace EdgyBot.Modules
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
     public class VoiceCommands : ModuleBase<ShardedCommandContext>
     {
-        private readonly AudioService _service;
+        private AudioService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
     
         public VoiceCommands (AudioService service)
@@ -25,7 +23,7 @@ namespace EdgyBot.Modules
         {
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults(true, $"{requester.Username}#{requester.DiscriminatorValue}");
 
-            eb.WithTitle("Playing");
+            eb.WithTitle("Added");
             eb.AddField("Song Title", track.Title);
             eb.AddField("Author", track.Author);
             eb.AddField("Length", track.Length);
@@ -61,8 +59,6 @@ namespace EdgyBot.Modules
         [Command("skip")]
         public async Task SkipCmd ()
             => await _service.Audio.SkipAsync(Context.Guild.Id, Context.User.Id);
-        
-        
 
         [Command("setvolume"), Alias("volume")]
         [Name("setvolume"), Summary("Sets the volume of the music.")]

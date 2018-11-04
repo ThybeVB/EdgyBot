@@ -1,4 +1,5 @@
 ﻿using Discord;
+using HyperEx;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,12 +11,13 @@ using Victoria.Objects.Enums;
 
 namespace EdgyBot.Services
 {
+    [Inject]
     public sealed class AudioService : BaseService
     {
         private LavaNode _lavaNode;
         private readonly ConcurrentDictionary<ulong, (LavaTrack Track, List<ulong> Votes)> _voteSkip;
 
-        public AudioService()
+        public AudioService ()
         {
             _voteSkip = new ConcurrentDictionary<ulong, (LavaTrack Track, List<ulong> Votes)>();
         }
@@ -183,16 +185,16 @@ namespace EdgyBot.Services
             var player = _lavaNode.GetPlayer(guildId);
             try
             {
-                var users = (await player.VoiceChannel.GetUsersAsync().FlattenAsync()).Count(x => !x.IsBot);
-                if (!_voteSkip.ContainsKey(guildId))
-                    _voteSkip.TryAdd(guildId, (player.CurrentTrack, new List<ulong>()));
-                _voteSkip.TryGetValue(guildId, out
-                 var skipInfo);
-
-                if (!skipInfo.Votes.Contains(userId)) skipInfo.Votes.Add(userId);
-                var perc = (int)Math.Round((double)(100 * skipInfo.Votes.Count) / users);
-                if (perc <= 50) return "More votes needed.";
-                _voteSkip.TryUpdate(guildId, skipInfo, skipInfo);
+                //var users = (await player.VoiceChannel.GetUsersAsync().FlattenAsync()).Count(x => !x.IsBot);
+                //if (!_voteSkip.ContainsKey(guildId))
+                //    _voteSkip.TryAdd(guildId, (player.CurrentTrack, new List<ulong>()));
+                //_voteSkip.TryGetValue(guildId, out
+                // var skipInfo);
+                //
+                //if (!skipInfo.Votes.Contains(userId)) skipInfo.Votes.Add(userId);
+                //var perc = (int)Math.Round((double)(100 * skipInfo.Votes.Count) / users);
+                //if (perc <= 50) return "More votes needed.";
+                //_voteSkip.TryUpdate(guildId, skipInfo, skipInfo);
                 player.Stop();
                 return $"**Skipped:** {player.CurrentTrack.Title}";
             }
@@ -233,7 +235,7 @@ namespace EdgyBot.Services
             }
 
             player.Play(nextTrack);
-            await player.TextChannel.SendMessageAsync($"**Now Playing:** {track.Title}");
+            //await player.TextChannel.SendMessageAsync($"**Now Playing:** {track.Title}");
         }
 
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
