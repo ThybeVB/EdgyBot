@@ -6,6 +6,7 @@ using Victoria;
 using Victoria.Objects;
 using Victoria.Objects.Enums;
 using Discord;
+using Discord.WebSocket;
 
 namespace EdgyBot.Services
 {
@@ -117,17 +118,12 @@ namespace EdgyBot.Services
             }
         }
 
-        public bool IsConnected (ulong guildId)
+        public bool IsConnected (SocketGuildUser user)
         {
-            try
-            {
-                var player = _lavaNode.GetPlayer(guildId);
-                if (player.IsConnected)
-                    return true;
-            } catch (NullReferenceException)
-            {
-                return false;
+            if (user.VoiceChannel != null) {
+                return true;
             }
+
             return false;
         }
 
@@ -147,6 +143,7 @@ namespace EdgyBot.Services
                 await channel.SendMessageAsync("You aren't connected to any voice channels.");
                 return;
             }
+            
 
             var player = await _lavaNode.JoinAsync(state.VoiceChannel, channel);
 

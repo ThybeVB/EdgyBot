@@ -36,7 +36,7 @@ namespace EdgyBot.Modules
         [Name("youtube"), Summary("Plays a song from YouTube")]
         public async Task YouTubeCmd ([Remainder]string query)
         {
-            if (!_service.Audio.IsConnected(Context.Guild.Id)) {
+            if (!_service.Audio.IsConnected(Context.Guild.CurrentUser)) {
                 await _service.Audio.ConnectAsync(Context.Guild.Id, (Context.User as IVoiceState), Context.Channel);
             }
             
