@@ -63,7 +63,7 @@ namespace EdgyBot.Core.Handler
 
                 LavaNode node = await _lavaLink.ConnectAsync(_client, new LavaConfig
                 {
-                    MaxTries = 5,
+                    MaxTries = 1,
                     Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
                     Endpoint = new Endpoint
                     {
