@@ -7,6 +7,7 @@ using Victoria.Objects;
 using Victoria.Objects.Enums;
 using Discord;
 using Discord.WebSocket;
+using System.Text;
 
 namespace EdgyBot.Services
 {
@@ -71,7 +72,17 @@ namespace EdgyBot.Services
             var player = _lavaNode.GetPlayer(guildId);
             try
             {
-                return string.Join("\n", player.Queue.Select(x => $"=> {x.Title}")) ?? "Your queue is empty.";
+                StringBuilder sb = new StringBuilder();
+                int trackNum = 0;
+                foreach (LavaTrack track in player.Queue.Items)
+                {
+                    if (track == null)
+                        continue;
+                    trackNum++;
+
+                    sb.Append($"{trackNum}. {track.Title}\n");
+                }
+                return sb.ToString();
             }
             catch
             {
@@ -154,31 +165,19 @@ namespace EdgyBot.Services
 
         private async Task OnFinished(LavaPlayer player, LavaTrack track, TrackReason reason)
         {
-            if (player == null)
-                return;
-            player.Dequeue(track);
-            var queue = player.Queue;
-            var nextTrack = queue.Count == 0 ? null : queue.First?.Value ?? queue.First?.Next?.Value;
 
-            if (nextTrack == null)
-            {
-                await _lavaNode.LeaveAsync(player.Guild.Id);
-                return;
-            }
-
-            player.Play(nextTrack);
         }
 
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
         {
-            player.Dequeue(track);
+            player.Dequeue();
             player.Enqueue(track);
             await player.TextChannel.SendMessageAsync($"Track {track.Title} got stuck: {arg3}. Track has been requeued.");
         }
 
         private async Task OnException(LavaPlayer player, LavaTrack track, string arg3)
         {
-            player.Dequeue(track);
+            player.Dequeue();
             player.Enqueue(track);
             await player.TextChannel.SendMessageAsync($"Track {track.Title} threw an exception: {arg3}. Track has been requeued.");
         }
