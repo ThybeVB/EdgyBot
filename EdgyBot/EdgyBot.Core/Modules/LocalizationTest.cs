@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using EdgyBot.Services;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +20,7 @@ namespace EdgyBot.Core
         [Command("l")]
         public async Task LCmd()
         {
-            await ReplyAsync("");
+            await ReplyAsync((string)_service.English["help"]["lcmd"]);
         }
     }
 }
