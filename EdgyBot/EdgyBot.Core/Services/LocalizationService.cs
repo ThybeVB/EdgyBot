@@ -8,7 +8,8 @@ namespace EdgyBot.Services
     {
         private readonly string path = "C:/EdgyBot/Localization/";
 
-        public JObject English;
+        public JObject EnglishUS;
+        public JObject DutchBE;
 
         public LocalizationService ()
         {
@@ -17,7 +18,8 @@ namespace EdgyBot.Services
 
         public void LoadAllLanguages ()
         {
-            English = FromJson(File.ReadAllText(path + "en_US.json"));
+            EnglishUS = FromJson(File.ReadAllText(path + "en_US.json"));
+            DutchBE = FromJson(File.ReadAllText(path + "nl_BE.json"));
         }
 
         public JObject FromJson (string rawJson)

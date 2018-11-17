@@ -20,7 +20,7 @@ namespace EdgyBot.Core
         [Command("l")]
         public async Task LCmd()
         {
-            await ReplyAsync((string)_service.English["help"]["lcmd"]);
+            await ReplyAsync((string)_service.DutchBE["help"]["lcmd"]);
         }
     }
 }
