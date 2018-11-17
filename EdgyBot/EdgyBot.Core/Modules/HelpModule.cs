@@ -6,6 +6,7 @@ using Discord;
 using Discord.Commands;
 using EdgyBot.Core.Lib;
 using Discord.Addons.Interactive;
+using EdgyBot.Services;
 
 namespace EdgyBot.Modules
 {

@@ -10,5 +10,6 @@ namespace EdgyBot.Services
         internal virtual IServiceProvider Provider { get; set; }
         internal virtual Lavalink Lavalink { get; set; }
         internal virtual AudioService Audio { get; set; }
+        internal virtual LocalizationService Strings { get; set; }
     }
 }
