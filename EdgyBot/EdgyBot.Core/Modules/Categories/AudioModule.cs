@@ -47,8 +47,8 @@ namespace EdgyBot.Modules
         [Command("queue"), Alias("q")]
         public async Task QueueCmd ()
         {
-            string status = _service.Audio.DisplayQueue(Context.Guild.Id);
-            await ReplyAsync(status);
+            Embed status = _service.Audio.DisplayQueue(Context.Guild.Id);
+            await ReplyAsync("", embed: status);
         }
     
         [Command("stop"), Alias("leave")]

@@ -24,7 +24,7 @@ namespace EdgyBot.Core
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
             LogLevel = LogSeverity.Info,
-            MessageCacheSize = 25,
+            MessageCacheSize = 10,
             TotalShards = 1
         });
 
@@ -54,6 +54,7 @@ namespace EdgyBot.Core
             services.AddSingleton(service);
             services.AddSingleton(client);
             services.AddSingleton<AudioService>();
+            services.AddSingleton<LocalizationService>();
             services.RegisterSubclasses(_assembly, typeof(BaseService), true);
 
             return service;

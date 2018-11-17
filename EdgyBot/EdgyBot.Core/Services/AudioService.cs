@@ -16,8 +16,6 @@ namespace EdgyBot.Services
     {
         private LavaNode _lavaNode;
 
-        public AudioService () {}
-
         public void Initialize(LavaNode node)
         {
             _lavaNode = node;
@@ -67,26 +65,30 @@ namespace EdgyBot.Services
             return leave ? "Disconnected" : "I'm not connected!";
         }
 
-        public string DisplayQueue(ulong guildId)
+        public Embed DisplayQueue(ulong guildId)
         {
             var player = _lavaNode.GetPlayer(guildId);
             try
             {
-                StringBuilder sb = new StringBuilder();
+                EmbedBuilder eb = new EmbedBuilder
+                {
+                    Title = "Queue",
+                    Color = new Color(0xca7f0d)
+                };
+
                 int trackNum = 0;
                 foreach (LavaTrack track in player.Queue.Items)
                 {
                     if (track == null)
                         continue;
                     trackNum++;
-
-                    sb.Append($"{trackNum}. {track.Title}\n");
+                    eb.AddField($"{trackNum}.", track.Title);
                 }
-                return sb.ToString();
+                return eb.Build();
             }
             catch
             {
-                return "Your queue is empty.";
+                return null;
             }
         }
 
@@ -154,11 +156,7 @@ namespace EdgyBot.Services
                 await channel.SendMessageAsync("You aren't connected to any voice channels.");
                 return;
             }
-            
-
-            var player = await _lavaNode.JoinAsync(state.VoiceChannel, channel);
-
-            //player.Queue.TryAdd(guildId, new LinkedList<LavaTrack>());
+            await _lavaNode.JoinAsync(state.VoiceChannel, channel);
         }
 
         public async Task<string> DisconnectAsync(ulong guildId) 
