@@ -161,7 +161,8 @@ namespace EdgyBot.Services
             //player.Queue.TryAdd(guildId, new LinkedList<LavaTrack>());
         }
 
-        public async Task<string> DisconnectAsync(ulong guildId) => await _lavaNode.LeaveAsync(guildId) ? "Disconnected." : "Not connected to any voice channels.";
+        public async Task<string> DisconnectAsync(ulong guildId) 
+            => await _lavaNode.LeaveAsync(guildId) ? "Disconnected." : "Not connected to any voice channels.";
 
         private async Task OnFinished(LavaPlayer player, LavaTrack track, TrackReason reason)
         {
