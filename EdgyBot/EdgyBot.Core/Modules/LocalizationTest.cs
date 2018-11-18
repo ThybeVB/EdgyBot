@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EdgyBot.Core
 {
-    public class LocalizationTest : ModuleBase<ShardedCommandContext>
+    public class LocalizationTest : ModuleBase<EbShardContext>
     {
         private LocalizationService _service;
 
@@ -20,7 +20,7 @@ namespace EdgyBot.Core
         [Command("l")]
         public async Task LCmd()
         {
-            await ReplyAsync((string)_service.DutchBE["help"]["lcmd"]);
+            await ReplyAsync((string)Context.Language["help"]["lcmd"]);
         }
     }
 }

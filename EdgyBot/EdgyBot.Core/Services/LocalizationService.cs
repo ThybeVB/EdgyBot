@@ -1,5 +1,5 @@
-﻿using HyperEx;
-using System.IO;
+﻿using System.IO;
+using EdgyBot.Database;
 using Newtonsoft.Json.Linq;
 
 namespace EdgyBot.Services
@@ -8,8 +8,8 @@ namespace EdgyBot.Services
     {
         private readonly string path = "C:/EdgyBot/Localization/";
 
-        public JObject EnglishUS;
-        public JObject DutchBE;
+        public static JObject EnglishUS;
+        public static JObject DutchBE;
 
         public LocalizationService ()
         {

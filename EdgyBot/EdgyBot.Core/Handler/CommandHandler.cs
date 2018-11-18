@@ -10,8 +10,6 @@ using Discord.Addons.Interactive;
 using EdgyBot.Modules;
 using EdgyBot.Core.Lib;
 using EdgyBot.Database;
-using Victoria;
-using EdgyBot.Services;
 
 namespace EdgyBot.Core.Handler
 {
@@ -64,7 +62,8 @@ namespace EdgyBot.Core.Handler
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null || msg.Author.IsBot) return;
 
-            ShardedCommandContext context = new ShardedCommandContext(_client, msg);
+            //ShardedCommandContext context = new ShardedCommandContext(_client, msg);
+            EbShardContext context = new EbShardContext(_client, msg);
 
             Guild guild = new Guild(context.Guild.Id);
             _prefix = guild.GetPrefix();
