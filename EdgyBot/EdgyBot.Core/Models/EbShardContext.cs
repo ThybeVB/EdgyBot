@@ -13,7 +13,7 @@ namespace EdgyBot.Core
     public class EbShardContext : ShardedCommandContext, ICommandContext
     {
         public new DiscordShardedClient Client;
-        private SocketUserMessage msg;
+        private readonly SocketUserMessage msg;
 
         public EbShardContext(DiscordShardedClient client, SocketUserMessage s) 
             : base(client, s)

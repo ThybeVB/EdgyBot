@@ -7,10 +7,11 @@ using Discord.Commands;
 using EdgyBot.Core.Lib;
 using Discord.Addons.Interactive;
 using EdgyBot.Services;
+using EdgyBot.Core;
 
 namespace EdgyBot.Modules
 {
-    public class HelpCommand : InteractiveBase<ShardedCommandContext>
+    public class HelpCommand : InteractiveBase<EbShardContext>
     {
         public static CommandService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
@@ -51,12 +52,12 @@ namespace EdgyBot.Modules
             if (param != "--text")
             {
                 EmbedBuilder eb = new EmbedBuilder();
-                eb.AddField("Text Version", "To get a text (paged) version of all the commands, please add --text to the command.\nExample: e!help --text");
-                eb.AddField("Web Version (Recommended)", "[EdgyBot Command List](https://edgybot.tk/commands.html)");
+                eb.AddField((string)Context.Language["help"]["textVersion"], (string)Context.Language["help"]["toGetText"]);
+                eb.AddField((string)Context.Language["help"]["webVersion"], (string)Context.Language["help"]["toGetWeb"]);
                 eb.WithColor(0xca7f0d);
 
                 await ReplyAsync("", embed: eb.Build());
-                await ReplyAsync("Support Server: https://discord.gg/hF4CSDG");
+                await ReplyAsync((string)Context.Language["help"]["supServer"]);
 
                 return;
             }
