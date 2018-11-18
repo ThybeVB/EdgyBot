@@ -6,7 +6,7 @@
     <Configurations>Debug;Release;EdgyBot</Configurations>
     <Description>A general purpose bot ranging from fun commands to... not so fun</Description>
     <Copyright>Thybe Van Beersel 2017-2018</Copyright>
-    <AssemblyVersion>1.2.1.1</AssemblyVersion>
+    <AssemblyVersion>1.2.3.1</AssemblyVersion>
     <FileVersion>1.2.1.1</FileVersion>
     <StartupObject></StartupObject>
     <ApplicationIcon />

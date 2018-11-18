@@ -164,7 +164,22 @@ namespace EdgyBot.Services
 
         private async Task OnFinished(LavaPlayer player, LavaTrack track, TrackReason reason)
         {
+            if (reason != TrackReason.Finished)
+                return;
+            LavaTrack nextTrack = null;
 
+            player.Remove(track);
+            nextTrack = player.Queue.Items.First();
+
+            if (nextTrack is null)
+            {
+                await player.TextChannel.SendMessageAsync("Queue has been completed!");
+                await Lavalink.DefaultNode.LeaveAsync(player.Guild.Id);
+                return;
+            }
+
+            player.Play(nextTrack);
+            await player.TextChannel.SendMessageAsync($"**Now Playing:** {nextTrack.Title}");
         }
 
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
