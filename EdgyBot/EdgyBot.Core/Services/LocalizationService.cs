@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using EdgyBot.Database;
 using Newtonsoft.Json.Linq;
 
 namespace EdgyBot.Services

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using System.Linq;
 using Discord.WebSocket;
 using Discord.Commands;
-using Discord.Addons.Interactive;
 using EdgyBot.Modules;
 using EdgyBot.Core.Lib;
 using EdgyBot.Database;
@@ -62,7 +60,6 @@ namespace EdgyBot.Core.Handler
             SocketUserMessage msg = (SocketUserMessage)s;
             if (msg == null || msg.Author.IsBot) return;
 
-            //ShardedCommandContext context = new ShardedCommandContext(_client, msg);
             EbShardContext context = new EbShardContext(_client, msg);
 
             Guild guild = new Guild(context.Guild.Id);
@@ -84,13 +81,13 @@ namespace EdgyBot.Core.Handler
                     switch (result.Error)
                     {
                         case CommandError.BadArgCount:
-                            await context.Channel.SendMessageAsync($"You gave wrong or no input in this command. Check the **{_prefix}help** command for info.");
+                            await context.Channel.SendMessageAsync($"{context.Language["core"]["badArgCount1"]}{_prefix}{context.Language["core"]["badArgCount2"]}");
                             break;
                         case CommandError.UnknownCommand:
                             await _lib.EdgyLog(LogSeverity.Verbose, $"Unknown Command Executed, '{msg.Content}'");
                             break;
                         case CommandError.Exception:
-                            await context.Channel.SendMessageAsync("**Internal Error**: Please use e!bugreport if you think this is an actual problem.");
+                            await context.Channel.SendMessageAsync((string)context.Language["core"]["exception"]);
                             break;
                         case CommandError.UnmetPrecondition:
                             await _lib.EdgyLog(LogSeverity.Warning, "USER ENCOUNTERED AN ERROR: " + result.ErrorReason);

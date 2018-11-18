@@ -6,7 +6,6 @@ using Discord;
 using Discord.Commands;
 using EdgyBot.Core.Lib;
 using Discord.Addons.Interactive;
-using EdgyBot.Services;
 using EdgyBot.Core;
 
 namespace EdgyBot.Modules
@@ -105,19 +104,19 @@ namespace EdgyBot.Modules
         public async Task CommandInfoCmd (string cmdName = null) 
         {
             if (cmdName == "help" || cmdName == "command") {
-                await ReplyAsync("This command does not have help.");
+                await ReplyAsync((string)Context.Language["help"]["noHelp"]);
                 return;
             }
 
             if (string.IsNullOrEmpty(cmdName)) {
-                await ReplyAsync("Please enter a command name for help.");
+                await ReplyAsync((string)Context.Language["help"]["enterCommand"]);
                 return;
             }
 
             CommandInfo command = _service.Commands.FirstOrDefault(x => x.Name == cmdName);
             
             if (command == null) {
-                await ReplyAsync("This command does not exist. Did you mispell the command?");
+                await ReplyAsync((string)Context.Language["help"]["commandNonExistant"]);
                 return;
             }
 
