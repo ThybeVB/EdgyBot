@@ -7,11 +7,12 @@ using Discord;
 using Discord.Commands;
 using EdgyBot.Database;
 using EdgyBot.Core.Lib;
+using EdgyBot.Core;
 
 namespace EdgyBot.Modules
 {
     [Name("Utility Commands"), Summary("Commands that help manage the server!")]
-    public class UtilityCommands : ModuleBase<ShardedCommandContext>
+    public class UtilityCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

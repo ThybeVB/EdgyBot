@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
     [Name("Crypto Commands"), Summary("Encryption commands centered for Developers")]
-    public class CryptoCommands : ModuleBase<ShardedCommandContext>
+    public class CryptoCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

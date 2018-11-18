@@ -5,12 +5,13 @@ using Newtonsoft.Json;
 using Discord;
 using Discord.Commands;
 using Discord.Addons.Interactive;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using EdgyBot.Database;
 
 namespace EdgyBot.Modules
 {
-    public class OwnerCommands : InteractiveBase<ShardedCommandContext>
+    public class OwnerCommands : InteractiveBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

@@ -8,7 +8,7 @@ using EdgyBot.Core.Lib;
 namespace EdgyBot.Modules
 {
     [Name("Miscellanious Commands"), Summary("Commands that don't fit in any other categories.")]
-    public class MiscCommands : ModuleBase<ShardedCommandContext>
+    public class MiscCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private LibEdgyCore _core = new LibEdgyCore();

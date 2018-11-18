@@ -5,12 +5,13 @@ using System.Text;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
     [Name("Fun Commands"), Summary("Commands used for FUNUNUNUN")]
-    public class FunCommands : ModuleBase<ShardedCommandContext>
+    public class FunCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
 

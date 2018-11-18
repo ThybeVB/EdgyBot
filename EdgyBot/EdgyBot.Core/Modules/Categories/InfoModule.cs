@@ -4,13 +4,14 @@ using System.Linq;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using System.Reflection;
 
 namespace EdgyBot.Modules
 {
     [Name("Info Commands"), Summary("Commands providing information about a certain thingy")]
-    public class InfoCommands : ModuleBase<ShardedCommandContext>
+    public class InfoCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly LibEdgyCore _core = new LibEdgyCore();

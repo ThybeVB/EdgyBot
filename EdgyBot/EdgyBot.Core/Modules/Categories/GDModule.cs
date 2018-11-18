@@ -8,7 +8,7 @@ using EdgyBot.Core.Models;
 namespace EdgyBot.Modules
 {
     [Name("Geometry Dash Commands"), Summary("Commands related to Geometry Dash")]
-    public class GDCommands : ModuleBase<ShardedCommandContext>
+    public class GDCommands : ModuleBase<EbShardContext>
     {
         private readonly LibEdgyBot _lib = new LibEdgyBot();
         private readonly GDLib _gdLib = new GDLib();

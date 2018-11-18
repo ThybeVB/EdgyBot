@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using ImageSharp;
 using Discord;
 using Discord.Commands;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 
 namespace EdgyBot.Modules
 {
     [Name("Image Commands"), Summary("Commands for manipulating images.")]
-    public class ImageCommands : ModuleBase<ShardedCommandContext>
+    public class ImageCommands : ModuleBase<EbShardContext>
     {
         private readonly string filePath = "C:/EdgyBot/DownloadedImages/";
 

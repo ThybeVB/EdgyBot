@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using EdgyBot.Core.Handler.API;
 
 namespace EdgyBot.Modules
 {
     [Name("Meme Commands"), Summary("Meme'y Commands. Pictures mainly.")]
-    public class MemeCommands : ModuleBase<ShardedCommandContext>
+    public class MemeCommands : ModuleBase<EbShardContext>
     {
         private LibEdgyBot _lib = new LibEdgyBot();
 

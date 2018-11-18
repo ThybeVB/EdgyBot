@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using Victoria;
 using EdgyBot.Services;
@@ -9,7 +10,7 @@ using Victoria.Objects;
 namespace EdgyBot.Modules
 {
     [Name("Voice Commands"), Summary("Music Commands!")]
-    public class VoiceCommands : ModuleBase<ShardedCommandContext>
+    public class VoiceCommands : ModuleBase<EbShardContext>
     {
         private AudioService _service;
         private readonly LibEdgyBot _lib = new LibEdgyBot();
