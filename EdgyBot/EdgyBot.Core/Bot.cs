@@ -24,8 +24,8 @@ namespace EdgyBot.Core
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
             LogLevel = LogSeverity.Info,
-            MessageCacheSize = 10,
-            TotalShards = 1
+            MessageCacheSize = 5,
+            TotalShards = 3
         });
 
         public async Task StartAsync ()
