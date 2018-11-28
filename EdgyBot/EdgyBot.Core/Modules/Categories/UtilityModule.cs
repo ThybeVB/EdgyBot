@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Discord;
@@ -23,7 +22,7 @@ namespace EdgyBot.Modules
         {
             CommandInfo cmd = HelpCommand._service.Commands.FirstOrDefault(x => x.Name == query);
             if (cmd == null) {
-                await ReplyAsync("I could not find this command! Please make sure you spelled the command correctly.");
+                await ReplyAsync((string)Context.Language["util"]["cmdNotFound"]);
                 return;
             }
 
@@ -37,16 +36,16 @@ namespace EdgyBot.Modules
                     Guild guild = new Guild(Context.Guild.Id);
                     await guild.EnableCommand(cmd.Name);
 
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully enabled command ``{cmd.Name}``"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText((string)Context.Language["util"]["utilCmds"], $"{Context.Language["util"]["enableCmdSuccess"]} ``{cmd.Name}``"));
                 }
                 catch (Exception e)
                 {
-                    await ReplyAsync("Could not enable this command. Error: " + e.Message);
+                    await ReplyAsync(Context.Language["util"]["enableCmdFail"] + e.Message);
                 }
                 return;
             }
 
-            await ReplyAsync("Could not open a connection to the Database.");
+            await ReplyAsync((string)Context.Language["util"]["openConnFail"]);
         }
 
         //[Command("disabledcommands", RunMode = RunMode.Async)]
@@ -85,10 +84,10 @@ namespace EdgyBot.Modules
         {
             CommandInfo cmd = HelpCommand._service.Commands.FirstOrDefault(x => x.Name == query);
             if (cmd == null) {
-                await ReplyAsync("This is not a valid command!\n*It is possible that you entered the alias for a command with a different name. Please check the help command to see the official command name.*    ");
+                await ReplyAsync((string)Context.Language["util"]["invalidCmd"]);
                 return;
             } else if (cmd.Name == "disablecommand") {
-                await ReplyAsync("You can not disable this command.");
+                await ReplyAsync((string)Context.Language["util"]["disableFail"]);
                 return;
             }
 
@@ -102,17 +101,17 @@ namespace EdgyBot.Modules
                     Guild guild = new Guild(Context.Guild.Id);
                     await guild.DisableCommand(cmd.Name);
 
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Successfully disabled command ``{cmd.Name}``"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText((string)Context.Language["util"]["disableSuccess"], $"{Context.Language["util"]["disableSuccess"]} ``{cmd.Name}``"));
                 }
                 catch (Exception e)
                 {
-                    await ReplyAsync("Could not disable this command. Error: " + e.Message);
+                    await ReplyAsync((string)Context.Language["util"]["disableFail"] + e.Message);
                 }
 
                 return;
             }
 
-            await ReplyAsync("Could not open a connection to the Database.");
+            await ReplyAsync((string)Context.Language["util"]["openConnFail"]);
         }
 
         [Command("setprefix")]
@@ -130,17 +129,17 @@ namespace EdgyBot.Modules
                     Guild guild = new Guild(Context.Guild.Id);
                     await guild.ChangePrefix(newPrefix);
 
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Utility Commands", $"Guild Prefix set to ``{newPrefix}``"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText((string)Context.Language["util"]["utilCmds"], $"{Context.Language["util"]["prefixSet"]} ``{newPrefix}``"));
                 }
                 catch (Exception e)
                 {
-                    await ReplyAsync("Could not change the server prefix. Error: " + e.Message);
+                    await ReplyAsync((string)Context.Language["util"]["prefixError"] + e.Message);
                 }
 
                 return;
             }
 
-            await ReplyAsync("Could not open a connection to the Database.");
+            await ReplyAsync((string)Context.Language["util"]["openConnFail"]);
         }
 
         [Command("purge", RunMode = RunMode.Async), Name("purge"), Summary("Deletes messages from said channel (Provide a number on how much messages to delete)")]
@@ -149,11 +148,11 @@ namespace EdgyBot.Modules
         {
 
             if (input > 100) {
-                await ReplyAsync("You can not delete more than 100 messages at once.");
+                await ReplyAsync((string)Context.Language["util"]["purgeMax"]);
                 return;
             }
             if (input <= 0) {
-                await ReplyAsync("What? No.");
+                await ReplyAsync((string)Context.Language["util"]["purgeInvalid"]);
                 return;
             }
 
@@ -166,14 +165,14 @@ namespace EdgyBot.Modules
 
                 if (channelPermissions.ManageMessages) {
                     await channel.DeleteMessagesAsync(messages);
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithText("Purge", "Successfully deleted " + (input + 1) + " messages! :ok_hand:"));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithText((string)Context.Language["util"]["purge"], (string)Context.Language["util"]["successPurge1"] + (input + 1) + (string)Context.Language["util"]["successPurge2"]));
                 } else {
-                    await ReplyAsync("", embed: _lib.CreateEmbedWithError("Purge Error", "I don't seem to have permissions to delete messages.\nTo Delete messages, i must have the **Manage Messages** permission."));
+                    await ReplyAsync("", embed: _lib.CreateEmbedWithError((string)Context.Language["util"]["purgeError"], (string)Context.Language["util"]["purgePermFail"]));
                 }
 
             } catch (Exception e)
             {
-                Embed err = _lib.CreateEmbedWithError("Purge Error", $"**Error**: {e.Message}");
+                Embed err = _lib.CreateEmbedWithError((string)Context.Language["util"]["purgeError"], $"**Error**: {e.Message}");
                 await ReplyAsync("", embed: err);
             }
         }
@@ -192,10 +191,10 @@ namespace EdgyBot.Modules
                 {
                     await usr.KickAsync(reason);
                 }
-                e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", "Kicked user " + usr.Username + " for reason " + reason);
+                e = _lib.CreateEmbedWithText((string)Context.Language["util"]["ebAdminCmds"], Context.Language["util"]["kickedUser"] + usr.Username + ": " + reason);
             } catch
             {
-                e = _lib.CreateEmbedWithError("EdgyBot Administrative Commands Error", ":exclamation: *Could not kick this user.*");
+                e = _lib.CreateEmbedWithError((string)Context.Language["util"]["ebAdminCmdsError"], $":exclamation: *{Context.Language["util"]["ebKickFail"]}*");
             }
             await ReplyAsync("", embed: e);
         }
@@ -213,10 +212,10 @@ namespace EdgyBot.Modules
                 {
                     await usr.Guild.AddBanAsync(usr, reason: reason);
                 } else await usr.Guild.AddBanAsync(usr);
-                e = _lib.CreateEmbedWithText("EdgyBot Administrative Commands", $"Successfully banned user {usr.Username}!");
+                e = _lib.CreateEmbedWithText((string)Context.Language["util"]["ebAdminCmds"], $"{(string)Context.Language["util"]["banSuccess"]} {usr.Username}!");
             } catch
             {
-                e = _lib.CreateEmbedWithError("EdgyBot Administrative Commands Error", ":exclamation: *Could not ban this user.*");
+                e = _lib.CreateEmbedWithError((string)Context.Language["util"]["ebAdminCmdsError"], $":exclamation: *{(string)Context.Language["util"]["banFail"]}*");
             }
             await ReplyAsync("", embed: e);
         }
