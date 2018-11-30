@@ -34,7 +34,7 @@ namespace EdgyBot.Modules
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             eb.Footer = new EmbedFooterBuilder
             {
-                Text = "All Pictures are taken from https://dog.ceo/dog-api/"
+                Text = (string)Context.Language["meme"]["takenFrom"]
             };
             eb.ImageUrl = imgUrl;
 
@@ -53,7 +53,7 @@ namespace EdgyBot.Modules
 
             eb.WithFooter(new EmbedFooterBuilder
             {
-                Text = "Cats API: http://shibe.online/"
+                Text = (string)Context.Language["meme"]["catsApi"]
             });
 
             await ReplyAsync("", embed: eb.Build());
@@ -74,7 +74,7 @@ namespace EdgyBot.Modules
 
             eb.WithFooter(new EmbedFooterBuilder
             {
-                Text = "Shibe API: http://shibe.online/"
+                Text = (string)Context.Language["meme"]["shibeApi"]
             });
 
             await ReplyAsync("", embed: eb.Build());
@@ -93,35 +93,10 @@ namespace EdgyBot.Modules
 
             eb.WithFooter(new EmbedFooterBuilder
             {
-                Text = "Birds API: http://shibe.online/"
+                Text = (string)Context.Language["meme"]["birdApi"]
             });
 
             await ReplyAsync("", embed: eb.Build());
-        }
-
-        [Command("randommeme", RunMode = RunMode.Async), Alias("meme", "randommem", "memes")]
-        [Name("randommeme"), Summary("Gets a random meme from Imgflip.")]
-        public async Task RandomMemeCmd (string param = null)
-        {
-            if (param == "--show") {
-                JsonHelper jsonHelper = new JsonHelper("https://api.imgflip.com/get_memes");
-                string get = jsonHelper.getRandomMemeImgFlip();
-
-                string imglink = _lib.GetRandomMemeData(get);
-                string[] imgParams = imglink.Split(',');
-
-                EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
-                eb.Title = imgParams[1];
-                eb.ImageUrl = imgParams[0];
-                eb.Footer = new EmbedFooterBuilder
-                {
-                    Text = "Memes may be bad, depends on Imgflip's API"
-                };
-
-                await ReplyAsync("", embed: eb.Build());
-            } else {
-                await ReplyAsync("The Meme Command is being replaced with a better one, But if you wish to view the old one, add ``--show`` to your e!meme.");
-            }
         }
     }
 }
