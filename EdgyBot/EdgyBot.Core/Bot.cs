@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EdgyBot.Core.Models;
 using EdgyBot.Core.Handler;
 using EdgyBot.Core.Lib;

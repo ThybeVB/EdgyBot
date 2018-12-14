@@ -18,7 +18,7 @@ namespace EdgyBot.Services
         public void LoadAllLanguages ()
         {
             EnglishUS = FromJson(File.ReadAllText(path + "en_US.json"));
-            DutchBE = FromJson(File.ReadAllText(path + "nl_BE.json"));
+            //DutchBE = FromJson(File.ReadAllText(path + "nl_BE.json"));
         }
 
         public JObject FromJson (string rawJson)
