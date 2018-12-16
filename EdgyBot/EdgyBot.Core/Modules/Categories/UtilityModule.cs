@@ -127,6 +127,11 @@ namespace EdgyBot.Modules
                 try
                 {
                     Guild guild = new Guild(Context.Guild.Id);
+                    if (newPrefix.Length > 5)
+                    {
+                        await ReplyAsync("Prefix can not be longer than 5 characters");
+                        return;
+                    }
                     await guild.ChangePrefix(newPrefix);
 
                     await ReplyAsync("", embed: _lib.CreateEmbedWithText((string)Context.Language["util"]["utilCmds"], $"{Context.Language["util"]["prefixSet"]} ``{newPrefix}``"));

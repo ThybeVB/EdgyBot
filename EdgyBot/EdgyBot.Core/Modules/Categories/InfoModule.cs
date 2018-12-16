@@ -27,10 +27,10 @@ namespace EdgyBot.Modules
             EmbedBuilder eb = _lib.SetupEmbedWithDefaults();
             var users = await channel.GetUsersAsync().FlattenAsync();
 
-            eb.AddField("Channel Name", channel.Name);
-            eb.AddField("Users In Channel", users.Count());
-            eb.AddField("Channel ID", channel.Id.ToString());
-            eb.AddField("Created", channel.CreatedAt.ToString());
+            eb.AddField((string)Context.Language["info"]["chName"], channel.Name);
+            eb.AddField((string)Context.Language["info"]["usrChannel"], users.Count());
+            eb.AddField((string)Context.Language["info"]["chnlId"], channel.Id.ToString());
+            eb.AddField((string)Context.Language["info"]["created"], channel.CreatedAt.ToString());
 
             await ReplyAsync("", embed: eb.Build());
         }
@@ -59,23 +59,24 @@ namespace EdgyBot.Modules
             #endregion
 
             eb.ThumbnailUrl = pfpUrl;
-            eb.AddField("Username", username, true);
+            eb.AddField((string)Context.Language["info"]["username"], username, true);
 
             if (string.IsNullOrEmpty(nickname))
-                eb.AddField("Nickname", "None", true);
+                eb.AddField((string)Context.Language["info"]["username"], (string)Context.Language["info"]["none"], true);
             else
-                eb.AddField("Nickname", nickname, true);
+                eb.AddField((string)Context.Language["info"]["nickname"], nickname, true);
             
-            eb.AddField("Discriminator (tag)", discriminator, true);
-            eb.AddField("Status", status, true);
-            eb.AddField("Joined At", joinedAt, true);
-            eb.AddField("Registered At", createdOn, true);
+            eb.AddField((string)Context.Language["info"]["discrim"], discriminator, true);
+            eb.AddField((string)Context.Language["info"]["status"], status, true);
+            eb.AddField((string)Context.Language["info"]["joined"], joinedAt, true);
+            eb.AddField((string)Context.Language["info"]["created"], createdOn, true);
 
             if (string.IsNullOrEmpty(playing))
-                eb.AddField("Playing", "None", true);
+                eb.AddField((string)Context.Language["info"]["playing"], (string)Context.Language["info"]["none"], true);
             else
                 eb.AddField((usr.Activity?.Type).ToString(), playing, true);
 
+            //Start here
             eb.AddField("User ID", userID, true);
             eb.AddField("Is Bot", isBot.ToString(), true);
             eb.AddField("Permissions", _lib.GetPermissionsString(perms));
