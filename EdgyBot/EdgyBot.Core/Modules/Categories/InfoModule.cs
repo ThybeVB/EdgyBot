@@ -74,7 +74,7 @@ namespace EdgyBot.Modules
             if (string.IsNullOrEmpty(playing))
                 eb.AddField("Playing", "None", true);
             else
-                eb.AddField("Playing", playing, true);
+                eb.AddField((usr.Activity?.Type).ToString(), playing, true);
 
             eb.AddField("User ID", userID, true);
             eb.AddField("Is Bot", isBot.ToString(), true);
