@@ -27,22 +27,23 @@ namespace EdgyBot.Services
             SessionOptions sessionOptions = new SessionOptions
             {
                 Protocol = Protocol.Ftp,
-                HostName = "ftp.example.com",
-                UserName = "this so far",
-                Password = "doesn't work",
+                HostName = "35.176.231.118",
+                UserName = "monstah",
+                Password = "f",
+                FtpMode = FtpMode.Passive
             };
-            _lib.EdgyLog(LogSeverity.Info, "Connected to EdgyBot FTP Server...");
 
             using (Session session = new Session())
             {
-                _lib.EdgyLog(LogSeverity.Info, "Download languages from EdgyBot FTP Server...");
-                session.Open(sessionOptions);
                 try
                 {
-                    session.GetFiles("/edgybot/lang/*", @"C:\EdgyBot\Localization\*").Check();
+                    session.Open(sessionOptions);
+                    _lib.EdgyLog(LogSeverity.Info, "Connected to EdgyBot FTP Server");
+                    _lib.EdgyLog(LogSeverity.Info, "Downloading languages from EdgyBot FTP Server...");
+                    session.GetFiles("/lang/*", @"C:\EdgyBot\Localization\*").Check();
                 } catch (Exception e)
                 {
-                    _lib.EdgyLog(LogSeverity.Critical, "Failed to retrieve languages from EdgyBot FTP Server:" + e.Message);
+                    _lib.EdgyLog(LogSeverity.Critical, "Failed to retrieve languages from EdgyBot FTP Server: " + e.Message);
                 }
             }
         }
