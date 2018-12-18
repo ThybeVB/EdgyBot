@@ -27,6 +27,7 @@
 	<PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-26216-02" />
 	<PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
 	<PackageReference Include="Victoria" Version="2.3.7" />
+	<PackageReference Include="WinSCP" Version="5.14.1-beta" />
   </ItemGroup>
 
   <ItemGroup>
