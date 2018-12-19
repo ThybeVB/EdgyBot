@@ -4,6 +4,8 @@ using EdgyBot.Core.Lib;
 using WinSCP;
 using Discord;
 using System;
+using FluentFTP;
+using System.Net;
 
 namespace EdgyBot.Services
 {
@@ -18,34 +20,40 @@ namespace EdgyBot.Services
         public LocalizationService ()
         {
             DownloadLanguages();
-            LoadAllLanguages();
+            //LoadAllLanguages();
         }
 
         private void DownloadLanguages ()
         {
-            _lib.EdgyLog(LogSeverity.Info, "Connecting to EdgyBot FTP Server...");
-            SessionOptions sessionOptions = new SessionOptions
-            {
-                Protocol = Protocol.Ftp,
-                HostName = "35.176.231.118",
-                UserName = "monstah",
-                Password = "f",
-                FtpMode = FtpMode.Passive
-            };
+            FtpClient client = new FtpClient("35.176.231.118");
+            client.Credentials = new NetworkCredential("monstah", "cuck");
+            client.Connect();
 
-            using (Session session = new Session())
-            {
-                try
-                {
-                    session.Open(sessionOptions);
-                    _lib.EdgyLog(LogSeverity.Info, "Connected to EdgyBot FTP Server");
-                    _lib.EdgyLog(LogSeverity.Info, "Downloading languages from EdgyBot FTP Server...");
-                    session.GetFiles("/lang/*", @"C:\EdgyBot\Localization\*").Check();
-                } catch (Exception e)
-                {
-                    _lib.EdgyLog(LogSeverity.Critical, "Failed to retrieve languages from EdgyBot FTP Server: " + e.Message);
-                }
-            }
+            client.DownloadFile(@"C:\EdgyBot\Localization\en_US.json", "/lang/en_US.json");
+
+            //_lib.EdgyLog(LogSeverity.Info, "Connecting to EdgyBot FTP Server...");
+            //SessionOptions sessionOptions = new SessionOptions
+            //{
+            //    Protocol = Protocol.Ftp,
+            //    HostName = "35.176.231.118",
+            //    UserName = "monstah",
+            //    Password = "cuck",
+            //    FtpMode = FtpMode.Passive
+            //};
+            //
+            //using (Session session = new Session())
+            //{
+            //    try
+            //    {
+            //        session.Open(sessionOptions);
+            //        _lib.EdgyLog(LogSeverity.Info, "Connected to EdgyBot FTP Server");
+            //        _lib.EdgyLog(LogSeverity.Info, "Downloading languages from EdgyBot FTP Server...");
+            //        session.GetFiles("/lang/*", @"C:\EdgyBot\Localization\*")/*.Check()*/;
+            //    } catch (Exception e)
+            //    {
+            //        _lib.EdgyLog(LogSeverity.Critical, "Failed to retrieve languages from EdgyBot FTP Server: " + e.Message);
+            //    }
+            //}
         }
 
         private void LoadAllLanguages ()
