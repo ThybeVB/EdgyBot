@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using System.Net;
 using Discord;
 using Discord.Commands;
-using ImageSharp;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace EdgyBot.Core.Lib
 {
@@ -17,7 +18,7 @@ namespace EdgyBot.Core.Lib
 
         public Image<Rgba32> OpenImage(string fileName)
         {
-            return ImageSharp.Image.Load(fileLocation + fileName);
+            return SixLabors.ImageSharp.Image.Load(fileLocation + fileName);
         }
 
         public async Task DetermineAttachmentAndDownload(Attachment img, SocketCommandContext Context, string fileName, IUser usr = null)

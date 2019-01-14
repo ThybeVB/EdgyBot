@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
-using ImageSharp;
+using SixLabors.ImageSharp;
 using Discord;
 using Discord.Commands;
 using EdgyBot.Core;
 using EdgyBot.Core.Lib;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace EdgyBot.Modules
 {
@@ -27,9 +29,8 @@ namespace EdgyBot.Modules
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.Resize(480, 320);
-            img.Pixelate(10);
-
+            img.Mutate(x => x.Resize(480, 320).Pixelate(10));
+            
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
 
@@ -47,12 +48,12 @@ namespace EdgyBot.Modules
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.Contrast(99);
+            img.Mutate(x => x.Contrast(99));
             img.Save(filePath + fileName);
             img.Dispose();
 
             Image<Rgba32> img2 = imgLib.OpenImage(fileName);
-            img2.Contrast(30);
+            img.Mutate(x => x.Contrast(30));
             img2.Save(filePath + fileName);
 
             await Context.Channel.SendFileAsync(filePath + fileName);
@@ -71,7 +72,7 @@ namespace EdgyBot.Modules
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.Grayscale();
+            img.Mutate(x => x.Grayscale());
             img.Save(filePath + fileName);
 
             await Context.Channel.SendFileAsync(filePath + fileName);
@@ -90,7 +91,7 @@ namespace EdgyBot.Modules
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.GaussianBlur(5.75f);
+            img.Mutate(x => x.GaussianBlur(5.75f));
 
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
@@ -109,7 +110,7 @@ namespace EdgyBot.Modules
             await imgLib.DetermineAttachmentAndDownload(image, Context, fileName, usr);
 
             Image<Rgba32> img = imgLib.OpenImage(fileName);
-            img.GaussianSharpen(6);
+            img.Mutate(x => x.GaussianSharpen(6));
 
             img.Save(filePath + fileName);
             await Context.Channel.SendFileAsync(filePath + fileName);
