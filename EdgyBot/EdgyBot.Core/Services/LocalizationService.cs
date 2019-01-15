@@ -19,17 +19,17 @@ namespace EdgyBot.Services
 
         public LocalizationService ()
         {
-            DownloadLanguages();
-            //LoadAllLanguages();
+            //DownloadLanguages();
+            LoadAllLanguages();
         }
 
         private void DownloadLanguages ()
         {
-            FtpClient client = new FtpClient("35.176.231.118");
-            client.Credentials = new NetworkCredential("monstah", "cuck");
-            client.Connect();
-
-            client.DownloadFile(@"C:\EdgyBot\Localization\en_US.json", "/lang/en_US.json");
+            //FtpClient client = new FtpClient("35.176.231.118");
+            //client.Credentials = new NetworkCredential("monstah", "cuck");
+            //client.Connect();
+            //
+            //client.DownloadFile(@"C:\EdgyBot\Localization\en_US.json", "/lang/en_US.json");
 
             //_lib.EdgyLog(LogSeverity.Info, "Connecting to EdgyBot FTP Server...");
             //SessionOptions sessionOptions = new SessionOptions
