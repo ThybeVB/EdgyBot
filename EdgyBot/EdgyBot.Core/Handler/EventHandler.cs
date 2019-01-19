@@ -26,7 +26,7 @@ namespace EdgyBot.Core.Handler
         private static DBLPinger dblPinger = new DBLPinger();
         private DblComPinger dblComPinger = new DblComPinger();
         private BotListSpacePinger blspPinger = new BotListSpacePinger();
-        private EdgyAPI edgyApi = new EdgyAPI();
+        //private EdgyAPI edgyApi = new EdgyAPI();
 
         public static int MemberCount;
         public static int ServerCount;
@@ -158,7 +158,7 @@ namespace EdgyBot.Core.Handler
 
             CurrentStats = stats;
 
-            await edgyApi.PostStatsAsync(stats);
+            //await edgyApi.PostStatsAsync(stats);
             
 
             if (inGuild)

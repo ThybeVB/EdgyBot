@@ -22,9 +22,9 @@ namespace EdgyBot.Core
 
         public readonly DiscordShardedClient Client = new DiscordShardedClient(new DiscordSocketConfig
         {
-            LogLevel = LogSeverity.Info,
+            LogLevel = LogSeverity.Verbose,
             MessageCacheSize = 0,
-            TotalShards = 3
+            TotalShards = 2
         });
 
         public async Task StartAsync ()
