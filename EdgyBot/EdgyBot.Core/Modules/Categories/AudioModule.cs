@@ -33,7 +33,7 @@ namespace EdgyBot.Modules
             return eb.Build();
         }
 
-        [Command("youtube", RunMode = RunMode.Async), Alias("play")]
+        [Command("youtube", RunMode = RunMode.Async), Alias("play", "add")]
         [Name("youtube"), Summary("Plays a song from YouTube")]
         public async Task YouTubeCmd ([Remainder]string query)
         {

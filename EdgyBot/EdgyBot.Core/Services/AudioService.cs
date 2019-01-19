@@ -169,15 +169,14 @@ namespace EdgyBot.Services
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
         {
             player.Queue.Dequeue();
-            player.Queue.Enqueue(track);
-            await player.TextChannel.SendMessageAsync($"Track {track.Title} got stuck: {arg3}. Track has been requeued.");
+            await player.TextChannel.SendMessageAsync($"Track {track.Title} got stuck: {arg3}. Track has been dequeued.");
         }
 
         private async Task OnException(LavaPlayer player, LavaTrack track, string arg3)
         {
             player.Queue.Dequeue();
-            player.Queue.Enqueue(track);
-            await player.TextChannel.SendMessageAsync($"Track {track.Title} threw an exception: {arg3}. Track has been requeued.");
+            await player.TextChannel.SendMessageAsync("This track has thrown an error.");
+            await player.TextChannel.SendMessageAsync($"Track {track.Title} threw an exception: {arg3}. Track has been dequeued.");
         }
     }
 }
