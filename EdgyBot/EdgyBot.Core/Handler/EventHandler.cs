@@ -63,18 +63,13 @@ namespace EdgyBot.Core.Handler
                 await SetupBot();
                 await _lib.EdgyLog(LogSeverity.Info, $"All Shards Connected ({_client.Shards.Count})");
 
-                LavaNode node = await _lavaLink.ConnectAsync(_client, new LavaConfig
+                var node = await Lavalink.AddNodeAsync(_client, new Configuration
                 {
-                    MaxTries = 5,
+                    Host = "127.0.0.1",
+                    Port = 1337,
                     Authorization = Environment.GetEnvironmentVariable("EdgyBot_LavaAuth", EnvironmentVariableTarget.User),
-                    Endpoint = new Endpoint
-                    {
-                        Port = 1337,
-                        Host = "127.0.0.1"
-                    },
-                    Severity = LogSeverity.Verbose,
-                    BufferSize = 1024
-                });
+                    ReconnectAttempts = 5
+                }).ConfigureAwait(false);
                 Audio.Initialize(node);
             }  
         }

@@ -3,11 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using HyperEx;
 using Victoria;
-using Victoria.Objects;
-using Victoria.Objects.Enums;
 using Discord;
 using Discord.WebSocket;
-using System.Text;
+using Victoria.Entities;
+using Victoria.Entities.Enums;
 
 namespace EdgyBot.Services
 {
@@ -20,9 +19,9 @@ namespace EdgyBot.Services
         {
             _lavaNode = node;
 
-            node.Stuck += OnStuck;
-            node.Finished += OnFinished;
-            node.Exception += OnException;
+            node.TrackStuck += OnStuck;
+            node.TrackFinished += OnFinished;
+            node.TrackException += OnException;
         }
 
         public async Task<LavaTrack> PlayYouTubeAsync(ulong guildId, string query)
@@ -33,11 +32,11 @@ namespace EdgyBot.Services
             var player = _lavaNode.GetPlayer(guildId);
             if (player.CurrentTrack != null)
             {
-                player.Enqueue(track);
+                player.Queue.Enqueue(track);
                 return track;
             }
 
-            player.Play(track);
+            await player.PlayAsync(track);
             return track;
         }
 
@@ -51,17 +50,17 @@ namespace EdgyBot.Services
             var player = _lavaNode.GetPlayer(guildId);
             if (player.CurrentTrack != null)
             {
-                player.Enqueue(track);
+                player.Queue.Enqueue(track);
                 return track;
             }
 
-            player.Play(track);
+            await player.PlayAsync(track);
             return track;
         }
 
         public async Task<string> StopAsync(ulong guildId)
         {
-            var leave = await _lavaNode.LeaveAsync(guildId);
+            var leave = await _lavaNode.DisconnectAsync(guildId);
             return leave ? "Disconnected" : "I'm not connected!";
         }
 
@@ -99,12 +98,12 @@ namespace EdgyBot.Services
             NOTINVOICE
         }
 
-        public PlayState Volume(ulong guildId, int vol)
+        public async Task<PlayState> Volume(ulong guildId, int vol)
         {
             var player = _lavaNode.GetPlayer(guildId);
             try
             {
-                player.Volume(vol);
+                await player.SetVolumeAsync(vol);
                 return PlayState.SUCCESS;
             }
             catch (ArgumentException)
@@ -114,20 +113,6 @@ namespace EdgyBot.Services
             catch
             {
                 return PlayState.NOTINVOICE;
-            }
-        }
-
-        public string Seek(ulong guildId, TimeSpan span)
-        {
-            var player = _lavaNode.GetPlayer(guildId);
-            try
-            {
-                player.Seek(span);
-                return $"**Seeked:** {player.CurrentTrack.Title}";
-            }
-            catch
-            {
-                return "Not playing anything currently.";
             }
         }
 
@@ -143,8 +128,7 @@ namespace EdgyBot.Services
         public async Task<string> SkipAsync(ulong guildId, ulong userId)
         {
             LavaPlayer player = _lavaNode.GetPlayer(guildId);
-            player.Skip();
-
+            await player.SkipAsync();
             return $"**Skipped:** {player.CurrentTrack.Title}";
             
         }
@@ -156,11 +140,11 @@ namespace EdgyBot.Services
                 await channel.SendMessageAsync("You aren't connected to any voice channels.");
                 return;
             }
-            await _lavaNode.JoinAsync(state.VoiceChannel, channel);
+            await _lavaNode.ConnectAsync(state.VoiceChannel, channel);
         }
 
         public async Task<string> DisconnectAsync(ulong guildId) 
-            => await _lavaNode.LeaveAsync(guildId) ? "Disconnected." : "Not connected to any voice channels.";
+            => await _lavaNode.DisconnectAsync(guildId) ? "Disconnected." : "Not connected to any voice channels.";
 
         private async Task OnFinished(LavaPlayer player, LavaTrack track, TrackReason reason)
         {
@@ -168,31 +152,31 @@ namespace EdgyBot.Services
                 return;
             LavaTrack nextTrack = null;
 
-            player.Remove(track);
+            player.Queue.Remove(track);
             nextTrack = player.Queue.Items.First();
 
             if (nextTrack is null)
             {
                 await player.TextChannel.SendMessageAsync("Queue has been completed!");
-                await Lavalink.DefaultNode.LeaveAsync(player.Guild.Id);
+                await Lavalink.DefaultNode.DisconnectAsync(player.VoiceChannel.GuildId);
                 return;
             }
 
-            player.Play(nextTrack);
+            await player.PlayAsync(nextTrack);
             await player.TextChannel.SendMessageAsync($"**Now Playing:** {nextTrack.Title}");
         }
 
         private async Task OnStuck(LavaPlayer player, LavaTrack track, long arg3)
         {
-            player.Dequeue();
-            player.Enqueue(track);
+            player.Queue.Dequeue();
+            player.Queue.Enqueue(track);
             await player.TextChannel.SendMessageAsync($"Track {track.Title} got stuck: {arg3}. Track has been requeued.");
         }
 
         private async Task OnException(LavaPlayer player, LavaTrack track, string arg3)
         {
-            player.Dequeue();
-            player.Enqueue(track);
+            player.Queue.Dequeue();
+            player.Queue.Enqueue(track);
             await player.TextChannel.SendMessageAsync($"Track {track.Title} threw an exception: {arg3}. Track has been requeued.");
         }
     }
