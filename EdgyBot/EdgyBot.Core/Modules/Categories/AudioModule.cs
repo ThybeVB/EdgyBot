@@ -5,7 +5,7 @@ using EdgyBot.Core;
 using EdgyBot.Core.Lib;
 using Victoria;
 using EdgyBot.Services;
-using Victoria.Objects;
+using Victoria.Entities;
 
 namespace EdgyBot.Modules
 {
@@ -65,7 +65,7 @@ namespace EdgyBot.Modules
         [Name("setvolume"), Summary("Sets the volume of the music.")]
         public async Task SetVolumeCmd(int volume)
         {
-            AudioService.PlayState state = _service.Audio.Volume(Context.Guild.Id, volume);
+            AudioService.PlayState state = await _service.Audio.Volume(Context.Guild.Id, volume);
             if (state == AudioService.PlayState.SUCCESS)
             {
                 await ReplyAsync("Volume set to " + volume + "%");
