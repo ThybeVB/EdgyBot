@@ -11,7 +11,7 @@ namespace EdgyBot.Core.Lib
     public class ImgLib
     {
         private WebClient webClient = new WebClient();
-        private readonly string fileLocation = "C:/EdgyBot/DownloadedImages/";
+        private readonly string fileLocation = @"C:\EdgyBot\DownloadedImages\";
 
         public async Task DownloadAsync(Uri url, string fileName)
             => await webClient.DownloadFileTaskAsync(url, fileLocation + fileName);
