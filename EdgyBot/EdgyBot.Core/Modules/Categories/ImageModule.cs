@@ -50,15 +50,10 @@ namespace EdgyBot.Modules
             Image<Rgba32> img = imgLib.OpenImage(fileName);
             img.Mutate(x => x.Contrast(99));
             img.Save(filePath + fileName);
-            img.Dispose();
-
-            Image<Rgba32> img2 = imgLib.OpenImage(fileName);
-            img.Mutate(x => x.Contrast(30));
-            img2.Save(filePath + fileName);
 
             await Context.Channel.SendFileAsync(filePath + fileName);
 
-            img2.Dispose();
+            img.Dispose();
             File.Delete(filePath + fileName);
         }
 

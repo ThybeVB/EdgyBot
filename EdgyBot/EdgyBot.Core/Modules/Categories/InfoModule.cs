@@ -76,10 +76,9 @@ namespace EdgyBot.Modules
             else
                 eb.AddField((usr.Activity?.Type).ToString(), playing, true);
 
-            //Start here
-            eb.AddField("User ID", userID, true);
-            eb.AddField("Is Bot", isBot.ToString(), true);
-            eb.AddField("Permissions", _lib.GetPermissionsString(perms));
+            eb.AddField((string)Context.Language["info"]["usrId"], userID, true);
+            eb.AddField((string)Context.Language["info"]["isBot"], isBot.ToString(), true);
+            eb.AddField((string)Context.Language["info"]["perms"], _lib.GetPermissionsString(perms));
 
             await ReplyAsync("", embed: eb.Build());
         }
@@ -106,14 +105,14 @@ namespace EdgyBot.Modules
             #endregion
 
             eb.ThumbnailUrl = serverGuildIconUrl;
-            eb.AddField("Guild Name", name);
-            eb.AddField("Server ID", serverId);
-            eb.AddField("Member Count", memberCount);
-            eb.AddField("Emote Count", emoteCount);
-            eb.AddField("Role Count", roleCount);
-            eb.AddField("Category Count", categoriesCount);
-            eb.AddField("Channel Count", channelCount);
-            eb.AddField("Created At", createdAt);
+            eb.AddField((string)Context.Language["info"]["guildName"], name);
+            eb.AddField((string)Context.Language["info"]["guildId"], serverId);
+            eb.AddField((string)Context.Language["info"]["memberCount"], memberCount);
+            eb.AddField((string)Context.Language["info"]["emoteCount"], emoteCount);
+            eb.AddField((string)Context.Language["info"]["roleCount"], roleCount);
+            eb.AddField((string)Context.Language["info"]["catCount"], categoriesCount);
+            eb.AddField((string)Context.Language["info"]["channelCount"], channelCount);
+            eb.AddField((string)Context.Language["info"]["created"], createdAt);
 
             eb.WithFooter(new EmbedFooterBuilder
             {
